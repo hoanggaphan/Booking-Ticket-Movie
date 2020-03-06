@@ -34,6 +34,11 @@ const useStyle = makeStyles(theme => ({
       opacity: "1"
     }
   },
+  btnArrow: {
+    "&:focus": {
+      outline: "none"
+    }
+  },
   imgs: {
     width: "100%",
     height: "100%"

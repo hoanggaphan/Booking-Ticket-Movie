@@ -1,13 +1,9 @@
 import * as ActionTypes from "./../constants/ActionTypes";
-import Axios from "axios";
+import { callAPI } from "./../utils/callAPI";
 
 export const actGetListMovieAPI = () => {
   return dispatch => {
-    Axios({
-      url:
-        "http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP10",
-      method: "GET"
-    })
+    callAPI("GET", "QuanLyPhim/LayDanhSachPhim?maNhom=GP10", null, null)
       .then(result =>
         dispatch({
           type: ActionTypes.GET_LIST_MOVIE_API,
@@ -22,5 +18,5 @@ export const actViewTrailer = trailerMovie => {
   return {
     type: ActionTypes.VIEW_TRAILER,
     trailerMovie
-  }
-}
+  };
+};

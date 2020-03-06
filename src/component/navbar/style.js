@@ -3,6 +3,9 @@ import { makeStyles } from "@material-ui/styles";
 const useStyle = makeStyles(theme => ({
   header: {
     backgroundColor: theme.palette.secondary.main,
+    "& button:focus": {
+      outline: 'none'
+    }
   },
   navLink: {
     margin: '10px',
@@ -18,7 +21,7 @@ const useStyle = makeStyles(theme => ({
     color: 'rgba(255, 255, 255, .7)',
     '&:hover': {
       color: 'rgba(255, 255, 255)'
-    }
+    },
   },
 }));
 

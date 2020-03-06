@@ -14,7 +14,7 @@ const movieReducer = (state = initialState, actions) => {
       state.listMovie = actions.listMovie;
       return { ...state };
     case ActionTypes.VIEW_TRAILER:
-      state.trailerMovie = actions.trailerMovie;
+      state.trailerMovie = {...state.trailerMovie,...actions.trailerMovie};
       return { ...state };
     default:
       return { ...state };
