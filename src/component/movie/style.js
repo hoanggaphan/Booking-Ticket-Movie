@@ -5,9 +5,12 @@ const useStyles = makeStyles({
       "&:hover": {
         cursor: 'pointer',
         "& div:last-child": {
-          visibility: 'visible'
+          visibility: 'visible',
+        },
+        "& a": {
+          visibility: 'visible',
         }
-      }
+      },
     },
     imgMovie: {
       width: "100%",
@@ -20,11 +23,18 @@ const useStyles = makeStyles({
     },
     nameMovie: {
       width: '100%',
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      textOverflow: 'ellipsis',
+      height: '44px',
+      maxHeight: '44px',
+      fontSize: '20px',
+      textAlign: 'center',
+      fontWeight: "400"
     },
     btnBook: {
+      visibility: "hidden",
+      marginTop: "50px",
+      "&:hover": {
+        color: 'unset'
+      }
     },
     overPlay: {
       borderRadius: '10px',
@@ -38,14 +48,25 @@ const useStyles = makeStyles({
       flexFlow: 'column',
       justifyContent: 'center',
       alignItems: "center",
-      backgroundColor: "rgba(2, 2, 2, .5)",
+      background: "linear-gradient(to top,#000,transparent 100%)",
       cursor: "pointer",
       "& button": {
         outline: "none"
       }
     },
     playIcon: {
-      fontSize: '75px'
+      fontSize: '75px',
+    },
+    starPoint: {
+      width: "75px",
+      backgroundColor: "rgba(12,27,54,.8)",
+      border: "1px solid #1f2e46",
+      borderRadius: "4px",
+      textAlign: "center",
+      "& span:": {
+        fontSize: "16px"
+      },
+      
     }
   });
   

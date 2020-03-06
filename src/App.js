@@ -1,7 +1,7 @@
 import React from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core';
-import theme from './styles/theme';
+import theme from './style/theme';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { routesHome } from "./routes";
 import HomeTemplate from "./template/HomeTemplate";
