@@ -2,16 +2,13 @@ import React from "react";
 import Carousel from "nuka-carousel";
 import { IconButton, Box } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
-import useStyle from './style';
+import useStyle from "./style";
 
-
-export default function CarouselHome() {
+const CarouselHome = () => {
   const classes = useStyle();
 
   return (
-    <Box
-      display={{xs: 'none', md: 'block'}}
-    >
+    <Box display={{ xs: "none", md: "block" }}>
       <Carousel
         autoplay={true}
         autoplayInterval={3500}
@@ -21,26 +18,29 @@ export default function CarouselHome() {
         pauseOnHover={false}
         heightMode={700}
         initialSlideHeight={700}
+        className={classes.carousel}
         defaultControlsConfig={{
-          pagingDotsContainerClassName: `${classes.dots}`,
-          pagingDotsClassName: `${classes.dotItem}`
+          pagingDotsContainerClassName: 'carousel-dots',
+          pagingDotsClassName: 'carousel-dots-item'
         }}
         renderCenterLeftControls={({ previousSlide }) => (
-          <IconButton  className={classes.btnArrow} onClick={previousSlide}>
-            <NavigateBefore className={classes.arrows} />
+          <IconButton className="carousel-arrows" onClick={previousSlide}>
+            <NavigateBefore />
           </IconButton>
         )}
         renderCenterRightControls={({ nextSlide }) => (
-          <IconButton className={classes.btnArrow} onClick={nextSlide}>
-            <NavigateNext className={classes.arrows} />
+          <IconButton className="carousel-arrows" onClick={nextSlide}>
+            <NavigateNext />
           </IconButton>
         )}
       >
-        <img src="carousel-1.jpg" className={classes.imgs} />
-        <img src="carousel-2.jpg" className={classes.imgs} />
-        <img src="carousel-3.jpg" className={classes.imgs} />
-        <img src="carousel-4.jpg" className={classes.imgs} />
+        <img src="carousel-1.jpg" className="caousel-imgs" alt="carousel-1" />
+        <img src="carousel-2.jpg" className="caousel-imgs" alt="carousel-2" />
+        <img src="carousel-3.jpg" className="caousel-imgs" alt="carousel-3" />
+        <img src="carousel-4.jpg" className="caousel-imgs" alt="carousel-4" />
       </Carousel>
     </Box>
   );
-}
+};
+
+export default CarouselHome;

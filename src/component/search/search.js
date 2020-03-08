@@ -1,32 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { InputGroup, FormControl } from "react-bootstrap";
-import useStyles from "./style";
 import { Box } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
 import { connect } from "react-redux";
+import SearchIcon from "@material-ui/icons/Search";
 import { actOnSearch } from "./../../redux/actions/index";
-function Search(props) {
+import useStyles from "./style";
+
+const Search = props => {
   const classes = useStyles();
-  console.log(classes)
+  const [focus, setFocus] = useState(false);
+
   return (
-    <Box component={InputGroup} className={classes.search}>
+    <Box
+      component={InputGroup}
+      className={`${classes.search} ${focus ? classes.searchFocus : ""}`}
+    >
+      <InputGroup.Prepend>
+        <InputGroup.Text>
+          <SearchIcon />
+        </InputGroup.Text>
+      </InputGroup.Prepend>
       <FormControl
         placeholder="Tìm Kiếm Phim"
-        aria-label="Tìm Kiếm Phim"
-        aria-describedby="Tìm Kiếm Phim"
         onKeyUp={e => {
           props.onSearch(e.target.value);
         }}
+        onFocus={() => {
+          setFocus(!focus);
+        }}
+        onBlur={() => {
+          setFocus(!focus);
+        }}
       />
-      <InputGroup.Append>
-        <InputGroup.Text id="search">
-          <SearchIcon />
-        </InputGroup.Text>
-      </InputGroup.Append>
     </Box>
   );
 }
 
+///////////// Connect with Redux ////////////////
 const mapDispatchToProps = dispatch => {
   return {
     onSearch: keyword => {
