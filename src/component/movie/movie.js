@@ -55,7 +55,7 @@ function Movie(props) {
           display="flex"
           flexDirection="column"
         >
-          <Typography align="center" component="span" variant="h6">
+          <Typography style={{lineHeight: "1"}} align="center" component="span" variant="h6">
             {movie.danhGia ? movie.danhGia : 0}
           </Typography>
           <StarRatings
@@ -80,7 +80,6 @@ function Movie(props) {
             className={classes.btnBook}
             variant="contained"
             size="large"
-            color="secondary"
             to="#"
             component={Link}
           >
@@ -88,9 +87,12 @@ function Movie(props) {
           </Button>
         </Box>
       </Box>
-      <Box position="relative">
-        <Box component="h4" className={classes.nameMovie}>
+      <Box mb="20px" mt="5px" textAlign="center" className={classes.nameMovie}>
+        <Box component="h4" >
           {movie.tenPhim}
+        </Box>
+        <Box component="span">
+          120 phút - 7.5 IMDb
         </Box>
       </Box>
     </Box>

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     movieItem: {
       "&:hover": {
         cursor: 'pointer',
@@ -22,18 +22,25 @@ const useStyles = makeStyles({
       }
     },
     nameMovie: {
-      width: '100%',
-      height: '44px',
-      maxHeight: '44px',
-      fontSize: '20px',
-      textAlign: 'center',
-      fontWeight: "400"
+      '& h4': {
+        width: '100%',
+        maxHeight: '44px',
+        fontSize: '20px',
+        textAlign: 'center',
+        fontWeight: "400"
+      },
+      "& span": {
+        color: theme.palette.text.secondary
+      }
     },
     btnBook: {
       visibility: "hidden",
       marginTop: "50px",
+      color: theme.palette.info.contrastText,
+      backgroundColor: theme.palette.info.main,
       "&:hover": {
-        color: 'unset'
+        backgroundColor: theme.palette.info.light,
+      color: theme.palette.info.contrastText,
       }
     },
     overPlay: {
@@ -68,6 +75,6 @@ const useStyles = makeStyles({
       },
       
     }
-  });
+  }));
   
 export default useStyles;

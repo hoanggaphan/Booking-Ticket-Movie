@@ -26,12 +26,12 @@ export default function CarouselHome() {
           pagingDotsClassName: `${classes.dotItem}`
         }}
         renderCenterLeftControls={({ previousSlide }) => (
-          <IconButton color="secondary"  className={classes.btnArrow} onClick={previousSlide}>
+          <IconButton  className={classes.btnArrow} onClick={previousSlide}>
             <NavigateBefore className={classes.arrows} />
           </IconButton>
         )}
         renderCenterRightControls={({ nextSlide }) => (
-          <IconButton color="secondary" className={classes.btnArrow} onClick={nextSlide}>
+          <IconButton className={classes.btnArrow} onClick={nextSlide}>
             <NavigateNext className={classes.arrows} />
           </IconButton>
         )}

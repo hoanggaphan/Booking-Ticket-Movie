@@ -20,3 +20,10 @@ export const actViewTrailer = trailerMovie => {
     trailerMovie
   };
 };
+
+export const actOnSearch = keyword => {
+  return {
+    type: ActionTypes.SEARCH,
+    keyword
+  };
+};
