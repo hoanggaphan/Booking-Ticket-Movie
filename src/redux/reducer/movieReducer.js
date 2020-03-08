@@ -4,8 +4,9 @@ const initialState = {
   listMovie: [],
   trailerMovie: {
     movie: {},
-    isOpen: false,
+    isOpen: false
   },
+  keyword: ""
 };
 
 const movieReducer = (state = initialState, actions) => {
@@ -14,7 +15,10 @@ const movieReducer = (state = initialState, actions) => {
       state.listMovie = actions.listMovie;
       return { ...state };
     case ActionTypes.VIEW_TRAILER:
-      state.trailerMovie = {...state.trailerMovie,...actions.trailerMovie};
+      state.trailerMovie = { ...state.trailerMovie, ...actions.trailerMovie };
+      return { ...state };
+    case ActionTypes.SEARCH:
+      state.keyword = actions.keyword;
       return { ...state };
     default:
       return { ...state };

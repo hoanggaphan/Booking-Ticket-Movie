@@ -7,7 +7,7 @@ const useStyle = makeStyles(theme => ({
       margin: "0 5px"
     },
     "& .paging-item.active button svg": {
-      fill: `${theme.palette.secondary.main}`
+      fill: `${theme.palette.info.main}`
     }
   },
   dotItem: {
