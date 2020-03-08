@@ -1,9 +1,24 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-  iconClose: {
-    "&:focus": {
-      outline: "none"
+  modalTrailer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    "& .modal-trailer-wrap": {
+      position: "relative",
+      width: "60%",
+      height: "60%",
+      outline: "none",
+      bgcolor: "black"
+    },
+    "& .modal-trailer-close-icon": {
+      position: "absolute",
+      right: "-30px",
+      top: "-30px",
+      "&:focus": {
+        outline: "none"
+      }
     }
   }
 }));

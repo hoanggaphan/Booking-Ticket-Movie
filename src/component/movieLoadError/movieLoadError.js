@@ -4,19 +4,12 @@ import YouTubeIcon from "@material-ui/icons/YouTube";
 import { Box, Typography, IconButton, Link } from "@material-ui/core";
 import useStyles from "./style";
 
-export default function MovieLoadError(props) {
+const MovieLoadError = props => {
   const classes = useStyles();
 
   const { movie } = props;
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      width="100%"
-      height="100%"
-      bgcolor="rgba(0 ,0 ,0 , .9)"
-      position="relative"
-    >
+    <Box className={classes.movieError}>
       <Box mx="20px 10px">
         <ErrorOutlineIcon style={{ fontSize: "100px" }} />
       </Box>
@@ -30,7 +23,7 @@ export default function MovieLoadError(props) {
             color="textPrimary"
             component={Link}
             rel="noopener noreferrer"
-            className={classes.linkErr}
+            className="movie-error-link"
           >
             Tìm Hiểu Thêm
           </Typography>
@@ -42,11 +35,13 @@ export default function MovieLoadError(props) {
           href="https://www.youtube.com/"
           target="__blank"
           rel="noopener noreferrer"
-          className={classes.iconYtb}
+          className="movie-error-link"
         >
           <YouTubeIcon style={{ fontSize: "60px" }} />
         </Link>
       </Box>
     </Box>
   );
-}
+};
+
+export default MovieLoadError;

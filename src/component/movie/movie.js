@@ -1,39 +1,32 @@
 import React, { useState } from "react";
 import { Box, IconButton, Button, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import useStyles from "./style";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { actViewTrailer } from "./../../redux/actions/index";
 import StarRatings from "react-star-ratings";
+import { actViewTrailer } from "./../../redux/actions/index";
+import useStyles from "./style";
 
-function Movie(props) {
-  const [error, setError] = useState(false);
-  const { movie } = props;
+const Movie = props => {
   const classes = useStyles();
-
-  const handleViewTrailer = () => {
-    const trailerMovie = {
-      movie,
-      isOpen: true
-    };
-    props.viewTrailer(trailerMovie);
-  };
-
-  const handleLoadErrorImg = () => {
-    setError(true);
-  };
+  const { movie, viewTrailer } = props;
+  const trailer = useTrailer(movie, viewTrailer);
+  const errImg = useOnError();
 
   return (
-    <Box
-      className={classes.movieItem}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      overflow="hidden"
-      px="10px"
-    >
-      <Box width="100%" position="relative">
+    <Box className={classes.movie}>
+      <Box
+        borderRadius="10px"
+        overflow="hidden"
+        width="100%"
+        position="relative"
+      >
+        <img
+          src={errImg.error ? "load-error.jpg" : movie.hinhAnh}
+          alt={movie.tenPhim}
+          className="movie-img"
+          {...errImg}
+        />
         <Box position="absolute" top="5px" left="5px">
           <img
             src={
@@ -45,39 +38,27 @@ function Movie(props) {
                 ? "c-13.png"
                 : "p.png"
             }
+            alt="phan loai tuoi"
           />
         </Box>
-        <Box
-          className={classes.starPoint}
-          position="absolute"
-          top="5px"
-          right="5px"
-          display="flex"
-          flexDirection="column"
-        >
-          <Typography style={{lineHeight: "1"}} align="center" component="span" variant="h6">
+        <Box className="movie-starpoint">
+          <Typography component="span" variant="h6">
             {movie.danhGia ? movie.danhGia : 0}
           </Typography>
           <StarRatings
-            rating={movie.danhGia ? movie.danhGia / 2 : 0}  
+            rating={movie.danhGia ? movie.danhGia / 2 : 0}
             starRatedColor="red"
             starDimension="12px"
             starSpacing="0px"
           />
         </Box>
-        <img
-          src={error ? "load-error.jpg" : movie.hinhAnh}
-          alt={movie.tenPhim}
-          className={classes.imgMovie}
-          onError={handleLoadErrorImg}
-        />
 
-        <Box className={classes.overPlay}>
-          <IconButton onClick={handleViewTrailer}>
-            <PlayCircleOutlineIcon className={classes.playIcon} />
+        <Box className="movie-overplay">
+          <IconButton {...trailer}>
+            <PlayCircleOutlineIcon className="movie-play-icon" />
           </IconButton>
           <Button
-            className={classes.btnBook}
+            className="movie-book-btn"
             variant="contained"
             size="large"
             to="#"
@@ -87,18 +68,40 @@ function Movie(props) {
           </Button>
         </Box>
       </Box>
-      <Box mb="20px" mt="5px" textAlign="center" className={classes.nameMovie}>
-        <Box component="h4" >
-          {movie.tenPhim}
-        </Box>
-        <Box component="span">
-          120 phút - 7.5 IMDb
-        </Box>
+      <Box className="movie-name">
+        <Box component="h4">{movie.tenPhim}</Box>
+        <Box component="span">120 phút - 7.5 IMDb</Box>
       </Box>
     </Box>
   );
-}
+};
 
+//////////// Refactor code with HOK /////////////
+const useOnError = () => {
+  const [error, setError] = useState(false);
+  const handleLoadErrorImg = () => {
+    setError(true);
+  };
+  return {
+    error,
+    onError: handleLoadErrorImg
+  };
+};
+
+const useTrailer = (movie, viewTrailer) => {
+  const handleViewTrailer = () => {
+    const trailerMovie = {
+      movie,
+      isOpen: true
+    };
+    viewTrailer(trailerMovie);
+  };
+  return {
+    onClick: handleViewTrailer
+  };
+};
+
+/////////////////// Connect with redux ///////////////////
 const mapDispatchToProps = dispatch => {
   return {
     viewTrailer: trailerMovie => {
