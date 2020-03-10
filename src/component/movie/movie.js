@@ -4,29 +4,25 @@ import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import StarRatings from "react-star-ratings";
-import { actViewTrailer } from "./../../redux/actions/index";
+import { actViewTrailer } from "../../redux/actions/index";
 import useStyles from "./style";
 
 const Movie = props => {
   const classes = useStyles();
-  const { movie, viewTrailer } = props;
-  const trailer = useTrailer(movie, viewTrailer);
+  const { movie } = props;
+  const trailer = useTrailer(props);
   const errImg = useOnError();
 
   return (
     <Box className={classes.movie}>
       <Box
-        borderRadius="10px"
-        overflow="hidden"
-        width="100%"
-        position="relative"
+        className="movie-background"
+        style={ errImg.error ? { backgroundImage: 'url("load-error.jpg")' } : { backgroundImage: `url(${movie.hinhAnh})` } }
       >
-        <img
-          src={errImg.error ? "load-error.jpg" : movie.hinhAnh}
-          alt={movie.tenPhim}
-          className="movie-img"
-          {...errImg}
-        />
+        {/* LINK DETAIL MOVIE IN MOBILE */}
+        <Box component={Link} to={`/detail-movie/${movie.maPhim}`} width="100%" height="100%" position="absolute" top="0" left="0" ></Box>
+
+        {/* AGE TYPES */}
         <Box position="absolute" top="5px" left="5px">
           <img
             src={
@@ -41,6 +37,8 @@ const Movie = props => {
             alt="phan loai tuoi"
           />
         </Box>
+        
+        {/* STAR RATING */}
         <Box className="movie-starpoint">
           <Typography component="span" variant="h6">
             {movie.danhGia ? movie.danhGia : 0}
@@ -52,25 +50,30 @@ const Movie = props => {
             starSpacing="0px"
           />
         </Box>
+        
+        {/* OVERPLAY */}
+        <Box component={Link} to={`/detail-movie/${movie.maPhim}`} className="movie-overplay">
+        </Box>
+        
+        {/* PLAY BUTTON */}
+        <IconButton {...trailer} className="movie-play-btn">
+          <PlayCircleOutlineIcon/>
+        </IconButton>    
+      </Box>
 
-        <Box className="movie-overplay">
-          <IconButton {...trailer}>
-            <PlayCircleOutlineIcon className="movie-play-icon" />
-          </IconButton>
-          <Button
+      {/* DETAIL MOVIE IN WEB */}
+      <Box display={{ xs: "none", sm: "block" }} className="movie-name">
+        <Box component="h4">{movie.tenPhim}</Box>
+        <Box component="span">120 phút - 7.5 IMDb</Box>
+        <Button
             className="movie-book-btn"
             variant="contained"
             size="large"
-            to="#"
+            to={`/detail-movie/${movie.maPhim}`}
             component={Link}
           >
             Đặt Vé
           </Button>
-        </Box>
-      </Box>
-      <Box className="movie-name">
-        <Box component="h4">{movie.tenPhim}</Box>
-        <Box component="span">120 phút - 7.5 IMDb</Box>
       </Box>
     </Box>
   );
@@ -88,7 +91,7 @@ const useOnError = () => {
   };
 };
 
-const useTrailer = (movie, viewTrailer) => {
+const useTrailer = ({ movie, viewTrailer }) => {
   const handleViewTrailer = () => {
     const trailerMovie = {
       movie,

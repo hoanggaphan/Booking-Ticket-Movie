@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Box } from "@material-ui/core";
-import { Tab, Nav} from "react-bootstrap";
+import { Box, Grid } from "@material-ui/core";
+import { Tab, Nav } from "react-bootstrap";
 import { connect } from "react-redux";
 import { actGetListMovieAPI } from "./../../redux/actions";
 import Slider from "react-slick";
@@ -8,7 +8,7 @@ import Movie from "./../movie/movie";
 import ModalTrailer from "../modalTrailer/modalTrailer";
 import Search from "../search/search";
 import useStyles from "./style";
-import {NextArrow, PrevArrow} from './arrow';
+import { NextArrow, PrevArrow } from "./arrow";
 
 function ListMovie(props) {
   const classes = useStyles();
@@ -31,16 +31,22 @@ function ListMovie(props) {
         </Nav>
         <Tab.Content>
           <Tab.Pane eventKey="showing">
-            {/* VIEW LIST MOVIE IN WEB */}
-            <Slider {...settings}>{listMovie()}</Slider>
+            {/* VIEW IN WEB */}
+            <Slider {...settings}>{listMovie.renderShowingMovieWeb()}</Slider>
 
-            {/* VIEW LIST MOVIE IN MOBILE */}
+            {/* VIEW IN MOBILE */}
+            <Box display={{ xs: "block", sm: "none" }}>
+              <Grid container>{listMovie.renderShowingMovieMobile()}</Grid>
+            </Box>
           </Tab.Pane>
           <Tab.Pane eventKey="comming">
-            {/* VIEW LIST MOVIE IN WEB */}
-            <Slider {...settings}>{listMovie()}</Slider>
+            {/* VIEW IN WEB */}
+            <Slider {...settings}>{listMovie.renderShowingMovieWeb()}</Slider>
 
-            {/* VIEW LIST MOVIE IN MOBILE */}
+            {/* VIEW IN MOBILE */}
+            <Box display={{ xs: "block", sm: "none" }}>
+              <Grid container>{listMovie.renderShowingMovieMobile()}</Grid>
+            </Box>
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>
@@ -51,10 +57,13 @@ function ListMovie(props) {
 
 //////////////// Refactor code with Hook ///////////////////
 const useListMovie = ({ listMovie, keyword, getListMovieAPI }) => {
+  // Search movie before render
+  listMovie = listMovie.filter(
+    movie => movie.tenPhim.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+  );
+
+  // render movie in web
   const renderShowingMovieWeb = () => {
-    listMovie = listMovie.filter(
-      movie => movie.tenPhim.toLowerCase().indexOf(keyword.toLowerCase()) > -1
-    );
     return listMovie.map((movie, index) => (
       <div className="list-movie-sliders-item">
         <Movie key={index} movie={movie} />
@@ -62,15 +71,25 @@ const useListMovie = ({ listMovie, keyword, getListMovieAPI }) => {
     ));
   };
 
+  // render movie in mobile
+  const renderShowingMovieMobile = () => {
+    return listMovie.map((movie, index) => {
+      return <Box component={Movie} key={index} movie={movie} />;
+    });
+  };
+
+  // get list movie from API
   useEffect(() => {
     getListMovieAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-  return renderShowingMovieWeb;
-}
+
+  // return
+  return { renderShowingMovieWeb, renderShowingMovieMobile };
+};
 
 const useSetting = () => {
+  // config of Slider library
   return {
     className: "list-movie-sliders",
     infinite: true,
@@ -79,17 +98,11 @@ const useSetting = () => {
     rows: 2,
     slidesPerRow: 4,
     nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      {
-        breakpoint: 750,
-        settings: {
-          slidesPerRow: 3
-        }
-      }
-    ]
+    prevArrow: <PrevArrow />
   };
-}
+};
+//////////////////////////////////////////////////////////
+
 
 //////////////// Connect with Redux //////////////////////
 const mapDispatchToProps = dispatch => {
