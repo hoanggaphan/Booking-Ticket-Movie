@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <Box className={classes.header} component={AppBar}>
-      {/* Logo */}
+      {/* LOGO */}
       <Link to="/" exact>
         <img
           src="https://tix.vn/app/assets/img/icons/web-logo.png"
@@ -19,7 +19,7 @@ const Navbar = () => {
         />
       </Link>
 
-      {/* Nav Link */}
+      {/* NAV LINK */}
       <Box component="nav" display={{ xs: "none", sm: "block" }}>
         <Button
           activeClassName="header-navLink-active"
@@ -60,7 +60,7 @@ const Navbar = () => {
         </Button>
       </Box>
 
-      {/* User Login */}
+      {/* USER LOGIN */}
       <Box display={{ xs: "none", sm: "block" }}>
         <Link to="/" className="header-login">
           <IconButton color="inherit" size="small">
@@ -72,7 +72,7 @@ const Navbar = () => {
         </Button>
       </Box>
 
-      {/* Button Menu */}
+      {/* BUTTON MENU MOBILE*/}
       <Box display={{ sm: "none" }}>
         <IconButton color="inherit" size="medium">
           <Menu fontSize="large" />
