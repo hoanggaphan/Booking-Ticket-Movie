@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
       width: "60%",
       height: "60%",
       outline: "none",
-      bgcolor: "black"
+      backgroundColor: "black"
     },
     "& .modal-trailer-close-icon": {
       position: "absolute",
