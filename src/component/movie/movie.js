@@ -16,7 +16,7 @@ const Movie = props => {
     <Box className={classes.movie}>
       <Box
         className="movie-background"
-        style={ !movie.hinhAnh ? { backgroundImage: 'url("load-error.jpg")' } : { backgroundImage: `url(${movie.hinhAnh})` } }
+        style={ movie.hinhAnh ? { backgroundImage: 'url("load-error.jpg")' } : { backgroundImage: `url(${movie.hinhAnh})` } }
       >
         {/* LINK DETAIL MOVIE IN MOBILE */}
         <Box component={Link} to={`/detail-movie/${movie.maPhim}`} width="100%" height="100%" position="absolute" top="0" left="0" ></Box>
@@ -81,11 +81,11 @@ const Movie = props => {
 //////////// Refactor code with HOK /////////////
 const useTrailer = ({ movie, viewTrailer }) => {
   const handleViewTrailer = () => {
-    const trailer = {
+    const trailerMovie = {
       movie,
       isOpen: true
     };
-    viewTrailer(trailer);
+    viewTrailer(trailerMovie);
   };
   return {
     onClick: handleViewTrailer
@@ -95,8 +95,8 @@ const useTrailer = ({ movie, viewTrailer }) => {
 /////////////////// Connect with redux ///////////////////
 const mapDispatchToProps = dispatch => {
   return {
-    viewTrailer: trailer => {
-      dispatch(actViewTrailer(trailer));
+    viewTrailer: trailerMovie => {
+      dispatch(actViewTrailer(trailerMovie));
     }
   };
 };
