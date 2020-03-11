@@ -14,10 +14,10 @@ export const actGetListMovieAPI = () => {
   };
 };
 
-export const actViewTrailer = trailer => {
+export const actViewTrailer = trailerMovie => {
   return {
     type: ActionTypes.VIEW_TRAILER,
-    trailer
+    trailerMovie
   };
 };
 

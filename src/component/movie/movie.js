@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, IconButton, Button, Typography } from "@material-ui/core";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import { Link } from "react-router-dom";
@@ -11,12 +11,13 @@ const Movie = props => {
   const classes = useStyles();
   const { movie } = props;
   const trailer = useTrailer(props);
+  const errImg = useOnError();
 
   return (
     <Box className={classes.movie}>
       <Box
         className="movie-background"
-        style={ !movie.hinhAnh ? { backgroundImage: 'url("load-error.jpg")' } : { backgroundImage: `url(${movie.hinhAnh})` } }
+        style={ errImg.error ? { backgroundImage: 'url("load-error.jpg")' } : { backgroundImage: `url(${movie.hinhAnh})` } }
       >
         {/* LINK DETAIL MOVIE IN MOBILE */}
         <Box component={Link} to={`/detail-movie/${movie.maPhim}`} width="100%" height="100%" position="absolute" top="0" left="0" ></Box>
@@ -79,13 +80,24 @@ const Movie = props => {
 };
 
 //////////// Refactor code with HOK /////////////
+const useOnError = () => {
+  const [error, setError] = useState(false);
+  const handleLoadErrorImg = () => {
+    setError(true);
+  };
+  return {
+    error,
+    onError: handleLoadErrorImg
+  };
+};
+
 const useTrailer = ({ movie, viewTrailer }) => {
   const handleViewTrailer = () => {
-    const trailer = {
+    const trailerMovie = {
       movie,
       isOpen: true
     };
-    viewTrailer(trailer);
+    viewTrailer(trailerMovie);
   };
   return {
     onClick: handleViewTrailer
@@ -95,8 +107,8 @@ const useTrailer = ({ movie, viewTrailer }) => {
 /////////////////// Connect with redux ///////////////////
 const mapDispatchToProps = dispatch => {
   return {
-    viewTrailer: trailer => {
-      dispatch(actViewTrailer(trailer));
+    viewTrailer: trailerMovie => {
+      dispatch(actViewTrailer(trailerMovie));
     }
   };
 };
