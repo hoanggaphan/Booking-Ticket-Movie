@@ -5,6 +5,18 @@ const useStyles = makeStyles(theme => ({
     maxWidth: "940px",
     margin: "0 auto",
     paddingTop: "30px",
+    "& .tab-pane": {
+      display: "block",
+      height: "0",
+      overflow: "hidden",
+      "&.active": {
+        height: "auto",
+        overflow: "visible",
+      }
+    },
+    "& .fade": {
+      transition: "opacity .2s ease-in"
+    },
     "& .list-movie-nav": {
       maxWidth: "100%",
       margin: "0 10px 25px 10px",
@@ -70,6 +82,13 @@ const useStyles = makeStyles(theme => ({
         }
       }
     },
+    "& .list-movie-more-btn": {
+      margin: "0 auto",
+      outline: "none",
+      fontSize: "20px",
+      color: theme.palette.primary.main,
+      borderColor: theme.palette.primary.main,
+    }
   },
 
   nextArrow: {

@@ -26,9 +26,6 @@ const useStyles = makeStyles(theme => ({
         visibility: "visible",
         opacity: "1",
       },
-      "& .movie-img": {
-        transform: "scale(1.1)"
-      },
       "& .movie-name .movie-book-btn": {
         visibility: "visible",
         opacity: "1",

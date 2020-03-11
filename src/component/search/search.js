@@ -13,7 +13,7 @@ const Search = props => {
   return (
     <Box
       component={InputGroup}
-      className={`${classes.search} ${focus ? classes.searchFocus : ""}`}
+      className={`${classes.search} ${focus && classes.searchFocus}`}
     >
       <InputGroup.Prepend>
         <InputGroup.Text>
