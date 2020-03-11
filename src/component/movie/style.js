@@ -19,19 +19,16 @@ const useStyles = makeStyles(theme => ({
 
       "& .movie-overplay": {
         visibility: "visible",
-        opacity: "1",
+        opacity: "1"
       },
 
       "& .movie-play-btn": {
         visibility: "visible",
-        opacity: "1",
-      },
-      "& .movie-img": {
-        transform: "scale(1.1)"
+        opacity: "1"
       },
       "& .movie-name .movie-book-btn": {
         visibility: "visible",
-        opacity: "1",
+        opacity: "1"
       }
     },
 
@@ -47,39 +44,32 @@ const useStyles = makeStyles(theme => ({
       overflow: "hidden",
       marginBottom: "20px",
       [theme.breakpoints.up("sm")]: {
-        marginBottom: "0px",
+        marginBottom: "0px"
       },
       "& .movie-starpoint": {
         position: "absolute",
-        top: "5px",
+        bottom: "5px",
         right: "5px",
         display: "flex",
         flexDirection: "column",
-        width: "75px",
         backgroundColor: "rgba(12,27,54,.8)",
         border: "1px solid #1f2e46",
         borderRadius: "4px",
         textAlign: "center",
+        width: "60px",
+        lineHeight: "1",
         "& span": {
-          color: "white",
-          lineHeight: "1",
-          textAlign: "center",
-          fontSize: "18px",
-          marginTop: "10px"
+          fontSize: "16px",
+          marginTop: "5px"
         },
-        [theme.breakpoints.up("sm")]: {
-            width: "60px",
-          "& span": {
-            fontSize: "16px",
-            marginTop: "5px"
-          },
-          "& .widget-svg": {
-            width: "10px!important",
-            height: "10px!important"
-          }
+        "& .widget-svg": {
+          width: "10px!important",
+          height: "10px!important"
         },
         [theme.breakpoints.up("md")]: {
           width: "75px",
+          top: "5px",
+          bottom: "unset",
           "& span": {
             fontSize: "18px",
             marginTop: "10px"
@@ -103,7 +93,7 @@ const useStyles = makeStyles(theme => ({
         cursor: "pointer",
         transition: "all .3s",
         display: "none",
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up("sm")]: {
           display: "block"
         }
       },
@@ -121,10 +111,10 @@ const useStyles = makeStyles(theme => ({
         "& svg": {
           fontSize: "75px"
         },
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up("sm")]: {
           display: "block"
         }
-      },
+      }
     },
 
     "& .movie-name": {

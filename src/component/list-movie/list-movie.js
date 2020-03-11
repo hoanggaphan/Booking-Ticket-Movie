@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Box, Grid } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { Box, Grid, Button } from "@material-ui/core";
 import { Tab, Nav } from "react-bootstrap";
 import { connect } from "react-redux";
 import { actGetListMovieAPI } from "./../../redux/actions";
@@ -12,7 +12,8 @@ import { NextArrow, PrevArrow } from "./arrow";
 
 function ListMovie(props) {
   const classes = useStyles();
-  const listMovie = useListMovie(props);
+  const [visible, setVisible] = useState(4); // numbers of movie render in mobile
+  const listMovie = useListMovie(props, visible, setVisible);
   const settings = useSetting();
 
   return (
@@ -21,10 +22,12 @@ function ListMovie(props) {
         <Nav className="list-movie-nav">
           <Box className="list-movie-nav-items">
             <Nav.Item>
-              <Nav.Link eventKey="showing">Đang Chiếu</Nav.Link>
+              <Nav.Link eventKey="showing">
+                Đang Chiếu ({listMovie.amount})
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="comming">Sắp Chiếu</Nav.Link>
+              <Nav.Link eventKey="comming">Sắp Chiếu ()</Nav.Link>
             </Nav.Item>
           </Box>
           <Search />
@@ -37,17 +40,21 @@ function ListMovie(props) {
             {/* VIEW IN MOBILE */}
             <Box display={{ xs: "block", sm: "none" }}>
               <Grid container>{listMovie.renderShowingMovieMobile()}</Grid>
+              {/* Button SHOW MORE */}
+              {visible < props.listMovie.length && (
+                <Box
+                  component={Button}
+                  display={{ xs: "block", sm: "none" }}
+                  variant="outlined"
+                  className="list-movie-more-btn"
+                  onClick={listMovie.showMoreMovie}
+                >
+                  XEM THÊM
+                </Box>
+              )}
             </Box>
           </Tab.Pane>
-          <Tab.Pane eventKey="comming">
-            {/* VIEW IN WEB */}
-            <Slider {...settings}>{listMovie.renderShowingMovieWeb()}</Slider>
-
-            {/* VIEW IN MOBILE */}
-            <Box display={{ xs: "block", sm: "none" }}>
-              <Grid container>{listMovie.renderShowingMovieMobile()}</Grid>
-            </Box>
-          </Tab.Pane>
+          <Tab.Pane eventKey="comming"></Tab.Pane>
         </Tab.Content>
       </Tab.Container>
       <ModalTrailer />
@@ -55,8 +62,8 @@ function ListMovie(props) {
   );
 }
 
-//////////////// Refactor code with Hook ///////////////////
-const useListMovie = ({ listMovie, keyword, getListMovieAPI }) => {
+//////////////// REFACTOR CODE WITH HOOK ///////////////////
+const useListMovie = ({ listMovie, keyword, getListMovieAPI }, visible, setVisible) => {
   // Search movie before render
   listMovie = listMovie.filter(
     movie => movie.tenPhim.toLowerCase().indexOf(keyword.toLowerCase()) > -1
@@ -73,9 +80,14 @@ const useListMovie = ({ listMovie, keyword, getListMovieAPI }) => {
 
   // render movie in mobile
   const renderShowingMovieMobile = () => {
-    return listMovie.map((movie, index) => {
+    return listMovie.slice(0, visible).map((movie, index) => {
       return <Box component={Movie} key={index} movie={movie} />;
     });
+  };
+
+  //ComponentDidMount call API get listmovie
+  const showMoreMovie = () => {
+    setVisible(listMovie.length);
   };
 
   // get list movie from API
@@ -85,11 +97,10 @@ const useListMovie = ({ listMovie, keyword, getListMovieAPI }) => {
   }, []);
 
   // return
-  return { renderShowingMovieWeb, renderShowingMovieMobile };
+  return { renderShowingMovieWeb, renderShowingMovieMobile, showMoreMovie, amount: listMovie.length };
 };
 
 const useSetting = () => {
-  // config of Slider library
   return {
     className: "list-movie-sliders",
     infinite: true,
@@ -102,7 +113,6 @@ const useSetting = () => {
   };
 };
 //////////////////////////////////////////////////////////
-
 
 //////////////// Connect with Redux //////////////////////
 const mapDispatchToProps = dispatch => {

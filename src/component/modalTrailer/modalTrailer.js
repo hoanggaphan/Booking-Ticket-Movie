@@ -8,33 +8,33 @@ import useStyles from "./style";
 
 function ModalTrailer(props) {
   const classes = useStyles();
-  const { trailerMovie, closeModal } = props;
-  const unModal = useCloseModal(closeModal);
+  const { trailer, onCloseModal } = props;
+  const modal = useModal(onCloseModal);
 
   return (
     <Box
       className={classes.modalTrailer}
-      onClose={unModal.onClose}
+      onClose={modal.handleOnCloseModal}
       component={Modal}
-      open={trailerMovie.isOpen}
+      open={trailer.isOpen}
     >
       <Box className="modal-trailer-wrap">
-        {trailerMovie.movie.trailer ? (
+        {trailer.movie.trailer ? (
           <iframe
             auto
             width="100%"
             height="100%"
             frameBorder="0"
             allowFullScreen
-            src={`${trailerMovie.movie.trailer}?autoplay=1`}
+            src={`${trailer.movie.trailer}?autoplay=1`}
             allow="autoplay"
-            title={trailerMovie.movie.tenPhim}
+            title={trailer.movie.tenPhim}
           ></iframe>
         ) : (
-          <MovieLoadError movie={trailerMovie.movie} />
+          <MovieLoadError movie={trailer.movie} />
         )}
         <Box
-          onClick={unModal.onClick}
+          onClick={modal.handleOnCloseModal}
           component={IconButton}
           className="modal-trailer-close-icon"
         >
@@ -46,29 +46,26 @@ function ModalTrailer(props) {
 }
 
 //////////// Refactor code with HOOK ////////////////
-const useCloseModal = closeModal => {
-  const handleCloseModal = () => {
+const useModal = onCloseModal => {
+  const handleOnCloseModal = () => {
     const valid = {
       isOpen: false
     };
-    closeModal(valid);
+    onCloseModal(valid);
   };
-  return {
-    onClose: handleCloseModal,
-    onClick: handleCloseModal
-  };
+  return { handleOnCloseModal };
 };
 
 //////////// Connect with Redux ////////////////////
 const mapStateToProps = state => {
   return {
-    trailerMovie: state.movieReducer.trailerMovie
+    trailer: state.movieReducer.trailer
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    closeModal: valid => {
+    onCloseModal: valid => {
       dispatch(actCloseModal(valid));
     }
   };

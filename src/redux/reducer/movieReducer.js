@@ -2,7 +2,7 @@ import * as ActionTypes from "./../constants/ActionTypes";
 
 const initialState = {
   listMovie: [],
-  trailerMovie: {
+  trailer: {
     movie: {},
     isOpen: false
   },
@@ -15,7 +15,7 @@ const movieReducer = (state = initialState, actions) => {
       state.listMovie = actions.listMovie;
       return { ...state };
     case ActionTypes.VIEW_TRAILER:
-      state.trailerMovie = { ...state.trailerMovie, ...actions.trailerMovie };
+      state.trailer = { ...state.trailer, ...actions.trailer };
       return { ...state };
     case ActionTypes.SEARCH:
       state.keyword = actions.keyword;
