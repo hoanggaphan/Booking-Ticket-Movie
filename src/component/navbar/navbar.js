@@ -72,11 +72,9 @@ const Navbar = () => {
         </Button>
       </Box>
 
-      {/* BUTTON MENU MOBILE*/}
+      {/* BUTTON HAMBURGER MOBILE*/}
       <Box display={{ sm: "none" }}>
-        <IconButton color="inherit" size="medium">
-          <Menu fontSize="large" />
-        </IconButton>
+        <Menu fontSize="large" className="header-hamburger-btn" />
       </Box>
     </Box>
   );

@@ -23,7 +23,7 @@ const useStyle = makeStyles(theme => ({
         color: "rgba(255, 255, 255)"
       },
       "@media (max-width: 700px)": {
-        margin: "5px"
+        margin: "4px"
       }
     },
 
@@ -36,6 +36,9 @@ const useStyle = makeStyles(theme => ({
       "&:hover": {
         color: "rgba(255, 255, 255)"
       }
+    },
+    "& .header-hamburger-btn": {
+      
     }
   }
 }));
