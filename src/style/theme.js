@@ -9,6 +9,9 @@ const theme = createMuiTheme({
       dark: "#9d368d",
       contrastText: "#fff"
     },
+    secondary: { // dark light
+      main: "#1F2251",
+    },
     info: { // color blue
       light: "#4aa3f9",
       main: "#1d8cf8",
@@ -32,6 +35,10 @@ const theme = createMuiTheme({
       main: "#fd5d93",
       dark: "#b14166",
       contrastText: "#fff"
+    },
+    button: {
+      default: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      blue: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
     },
     typography: {
       h1: {

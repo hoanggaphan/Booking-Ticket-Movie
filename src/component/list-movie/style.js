@@ -4,7 +4,10 @@ const useStyles = makeStyles(theme => ({
   listMovie: {
     maxWidth: "940px",
     margin: "0 auto",
-    paddingTop: "30px",
+    marginTop: "20px",
+    [theme.breakpoints.up("md")]: {
+      marginTop: "70px",
+    },
     "& .tab-pane": {
       display: "block",
       height: "0",
@@ -23,29 +26,35 @@ const useStyles = makeStyles(theme => ({
       alignItems: "center",
       justifyContent: "space-between",
       borderBottom: "1px solid rgba(255, 255, 255, .1)",
+      
       "& .list-movie-nav-items": {
         display: "flex",
         alignItems: "center",
         width: "100%",
-        justifyContent: "center",
+        justifyContent: "space-around",
         order: "2",
         [theme.breakpoints.up("sm")]: {
           width: "65%",
           justifyContent: "flex-start",
           order: "1"
-        }
+        },
+        "@media (max-width: 310px)": {
+          flexDirection: "column"
+        },
       },
       "& .nav-link": {
         fontSize: "18px",
         border: "none",
         color: theme.palette.text.secondary,
         padding: "8px 0px 5px 0px",
-        marginRight: "20px",
         position: "relative",
         textTransform: "uppercase",
         fontWeight: "500",
-        [theme.breakpoints.up("sm")]: {
-          fontSize: "24px"
+        "@media (min-width: 600px)": {
+          marginRight: "20px",
+        },
+        [theme.breakpoints.up("md")]: {
+          fontSize: "24px",
         },
         "&.active": {
           backgroundColor: "unset",
@@ -59,7 +68,7 @@ const useStyles = makeStyles(theme => ({
             width: "100%",
             height: "1px",
             background: "#0089d0",
-            boxShadow: "0 0 15px 1px #0089d0"
+            boxShadow: "0 0 15px 3px #0089d0"
           }
         },
         "&:hover": {
@@ -72,7 +81,7 @@ const useStyles = makeStyles(theme => ({
     },
     "& .list-movie-sliders": {
       display: "none",
-      [theme.breakpoints.up("sm")]: {
+      '@media (min-width: 1080px)': {
         display: "block"
       },
       "& .list-movie-sliders-item": {
@@ -82,12 +91,18 @@ const useStyles = makeStyles(theme => ({
         }
       }
     },
-    "& .list-movie-more-btn": {
-      margin: "0 auto",
-      outline: "none",
-      fontSize: "20px",
-      color: theme.palette.primary.main,
-      borderColor: theme.palette.primary.main
+    "& .list-movie-alert": {
+      backgroundColor: "#1f2251",
+      color: "rgba(255,255,255,.5)",
+      margin: "0 10px",
+      fontSize: "16px",
+      alignItems: "center"
+    },
+    "& .list-movie-mobile": {
+      display: "block",
+      '@media (min-width: 1080px)': {
+        display: "none"
+      },
     }
   },
 
@@ -100,7 +115,7 @@ const useStyles = makeStyles(theme => ({
     "&:focus": {
       outline: "none"
     },
-    [theme.breakpoints.up("md")]: {
+    '@media (min-width: 1080px)': {
       display: "block"
     },
     [theme.breakpoints.up("lg")]: {
@@ -116,7 +131,7 @@ const useStyles = makeStyles(theme => ({
     "&:focus": {
       outline: "none"
     },
-    [theme.breakpoints.up("md")]: {
+    '@media (min-width: 1080px)': {
       display: "block"
     },
     [theme.breakpoints.up("lg")]: {

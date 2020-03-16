@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { Box } from "@material-ui/core";
 import { connect } from "react-redux";
@@ -10,6 +10,12 @@ const Search = props => {
   const classes = useStyles();
   const [focus, setFocus] = useState(false);
 
+  useEffect(() => {
+    return () => {
+      props.onSearch("")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <Box
       component={InputGroup}
@@ -22,7 +28,7 @@ const Search = props => {
       </InputGroup.Prepend>
       <FormControl
         placeholder="Tìm Kiếm Phim"
-        onKeyUp={e => {
+        onChange={e => {
           props.onSearch(e.target.value);
         }}
         onFocus={() => {
@@ -34,7 +40,7 @@ const Search = props => {
       />
     </Box>
   );
-}
+};
 
 ///////////// Connect with Redux ////////////////
 const mapDispatchToProps = dispatch => {

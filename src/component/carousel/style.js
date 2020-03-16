@@ -2,47 +2,28 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   carousel: {
-    "& .carousel-dots": {
-      top: "-50px!important",
-      "& .paging-item": {
-        margin: "0 5px"
-      },
-      "& .paging-item.active button svg": {
-        fill: `${theme.palette.info.main}`
-      }
+    // aspect ratio
+    "& .carousel-img": {
+      maxWidth: "100%",
+      height: "calc(100vw * (9/16))",
+      maxHeight: "650px",
+      display: "block!important"
     },
-    "& .carousel-dots-item": {
-      opacity: "1!important",
-      "&:focus": {
-        outline: "none"
+    "& .slick-dots": {
+      bottom: "15%",
+      left: "0",
+      "& li button": {
+        backgroundColor: "#d8d8d8",
+        borderRadius: "50%",
+        width: "12px",
+        height: "12px"
       },
-      "& svg": {
-        fill: "rgba(255, 255, 255, 0.7)",
-        width: "18px",
-        height: "18px",
-        "& circle": {
-          cx: "9",
-          cy: "9",
-          r: "9"
-        }
-      }
-    },
-    "& .carousel-arrows": {
-      "&:focus": {
-        outline: "none"
+      "& li.slick-active button": {
+        backgroundColor: theme.palette.info.main
       },
-      "& svg": {
-        fontSize: "100px",
-        color: "white",
-        opacity: "0.7",
-        "&:hover": {
-          opacity: "1"
-        }
-      }
-    },
-    "& .carousel-imgs": {
-      width: "100%",
-      height: "100%"
+      "& li button::before": {
+        content: "none"
+      },
     }
   }
 }));

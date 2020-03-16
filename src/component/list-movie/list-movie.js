@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Box, Grid, Button } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Box, Grid } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import { Tab, Nav } from "react-bootstrap";
 import { connect } from "react-redux";
 import { actGetListMovieAPI } from "./../../redux/actions";
 import Slider from "react-slick";
 import Movie from "./../movie/movie";
-import ModalTrailer from "../modalTrailer/modalTrailer";
+import ModalTrailer from "../modal-trailer/modalTrailer";
 import Search from "../search/search";
 import useStyles from "./style";
 import { NextArrow, PrevArrow } from "./arrow";
 
 function ListMovie(props) {
   const classes = useStyles();
-  const [visible, setVisible] = useState(4); // numbers of movie render in mobile
-  const listMovie = useListMovie(props, visible, setVisible);
+  const listMovie = useListMovie(props);
   const settings = useSetting();
 
   return (
@@ -23,38 +23,82 @@ function ListMovie(props) {
           <Box className="list-movie-nav-items">
             <Nav.Item>
               <Nav.Link eventKey="showing">
-                Đang Chiếu ({listMovie.amount})
+                Đang Chiếu ({listMovie.amountShowing})
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="comming">Sắp Chiếu ()</Nav.Link>
+              <Nav.Link eventKey="comming">
+                Sắp Chiếu ({listMovie.amountComming})
+              </Nav.Link>
             </Nav.Item>
           </Box>
           <Search />
         </Nav>
         <Tab.Content>
           <Tab.Pane eventKey="showing">
-            {/* VIEW IN WEB */}
-            <Slider {...settings}>{listMovie.renderShowingMovieWeb()}</Slider>
+            {listMovie.amountShowing ? (
+              <>
+                {/* VIEW IN WEB */}
+                <Slider {...settings}>
+                  {listMovie.renderMovieWeb(
+                    listMovie.listMovieShowing,
+                    "showing"
+                  )}
+                </Slider>
 
-            {/* VIEW IN MOBILE */}
-            <Box display={{ xs: "block", sm: "none" }}>
-              <Grid container>{listMovie.renderShowingMovieMobile()}</Grid>
-              {/* Button SHOW MORE */}
-              {visible < props.listMovie.length && (
-                <Box
-                  component={Button}
-                  display={{ xs: "block", sm: "none" }}
-                  variant="outlined"
-                  className="list-movie-more-btn"
-                  onClick={listMovie.showMoreMovie}
-                >
-                  XEM THÊM
+                {/* VIEW IN MOBILE */}
+                <Box className="list-movie-mobile">
+                  <Grid container>
+                    {listMovie.renderMovieMobile(
+                      listMovie.listMovieShowing,
+                      "showing"
+                    )}
+                  </Grid>
                 </Box>
-              )}
-            </Box>
+              </>
+            ) : (
+              <Box
+                component={Alert}
+                className="list-movie-alert"
+                severity="error"
+                variant="filled"
+              >
+                Rất Tiếc! Không Tìm Thấy Phim Của Bạn. Hãy Thử Lại Với Tên Khác.
+              </Box>
+            )}
           </Tab.Pane>
-          <Tab.Pane eventKey="comming"></Tab.Pane>
+          <Tab.Pane eventKey="comming">
+            {listMovie.amountShowing ? (
+              <>
+                {/* VIEW IN WEB */}
+                <Slider {...settings}>
+                  {listMovie.renderMovieWeb(
+                    listMovie.listMovieComming,
+                    "comming"
+                  )}
+                </Slider>
+
+                {/* VIEW IN MOBILE */}
+                <Box className="list-movie-mobile">
+                  <Grid container>
+                    {listMovie.renderMovieMobile(
+                      listMovie.listMovieComming,
+                      "comming"
+                    )}
+                  </Grid>
+                </Box>
+              </>
+            ) : (
+              <Box
+                component={Alert}
+                className="list-movie-alert"
+                severity="error"
+                variant="filled"
+              >
+                Rất Tiếc! Không Tìm Thấy Phim Của Bạn. Hãy Thử Lại Với Tên Khác.
+              </Box>
+            )}
+          </Tab.Pane>
         </Tab.Content>
       </Tab.Container>
       <ModalTrailer />
@@ -63,41 +107,50 @@ function ListMovie(props) {
 }
 
 //////////////// REFACTOR CODE WITH HOOK ///////////////////
-const useListMovie = ({ listMovie, keyword, getListMovieAPI }, visible, setVisible) => {
-  // Search movie before render
-  listMovie = listMovie.filter(
+const useListMovie = ({
+  listMovieShowing,
+  listMovieComming,
+  keyword,
+  getListMovieAPI
+}) => {
+  listMovieComming = listMovieComming.filter(
+    movie => movie.tenPhim.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+  );
+  listMovieShowing = listMovieShowing.filter(
     movie => movie.tenPhim.toLowerCase().indexOf(keyword.toLowerCase()) > -1
   );
 
   // render movie in web
-  const renderShowingMovieWeb = () => {
+  const renderMovieWeb = (listMovie, type) => {
     return listMovie.map((movie, index) => (
       <div className="list-movie-sliders-item">
-        <Movie key={index} movie={movie} />
+        <Movie key={index} movie={movie} type={type} />
       </div>
     ));
   };
 
   // render movie in mobile
-  const renderShowingMovieMobile = () => {
-    return listMovie.slice(0, visible).map((movie, index) => {
-      return <Box component={Movie} key={index} movie={movie} />;
+  const renderMovieMobile = (listMovie, type) => {
+    return listMovie.map((movie, index) => {
+      return <Movie key={index} movie={movie} type={type} />;
     });
   };
 
   //ComponentDidMount call API get listmovie
-  const showMoreMovie = () => {
-    setVisible(listMovie.length);
-  };
-
-  // get list movie from API
   useEffect(() => {
     getListMovieAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // return
-  return { renderShowingMovieWeb, renderShowingMovieMobile, showMoreMovie, amount: listMovie.length };
+  return {
+    listMovieShowing,
+    listMovieComming,
+    renderMovieWeb,
+    renderMovieMobile,
+    amountShowing: listMovieShowing.length,
+    amountComming: listMovieComming.length
+  };
 };
 
 const useSetting = () => {
@@ -125,7 +178,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    listMovie: state.movieReducer.listMovie,
+    listMovieShowing: state.movieReducer.listMovieShowing,
+    listMovieComming: state.movieReducer.listMovieComming,
     keyword: state.movieReducer.keyword
   };
 };

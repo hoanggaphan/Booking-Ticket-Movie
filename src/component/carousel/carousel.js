@@ -1,46 +1,35 @@
 import React from "react";
-import Carousel from "nuka-carousel";
-import { IconButton, Box } from "@material-ui/core";
-import { NavigateBefore, NavigateNext } from "@material-ui/icons";
+import { Box } from "@material-ui/core";
+import Slider from "react-slick";
 import useStyle from "./style";
 
-const CarouselHome = () => {
+export default function Carousel() {
   const classes = useStyle();
 
+  const settings = {
+    pauseOnDotsHover: true,
+    autoplaySpeed: 4000,
+    fade: true,
+    pauseOnHover: false,
+    autoplay: true,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: false,
+    className: `${classes.carousel}`
+  };
+
   return (
-    <Box display={{ xs: "none", md: "block" }}>
-      <Carousel
-        autoplay={true}
-        autoplayInterval={3500}
-        transitionMode="fade"
-        speed={1000}
-        wrapAround={true} // infinity loop
-        pauseOnHover={false}
-        heightMode={700}
-        initialSlideHeight={700}
-        className={classes.carousel}
-        defaultControlsConfig={{
-          pagingDotsContainerClassName: 'carousel-dots',
-          pagingDotsClassName: 'carousel-dots-item'
-        }}
-        renderCenterLeftControls={({ previousSlide }) => (
-          <IconButton className="carousel-arrows" onClick={previousSlide}>
-            <NavigateBefore />
-          </IconButton>
-        )}
-        renderCenterRightControls={({ nextSlide }) => (
-          <IconButton className="carousel-arrows" onClick={nextSlide}>
-            <NavigateNext />
-          </IconButton>
-        )}
-      >
-        <img src="carousel-1.jpg" className="caousel-imgs" alt="carousel-1" />
-        <img src="carousel-2.jpg" className="caousel-imgs" alt="carousel-2" />
-        <img src="carousel-3.jpg" className="caousel-imgs" alt="carousel-3" />
-        <img src="carousel-4.jpg" className="caousel-imgs" alt="carousel-4" />
-      </Carousel>
+    <Box>
+      <Slider {...settings}>
+        <img src="carousel-1.jpg" alt="carousel-1" className="carousel-img" width="100%" height="650px" />
+        <img src="carousel-2.jpg" alt="carousel-2" className="carousel-img" width="100%" height="650px" />
+        <img src="carousel-3.jpg" alt="carousel-3" className="carousel-img" width="100%" height="650px" />
+        <img src="carousel-4.jpg" alt="carousel-4" className="carousel-img" width="100%" height="650px" />
+      </Slider>
     </Box>
   );
-};
-
-export default CarouselHome;
+}

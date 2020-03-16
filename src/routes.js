@@ -3,6 +3,7 @@ import ShowTimes from './pages/home/show-times';
 import ListCenima from './pages/home/list-cenima';
 import News from './pages/home/news';
 import DetailMovie from './pages/home/detail-movie';
+import BookingMovie from './pages/home/booking-movie';
 
 const routesHome = [
     {
@@ -29,6 +30,11 @@ const routesHome = [
         path: '/detail-movie/:maPhim',
         component: DetailMovie,
         exact: false,
+    },
+    {
+        path: '/booking-movie/:maLichChieu',
+        component: BookingMovie,
+        exact: false
     }
 ]
 

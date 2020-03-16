@@ -6,23 +6,29 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     overflow: "hidden",
-    padding: "0 10px",
+    padding: "0 5px",
     width: "50%",
-    [theme.breakpoints.up("sm")]: {
-      width: "100%"
+    "@media (min-width: 400px)": {
+      width: "calc(100% / 3)",
     },
-    "& button": {
-      outline: "none"
+    "@media (min-width: 600px)": {
+      width: "25%",
+    },
+    "@media (min-width: 1080px)": {
+      width: "100%",
+      padding: "0 10px",
     },
     "&:hover": {
       cursor: "pointer",
-
-      "& .movie-overplay": {
+      "& .movie-wrapper .movie-background": {
+        transform: "scale(1.1)",
+      },
+      "& .movie-wrapper .movie-overplay": {
         visibility: "visible",
         opacity: "1"
       },
 
-      "& .movie-play-btn": {
+      "& .movie-wrapper .movie-play-btn": {
         visibility: "visible",
         opacity: "1"
       },
@@ -31,25 +37,29 @@ const useStyles = makeStyles(theme => ({
         opacity: "1"
       }
     },
-
-    "& .movie-background": {
+    "& .movie-wrapper": {
       width: "100%",
-      height: "auto",
-      position: "relative",
-      paddingTop: "150%",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
-      borderRadius: "10px",
+      height: "100%",
       overflow: "hidden",
-      marginBottom: "20px",
+      borderRadius: "10px",
+      marginBottom: "10px",
+      position: "relative",
       [theme.breakpoints.up("sm")]: {
         marginBottom: "0px"
+      },
+      "& .movie-background": {
+        width: "100%",
+        height: "auto",
+        paddingTop: "150%",
+        backgroundSize: "100% 100%",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+        transition: "all .3s",
       },
       "& .movie-starpoint": {
         position: "absolute",
         bottom: "5px",
-        right: "5px",
+        right: "5px", 
         display: "flex",
         flexDirection: "column",
         backgroundColor: "rgba(12,27,54,.8)",
@@ -57,8 +67,8 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "4px",
         textAlign: "center",
         width: "60px",
-        lineHeight: "1",
         "& span": {
+          lineHeight: "1",
           fontSize: "16px",
           marginTop: "5px"
         },
@@ -80,13 +90,34 @@ const useStyles = makeStyles(theme => ({
           }
         }
       },
-
+      "& .movie-date": {
+        position: "absolute",
+        bottom: "5px",
+        right: "5px",
+        backgroundColor: "rgba(12,27,54,.8)",
+        border: "1px solid #1f2e46",
+        borderRadius: "4px",
+        textAlign: "center",
+        padding: "5px 10px",
+        "& span": {
+          fontSize: "16px",
+        },
+        [theme.breakpoints.up("md")]: {
+          top: "5px",
+          bottom: "unset",
+          "& span": {
+            fontSize: "18px",
+          },
+        }
+      },
       "& .movie-overplay": {
         visibility: "hidden",
         opacity: "0",
         position: "absolute",
         top: "0",
         left: "0",
+        bottom: "0",
+        right: "0",
         width: "100%",
         height: "100%",
         background: "linear-gradient(to top,#000,transparent 100%)",
@@ -115,6 +146,9 @@ const useStyles = makeStyles(theme => ({
           display: "block"
         }
       }
+    },
+    "& button": {
+      outline: "none"
     },
 
     "& .movie-name": {
@@ -145,11 +179,9 @@ const useStyles = makeStyles(theme => ({
         width: "100%",
         height: "100%",
         color: theme.palette.info.contrastText,
-        backgroundColor: theme.palette.info.main,
-        transition: "all .3s",
+        background: theme.palette.info.main,
         "&:hover": {
-          backgroundColor: theme.palette.info.light,
-          color: theme.palette.info.contrastText
+          background: theme.palette.info.dark
         }
       }
     }

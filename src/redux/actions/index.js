@@ -14,6 +14,17 @@ export const actGetListMovieAPI = () => {
   };
 };
 
+export const actGetShowtimesInfoAPI = maPhim => {
+  return dispatch => {
+    callAPI("GET", `QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`, null, null)
+      .then(result => dispatch({
+        type: ActionTypes.GET_SHOWTIMES_INFO_API,
+        showtimesInfo: result.data
+      }))
+      .catch(err => console.log(err));
+  };
+};
+
 export const actViewTrailer = trailer => {
   return {
     type: ActionTypes.VIEW_TRAILER,

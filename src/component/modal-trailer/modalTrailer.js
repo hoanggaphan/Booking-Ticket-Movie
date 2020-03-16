@@ -3,7 +3,7 @@ import { Modal, Box, IconButton } from "@material-ui/core";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { connect } from "react-redux";
 import { actViewTrailer as actCloseModal } from "../../redux/actions/index";
-import MovieLoadError from "../movieLoadError/movieLoadError";
+import MovieLoadError from "../movie-load-error/movieLoadError";
 import useStyles from "./style";
 
 function ModalTrailer(props) {
