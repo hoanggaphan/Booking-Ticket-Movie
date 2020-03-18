@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ListCenima() {
+export default function ListCinema() {
     return (
         <div>
-            List Cenima
+            list Cinema
         </div>
     )
 }

@@ -47,6 +47,18 @@ const useStyles = makeStyles(theme => ({
       [theme.breakpoints.up("sm")]: {
         marginBottom: "0px"
       },
+      "& .movie-age": {
+        minWidth: "30px",
+        padding: "0 5px",
+        height: "20px",
+        lineHeight: "20px",
+        borderRadius: "5px",
+        position: "absolute",
+        top: "5px",
+        left: "5px",
+        backgroundColor: theme.palette.success.main,
+        textAlign: "center"
+      },
       "& .movie-background": {
         width: "100%",
         height: "auto",
@@ -54,7 +66,7 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        transition: "all .3s",
+        transition: "transform .3s",
       },
       "& .movie-starpoint": {
         position: "absolute",
@@ -74,7 +86,7 @@ const useStyles = makeStyles(theme => ({
         },
         "& .widget-svg": {
           width: "10px!important",
-          height: "10px!important"
+          height: "10px!important",
         },
         [theme.breakpoints.up("md")]: {
           width: "75px",
@@ -145,7 +157,8 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up("sm")]: {
           display: "block"
         }
-      }
+      },
+      
     },
     "& button": {
       outline: "none"
@@ -178,11 +191,9 @@ const useStyles = makeStyles(theme => ({
         left: "0",
         width: "100%",
         height: "100%",
-        color: theme.palette.info.contrastText,
-        background: theme.palette.info.main,
-        "&:hover": {
-          background: theme.palette.info.dark
-        }
+        color: theme.palette.text.primary,
+        background: theme.palette.warning.main,
+        
       }
     }
   }

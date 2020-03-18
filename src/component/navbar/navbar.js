@@ -44,7 +44,7 @@ const Navbar = () => {
           activeClassName="header-navLink-active"
           className="header-navLink"
           component={NavLink}
-          to="/list-cenima"
+          to="/list-cinema"
           color="inherit"
         >
           Cụm Rạp

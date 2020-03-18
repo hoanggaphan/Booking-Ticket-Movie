@@ -10,12 +10,14 @@ const Search = props => {
   const classes = useStyles();
   const [focus, setFocus] = useState(false);
 
+  // ComponentWillUnmount
   useEffect(() => {
     return () => {
       props.onSearch("")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
+  
   return (
     <Box
       component={InputGroup}
