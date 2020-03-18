@@ -67,8 +67,8 @@ const useStyles = makeStyles(theme => ({
             left: "0",
             width: "100%",
             height: "1px",
-            background: "#0089d0",
-            boxShadow: "0 0 15px 3px #0089d0"
+            background: theme.palette.success.main,
+            boxShadow: `0 0 15px 3px ${theme.palette.success.main}`
           }
         },
         "&:hover": {
@@ -112,6 +112,10 @@ const useStyles = makeStyles(theme => ({
     transform: "translateY(-50%)",
     right: "-60px",
     display: "none",
+    opacity: ".7",
+    "&:hover": {
+      opacity: "1"
+    },
     "&:focus": {
       outline: "none"
     },
@@ -128,6 +132,10 @@ const useStyles = makeStyles(theme => ({
     left: "-60px",
     display: "none",
     transform: "translateY(-50%)",
+    opacity: ".7",
+    "&:hover": {
+      opacity: "1"
+    },
     "&:focus": {
       outline: "none"
     },

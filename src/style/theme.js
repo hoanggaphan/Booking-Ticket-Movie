@@ -4,37 +4,22 @@ const theme = createMuiTheme({
   palette: {
     type: "dark",
     primary: { // color violet
-      light: "#e771d4",
       main: "#e14eca",
-      dark: "#9d368d",
-      contrastText: "#fff"
     },
-    secondary: { // dark light
-      main: "#1F2251",
+    default: { // dark light
+      main: "#344670",
     },
     info: { // color blue
-      light: "#4aa3f9",
       main: "#1d8cf8",
-      dark: "#1462ad",
-      contrastText: "#fff"
     },
     success: { // color green
-      light: "#4aa3f9",
-      main: "#00bf9a",
-      dark: "#1462ad",
-      contrastText: "#fff"
+      main: "#00f2c3",
     },
     warning: { // color orange
-      light: "#ffa38e",
       main: "#ff8d72",
-      dark: "#b2624f",
-      contrastText: "#fff"
     },
     danger: { // color red
-      light: "#fd7da8",
       main: "#fd5d93",
-      dark: "#b14166",
-      contrastText: "#fff"
     },
     button: {
       default: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -62,7 +47,7 @@ const theme = createMuiTheme({
     },
     background: {
       default: "#171940", // color blue black
-      paper: ""
+      paper: "#1f2251"
     },
     text: {
       primary: "rgba(255, 255, 255, 1)",

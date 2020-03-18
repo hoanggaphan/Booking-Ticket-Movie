@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   quickBook: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.background.paper,
     borderRadius: "5px",
     display: "flex",
     alignItems: "center",
@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
       textAlign: "center",
       "& a": {
         transition: "none",
-        background: theme.palette.info.main,
-        boxShadow: "1px 1px 8px 1px #1d8cf8",
+        background: theme.palette.warning.main,
+        boxShadow: `1px 1px 8px 1px ${theme.palette.warning.main}`,
         "&:hover": {
           color: "white",
           transform: "translateY(-1px)",
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
           transform: "none"
         },
         "&.Mui-disabled": {
-          background: theme.palette.info.main,
+          background: theme.palette.warning.main,
           boxShadow: "none",
         }
       },
@@ -77,6 +77,7 @@ const useStyles = makeStyles(theme => ({
         },
         "& .dropdown-item": {
           transition: "all .1s",
+          color: "rgba(0, 0, 0, .8)",
           "&:hover": {
             backgroundColor: "#eee",
           }

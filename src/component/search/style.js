@@ -5,9 +5,11 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     transition: "width 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
     order: '1',
+    margin: "15px 0",
     [theme.breakpoints.up('sm')]: {
       width: "25%",
       order: '2',
+      margin: "unset",
     },
     "& .form-control": {
       border: "1px solid rgba(255, 255, 255, .1)",
@@ -18,7 +20,7 @@ const useStyles = makeStyles(theme => ({
       "&:focus": {
         outline: "none",
         borderLeft: "none",
-        border: "1px solid #0089d0",
+        // border: `1px solid ${theme.palette.info.main}`,
         backgroundColor: "#1F2251",
         boxShadow: "none", 
       },
@@ -40,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   searchFocus: {
     width: "100%",
     "& .input-group-prepend .input-group-text": {
-      border: "1px solid #0089d0",
+      // border: `1px solid ${theme.palette.info.main}`,
       borderRight: "none"
     },
     [theme.breakpoints.up('sm')]: {

@@ -1,7 +1,6 @@
 import React from 'react'
 
-export default function DetailMovie(props) {
-  console.log(props)
+export default function DetailMovie() {
     return (
         <div>
             Detail Movie

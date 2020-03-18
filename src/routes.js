@@ -1,6 +1,6 @@
 import Home from './pages/home/home';
 import ShowTimes from './pages/home/show-times';
-import ListCenima from './pages/home/list-cenima';
+import ListCinema from './pages/home/list-cinema.js';
 import News from './pages/home/news';
 import DetailMovie from './pages/home/detail-movie';
 import BookingMovie from './pages/home/booking-movie';
@@ -17,8 +17,8 @@ const routesHome = [
         exact: false,
     },
     {
-        path: '/list-cenima',
-        component: ListCenima,
+        path: '/list-cinema',
+        component: ListCinema,
         exact: false,
     },
     {
