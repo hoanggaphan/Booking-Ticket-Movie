@@ -100,7 +100,6 @@ const QuickBook = props => {
     })
   }
 
-  console.log(listCinema)
   return (
     <Box className={classes.quickBook}>
       <Dropdown>

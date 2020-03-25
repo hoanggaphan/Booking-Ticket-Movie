@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
       height: "100%",
       overflow: "hidden",
-      borderRadius: "10px",
+      borderRadius: "5px",
       marginBottom: "10px",
       position: "relative",
       [theme.breakpoints.up("sm")]: {
@@ -54,10 +54,11 @@ const useStyles = makeStyles(theme => ({
         lineHeight: "20px",
         borderRadius: "5px",
         position: "absolute",
-        top: "5px",
-        left: "5px",
-        backgroundColor: theme.palette.success.main,
-        textAlign: "center"
+        top: "10px",
+        left: "10px",
+        backgroundColor: theme.palette.warning.main,
+        textAlign: "center",
+        color: theme.palette.text.primary,
       },
       "& .movie-background": {
         width: "100%",
@@ -70,8 +71,8 @@ const useStyles = makeStyles(theme => ({
       },
       "& .movie-starpoint": {
         position: "absolute",
-        bottom: "5px",
-        right: "5px", 
+        bottom: "10px",
+        right: "10px", 
         display: "flex",
         flexDirection: "column",
         backgroundColor: "rgba(12,27,54,.8)",
@@ -82,7 +83,8 @@ const useStyles = makeStyles(theme => ({
         "& span": {
           lineHeight: "1",
           fontSize: "16px",
-          marginTop: "5px"
+          marginTop: "5px",
+          color: theme.palette.text.primary,
         },
         "& .widget-svg": {
           width: "10px!important",
@@ -90,7 +92,7 @@ const useStyles = makeStyles(theme => ({
         },
         [theme.breakpoints.up("md")]: {
           width: "75px",
-          top: "5px",
+          top: "10px",
           bottom: "unset",
           "& span": {
             fontSize: "18px",
@@ -103,6 +105,7 @@ const useStyles = makeStyles(theme => ({
         }
       },
       "& .movie-date": {
+        color: theme.palette.text.primary,
         position: "absolute",
         bottom: "5px",
         right: "5px",
@@ -152,7 +155,7 @@ const useStyles = makeStyles(theme => ({
         transition: "all .3s",
         display: "none",
         "& svg": {
-          fontSize: "75px"
+          fontSize: "60px"
         },
         [theme.breakpoints.up("sm")]: {
           display: "block"
@@ -170,17 +173,19 @@ const useStyles = makeStyles(theme => ({
       margin: "10px 0 30px 0",
       textAlign: "center",
       "& > h4": {
+        color: theme.palette.text.default,
         width: "100%",
         maxHeight: "44px",
         fontSize: "20px",
         textAlign: "center",
-        fontWeight: "400",
         whiteSpace: "nowrap",
         textOverflow: "ellipsis",
-        overflow: "hidden"
+        overflow: "hidden",
+        fontWeight: "500"
       },
       "& > span": {
-        color: theme.palette.text.secondary
+        color: theme.palette.text.muted,
+        fontWeight: "400"
       },
 
       "& .movie-book-btn": {
@@ -191,9 +196,10 @@ const useStyles = makeStyles(theme => ({
         left: "0",
         width: "100%",
         height: "100%",
-        color: theme.palette.text.primary,
-        background: theme.palette.warning.main,
-        
+        color: "white",
+        background: theme.palette.button.warning,
+        backgroundPosition: "100% 0",
+        backgroundSize: "210% 210%"
       }
     }
   }

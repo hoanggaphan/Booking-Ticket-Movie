@@ -15,12 +15,12 @@ const useStyles = makeStyles(theme => ({
       border: "1px solid rgba(255, 255, 255, .1)",
       backgroundColor: "#1F2251",
       borderLeft: "none",
-      color: "white",
+      color: theme.palette.text.default,
       transition: "all .3s",
       "&:focus": {
         outline: "none",
         borderLeft: "none",
-        // border: `1px solid ${theme.palette.info.main}`,
+        // border: `1px solid ${theme.palette.warning.main}`,
         backgroundColor: "#1F2251",
         boxShadow: "none", 
       },
@@ -35,14 +35,14 @@ const useStyles = makeStyles(theme => ({
       borderRight: "none",
       border: "1px solid rgba(255, 255, 255, .05)",
       backgroundColor: "#1F2251",
-      color: "white",
+      color: theme.palette.text.default,
       transition: "all .3s",
     },
   },
   searchFocus: {
     width: "100%",
     "& .input-group-prepend .input-group-text": {
-      // border: `1px solid ${theme.palette.info.main}`,
+      // border: `1px solid ${theme.palette.warning.main}`,
       borderRight: "none"
     },
     [theme.breakpoints.up('sm')]: {

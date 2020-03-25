@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
         overflow: "hidden",
         padding: "10px 0",
         cursor: "pointer",
-        color: "white",
+        color: theme.palette.text.default,
         position: "relative",
         "& span": {
           display: "block",
@@ -77,7 +77,7 @@ const useStyles = makeStyles(theme => ({
         },
         "& .dropdown-item": {
           transition: "all .1s",
-          color: "rgba(0, 0, 0, .8)",
+          color: theme.palette.text.muted,
           "&:hover": {
             backgroundColor: "#eee",
           }
