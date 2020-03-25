@@ -10,7 +10,8 @@ const initialState = {
     movie: {},
     isOpen: false
   },
-  keyword: ""
+  keyword: "",
+  isLoading: true,
 };
 
 const movieReducer = (state = initialState, actions) => {
@@ -22,15 +23,15 @@ const movieReducer = (state = initialState, actions) => {
           new Date(movie1.ngayKhoiChieu).getTime() -
           new Date(movie2.ngayKhoiChieu).getTime()
       );
-      // Chia list movie ra list sắp chiếu và đang chiếu
+      
       state.listMovieShowing = listMovieSorted.filter(
         movie => new Date() - new Date(movie.ngayKhoiChieu) >= 0
       );
       state.listMovieComming = listMovieSorted.filter(
         movie => new Date() - new Date(movie.ngayKhoiChieu) < 0
       );
-      //list movie tổng
       state.listMovie = listMovieSorted;
+      state.isLoading = false;
       return { ...state };
 
     case ActionTypes.GET_SHOWTIMES_INFO_API:

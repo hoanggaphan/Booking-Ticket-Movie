@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Box, IconButton, Button } from "@material-ui/core";
 import { AccountCircle, Menu } from "@material-ui/icons";
-import { Link, NavLink } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 import useStyle from "./style";
 
 const Navbar = () => {
@@ -24,7 +24,7 @@ const Navbar = () => {
         <Button
           activeClassName="header-navLink-active"
           className="header-navLink"
-          component={NavLink}
+          component={Link}
           exact
           to="/"
           color="inherit"
@@ -34,8 +34,9 @@ const Navbar = () => {
         <Button
           activeClassName="header-navLink-active"
           className="header-navLink"
-          component={NavLink}
-          to="/show-times"
+          component={Link}
+          to="/#showtimes"
+          scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}
           color="inherit"
         >
           Lịch Chiếu
@@ -43,8 +44,9 @@ const Navbar = () => {
         <Button
           activeClassName="header-navLink-active"
           className="header-navLink"
-          component={NavLink}
-          to="/list-cinema"
+          component={Link}
+          scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+          to="/#list-cinema"
           color="inherit"
         >
           Cụm Rạp
@@ -52,7 +54,7 @@ const Navbar = () => {
         <Button
           activeClassName="header-navLink-active"
           className="header-navLink"
-          component={NavLink}
+          component={Link}
           to="/news"
           color="inherit"
         >

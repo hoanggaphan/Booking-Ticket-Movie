@@ -5,8 +5,12 @@ const useStyles = makeStyles(theme => ({
     maxWidth: "940px",
     margin: "0 auto",
     marginTop: "20px",
+    position: "relative",
     [theme.breakpoints.up("md")]: {
       marginTop: "70px",
+    },
+    "& div:focus": {
+      outline: "none"
     },
     "& .tab-pane": {
       display: "block",
@@ -45,11 +49,11 @@ const useStyles = makeStyles(theme => ({
       "& .nav-link": {
         fontSize: "18px",
         border: "none",
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.muted,
         padding: "8px 0px 5px 0px",
         position: "relative",
         textTransform: "uppercase",
-        fontWeight: "500",
+        fontWeight: "bold",
         "@media (min-width: 600px)": {
           marginRight: "20px",
         },
@@ -59,7 +63,7 @@ const useStyles = makeStyles(theme => ({
         "&.active": {
           backgroundColor: "unset",
           border: "none",
-          color: theme.palette.text.primary,
+          color: theme.palette.text.default,
           "&::after": {
             content: "''",
             position: "absolute",
@@ -67,8 +71,8 @@ const useStyles = makeStyles(theme => ({
             left: "0",
             width: "100%",
             height: "1px",
-            background: theme.palette.success.main,
-            boxShadow: `0 0 15px 3px ${theme.palette.success.main}`
+            background: theme.palette.warning.main,
+            boxShadow: `0 0 15px 3px ${theme.palette.warning.main}`
           }
         },
         "&:hover": {
@@ -95,8 +99,11 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: "#1f2251",
       color: "rgba(255,255,255,.5)",
       margin: "0 10px",
-      fontSize: "16px",
-      alignItems: "center"
+      alignItems: "center",
+      fontSize: "14px",
+      [theme.breakpoints.up("sm")]: {
+        fontSize: "16px",
+      }
     },
     "& .list-movie-mobile": {
       display: "block",
@@ -105,7 +112,15 @@ const useStyles = makeStyles(theme => ({
       },
     }
   },
-
+  shape: {
+    position: "absolute",
+    opacity: ".02",
+    top: "0px",
+    right: "-200px",
+    width: "100%",
+    height: "100%",
+    zIndex: "-1"
+  },
   nextArrow: {
     position: "absolute",
     top: "47%",

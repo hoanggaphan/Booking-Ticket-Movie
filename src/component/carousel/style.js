@@ -2,8 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   carousel: {
-    // position: "relative",
-    "&:focus": {
+    "& div:focus": {
       outline: "none"
     },
     // aspect ratio

@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, IconButton, Button, Typography } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -11,36 +12,48 @@ const Movie = props => {
   const classes = useStyles();
   const { movie, type } = props;
   const trailer = useTrailer(props);
-  console.log(type);
   return (
     <Box className={classes.movie}>
       <Box className="movie-wrapper">
-        <Box
-          className="movie-background"
-          style={
-            !movie.hinhAnh
-              ? { backgroundImage: 'url("load-error.jpg")' }
-              : { backgroundImage: `url(${movie.hinhAnh})` }
-          }
-        ></Box>
+        {movie ? (
+          <Box
+            className="movie-background"
+            style={
+              !movie.hinhAnh
+                ? { backgroundImage: 'url("load-error.jpg")' }
+                : { backgroundImage: `url(${movie.hinhAnh})` }
+            }
+          ></Box>
+        ) : (
+          <Box
+            component={Skeleton}
+            variant="rect"
+            paddingTop="150%"
+            animation="pulse"
+          />
+        )}
         {/* LINK DETAIL MOVIE IN MOBILE */}
-        <Box
-          component={Link}
-          to={`/detail-movie/${movie.maPhim}`}
-          width="100%"
-          height="100%"
-          position="absolute"
-          top="0"
-          left="0"
-        ></Box>
+        {movie && (
+          <Box
+            component={Link}
+            to={`/detail-movie/${movie.maPhim}`}
+            width="100%"
+            height="100%"
+            position="absolute"
+            top="0"
+            left="0"
+          ></Box>
+        )}
 
         {/* AGE TYPES */}
-        <Box className="movie-age" >
-          <span>P</span>
-        </Box>
+        {movie && 
+          <Box className="movie-age">
+            <span>P</span>
+          </Box>
+        }
 
         {/* STAR RATING */}
-        {type === "showing" && (
+        {movie && type === "showing" && (
           <Box className="movie-starpoint">
             <Typography component="span" variant="h6">
               {movie.danhGia ? movie.danhGia : 0}
@@ -53,7 +66,7 @@ const Movie = props => {
           </Box>
         )}
         {/* DATE COMMING */}
-        {type === "comming" && (
+        {movie && type === "comming" && (
           <Box className="movie-date" style={{ lineHeight: "1.6" }}>
             <Typography component="span" variant="h6">
               {new Date(movie.ngayKhoiChieu).getDate() +
@@ -64,34 +77,51 @@ const Movie = props => {
         )}
 
         {/* OVERPLAY */}
-        <Box
-          component={Link}
-          to={`/detail-movie/${movie.maPhim}`}
-          className="movie-overplay"
-        ></Box>
+        {movie && (
+          <Box
+            component={Link}
+            to={`/detail-movie/${movie.maPhim}`}
+            className="movie-overplay"
+          ></Box>
+        )}
 
         {/* PLAY BUTTON */}
-        <IconButton {...trailer} className="movie-play-btn">
-          <PlayCircleOutlineIcon />
-        </IconButton>
+        {movie && (
+          <IconButton {...trailer} className="movie-play-btn">
+            <PlayCircleOutlineIcon />
+          </IconButton>
+        )}
       </Box>
 
       {/* DETAIL MOVIE IN WEB */}
-      <Box display={{ xs: "none", sm: "block" }} className="movie-name">
-        <Box component="h4">{movie.tenPhim}</Box>
-        <Box component="span">120 phút{type === "showing" && "- 7.5 IMDb"}</Box>
-        {type === "showing" && (
-          <Button
-            className="movie-book-btn"
-            variant="contained"
-            size="large"
-            to={`/detail-movie/${movie.maPhim}`}
-            component={Link}
-          >
-            MUA Vé
-          </Button>
-        )}
-      </Box>
+        <Box display={{ xs: "none", sm: "block" }} className="movie-name">
+          {movie ? (
+            <>
+              <Box component="h4">{movie.tenPhim}</Box>
+              <Box component="span">
+                120 phút{type === "showing" && "- 7.5 IMDb"}
+              </Box>
+            </>  
+            ) : (
+              <>
+                <Box component={Skeleton} variant="text" animation="pulse" />
+                <Box component={Skeleton} variant="text" width="60%" animation="pulse" />
+              </>
+            )
+          
+          }
+          {movie && type === "showing" && (
+            <Button
+              className="movie-book-btn"
+              variant="contained"
+              size="large"
+              to={`/detail-movie/${movie.maPhim}`}
+              component={Link}
+            >
+              MUA Vé
+            </Button>
+          )}
+        </Box>
     </Box>
   );
 };

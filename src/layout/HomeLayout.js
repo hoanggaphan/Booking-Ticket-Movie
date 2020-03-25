@@ -4,11 +4,11 @@ import { Box } from "@material-ui/core";
 
 export default function HomeLayout(props) {
   return (
-    <>
+    <Box style={{backgroundImage: "url('dots.png')", backgroundSize: "contain"}}>
       <Navbar />
-      <Box component="main" pt="65px">
+      <Box component="main" pt="65px" overflow="hidden" >
         {props.children}
       </Box>
-    </>
+    </Box>
   );
 }

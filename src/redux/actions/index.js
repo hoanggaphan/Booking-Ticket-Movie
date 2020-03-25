@@ -25,6 +25,20 @@ export const actGetShowtimesInfoAPI = maPhim => {
   };
 };
 
+export const actGetListCinemaAPI = () => {
+  return dispatch => {
+    const listCinemaLogo = callAPI("GET", "QuanLyRap/LayThongTinHeThongRap", null, null);
+    const listCinemaDetail = callAPI("GET", "QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP10", null, null);
+    Promise.all([listCinemaLogo, listCinemaDetail])
+      .then(([listCinemaLogo, listCinemaDetail]) => dispatch({
+        type: ActionTypes.GET_LIST_CINEMA_API,
+        listCinema: [listCinemaLogo.data, listCinemaDetail.data]
+      }))
+      .catch(err => console.log(err));
+
+  }
+}
+
 export const actViewTrailer = trailer => {
   return {
     type: ActionTypes.VIEW_TRAILER,

@@ -27,8 +27,6 @@ export default function Carousel() {
 
   const settings = {
     pauseOnDotsHover: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
     pauseOnHover: false,
     pauseOnFocus: true,
     arrows: true,
@@ -36,13 +34,13 @@ export default function Carousel() {
     prevArrow: <PrevArrow/>,
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 550,
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,
     className: `${classes.carousel}`
   };
-
+  
   return (
     <Box>
       <Slider {...settings}>
