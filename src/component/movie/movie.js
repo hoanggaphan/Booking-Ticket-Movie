@@ -12,18 +12,29 @@ const Movie = props => {
   const classes = useStyles();
   const { movie, type } = props;
   const trailer = useTrailer(props);
+  
   return (
     <Box className={classes.movie}>
       <Box className="movie-wrapper">
         {movie ? (
-          <Box
-            className="movie-background"
-            style={
-              !movie.hinhAnh
-                ? { backgroundImage: 'url("load-error.jpg")' }
-                : { backgroundImage: `url(${movie.hinhAnh})` }
-            }
-          ></Box>
+          <Box position="relative">
+            <Box
+              className="movie-background"
+              style={
+                !movie.hinhAnh
+                    ? { backgroundImage: 'url("load-error.jpg")' }
+                    : { backgroundImage: `url(${movie.hinhAnh})` }
+                }
+            />
+            <Box 
+              position="absolute" 
+              top="0" 
+              left="0"
+              className="movie-background"
+              zIndex="-2"
+              style={{ backgroundImage: 'url("load-error.jpg")' }} 
+            />
+          </Box>
         ) : (
           <Box
             component={Skeleton}
@@ -32,6 +43,7 @@ const Movie = props => {
             animation="pulse"
           />
         )}
+
         {/* LINK DETAIL MOVIE IN MOBILE */}
         {movie && (
           <Box
@@ -104,8 +116,8 @@ const Movie = props => {
             </>  
             ) : (
               <>
-                <Box component={Skeleton} variant="text" animation="pulse" />
-                <Box component={Skeleton} variant="text" width="60%" animation="pulse" />
+                <Box component={Skeleton} variant="text" />
+                <Box component={Skeleton} variant="text" width="75%"/>
               </>
             )
           

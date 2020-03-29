@@ -45,10 +45,3 @@ export const actViewTrailer = trailer => {
     trailer
   };
 };
-
-export const actOnSearch = keyword => {
-  return {
-    type: ActionTypes.SEARCH,
-    keyword
-  };
-};

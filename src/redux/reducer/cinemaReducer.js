@@ -10,6 +10,14 @@ const initialState = {
     "https://s3img.vcdn.vn/123phim/2020/01/galaxy-linh-trung-15791435324335.jpg",
     "https://s3img.vcdn.vn/123phim/2018/10/lotte-cinema-cantavil-15383866510260.jpg",
     "https://s3img.vcdn.vn/123phim/2018/09/mega-gs-cao-thang-15380164745357.jpg"
+  ],
+  trangChu: [
+    "https://www.bhdstar.vn",
+    "https://www.cgv.vn",
+    "http://cinestar.com.vn",
+    "https://www.galaxycine.vn",
+    "http://lottecinemavn.com",
+    "https://www.megagscinemas.vn/"
   ], 
   isLoading: true
 };
@@ -17,7 +25,10 @@ const initialState = {
 const cinemaReducer = (state = initialState, actions) => {
   switch (actions.type) {
     case ActionsType.GET_LIST_CINEMA_API:
-      state.listCinemaLogo = actions.listCinema[0];
+      state.listCinemaLogo = actions.listCinema[0].map((item, index) => {
+        item.trangChu = state.trangChu[index];
+        return item;
+      });
       state.listCinemaDetail  = actions.listCinema[1].map((cinema, index) => {
         cinema.lstCumRap.map(cumRap => {
           cumRap.hinhAnh = state.hinhAnh[index];

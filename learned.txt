@@ -1,0 +1,6 @@
+Kiến thức học dc:
+  + Reponsive cho img auto khi muốn img làm background - đặt theo tỉ lệ khung hình 16:9, 4:3, 1:1 (aspect ratio), cho height: calc(100vw * (9/16));
+  + Reponsive cho img auto khi muốn img làm item,... - bọc img vào 1 <div>, cho img width: 100%, height: 100%, đặt max-width cho <div>;
+  
+  + Đặt background-img ko cần sử dụng height - ta sử dụng padding-top or padding-bottom để đẩy hình ra;
+  

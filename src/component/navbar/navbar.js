@@ -1,6 +1,7 @@
 import React from "react";
 import { AppBar, Box, IconButton, Button } from "@material-ui/core";
 import { AccountCircle, Menu } from "@material-ui/icons";
+import SearchMovie from './../search-movie/search-movie';
 import { HashLink as Link } from 'react-router-hash-link';
 import useStyle from "./style";
 
@@ -12,8 +13,8 @@ const Navbar = () => {
       {/* LOGO */}
       <Link to="/" exact>
         <img
-          src="https://tix.vn/app/assets/img/icons/web-logo.png"
-          width="50px"
+          src={process.env.PUBLIC_URL + "/logo.png"}
+          width="150px"
           height="50px"
           alt="logo"
         />
@@ -62,16 +63,17 @@ const Navbar = () => {
         </Button>
       </Box>
 
+      {/* SEARCH MOVIE */}
+      <SearchMovie />
+
       {/* USER LOGIN */}
-      <Box display={{ xs: "none", sm: "block" }}>
-        <Link to="/" className="header-login">
-          <IconButton color="inherit" size="small">
-            <AccountCircle fontSize="large" />
-          </IconButton>
-        </Link>
-        <Button className="header-login" component={Link} to="/" color="inherit">
+      <Box component={Link} to="/login" className="header-login" display={{ xs: "none", sm: "block" }}>
+        <IconButton color="inherit" size="small">
+          <AccountCircle fontSize="large" />
+        </IconButton>
+        <Box component={Button} className="header-login-txt" color="inherit">
           Đăng Nhập
-        </Button>
+        </Box>
       </Box>
 
       {/* BUTTON HAMBURGER MOBILE*/}

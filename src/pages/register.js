@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ShowTimes() {
+export default function Register() {
     return (
         <div>
-            show times
+            register user
         </div>
     )
 }

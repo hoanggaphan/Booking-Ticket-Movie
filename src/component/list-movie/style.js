@@ -4,7 +4,7 @@ const useStyles = makeStyles(theme => ({
   listMovie: {
     maxWidth: "940px",
     margin: "0 auto",
-    marginTop: "20px",
+    marginTop: "10px",
     position: "relative",
     [theme.breakpoints.up("md")]: {
       marginTop: "70px",
@@ -28,42 +28,35 @@ const useStyles = makeStyles(theme => ({
       maxWidth: "100%",
       margin: "0 10px 25px 10px",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "center",
       borderBottom: "1px solid rgba(255, 255, 255, .1)",
       
       "& .list-movie-nav-items": {
         display: "flex",
         alignItems: "center",
-        width: "100%",
         justifyContent: "space-around",
-        order: "2",
+        flexWrap: "wrap",
+        width: "100%",
         [theme.breakpoints.up("sm")]: {
-          width: "65%",
-          justifyContent: "flex-start",
-          order: "1"
-        },
-        "@media (max-width: 310px)": {
-          flexDirection: "column"
+          width: "unset"
         },
       },
       "& .nav-link": {
         fontSize: "18px",
         border: "none",
-        color: theme.palette.text.muted,
+        color: theme.palette.text.secondary,
         padding: "8px 0px 5px 0px",
         position: "relative",
         textTransform: "uppercase",
         fontWeight: "bold",
-        "@media (min-width: 600px)": {
+        [theme.breakpoints.up("sm")]: {
           marginRight: "20px",
-        },
-        [theme.breakpoints.up("md")]: {
           fontSize: "24px",
         },
         "&.active": {
           backgroundColor: "unset",
           border: "none",
-          color: theme.palette.text.default,
+          color: theme.palette.text.primary,
           "&::after": {
             content: "''",
             position: "absolute",
@@ -110,6 +103,15 @@ const useStyles = makeStyles(theme => ({
       '@media (min-width: 1080px)': {
         display: "none"
       },
+      "& .list-movie-mobile-btn-more": {
+        display: "block",
+        margin: "0 auto",
+        borderColor: theme.palette.warning.main,
+        color: theme.palette.warning.main,
+        "&:focus": {
+          outline: "none"
+        }
+      }
     }
   },
   shape: {

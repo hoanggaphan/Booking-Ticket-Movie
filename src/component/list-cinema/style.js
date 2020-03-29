@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     margin: "0 auto",
     borderRadius: "5px",
     position: "relative",
-    "@media (max-width: 940px)": {
+    "@media (max-width: 600px)": {
       display: "none"
     },
     "& .nav": {
@@ -46,18 +46,28 @@ const useStyles = makeStyles(theme => ({
         }
       },
     },
-
+    "& .list-cinema-nav-logo": {
+      flexDirection: "row",
+      flexWrap: "nowrap",
+      [theme.breakpoints.up("md")]: {
+        flexDirection: "column",
+      }
+    },
     // Cụm Rạp
     "& .list-cinema-group": {
       width: "100%",
       display: "flex",
       alignItems: "center",
       "& .list-cinema-group-name": {
-        fontSize: "16px",
+        fontSize: "14px",
         textAlign: "start",
         display: "block",
         color: theme.palette.text.default,
-        width: "100%"
+        width: "100%",
+        fontWeight: "500",
+        [theme.breakpoints.up("md")]: {
+          fontSize: "16px",
+        }
       },
       "& .list-cinema-group-location": {
         display: "block",
@@ -67,6 +77,7 @@ const useStyles = makeStyles(theme => ({
         textOverflow: "ellipsis",
         textAlign: "start",
         width: "100%",
+        fontWeight: "500",
         color: theme.palette.text.muted
       }
     },
@@ -126,14 +137,16 @@ const useStyles = makeStyles(theme => ({
       },
       "& .list-cinema-movie-img": {
         width: "90px",
-        height: "100px",
+        height: "130px",
         display: "block",
+        borderRadius: "3px"
       },
       "& .list-cinema-movie-name": {
         display: "block",
         fontSize: "16px",
         color: theme.palette.text.default,
-        textAlign: "center",
+        fontWeight: "500",
+        marginBottom: "5px"
       },
       "& .list-cinema-movie-date": {
         display: "flex",
@@ -141,7 +154,7 @@ const useStyles = makeStyles(theme => ({
         width: "100%",
         "& .dropdown": {
           marginRight: "6px",
-          marginBottom: "10px",
+          marginBottom: "8px",
           "&.show .list-cinema-movie-date-day": {
             transform: "translateY(-1px)",
             boxShadow: `1px 1px 8px 1px ${theme.palette.warning.main}`
@@ -152,6 +165,7 @@ const useStyles = makeStyles(theme => ({
             fontSize: "16px",
             background: theme.palette.warning.main,
             borderRadius: "3px",
+            fontWeight: "500",
             "&::after": {
               content: "none"
             },

@@ -4,6 +4,7 @@ import CarouselHome from './../../component/carousel/carousel';
 import ListMovie from './../../component/list-movie/list-movie';
 import QuickBook from '../../component/quick-booking-movie/quickBook';
 import ListCinema from '../../component/list-cinema/list-cinema';
+import BgApp from '../../component/bg-app/bg-app';
 
 export default function home(props) {
   return (
@@ -16,6 +17,7 @@ export default function home(props) {
       </Box>
       <ListMovie />
       <ListCinema/>
+      <BgApp/>
     </>
   )
 }

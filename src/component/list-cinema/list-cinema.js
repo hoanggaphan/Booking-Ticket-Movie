@@ -92,7 +92,7 @@ function ListCinema(props) {
       <Box component={Tab.Pane} height="100%" eventKey={index} key={index}>
         <Tab.Container transition={false} defaultActiveKey={0}>
           <Box component={Grid} height="100%" container>
-            <Grid item xs={4}>
+            <Grid item xs={5} md={4}>
               <Nav className="list-cinema-nav">
                 {(isLoading ? skeleArr : item.lstCumRap).map((cumRap, cumRapIndex) => (
                   <Nav.Item key={cumRap && cumRap.maCumRap}>
@@ -109,7 +109,7 @@ function ListCinema(props) {
                           <span className="list-cinema-group-name">
                             {cumRap ? (
                               <>
-                                <Box component="span" fontWeight="bold" color="#ff8d72">
+                                <Box component="span" fontWeight="bold" color="white">
                                   {cumRap.tenCumRap.split("-")[0]}
                                 </Box>
                                   - {cumRap.tenCumRap.split("-")[1]}
@@ -135,7 +135,7 @@ function ListCinema(props) {
                 ))}
               </Nav>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7} md={8}>
               {(isLoading ? skeleArr : item.lstCumRap).map((cumRap, cumRapIndex) => (
                 <Tab.Content className="list-cinema-nav " key={cumRapIndex}>
                   <Tab.Pane eventKey={cumRapIndex}>
@@ -147,11 +147,15 @@ function ListCinema(props) {
                               className="list-cinema-movie-img"
                               src={phim.hinhAnh}
                               alt={phim.tenPhim}
+                              onError={(e) => (e.target.src = `${process.env.PUBLIC_URL}/load-error.jpg`)}
                             />
                             ) : (
-                              <Box component={Skeleton} variant="rect" marginRight="20px" width="90px" height="100px!important" />
+                              <Box component={Skeleton} variant="rect" borderRadius="3px" marginRight="20px" width="90px" height="130px!important" />
                             )
                           }
+                          
+                        </Box>
+                        <Box width="100%">
                           {cumRap ? (
                             <>
                               <span className="list-cinema-movie-name">
@@ -160,12 +164,10 @@ function ListCinema(props) {
                             </>
                             ) : (
                               <>
-                                <Box component={Skeleton} variant="text" width="50%" mx="auto" />
+                                <Box component={Skeleton} variant="text" width="60%" />
                               </>
                             )
                           }
-                        </Box>
-                        <Box width="100%">
                           <Box className="list-cinema-movie-date">
                             {(isLoading ? Array.from(new Array(3)) : phim.lstLichChieuTheoNgay).map(lichChieu => (
                               <>
@@ -207,7 +209,7 @@ function ListCinema(props) {
       </Box>
     ));
   };
-
+  
   return (
     <Box className={classes.listCinema}>
       <img src="shape-5.png" alt="shape 5" className={classes.shape} />
@@ -215,10 +217,10 @@ function ListCinema(props) {
       <Box id="list-cinema" >
         <Tab.Container transition={false} id="cum-rap" defaultActiveKey={0}>
           <Box bgcolor="#1f2251" component={Grid} height="100%" container>
-            <Grid item xs={1}>
-              <Nav className="flex-column">{renderCinemaLogo()}</Nav>
+            <Grid item xs={12} md={1}>
+              <Nav className="list-cinema-nav-logo">{renderCinemaLogo()}</Nav>
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={12} md={11}>
               <Box component={Tab.Content}>
                 {renderListCinema()}
               </Box>

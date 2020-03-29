@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ListCinema() {
+export default function Login() {
     return (
         <div>
-            list Cinema
+          login user
         </div>
     )
 }
