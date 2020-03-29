@@ -10,7 +10,6 @@ const initialState = {
     movie: {},
     isOpen: false
   },
-  keyword: "",
   isLoading: true,
 };
 
@@ -46,11 +45,6 @@ const movieReducer = (state = initialState, actions) => {
     case ActionTypes.VIEW_TRAILER:
       state.trailer = { ...state.trailer, ...actions.trailer };
       return { ...state };
-
-    case ActionTypes.SEARCH:
-      state.keyword = actions.keyword;
-      return { ...state };
-
     default:
       return { ...state };
   }

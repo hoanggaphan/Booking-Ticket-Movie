@@ -5,7 +5,9 @@ import theme from './style/theme';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { routesHome } from "./routes";
 import HomeTemplate from "./template/HomeTemplate";
-import PageNotFound from './pages/PageNotFound/PageNotFound';
+import PageNotFound from './pages/PageNotFound';
+import Login from './pages/login';
+import Register from './pages/register';
 
 function App() {
   const showMenuHome = routesHome => {
@@ -18,7 +20,14 @@ function App() {
       <BrowserRouter>
         <CssBaseline/>
         <Switch>
+          {/* Trang Home */}
           {showMenuHome(routesHome)}
+
+          {/* Trang Login, Register Cho Users */}
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+
+          {/* Trang 404 not found */}
           <Route path="" component={PageNotFound} />
         </Switch>
       </BrowserRouter>

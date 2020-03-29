@@ -28,10 +28,16 @@ const useStyle = makeStyles(theme => ({
     },
 
     "& .header-login": {
-      color: theme.palette.text.default,
+      color: theme.palette.text.primary,
+      textDecoration: "none",
+      "& .header-login-txt": {
+        "@media (max-width: 1080px)": {
+          display: "none"
+        }
+      }
     },
     "& .header-hamburger-btn": {
-      
+      color: theme.palette.warning.main
     }
   }
 }));

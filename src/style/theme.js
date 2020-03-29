@@ -51,7 +51,8 @@ const theme = createMuiTheme({
     },
     background: {
       default: "#171940", // dark black
-      paper: "#1f2251" // light black
+      paper: "#1f2251", // light black
+      footer: "radial-gradient(ellipse at bottom,#292d61 30%,#171941 80%)",
     },
     text: {
       default: "hsla(0,0%,100%,.8)",
