@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Register() {
+export default function Reset() {
     return (
         <div>
-            register user
+            Reset Page
         </div>
     )
 }

@@ -1,16 +1,21 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import HomeLayout from "../layout/HomeLayout";
 
-export default function HomeTemplate({ component: Component, ...props }) {
+export default function HomeTemplate({ component: Component, path, ...props }) {
   return (
     <Route
       {...props}
-      render={propsComponent => (
-        <HomeLayout>
-          <Component {...propsComponent} />
-        </HomeLayout>
-      )}
+      render={propsComponent => {
+        if(path === "/booking-movie/:maLichChieu" && !localStorage.getItem("user")) {
+          return <Redirect to="/login" />
+        }
+        return (
+          <HomeLayout>
+            <Component {...propsComponent} />
+          </HomeLayout>
+        );
+      }}
     />
   );
 }

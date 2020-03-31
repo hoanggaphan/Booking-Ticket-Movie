@@ -29,6 +29,10 @@ const theme = createMuiTheme({
       warning: 'linear-gradient(to bottom left,#ff8d72,#ff6491,#ff8d72)',
       danger: "linear-gradient(to bottom left,#fd5d93,#ec250d,#fd5d93)!important",
     },
+    squares: {
+      primary: "linear-gradient(0deg,#ba54f5,#e14eca)",
+      warning: "linear-gradient(0deg,#ff6491,#ff8d72)"
+    },
     typography: {
       h1: {
         fontSize: '2.0625rem'
@@ -56,9 +60,9 @@ const theme = createMuiTheme({
     },
     text: {
       default: "hsla(0,0%,100%,.8)",
+      muted: "#6c757d",
       primary: "rgba(255, 255, 255)",
       secondary: "rgba(255, 255, 255, .5)",
-      muted: "#6c757d",
       info: '#1d8cf8',
       success: "#00f2c3",
       warning: '#ff8d72',

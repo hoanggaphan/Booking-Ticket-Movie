@@ -39,6 +39,17 @@ export const actGetListCinemaAPI = () => {
   }
 }
 
+export const actLoginUserAPI = (data, history) => {
+  return () => {
+    callAPI("POST", "QuanLyNguoiDung/DangNhap", data, null)
+      .then(result => {
+        localStorage.setItem("user", JSON.stringify(result.data));
+        history.push('/');
+      })
+      .catch(err => console.log(err.response.data))
+  }
+}
+
 export const actViewTrailer = trailer => {
   return {
     type: ActionTypes.VIEW_TRAILER,
