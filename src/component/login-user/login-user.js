@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Box, Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@material-ui/core";
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { Visibility, VisibilityOff, KeyboardBackspace } from '@material-ui/icons';
 import { Card } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import useStyles from "./style";
-import { actLoginUserAPI } from './../../redux/actions/index';
+import { actLoginUserAPI } from '../../redux/actions/index';
 import { connect } from "react-redux";
 
-function LoginCard(props) {
+function LoginUser(props) {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
@@ -40,14 +40,14 @@ function LoginCard(props) {
       <Box className="squares square5"></Box>
       <Box className="squares square6"></Box>
       <Box className="squares square7"></Box>
-      <Box maxWidth="390px" m="30px" >
+      <Box maxWidth="390px" m="10px" >
         <Card>
           <Card.Header>
             <img className="card-img" src={process.env.PUBLIC_URL + "/login-head.png"} alt="login head"/>
             <Card.Title>Đăng Nhập</Card.Title>
           </Card.Header>
           <Card.Body>
-            <form onSubmit={handleSubmit} autocomplete="off">
+            <form onSubmit={handleSubmit} >
               <FormControl required variant="outlined" fullWidth size="small">
                 <InputLabel>Tài Khoản</InputLabel>
                 <OutlinedInput className="form-input" name="taiKhoan" onChange={handleChange} labelWidth={85} />
@@ -81,8 +81,17 @@ function LoginCard(props) {
             </form>
           </Card.Body>
           <Card.Footer>
-            <span>Chưa có tài khoản?</span>
-            <Link to="/register" className="card-link">Đăng Ký</Link>
+            <Box>Chưa có tài khoản?
+              <Link to="/register" className="card-link">Đăng Ký</Link>
+            </Box>
+            <IconButton
+              component={Link}
+              size="small"
+              to="/"
+              className="card-back"
+            >
+              <KeyboardBackspace />
+            </IconButton>
           </Card.Footer>
         </Card>
       </Box>
@@ -98,4 +107,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps) (LoginCard);
+export default connect(null, mapDispatchToProps) (LoginUser);

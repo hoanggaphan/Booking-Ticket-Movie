@@ -12,9 +12,9 @@ const useStyles = makeStyles(theme => ({
       transform: "translateX(-10px)"
     } 
   },
-  login: {
+  register: {
     width: "100%",
-    height: "100vh",
+    minHeight: "100vh",
     overflow: "hidden",
     position: "relative",
     display: "flex",
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
       position: "absolute",
       overflow: "hidden",
       borderRadius: "20%",
-      background: theme.palette.squares.primary,
+      background: theme.palette.squares.warning,
       transition: "0.5s ease-out",
       "&.square1": {
         animation: `$move-left-right 4s infinite`,
@@ -87,6 +87,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.background.paper,
       borderRadius: "7px",
       overflow: "hidden",
+      border: "none",
       "& .card-header": {
         border: "none",
         backgroundColor: "unset",
@@ -94,16 +95,18 @@ const useStyles = makeStyles(theme => ({
         position: "relative",
         paddingBottom: "25px",
         "& .card-img": {
-          width: "350px",
+          width: "100%",
           borderRadius: "20%",
           position: "absolute",
-          bottom: "0",
-          left: "-40px"
+          bottom: "-30px",
+          left: "0",
+          opacity: ".5",
         },
         "& .card-title": {
+          textAlign: "center",
           fontSize: "60px",
           fontWeight: "bold",
-          color: "#222a42",
+          color: "white",
           position: "relative",
           zIndex: "1",
           margin: "unset",
@@ -115,60 +118,109 @@ const useStyles = makeStyles(theme => ({
       },
       "& .card-body": {
         marginTop: "10px",
-        "& .form-input": {
-          marginBottom: "15px",
-          '& fieldset': {
-            borderColor: 'rgba(255, 255, 255, 0.23)',
+        "& .card-form": {
+          '& label.Mui-focused': {
+            color: theme.palette.warning.main,
           },
-          '&:hover fieldset': {
-            borderColor: 'rgba(255, 255, 255, 0.23)',
-          },
-          "& button": {
-            "& svg": {
-              color: "rgba(255, 255, 255, 0.23)",
-              transition: "all .1s"
-            }
-          },
-          '&.Mui-focused': {
-            "& fieldset": {
-              borderColor: '#e14eca',
+          "& .form-input": {
+            color: 'white',
+            '& fieldset': {
+              borderColor: 'rgba(255, 255, 255, 0.23)',
             },
-            "& button svg": {
-              color: "white"
-            }
+            '&:hover fieldset': {
+              borderColor: 'rgba(255, 255, 255, 0.23)',
+            },
+            "& button": {
+              "& svg": {
+                color: "rgba(255, 255, 255, 0.23)",
+                transition: "all .1s"
+              }
+            },
+            '&.Mui-focused': {
+              "& fieldset": {
+                borderColor: theme.palette.warning.main,
+              },
+              "& button svg": {
+                color: "white"
+              }
+            },
+            
+            "& input:-webkit-autofill": {
+              boxShadow: `0 0 0 20px ${theme.palette.background.paper} inset`
+            },
           },
+          "& .form-text-error": {
+            paddingTop: "3px",
+            visibility: "hidden",
+            margin: "0 0 10px 0",
+            minHeight: "20px",
+            display: 'flex',
+            alignItems: "center",
+            "& div": {
+              fontSize: "12px"
+            }
+          }
         },
-        "& .login-btn": {
-          backgroundImage: theme.palette.button.primary,
+        "& .error": {
+          '& label.Mui-focused': {
+            color: `${theme.palette.secondary.main}!important`,
+          },
+          "& .Mui-error": {
+            color: theme.palette.secondary.main
+          },
+          "& .form-input": {
+            '&.Mui-focused': {
+              "& fieldset": {
+                borderColor: `${theme.palette.secondary.main}!important`,
+              },
+            },
+          },
+          "& .form-text-error": {
+            visibility: "visible!important",
+          }
+        },
+        
+        "& .register-btn": {
+          backgroundImage: theme.palette.button.warning,
           backgroundSize: "210% 210%",
           backgroundPosition: "100% 0",
           width: "100%",
           borderRadius: "30px",
           padding: "15px",
           marginTop: "30px",
-          outline: "none"
+          outline: "none",
+          "&:hover": {
+            transform: "translateY(-1px)",
+            boxShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)"
+          },
+          "&:active": {
+            transform: "translateY(1px)",
+          }
         }
       },
       "& .card-footer": {
         border: "none",
         backgroundColor: "unset",
         paddingTop: "0",
-        textAlign: "center",
-        "& span": {
-          marginRight: "5px"
+        display: "flex",
+        justifyContent: "space-between",
+        "& a": {
+        },
+        "& .card-link": {
+          fontWeight: "light",
+          color: "#ba54f5",
+          textDecoration: "underline",
+          "&:hover": {
+            color: theme.palette.primary.main
+          }
+        },
+        "& .card-back": {
+          color: "white",
+          fontSize: "30px",
         },
       },
-      "& .card-link": {
-        fontWeight: "light",
-        color: "#ba54f5",
-        textDecoration: "underline",
-        "&:hover": {
-          color: theme.palette.primary.main
-        }
-      }
     }
   },
-  
 }));
 
 export default useStyles;
