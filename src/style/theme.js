@@ -31,7 +31,7 @@ const theme = createMuiTheme({
     },
     squares: {
       primary: "linear-gradient(0deg,#ba54f5,#e14eca)",
-      warning: "linear-gradient(0deg,#ff6491,#ff8d72)"
+      warning: "linear-gradient(0deg,#ff6491,#ff8d72)",
     },
     typography: {
       h1: {

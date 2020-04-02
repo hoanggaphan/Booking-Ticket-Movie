@@ -1,10 +1,10 @@
 import React from "react";
-import LoginCard from "./../../component/login-card/login-card";
+import LoginUser from "../../component/login-user/login-user";
 
 export default function Login(props) {
   return (
     <>
-      <LoginCard history={props.history} />
+      <LoginUser history={props.history} />
     </>
   );
 }

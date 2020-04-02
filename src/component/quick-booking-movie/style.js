@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
           transform: "translateY(-1px)",
         },
         "&:active": {
-          transform: "none"
+          transform: "translateY(1px)",
         },
         "&.Mui-disabled": {
           background: theme.palette.warning.main,

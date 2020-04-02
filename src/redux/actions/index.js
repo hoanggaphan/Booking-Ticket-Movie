@@ -44,7 +44,19 @@ export const actLoginUserAPI = (data, history) => {
     callAPI("POST", "QuanLyNguoiDung/DangNhap", data, null)
       .then(result => {
         localStorage.setItem("user", JSON.stringify(result.data));
+        alert("Đăng nhập thành công")
         history.push('/');
+      })
+      .catch(err => console.log(err.response.data))
+  }
+}
+
+export const actRegisterUserAPI = (data, history) => {
+  return () => {
+    callAPI("POST", "QuanLyNguoiDung/DangKy", data, null)
+      .then(result => {
+        alert("Đăng ký thành công")
+        history.push('/login');
       })
       .catch(err => console.log(err.response.data))
   }
