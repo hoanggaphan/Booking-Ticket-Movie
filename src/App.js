@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/core';
 import theme from './style/theme';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import HomeTemplate from "./template/HomeTemplate";
-import PageNotFound from './pages/PageNotFound';
+import PageNotFound from './pages/PageNotFound/PageNotFound';
 import * as routes from "./routes";
 import UserTemplate from "./template/UserTemplate";
 

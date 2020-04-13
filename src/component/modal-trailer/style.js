@@ -5,12 +5,22 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    padding: "20px",
     "& .modal-trailer-wrap": {
       position: "relative",
-      width: "60%",
-      height: "60%",
       outline: "none",
-      backgroundColor: "black"
+      backgroundColor: "black",
+      display: "none",
+      "@media (min-width: 600px)": {
+        display: "block",
+        width: "600px",
+        height: "calc(600px * 9/16)",
+      },
+      "@media (min-width: 960px)": {
+        display: "block",
+        width: "900px",
+        height: "calc(900px * 9/16)",
+      }
     },
     "& .modal-trailer-close-icon": {
       position: "absolute",
@@ -20,6 +30,20 @@ const useStyles = makeStyles(theme => ({
         outline: "none"
       }
     }
+  },
+  trailerNull: {
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    bgcolor: "rgba(0 ,0 ,0 , .9)",
+    position: "relative",
+    "& .movie-error-link": {
+      textDecoration: "underline",
+      "&:hover": {
+        color: "unset"
+      }
+    },
   }
 }));
 

@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         borderBottom: "1px solid rgba(255, 255, 255, .1)",
         color: theme.palette.text.primary,
         opacity: ".4",
-        transition: "all .1s",
+        transition: "all .2s",
         "&:hover": {
           color: "unset",
           opacity: "1"
@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
         "& img": {
         width: "50px",
         height: "50px",
+        borderRadius: "15%"
         },
         "&.active": {
           opacity: "1"
@@ -62,23 +63,23 @@ const useStyles = makeStyles(theme => ({
         fontSize: "14px",
         textAlign: "start",
         display: "block",
-        color: theme.palette.text.default,
+        color: theme.palette.text.primary,
         width: "100%",
         fontWeight: "500",
-        [theme.breakpoints.up("md")]: {
-          fontSize: "16px",
-        }
+        "& span": {
+          color: theme.palette.text.warning,
+        },
       },
       "& .list-cinema-group-location": {
         display: "block",
-        fontSize: "14px",
+        fontSize: "12px",
         overflow: "hidden",
         whiteSpace: "nowrap",
         textOverflow: "ellipsis",
         textAlign: "start",
         width: "100%",
         fontWeight: "500",
-        color: theme.palette.text.muted
+        color: theme.palette.text.secondary
       }
     },
     "& .list-cinema-nav": {
@@ -109,7 +110,7 @@ const useStyles = makeStyles(theme => ({
           borderRadius: "4px"
         },
         "& .dropdown-item": {
-          transition: "all .1s",
+          transition: "all .2s",
           color: "rgba(0, 0, 0, .8)",
           "&:hover": {
             backgroundColor: "#eee",

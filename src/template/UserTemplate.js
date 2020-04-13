@@ -6,7 +6,7 @@ export default function UserTemplate({ component: Component, path, ...props }) {
     <Route
       {...props}
       render={routeProps => {
-        if (path ==="/login" && localStorage.getItem("user")) {
+        if (path === "/user/login" && localStorage.getItem("user")) {
           return <Redirect to="/" />;
         }
         return <Component {...routeProps} />;

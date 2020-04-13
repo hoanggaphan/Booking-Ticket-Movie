@@ -32,26 +32,7 @@ const theme = createMuiTheme({
     squares: {
       primary: "linear-gradient(0deg,#ba54f5,#e14eca)",
       warning: "linear-gradient(0deg,#ff6491,#ff8d72)",
-    },
-    typography: {
-      h1: {
-        fontSize: '2.0625rem'
-      },
-      h2: {
-        fontSize: '1.6875rem'
-      },
-      h3: {
-        fontSize: '1.4375rem'
-      },
-      h4: {
-        fontSize: '1.0625rem'
-      },
-      h5: {
-        fontSize: '.8125rem'
-      },
-      h6: {
-        fontSize: '.75rem'
-      }
+      info: 'linear-gradient(0deg,#3358f4,#1d8cf8)',
     },
     background: {
       default: "#171940", // dark black
@@ -63,12 +44,13 @@ const theme = createMuiTheme({
       muted: "#6c757d",
       primary: "rgba(255, 255, 255)",
       secondary: "rgba(255, 255, 255, .5)",
+      helper: "rgba(255, 255, 255, .7)",
       info: '#1d8cf8',
       success: "#00f2c3",
       warning: '#ff8d72',
       danger: "#fd5d93",
     }
-  }
+  },
 });
 
 export default theme;

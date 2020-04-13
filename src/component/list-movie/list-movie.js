@@ -1,13 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { Box, Grid, Button } from "@material-ui/core";
+import React, { useState, useMemo } from "react";
+import { Box, Grid, Button, IconButton } from "@material-ui/core";
+import { NavigateNext, NavigateBefore } from "@material-ui/icons";
 import { Tab, Nav } from "react-bootstrap";
 import { connect } from "react-redux";
-import { actGetListMovieAPI } from "./../../redux/actions";
 import Slider from "react-slick";
-import Movie from "./../movie/movie";
 import ModalTrailer from "../modal-trailer/modalTrailer";
+import Movie from "./../movie/movie";
 import useStyles from "./style";
-import { NextArrow, PrevArrow } from "./arrow";
+
+function NextArrow(props) {
+  const { onClick } = props;
+  return (
+    <IconButton size="small" onClick={onClick} className="next-arrow">
+      <NavigateNext className="icon-arrow" />
+    </IconButton>
+  );
+}
+function PrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <IconButton size="small" onClick={onClick} className="prev-arrow">
+      <NavigateBefore className="icon-arrow" />
+    </IconButton>
+  );
+}
 
 function ListMovie(props) {
   const classes = useStyles();
@@ -15,26 +31,23 @@ function ListMovie(props) {
   let { listMovieComming, listMovieShowing, isLoading, listMovie } = props;
   const render = useRender(isLoading, visible);
 
-  const settings = {
-    className: "list-movie-sliders",
-    infinite: true,
-    slidesToShow: 1,
-    speed: 500,
-    rows: 2,
-    slidesPerRow: 4,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
-  };
-  
-  useEffect(() => {
-    props.getListMovieAPI();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const memoziedSettings = useMemo(() => {
+    return {
+      className: "list-movie-sliders",
+      infinite: true,
+      slidesToShow: 1,
+      speed: 500,
+      rows: 2,
+      slidesPerRow: 4,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
+    };
   }, []);
 
   return (
     <Box position="relative">
       <Box id="showtimes" className={classes.listMovie}>
-      <img src="shape-6.PNG" className={classes.shape} alt="shape 6" />
+        <img src="shape-6.PNG" className={classes.shape} alt="shape 6" />
         <Tab.Container id="lich-chieu" defaultActiveKey="showing">
           <Nav className="list-movie-nav">
             <Box className="list-movie-nav-items">
@@ -53,48 +66,48 @@ function ListMovie(props) {
           <Tab.Content>
             <Tab.Pane eventKey="showing">
               {/* VIEW IN WEB */}
-              <Slider {...settings}>
+              <Slider {...memoziedSettings}>
                 {render.renderMovieWeb(listMovieShowing, "showing")}
               </Slider>
 
               {/* VIEW IN MOBILE */}
               <Box className="list-movie-mobile">
                 <Grid container>
-                  {render.renderMovieMobile(listMovieShowing,"showing")}
+                  {render.renderMovieMobile(listMovieShowing, "showing")}
                 </Grid>
-                {listMovieShowing.length > visible &&
-                  <Button 
-                    className="list-movie-mobile-btn-more" 
-                    variant="outlined" 
-                    size="large" 
+                {listMovieShowing.length > visible && (
+                  <Button
+                    className="list-movie-mobile-btn-more"
+                    variant="outlined"
+                    size="large"
                     onClick={() => setVisible(listMovie.length)}
                   >
                     Xem Thêm
                   </Button>
-                }
+                )}
               </Box>
             </Tab.Pane>
             <Tab.Pane eventKey="comming">
               {/* VIEW IN WEB */}
-              <Slider {...settings}>
+              <Slider {...memoziedSettings}>
                 {render.renderMovieWeb(listMovieComming, "comming")}
               </Slider>
 
               {/* VIEW IN MOBILE */}
               <Box className="list-movie-mobile">
                 <Grid container>
-                  {render.renderMovieMobile(listMovieComming,"comming")}
+                  {render.renderMovieMobile(listMovieComming, "comming")}
                 </Grid>
-                {listMovieComming.length > visible && 
-                  <Button 
-                    className="list-movie-mobile-btn-more" 
-                    variant="outlined" 
-                    size="large" 
+                {listMovieComming.length > visible && (
+                  <Button
+                    className="list-movie-mobile-btn-more"
+                    variant="outlined"
+                    size="large"
                     onClick={() => setVisible(listMovie.length)}
                   >
                     Xem Thêm
                   </Button>
-                }
+                )}
               </Box>
             </Tab.Pane>
           </Tab.Content>
@@ -117,34 +130,23 @@ const useRender = (isLoading, visible) => {
     );
   };
   const renderMovieMobile = (listMovie, type) => {
-    return (isLoading ? Array.from(new Array(8)) : listMovie).slice(0, visible).map(
-      (movie, index) => {
+    return (isLoading ? Array.from(new Array(8)) : listMovie)
+      .slice(0, visible)
+      .map((movie, index) => {
         return <Movie key={index} movie={movie} type={type} />;
-      }
-    );
+      });
   };
   return { renderMovieWeb, renderMovieMobile };
 };
 
-
-//////////////////////////////////////////////////////////
-
 //////////////// Connect with Redux //////////////////////
-const mapDispatchToProps = dispatch => {
-  return {
-    getListMovieAPI: () => {
-      dispatch(actGetListMovieAPI());
-    }
-  };
-};
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     listMovieShowing: state.movieReducer.listMovieShowing,
     listMovieComming: state.movieReducer.listMovieComming,
     listMovie: state.movieReducer.listMovie,
-    isLoading: state.movieReducer.isLoading
+    isLoading: state.movieReducer.isLoading,
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListMovie);
+export default connect(mapStateToProps, null)(ListMovie);

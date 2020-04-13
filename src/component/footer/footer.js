@@ -9,7 +9,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 function Footer(props) {
   const classes = useStyles();
-
+  
   const renderLogo = () => {
     return props.listCinemaLogo.map((item, index) => {
       return (

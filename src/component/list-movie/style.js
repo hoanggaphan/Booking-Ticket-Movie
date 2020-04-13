@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: "10px",
     position: "relative",
     [theme.breakpoints.up("md")]: {
-      marginTop: "70px",
+      marginTop: "70px"
     },
     "& div:focus": {
       outline: "none"
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
       alignItems: "center",
       justifyContent: "center",
       borderBottom: "1px solid rgba(255, 255, 255, .1)",
-      
+
       "& .list-movie-nav-items": {
         display: "flex",
         alignItems: "center",
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
         width: "100%",
         [theme.breakpoints.up("sm")]: {
           width: "unset"
-        },
+        }
       },
       "& .nav-link": {
         fontSize: "18px",
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
         fontWeight: "bold",
         [theme.breakpoints.up("sm")]: {
           marginRight: "20px",
-          fontSize: "24px",
+          fontSize: "24px"
         },
         "&.active": {
           backgroundColor: "unset",
@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
     },
     "& .list-movie-sliders": {
       display: "none",
-      '@media (min-width: 1080px)': {
+      "@media (min-width: 1080px)": {
         display: "block"
       },
       "& .list-movie-sliders-item": {
@@ -95,12 +95,12 @@ const useStyles = makeStyles(theme => ({
       alignItems: "center",
       fontSize: "14px",
       [theme.breakpoints.up("sm")]: {
-        fontSize: "16px",
+        fontSize: "16px"
       }
     },
     "& .list-movie-mobile": {
       display: "block",
-      '@media (min-width: 1080px)': {
+      "@media (min-width: 1080px)": {
         display: "none"
       },
       "& .list-movie-mobile-btn-more": {
@@ -112,6 +112,52 @@ const useStyles = makeStyles(theme => ({
           outline: "none"
         }
       }
+    },
+    "& .next-arrow": {
+      position: "absolute",
+      top: "47%",
+      transform: "translateY(-50%)",
+      right: "-60px",
+      display: "none",
+      opacity: ".7",
+      "&:hover": {
+        opacity: "1"
+      },
+      "&:focus": {
+        outline: "none"
+      },
+      "@media (min-width: 1080px)": {
+        display: "block"
+      },
+      [theme.breakpoints.up("lg")]: {
+        right: "-100px"
+      }
+    },
+    "& .prev-arrow": {
+      position: "absolute",
+      top: "47%",
+      left: "-60px",
+      display: "none",
+      transform: "translateY(-50%)",
+      opacity: ".7",
+      "&:hover": {
+        opacity: "1"
+      },
+      "&:focus": {
+        outline: "none"
+      },
+      "@media (min-width: 1080px)": {
+        display: "block"
+      },
+      [theme.breakpoints.up("lg")]: {
+        left: "-100px"
+      }
+    },
+    "& .icon-arrow": {
+      fontSize: "50px",
+      [theme.breakpoints.up("lg")]: {
+        fontSize: "90px"
+      }
     }
   },
   shape: {
@@ -122,52 +168,6 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%",
     zIndex: "-1"
-  },
-  nextArrow: {
-    position: "absolute",
-    top: "47%",
-    transform: "translateY(-50%)",
-    right: "-60px",
-    display: "none",
-    opacity: ".7",
-    "&:hover": {
-      opacity: "1"
-    },
-    "&:focus": {
-      outline: "none"
-    },
-    '@media (min-width: 1080px)': {
-      display: "block"
-    },
-    [theme.breakpoints.up("lg")]: {
-      right: "-100px"
-    }
-  },
-  prevArrow: {
-    position: "absolute",
-    top: "47%",
-    left: "-60px",
-    display: "none",
-    transform: "translateY(-50%)",
-    opacity: ".7",
-    "&:hover": {
-      opacity: "1"
-    },
-    "&:focus": {
-      outline: "none"
-    },
-    '@media (min-width: 1080px)': {
-      display: "block"
-    },
-    [theme.breakpoints.up("lg")]: {
-      left: "-100px"
-    }
-  },
-  iconArrow: {
-    fontSize: "50px",
-    [theme.breakpoints.up("lg")]: {
-      fontSize: "90px"
-    }
   }
 }));
 

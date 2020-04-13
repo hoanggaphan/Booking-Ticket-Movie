@@ -8,7 +8,7 @@ function HomeLayout(props) {
   return (
     <Box style={{backgroundImage: `url('${process.env.PUBLIC_URL}/dots.png')`, backgroundSize: "contain"}}>
       <Navbar />
-      <Box component="main" pt="65px" overflow="hidden" >
+      <Box component="main" pt="65px">
         {props.children}
       </Box>
       <MyFooter/>
@@ -23,7 +23,7 @@ export default function HomeTemplate({ component: Component, path, ...props }) {
       {...props}
       render={propsComponent => {
         if(path === "/booking-movie/:maLichChieu" && !localStorage.getItem("user")) {
-          return <Redirect to="/login" />
+          return <Redirect to="/user/login" />
         }
         return (
           <HomeLayout>

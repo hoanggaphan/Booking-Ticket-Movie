@@ -1,10 +1,10 @@
-import Home from "./pages/home/home";
-import News from "./pages/home/news";
-import DetailMovie from "./pages/home/detail-movie";
-import BookingMovie from "./pages/home/booking-movie";
-import Login from "./pages/user/login";
-import Register from "./pages/user/register";
-import Reset from "./pages/user/reset";
+import Home from "./pages/HomeModule/home/home";
+import News from "./pages/HomeModule/news/news";
+import DetailMovie from "./pages/HomeModule/detail-movie/detail-movie";
+import BookingMovie from "./pages/HomeModule/booking-movie/booking-movie";
+import Login from "./pages/UserModule/login/login";
+import Register from "./pages/UserModule/register/register";
+import Reset from "./pages/UserModule/reset/reset";
 
 const home = [
   {
@@ -31,17 +31,17 @@ const home = [
 
 const user = [
   {
-    path: "/login",
+    path: "/user/login",
     component: Login,
     exact: false
   },
   {
-    path: "/register",
+    path: "/user/register",
     component: Register,
-    exact: true
+    exact: false
   },
   {
-    path: "/reset",
+    path: "/user/reset",
     component: Reset,
     exact: false
   }

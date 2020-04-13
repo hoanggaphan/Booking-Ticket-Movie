@@ -20,9 +20,6 @@ const useStyles = makeStyles(theme => ({
     },
     "&:hover": {
       cursor: "pointer",
-      "& .movie-wrapper .movie-background": {
-        transform: "scale(1.1)",
-      },
       "& .movie-wrapper .movie-overplay": {
         visibility: "visible",
         opacity: "1"
@@ -48,60 +45,37 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "0px"
       },
       "& .movie-age": {
-        minWidth: "30px",
-        padding: "0 5px",
-        height: "20px",
-        lineHeight: "20px",
-        borderRadius: "5px",
         position: "absolute",
         top: "10px",
         left: "10px",
-        backgroundColor: theme.palette.warning.main,
-        textAlign: "center",
-        color: theme.palette.text.primary,
       },
       "& .movie-background": {
         width: "100%",
         height: "auto",
         paddingTop: "150%",
-        backgroundSize: "100% 100%",
+        backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        transition: "transform .3s",
       },
       "& .movie-starpoint": {
         position: "absolute",
-        bottom: "10px",
+        top: "10px",
         right: "10px", 
-        display: "flex",
-        flexDirection: "column",
         backgroundColor: "rgba(12,27,54,.8)",
         border: "1px solid #1f2e46",
         borderRadius: "4px",
-        textAlign: "center",
-        width: "60px",
-        "& span": {
+        width: "54px",
+        padding: "2px",
+        "& p": {
           lineHeight: "1",
           fontSize: "16px",
-          marginTop: "5px",
           color: theme.palette.text.primary,
+          textAlign: "center",
+          margin: "0"
         },
-        "& .widget-svg": {
-          width: "10px!important",
-          height: "10px!important",
-        },
-        [theme.breakpoints.up("md")]: {
-          width: "75px",
-          top: "10px",
-          bottom: "unset",
-          "& span": {
-            fontSize: "18px",
-            marginTop: "10px"
-          },
-          "& .widget-svg": {
-            width: "12px!important",
-            height: "12px!important"
-          }
+        "@media (max-width: 600px)": {
+          bottom: "10px",
+          top: "unset"
         }
       },
       "& .movie-date": {
@@ -137,7 +111,7 @@ const useStyles = makeStyles(theme => ({
         height: "100%",
         background: "linear-gradient(to top,#000,transparent 100%)",
         cursor: "pointer",
-        transition: "all .3s",
+        transition: "all .2s",
         display: "none",
         [theme.breakpoints.up("sm")]: {
           display: "block"
@@ -152,7 +126,7 @@ const useStyles = makeStyles(theme => ({
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        transition: "all .3s",
+        transition: "all .2s",
         display: "none",
         "& svg": {
           fontSize: "60px"
