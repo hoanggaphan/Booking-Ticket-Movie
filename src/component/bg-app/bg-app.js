@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Box, Grid, Button } from "@material-ui/core";
 import Slider from "react-slick";
 import useStyles from "./style";
 
 export default function BgApp() {
   const classes = useStyles();
-  const settings = {
-    dots: false,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    pauseOnHover: false,
-  };
+
+  const memorizedSettings = useMemo(() => {
+    return {
+      dots: false,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 2500,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      pauseOnHover: false,
+    };
+  }, [])
+
   return (
     <Box
       className={classes.backApp}
@@ -65,7 +69,7 @@ export default function BgApp() {
             src={process.env.PUBLIC_URL + "/mobile.png"}
             className="right-img-mobile"
           />
-          <Slider {...settings}>
+          <Slider {...memorizedSettings}>
             {["slide2.jpg","slide3.jpg","slide4.jpg",
             "slide5.jpg","slide6.jpg","slide7.jpg","slide8.jpg",
             "slide9.jpg","slide10.jpg","slide11.jpg","slide12.jpg",

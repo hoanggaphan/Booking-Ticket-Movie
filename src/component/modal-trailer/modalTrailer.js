@@ -1,27 +1,33 @@
 import React from "react";
-import { Modal, Box, IconButton } from "@material-ui/core";
+import { Box, Typography, IconButton, Link, Modal } from "@material-ui/core";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 import { connect } from "react-redux";
 import { actViewTrailer as actCloseModal } from "../../redux/actions/index";
-import MovieLoadError from "../movie-load-error/movieLoadError";
 import useStyles from "./style";
 
 function ModalTrailer(props) {
   const classes = useStyles();
   const { trailer, onCloseModal } = props;
-  const modal = useModal(onCloseModal);
+
+  const handleOnCloseModal = () => {
+    const valid = {
+      isOpen: false
+    };
+    onCloseModal(valid);
+  };
 
   return (
     <Box
       className={classes.modalTrailer}
-      onClose={modal.handleOnCloseModal}
+      onClose={handleOnCloseModal}
       component={Modal}
       open={trailer.isOpen}
     >
       <Box className="modal-trailer-wrap">
         {trailer.movie.trailer ? (
           <iframe
-            auto
             width="100%"
             height="100%"
             frameBorder="0"
@@ -29,12 +35,44 @@ function ModalTrailer(props) {
             src={`${trailer.movie.trailer}?autoplay=1`}
             allow="autoplay"
             title={trailer.movie.tenPhim}
-          ></iframe>
+          />
         ) : (
-          <MovieLoadError movie={trailer.movie} />
+          <Box className={classes.trailerNull}>
+            <Box mx="20px 10px">
+              <ErrorOutlineIcon style={{ fontSize: "100px" }} />
+            </Box>
+            <Box maxWidth="600px">
+              <Typography component="span" variant="h4">
+                Đã xảy ra lỗi. Vui lòng thử lại sau. (Mã lượt phát:{" "}
+                {trailer.movie.maPhim})
+                <Typography
+                  href="https://support.google.com/youtube/answer/3037019?visit_id=637188399539876760-3981321229&p=player_error1&hl=vi&rd=1"
+                  target="__blank"
+                  variant="h4"
+                  color="textPrimary"
+                  component={Link}
+                  rel="noopener noreferrer"
+                  className="movie-error-link"
+                >
+                  Tìm Hiểu Thêm
+                </Typography>
+              </Typography>
+            </Box>
+            <Box position="absolute" bottom="15px" right="15px">
+              <Link
+                component={IconButton}
+                href="https://www.youtube.com/"
+                target="__blank"
+                rel="noopener noreferrer"
+                className="movie-error-link"
+              >
+                <YouTubeIcon style={{ fontSize: "60px" }} />
+              </Link>
+            </Box>
+          </Box>
         )}
         <Box
-          onClick={modal.handleOnCloseModal}
+          onClick={handleOnCloseModal}
           component={IconButton}
           className="modal-trailer-close-icon"
         >
@@ -44,17 +82,6 @@ function ModalTrailer(props) {
     </Box>
   );
 }
-
-//////////// Refactor code with HOOK ////////////////
-const useModal = onCloseModal => {
-  const handleOnCloseModal = () => {
-    const valid = {
-      isOpen: false
-    };
-    onCloseModal(valid);
-  };
-  return { handleOnCloseModal };
-};
 
 //////////// Connect with Redux ////////////////////
 const mapStateToProps = state => {

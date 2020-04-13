@@ -1,0 +1,109 @@
+import React from "react";
+import { Box, Grid } from "@material-ui/core";
+import { Nav, Tab, Dropdown } from "react-bootstrap";
+import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
+import useStyles from "./style";
+
+function Showtimes(props) {
+  const classes = useStyles();
+  let { listCinemaLogo, detailMovie } = props;
+
+  const refactorLichChieu = () => { //thêm logo cho rạp vì api thiếu
+    return detailMovie.lichChieu.map(item => {
+      const index = listCinemaLogo.findIndex(cinema => cinema.maHeThongRap === item.maHeThongRap);
+      if(index > -1) item.logo = listCinemaLogo[index].logo;
+      return item;
+    });
+  }
+
+  const renderLogo = () => {
+    return refactorLichChieu().map((item, itemIndex) => {
+      return (
+        <Nav.Item key={itemIndex}>
+          <Nav.Link eventKey={itemIndex}>
+            <img src={item.logo} alt={item.tenHeThongRap} />
+          </Nav.Link>
+        </Nav.Item>
+      );
+    });
+  };
+
+  const renderContent = () => {
+    return refactorLichChieu().map((item, itemIndex) => {
+      return (
+        <Tab.Pane className="main-pane" key={itemIndex} eventKey={itemIndex}>
+          <Tab.Container transition={false} defaultActiveKey={0}>
+            <Grid container style={{paddingTop: "10px", paddingBottom: "10px", width: "100%"}}>
+              <Grid item xs={12} sm={5} style={{borderRight: "1px solid rgba(255, 255, 255, .1)",}}>
+                <Nav className="flex-column">
+                  {item.lstLichChieu.map((lichChieu, index) => (
+                    <Nav.Item key={index}>
+                      <Nav.Link eventKey={index}>
+                        <img src={lichChieu.thongTinRap.hinhAnh} alt={lichChieu.tenCumRap} />
+                        <Box className="cinema-box">
+                          <span className="cinema-name">
+                            {lichChieu.thongTinRap.tenCumRap.split("-")[0]}
+                            <span>-{lichChieu.thongTinRap.tenCumRap.split("-")[1]}</span>
+                          </span>
+                          <span className="cinema-location">{lichChieu.thongTinRap.diaChi}</span>
+                        </Box>
+                      </Nav.Link>
+                    </Nav.Item>
+                  ))}
+                </Nav>
+              </Grid>
+              <Grid item xs={12} sm={7}>
+                <Tab.Content>
+                  {item.lstLichChieu.map((lichChieu, index) => (
+                    <Tab.Pane key={index} eventKey={index}>
+                      {lichChieu.thoiGianChieu.map(thoiGian => (
+                        <Dropdown>
+                          <Dropdown.Toggle>
+                            {thoiGian.ngayChieu}
+                          </Dropdown.Toggle>
+                        
+                          <Dropdown.Menu>
+                            {thoiGian.suatChieu.map(suat => (
+                              <Dropdown.Item >
+                                <Link to={`/booking-movie/${suat.maLichChieu}`} >{suat.gioChieu}</Link>
+                              </Dropdown.Item>
+                            ))}
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      ))}
+                    </Tab.Pane>
+                  ))}
+                </Tab.Content>
+              </Grid>
+            </Grid>
+          </Tab.Container>
+        </Tab.Pane>
+      );
+    });
+  };
+
+  return (
+    <Box className={classes.root}>
+      <Tab.Container
+        id="showtimes"
+        transition={false}
+        defaultActiveKey={0}
+      >
+        <Nav className="nav-bg">
+          <Box className={classes.navList}>{renderLogo()}</Box>
+          <Tab.Content>{renderContent()}</Tab.Content>
+        </Nav>
+      </Tab.Container>
+    </Box>
+  );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    listCinemaLogo: state.cinemaReducer.listCinemaLogo,
+    detailMovie: state.movieReducer.detailMovie,
+  };
+};
+
+export default connect(mapStateToProps, null)(Showtimes);

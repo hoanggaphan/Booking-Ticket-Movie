@@ -1,24 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Grid } from "@material-ui/core";
 import { Skeleton } from '@material-ui/lab';
 import { Tab, Nav, Dropdown } from "react-bootstrap";
 import useStyles from "./style";
-import { actGetListCinemaAPI } from "./../../redux/actions/index";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 function ListCinema(props) {
   const classes = useStyles();
-  let { isLoading, getListCinemaAPI, listCinemaLogo, listCinemaDetail, listMovie } = props;
-  const skeleArr = Array.from(new Array(6));
-  
-  useEffect(() => {
-    getListCinemaAPI();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  let { isLoading, listCinemaLogo, listCinemaDetail, listMovie } = props;
 
   const renderCinemaLogo = () => {
-    return (isLoading ? skeleArr : listCinemaLogo).map((item, index) => (
+    return (isLoading ? [...Array(6)] : listCinemaLogo).map((item, index) => (
       <Nav.Item key={index}>
         <Nav.Link eventKey={index}>
           {item ? (
@@ -88,13 +81,13 @@ function ListCinema(props) {
       });
       return cinema;
     });
-    return (isLoading ? skeleArr : listCinemaDetail).map((item, index) => (
+    return (isLoading ? [...Array(6)] : listCinemaDetail).map((item, index) => (
       <Box component={Tab.Pane} height="100%" eventKey={index} key={index}>
         <Tab.Container transition={false} defaultActiveKey={0}>
           <Box component={Grid} height="100%" container>
             <Grid item xs={5} md={4}>
               <Nav className="list-cinema-nav">
-                {(isLoading ? skeleArr : item.lstCumRap).map((cumRap, cumRapIndex) => (
+                {(isLoading ? [...Array(6)] : item.lstCumRap).map((cumRap, cumRapIndex) => (
                   <Nav.Item key={cumRap && cumRap.maCumRap}>
                     <Nav.Link eventKey={cumRapIndex}>
                       <Box className="list-cinema-group">
@@ -109,7 +102,7 @@ function ListCinema(props) {
                           <span className="list-cinema-group-name">
                             {cumRap ? (
                               <>
-                                <Box component="span" fontWeight="bold" color="white">
+                                <Box component="span">
                                   {cumRap.tenCumRap.split("-")[0]}
                                 </Box>
                                   - {cumRap.tenCumRap.split("-")[1]}
@@ -136,9 +129,10 @@ function ListCinema(props) {
               </Nav>
             </Grid>
             <Grid item xs={7} md={8}>
-              {(isLoading ? skeleArr : item.lstCumRap).map((cumRap, cumRapIndex) => (
+              {(isLoading ? [...Array(6)] : item.lstCumRap).map((cumRap, cumRapIndex) => (
                 <Tab.Content className="list-cinema-nav " key={cumRapIndex}>
                   <Tab.Pane eventKey={cumRapIndex}>
+                    {/* render list phim */}
                     {(isLoading ? Array.from(new Array(2)) : cumRap.danhSachPhim).map(phim => (
                       <Box key={cumRap && phim.maPhim} className="list-cinema-movie">
                         <Box mr="20px" maxWidth="90px">
@@ -232,14 +226,6 @@ function ListCinema(props) {
   );
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getListCinemaAPI: () => {
-      dispatch(actGetListCinemaAPI());
-    }
-  };
-};
-
 const mapStateToProps = state => {
   return {
     listCinemaLogo: state.cinemaReducer.listCinemaLogo,
@@ -249,4 +235,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListCinema);
+export default connect(mapStateToProps, null)(ListCinema);

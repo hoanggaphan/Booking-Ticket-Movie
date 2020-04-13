@@ -3,37 +3,86 @@ import * as ActionsType from "./../constants/ActionTypes";
 const initialState = {
   listCinemaLogo: [],
   listCinemaDetail: [],
-  hinhAnh: [
-    "https://s3img.vcdn.vn/123phim/2018/09/bhd-star-vincom-3-2-15379527367766.jpg",
-    "https://s3img.vcdn.vn/123phim/2019/10/290284596e800086d4f06054e56f26fa.jpg",
-    "https://s3img.vcdn.vn/123phim/2018/09/ddc-dong-da-15379624326697.jpg",
-    "https://s3img.vcdn.vn/123phim/2020/01/galaxy-linh-trung-15791435324335.jpg",
-    "https://s3img.vcdn.vn/123phim/2018/10/lotte-cinema-cantavil-15383866510260.jpg",
-    "https://s3img.vcdn.vn/123phim/2018/09/mega-gs-cao-thang-15380164745357.jpg"
+  listHinhAnh: [
+    {
+      maHeThongRap: "BHDStar",
+      hinhAnh:
+        "https://s3img.vcdn.vn/123phim/2018/09/bhd-star-vincom-3-2-15379527367766.jpg",
+    },
+    {
+      maHeThongRap: "CGV",
+      hinhAnh:
+        "https://s3img.vcdn.vn/123phim/2019/10/290284596e800086d4f06054e56f26fa.jpg",
+    },
+    {
+      maHeThongRap: "CineStar",
+      hinhAnh:
+        "https://s3img.vcdn.vn/123phim/2018/09/ddc-dong-da-15379624326697.jpg",
+    },
+    {
+      maHeThongRap: "Galaxy",
+      hinhAnh:
+        "https://s3img.vcdn.vn/123phim/2020/01/galaxy-linh-trung-15791435324335.jpg",
+    },
+    {
+      maHeThongRap: "LotteCinima",
+      hinhAnh:
+        "https://s3img.vcdn.vn/123phim/2018/10/lotte-cinema-cantavil-15383866510260.jpg",
+    },
+    {
+      maHeThongRap: "MegaGS",
+      hinhAnh:
+        "https://s3img.vcdn.vn/123phim/2018/09/mega-gs-cao-thang-15380164745357.jpg",
+    },
   ],
-  trangChu: [
-    "https://www.bhdstar.vn",
-    "https://www.cgv.vn",
-    "http://cinestar.com.vn",
-    "https://www.galaxycine.vn",
-    "http://lottecinemavn.com",
-    "https://www.megagscinemas.vn/"
-  ], 
-  isLoading: true
+  listTrangChu: [
+    {
+      maHeThongRap: "BHDStar",
+      trangChu: "https://www.bhdstar.vn",
+    },
+    {
+      maHeThongRap: "CGV",
+      trangChu: "https://www.cgv.vn",
+    },
+    {
+      maHeThongRap: "CineStar",
+      trangChu: "http://cinestar.com.vn",
+    },
+    {
+      maHeThongRap: "Galaxy",
+      trangChu: "https://www.galaxycine.vn",
+    },
+    {
+      maHeThongRap: "LotteCinima",
+      trangChu: "http://lottecinemavn.com",
+    },
+    {
+      maHeThongRap: "MegaGS",
+      trangChu: "https://www.megagscinemas.vn/",
+    },
+  ],
+  isLoading: true,
 };
 
 const cinemaReducer = (state = initialState, actions) => {
   switch (actions.type) {
     case ActionsType.GET_LIST_CINEMA_API:
-      state.listCinemaLogo = actions.listCinema[0].map((item, index) => {
-        item.trangChu = state.trangChu[index];
-        return item;
+      state.listCinemaLogo = actions.listCinema[0].map((cinema) => {
+        const item = state.listTrangChu.find(
+          (item) => item.maHeThongRap === cinema.maHeThongRap
+        );
+        if (item) {
+          cinema.trangChu = item.trangChu;
+        }
+        return cinema;
       });
-      state.listCinemaDetail  = actions.listCinema[1].map((cinema, index) => {
-        cinema.lstCumRap.map(cumRap => {
-          cumRap.hinhAnh = state.hinhAnh[index];
-          return cumRap;
-        })
+      state.listCinemaDetail = actions.listCinema[1].map((cinema) => {
+        const item = state.listHinhAnh.find(
+          (item) => item.maHeThongRap === cinema.maHeThongRap
+        );
+        if (item) {
+          cinema.lstCumRap.map((cumRap) => (cumRap.hinhAnh = item.hinhAnh));
+        }
         return cinema;
       });
       state.isLoading = false;

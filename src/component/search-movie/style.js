@@ -72,8 +72,8 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "#eee"
       },
       "& img": {
-        width: "90px",
-        height: "90px",
+        width: "90px!important",
+        height: "90px!important",
         boxShadow: "0 4px 10px rgba(8, 8, 8, .3)",
         marginRight: "10px",
         borderRadius: "5px"
