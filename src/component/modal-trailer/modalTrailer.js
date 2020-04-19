@@ -28,6 +28,7 @@ function ModalTrailer(props) {
       <Box className="modal-trailer-wrap">
         {trailer.movie.trailer ? (
           <iframe
+            loading="lazy"
             width="100%"
             height="100%"
             frameBorder="0"

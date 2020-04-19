@@ -11,6 +11,7 @@ const useStyle = makeStyles(theme => ({
     justifyContent: "space-between",
     padding: "0 1%",
     zIndex: "1000",
+    boxShadow: "0 0 30px 6px rgba(0,0,0,.3)",
     "& button:focus": {
       outline: "none"
     },

@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, FormHelperText } from "@material-ui/core";
-import { Visibility, VisibilityOff, KeyboardBackspace,Error } from "@material-ui/icons";
+import { Visibility, VisibilityOff, KeyboardBackspace,Error, Close } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import useStyles from './style';
+import { useHistory } from 'react-router-dom'
+import { connect } from "react-redux";
+import { useSnackbar } from "notistack";
+import { actClearMessage } from './../../redux/actions/index';
 
-export default function RegisterCard(props) {
+function RegisterCard(props) {
   const classes = useStyles();
+  const history = useHistory();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { message, status, isFetching, clearMessage } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [notValid, setNotValid] = useState(true);
   const [values, setValues] = useState({
@@ -40,6 +47,25 @@ export default function RegisterCard(props) {
       isError: false
     }
   });
+
+  useEffect(() => {
+    if(message) {
+      enqueueSnackbar(message, {
+        variant: status,
+        anchorOrigin: {vertical: "top", horizontal: "center"},
+        action: (key) => (
+          <IconButton
+            style={{ color: "white", outline: "unset" }}
+            onClick={() => closeSnackbar(key)}
+          >
+            <Close />
+          </IconButton>
+        ),
+      });
+    }
+    return () =>  {clearMessage()};
+    // eslint-disable-next-line
+  }, [isFetching]);
 
   const handleError = e => {
     const { name, value } = e.target;
@@ -90,7 +116,7 @@ export default function RegisterCard(props) {
     }
     setError({ ...error, [name]: { message, isError } });
   };
-
+  
   const formValidation = () => {
     setNotValid(prevState => {
       prevState = error.hoTen.isError || error.taiKhoan.isError || error.matKhau.isError || error.email.isError || error.soDt.isError;
@@ -256,10 +282,9 @@ export default function RegisterCard(props) {
             Trang Chủ
           </Link>
           <IconButton
-            component={Link}
             size="small"
-            to="/user/login"
             className="card-back"
+            onClick={() => history.goBack()}
           >
             <KeyboardBackspace />
           </IconButton>
@@ -268,3 +293,21 @@ export default function RegisterCard(props) {
     </Box>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.userReducer.isFetching,
+    message: state.userReducer.message,
+    status: state.userReducer.status
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearMessage: () => {
+      dispatch(actClearMessage());
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (RegisterCard);

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Box, Grid, Button, IconButton } from "@material-ui/core";
 import { NavigateNext, NavigateBefore } from "@material-ui/icons";
 import { Tab, Nav } from "react-bootstrap";
@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import ModalTrailer from "../modal-trailer/modalTrailer";
 import Movie from "./../movie/movie";
+import { actgetListMovie } from './../../redux/actions/index';
 import useStyles from "./style";
 
 function NextArrow(props) {
@@ -28,8 +29,8 @@ function PrevArrow(props) {
 function ListMovie(props) {
   const classes = useStyles();
   const [visible, setVisible] = useState(8);
-  let { listMovieComming, listMovieShowing, isLoading, listMovie } = props;
-  const render = useRender(isLoading, visible);
+  let { listMovieComming, listMovieShowing, isFetchingLstMovie, listMovie, getListMovie } = props;
+  const render = useRender(isFetchingLstMovie, visible);
 
   const memoziedSettings = useMemo(() => {
     return {
@@ -43,6 +44,11 @@ function ListMovie(props) {
       prevArrow: <PrevArrow />,
     };
   }, []);
+
+  useEffect(() => {
+    getListMovie();
+    //eslint-disable-next-line
+  }, [])
 
   return (
     <Box position="relative">
@@ -119,9 +125,9 @@ function ListMovie(props) {
 }
 
 //////////////// REFACTOR CODE WITH HOOK ///////////////////
-const useRender = (isLoading, visible) => {
+const useRender = (isFetchingLstMovie, visible) => {
   const renderMovieWeb = (listMovie, type) => {
-    return (isLoading ? Array.from(new Array(8)) : listMovie).map(
+    return (isFetchingLstMovie ? [...Array(8)] : listMovie).map(
       (movie, index) => (
         <div className="list-movie-sliders-item">
           <Movie key={index} movie={movie} type={type} />
@@ -130,7 +136,7 @@ const useRender = (isLoading, visible) => {
     );
   };
   const renderMovieMobile = (listMovie, type) => {
-    return (isLoading ? Array.from(new Array(8)) : listMovie)
+    return (isFetchingLstMovie ? [...Array(8)] : listMovie)
       .slice(0, visible)
       .map((movie, index) => {
         return <Movie key={index} movie={movie} type={type} />;
@@ -145,8 +151,16 @@ const mapStateToProps = (state) => {
     listMovieShowing: state.movieReducer.listMovieShowing,
     listMovieComming: state.movieReducer.listMovieComming,
     listMovie: state.movieReducer.listMovie,
-    isLoading: state.movieReducer.isLoading,
+    isFetchingLstMovie: state.movieReducer.isFetchingLstMovie,
   };
 };
 
-export default connect(mapStateToProps, null)(ListMovie);
+const mapDispatchToProps = dispatch => {
+  return {
+      getListMovie: () => {
+          dispatch(actgetListMovie());
+      }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListMovie);

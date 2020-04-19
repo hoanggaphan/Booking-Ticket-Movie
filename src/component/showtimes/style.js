@@ -67,7 +67,8 @@ const useStyle = makeStyles((theme) => ({
             margin: "0 5px 7px 0",
             "&.show .dropdown-toggle": {
               transform: "translateY(-1px)",
-              boxShadow: `1px 1px 8px 1px ${theme.palette.warning.main}`
+              boxShadow: `1px 1px 8px 1px ${theme.palette.warning.main}`,
+              transition: "transform .1s"
             },
             "& .dropdown-toggle": {
               cursor: "pointer",

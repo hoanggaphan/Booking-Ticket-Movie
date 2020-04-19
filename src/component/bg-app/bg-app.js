@@ -1,24 +1,21 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Box, Grid, Button } from "@material-ui/core";
 import Slider from "react-slick";
 import useStyles from "./style";
 
 export default function BgApp() {
   const classes = useStyles();
-
-  const memorizedSettings = useMemo(() => {
-    return {
-      dots: false,
-      arrows: false,
-      autoplay: true,
-      autoplaySpeed: 2500,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      pauseOnHover: false,
-    };
-  }, [])
+  const settings = {
+    dots: false,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    pauseOnHover: false,
+  };
 
   return (
     <Box
@@ -69,17 +66,30 @@ export default function BgApp() {
             src={process.env.PUBLIC_URL + "/mobile.png"}
             className="right-img-mobile"
           />
-          <Slider {...memorizedSettings}>
-            {["slide2.jpg","slide3.jpg","slide4.jpg",
-            "slide5.jpg","slide6.jpg","slide7.jpg","slide8.jpg",
-            "slide9.jpg","slide10.jpg","slide11.jpg","slide12.jpg",
-            "slide13.jpg","slide14.jpg","slide15.jpg","slide16.jpg"].map(item => (
+          <Slider {...settings}>
+            {[
+              "slide2.jpg",
+              "slide3.jpg",
+              "slide4.jpg",
+              "slide5.jpg",
+              "slide6.jpg",
+              "slide7.jpg",
+              "slide8.jpg",
+              "slide9.jpg",
+              "slide10.jpg",
+              "slide11.jpg",
+              "slide12.jpg",
+              "slide13.jpg",
+              "slide14.jpg",
+              "slide15.jpg",
+              "slide16.jpg",
+            ].map((item) => (
               <div>
-                  <img
+                <img
                   src={process.env.PUBLIC_URL + "/" + item}
                   className="right-img-slide"
                   alt={item}
-                  />
+                />
               </div>
             ))}
           </Slider>

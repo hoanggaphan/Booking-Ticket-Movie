@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
   result: {
     width: "100%",
     maxHeight: "400px",
+    minHeight: "80px",
     position: "absolute",
     zIndex: "1000",
     backgroundColor: "rgb(255, 255, 255)",
@@ -86,6 +87,18 @@ const useStyles = makeStyles(theme => ({
   show: {
     visibility: "visible",
     opacity: "1",
+  },
+  loading: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    minHeight: "80px",
+    "& .spinner-border": {
+      width: "48px",
+      height: "48px",
+      color: theme.palette.warning.main
+    }
   }
 }));
 

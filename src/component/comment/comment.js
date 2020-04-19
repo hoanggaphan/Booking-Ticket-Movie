@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@material-ui/core";
 import { Card } from "react-bootstrap";
+import { Skeleton } from "@material-ui/lab";
 import StarRating from "../star-rating/star-rating";
 import {
   FavoriteBorder,
@@ -15,10 +16,16 @@ import useStyles from "./style";
 function Comment(props) {
   const classes = useStyles();
   const { comment, putCommentAPI, user, showLogin } = props;
-  const [like, setLike] = useState(comment.like);
+  const [like, setLike] = useState(0);
   const [status, setStatus] = useState({ like: false, comment: false });
   const [value, setValue] = useState("");
   const [visibile, setVisible] = useState({ reply: 2, comment: 4 });
+
+  useEffect(() => {
+    if (comment) {
+      setLike(comment.like);
+    }
+  }, [comment]);
 
   const checkUserLiked = (user) => {
     return comment.danhSachLike.find((item) => item.taiKhoan === user.taiKhoan);
@@ -69,7 +76,7 @@ function Comment(props) {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && comment) {
       // kiểm tra localstorage và store coi đã like chưa
       const item = checkUserLiked(user);
       return item && setStatus({ ...status, like: item.liked });
@@ -82,42 +89,84 @@ function Comment(props) {
       <Card>
         <Card.Header>
           <Box display="flex">
-            <MyAvatar user={comment} />
+            {comment ? (
+              <MyAvatar user={comment} />
+            ) : (
+              <Skeleton width="33px" height="33px" variant="rect" />
+            )}
             <Box ml="8px">
-              <span className="name">{comment.hoTen}</span>
-              <span className="time">10 phút trước</span>
+              {comment ? (
+                <>
+                  <span className="name">{comment.hoTen}</span>
+                  <span className="time">10 phút trước</span>
+                </>
+              ) : (
+                <Skeleton width="70px" variant="text" />
+              )}
             </Box>
           </Box>
           <Box className="vote">
-            <p className="vote-txt">{comment.votes}</p>
-            <StarRating votes={10} xs={{star1: "10px", star2: "10px"}} />
+            {comment ? (
+              <>
+                <p className="vote-txt">{comment.votes}</p>
+                <StarRating votes={10} xs={{ star1: "10px", star2: "10px" }} />
+              </>
+            ) : (
+              <Skeleton variant="rect" width="40px" height="40px" />
+            )}
           </Box>
         </Card.Header>
         <Card.Body>
-          <Card.Text>{comment.binhLuan}</Card.Text>
+          {comment ? (
+            <Card.Text>{comment.binhLuan}</Card.Text>
+          ) : (
+            <>
+              <Skeleton variant="text" width="100%" />
+              <Skeleton variant="text" width="50%" />
+            </>
+          )}
         </Card.Body>
         <Card.Footer>
           {status.like && user ? (
             <Box className="review-box like-box" onClick={handleLikeAmount}>
-              <Favorite className="icon" />
-              <span>{like} Thích</span>
+              {comment ? (
+                <>
+                  <Favorite className="icon" />
+                  <span>{like} Thích</span>
+                </>
+              ) : (
+                <Skeleton variant="rect" width="100px" />
+              )}
             </Box>
           ) : (
             <Box className="review-box like-box" onClick={handleLikeAmount}>
-              <FavoriteBorder className="icon" />
-              <span>{like} Thích</span>
+              {comment ? (
+                <>
+                  <FavoriteBorder className="icon" />
+                  <span>{like} Thích</span>
+                </>
+              ) : (
+                <Skeleton variant="rect" width="100px" />
+              )}
             </Box>
           )}
 
-          <Box className="review-box comment-box" onClick={() => setStatus({ ...status, comment: true })}>
-            <ChatBubbleOutline className="icon" />
-            <span>
-              {comment.danhSachTraLoi.length} Bình Luận
-            </span>
+          <Box
+            className="review-box comment-box"
+            onClick={() => setStatus({ ...status, comment: true })}
+          >
+            {comment ? (
+              <>
+                <ChatBubbleOutline className="icon" />
+                <span>{comment.danhSachTraLoi.length} Bình Luận</span>
+              </>
+            ) : (
+              <Skeleton variant="rect" width="100px" />
+            )}
           </Box>
         </Card.Footer>
         <Box className="card-expand">
-          {status.comment && (
+          {comment && status.comment && (
             <>
               <Box className="reply">
                 <MyAvatar user={user} />
@@ -125,7 +174,7 @@ function Comment(props) {
                   className="reply-input"
                   placeholder="Viết bình luận..."
                   value={value}
-                  onChange={e => setValue(e.target.value)}
+                  onChange={(e) => setValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                 />
               </Box>
@@ -145,7 +194,12 @@ function Comment(props) {
                   })}
                 {comment.danhSachTraLoi.length > 0 &&
                   visibile.reply < comment.danhSachTraLoi.length && (
-                    <Box className="reply-more" onClick={() => setVisible({ ...visibile, reply: visibile.reply + 3 })}>
+                    <Box
+                      className="reply-more"
+                      onClick={() =>
+                        setVisible({ ...visibile, reply: visibile.reply + 3 })
+                      }
+                    >
                       Xem thêm bình luận
                     </Box>
                   )}
