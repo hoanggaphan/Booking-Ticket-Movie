@@ -78,15 +78,6 @@ const Navbar = (props) => {
         >
           Cụm Rạp
         </Button>
-        <Button
-          activeClassName="header-navLink-active"
-          className="header-navLink"
-          component={Link}
-          to="/news"
-          color="inherit"
-        >
-          Tin Tức
-        </Button>
       </Box>
 
       {/* SEARCH MOVIE */}

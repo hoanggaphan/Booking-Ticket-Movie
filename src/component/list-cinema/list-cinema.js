@@ -98,7 +98,7 @@ function ListCinema(props) {
                     <Nav.Link eventKey={cumRapIndex}>
                       <Box className="list-cinema-group">
                         {cumRap ? (
-                          <img loading="lazy" src={cumRap.hinhAnh} alt={cumRap.maCumRap} width="50px" height="50px" />
+                          <img loading='eager' style={{width: "50px!important", height: "50px!important"}} width="90" height="90" src={cumRap.hinhAnh} alt={cumRap.maCumRap}  />
                           ) : (
                             <Box component={Skeleton} variant="rect" minWidth="50px" height="50px!important" />
                           )

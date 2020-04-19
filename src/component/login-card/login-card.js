@@ -94,11 +94,6 @@ function LoginCard(props) {
                 }
               />
             </FormControl>
-            <Box textAlign="end">
-              <Link to="/user/reset" className="card-link">
-                Quên mật khẩu?
-              </Link>
-            </Box>
             <Button disabled={isFetching} type="submit" className="login-btn">
               Đăng Nhập
               {isFetching && <Spinner animation="border" className={classes.buttonProgress}/>}

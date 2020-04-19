@@ -38,8 +38,8 @@ const useStyles = makeStyles(theme => ({
         outline: "none"
         },
         "& img": {
-        width: "50px!important",
-        height: "50px!important",
+        width: "50px",
+        height: "50px",
         borderRadius: "15%"
         },
         "&.active": {

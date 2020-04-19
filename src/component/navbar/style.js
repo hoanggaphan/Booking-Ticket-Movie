@@ -118,6 +118,7 @@ const useStyle = makeStyles(theme => ({
         backgroundColor: theme.palette.default.main,
         textAlign: "center",
         minWidth: "unset",
+        left: "-8px!important",
         "& .account-m": {
           color: theme.palette.text.primary,
           width: "100%",

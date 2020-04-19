@@ -38,7 +38,7 @@ const SearchMovie = (props) => {
     } 
     return listSearch.map(movie => {
       return <Box component={Link} to={`/detail-movie/${movie.maPhim}`} className="result-item">
-        <img loading="lazy" src={movie.hinhAnh} alt={movie.biDanh} />
+        <img loading='eager' style={{width: "90px!important", height: "90px!important"}} width="90" height="90" src={movie.hinhAnh} alt={movie.biDanh} />
         <Box><span>{movie.tenPhim}</span></Box>
       </Box>;
     });
