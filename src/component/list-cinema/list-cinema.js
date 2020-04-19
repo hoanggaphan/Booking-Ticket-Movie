@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
 import { Skeleton } from '@material-ui/lab';
 import { Tab, Nav, Dropdown } from "react-bootstrap";
-import useStyles from "./style";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { actGetListCinemaAPI } from "./../../redux/actions/index";
+import useStyles from "./style";
 
 function ListCinema(props) {
   const classes = useStyles();
-  let { isLoading, listCinemaLogo, listCinemaDetail, listMovie } = props;
+  let { isLoading, listCinemaLogo, listCinemaDetail, listMovie, getListCinemaAPI } = props;
+
+  useEffect(() => {
+    getListCinemaAPI();
+    // eslint-disable-next-line 
+  }, []);
 
   const renderCinemaLogo = () => {
     return (isLoading ? [...Array(6)] : listCinemaLogo).map((item, index) => (
       <Nav.Item key={index}>
         <Nav.Link eventKey={index}>
           {item ? (
-            <img src={item.logo} alt={item.biDanh} />
+            <img src={item.logo} alt={item.biDanh} loading="lazy" />
           ) : (
             <Box component={Skeleton} width="50px" height="50px!important" variant="circle" />
           )}
@@ -92,7 +98,7 @@ function ListCinema(props) {
                     <Nav.Link eventKey={cumRapIndex}>
                       <Box className="list-cinema-group">
                         {cumRap ? (
-                          <img src={cumRap.hinhAnh} alt={cumRap.maCumRap} />
+                          <img loading="lazy" src={cumRap.hinhAnh} alt={cumRap.maCumRap} width="50px" height="50px" />
                           ) : (
                             <Box component={Skeleton} variant="rect" minWidth="50px" height="50px!important" />
                           )
@@ -138,6 +144,7 @@ function ListCinema(props) {
                         <Box mr="20px" maxWidth="90px">
                           {cumRap ? (
                             <img
+                              loading="lazy"
                               className="list-cinema-movie-img"
                               src={phim.hinhAnh}
                               alt={phim.tenPhim}
@@ -206,7 +213,7 @@ function ListCinema(props) {
   
   return (
     <Box className={classes.listCinema}>
-      <img src="shape-5.png" alt="shape 5" className={classes.shape} />
+      <im loading="lazy"g src="shape-5.png" alt="shape 5" className={classes.shape} />
       <Box paddingTop="80px" ></Box>
       <Box id="list-cinema" >
         <Tab.Container transition={false} id="cum-rap" defaultActiveKey={0}>
@@ -235,4 +242,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(ListCinema);
+const mapDispatchToProps = dispatch => {
+  return {
+    getListCinemaAPI: () => {
+      dispatch(actGetListCinemaAPI());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListCinema);

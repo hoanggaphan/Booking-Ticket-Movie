@@ -4,14 +4,15 @@ const initialState = {
   listMovie: [],
   listMovieShowing: [],
   listMovieComming: [],
-  detailMovie: {},
+  isFetchingLstMovie: true,
+  isFechingDetailMovie: true,
+  detailMovie: null,
   showtimesInfo: [],
   listCinema: [],
   trailer: {
     movie: {},
     isOpen: false,
   },
-  isLoading: true,
   listDiaChi: [
     {
       maCumRap: "bhd-star-cineplex-pham-hung",
@@ -173,18 +174,25 @@ const initialState = {
         "https://s3img.vcdn.vn/123phim/2018/09/mega-gs-cao-thang-15380164745357.jpg",
     },
   ],
+  listSearch: [],
+  isSearching: false,
+  notFound: false,
 };
 
-const movieReducer = (state = initialState, actions) => {
-  switch (actions.type) {
-    case ActionTypes.GET_LIST_MOVIE_API:
+const movieReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionTypes.GET_LIST_MOVIE_REQUEST:
+      return { ...state, isFetchingLstMovie: true };
+    case ActionTypes.GET_LIST_MOVIE_FAILURE:
+      console.log(action.message)
+      return { ...state };
+    case ActionTypes.GET_LIST_MOVIE_SUCCESS:
       // Sắp xếp lại listmovie theo ngày tháng năm tăng dần
-      const listMovieSorted = actions.listMovie.sort(
+      const listMovieSorted = action.payload.sort(
         (movie1, movie2) =>
           new Date(movie1.ngayKhoiChieu).getTime() -
           new Date(movie2.ngayKhoiChieu).getTime()
       );
-
       state.listMovieShowing = listMovieSorted.filter(
         (movie) => new Date() - new Date(movie.ngayKhoiChieu) >= 0
       );
@@ -192,16 +200,15 @@ const movieReducer = (state = initialState, actions) => {
         (movie) => new Date() - new Date(movie.ngayKhoiChieu) < 0
       );
       state.listMovie = listMovieSorted;
-      state.isLoading = false;
-      return { ...state };
+      return { ...state, isFetchingLstMovie: false };
 
-    case ActionTypes.GET_DETAIL_MOVIE:
-      const d = new Date(actions.detailMovie.ngayKhoiChieu);
+    case ActionTypes.GET_DETAIL_MOVIE_SUCCESS:
+      const d = new Date(action.detailMovie.ngayKhoiChieu);
       const date = ("0" + d.getDate()).slice(-2);
       const month = ("0" + (d.getMonth() + 1)).slice(-2);
       const year = d.getFullYear();
       const ngayKhoiChieu = `${date}.${month}.${year}`; // Định dạng ngày lại dd/mm/yyyy
-      let lichChieu = actions.detailMovie.lichChieu.map((rap) => { // Thêm địa chỉ, hình ảnh rap vào thongTinRap vì API thiếu
+      let lichChieu = action.detailMovie.lichChieu.map((rap) => { // Thêm địa chỉ, hình ảnh rap vào thongTinRap vì API thiếu
         const item1 = state.listDiaChi.find(
           (diaChi) => diaChi.maCumRap === rap.thongTinRap.maCumRap
         );
@@ -278,21 +285,40 @@ const movieReducer = (state = initialState, actions) => {
         }
         return accumulator;
       }, []);
-      state.detailMovie = { ...actions.detailMovie, ngayKhoiChieu, lichChieu };
-      return { ...state };
-
+      state.detailMovie = { ...action.detailMovie, ngayKhoiChieu, lichChieu };
+      return { ...state, isFechingDetailMovie: false };
+    case ActionTypes.GET_DETAIL_MOVIE_REQUEST:
+      return { ...state, isFechingDetailMovie: true };
+    case ActionTypes.GET_DETAIL_MOVIE_FAILURE:
+      console.log(action.message)
+      return { ...state, isFechingDetailMovie: false };
     case ActionTypes.GET_SHOWTIMES_INFO_API:
       let listCinema = [];
-      actions.showtimesInfo.heThongRapChieu.forEach((item) =>
+      action.showtimesInfo.heThongRapChieu.forEach((item) =>
         item.cumRapChieu.forEach((item) => listCinema.push(item))
       );
-      state.showtimesInfo = actions.showtimesInfo;
+      state.showtimesInfo = action.showtimesInfo;
       state.listCinema = listCinema;
       return { ...state };
 
+    case ActionTypes.SEARCH_MOVIE_REQUEST:
+      return { ...state, isSearching: true };
+    case ActionTypes.SEARCH_MOVIE_SUCCESS:
+      const listSearch = action.payload;
+      if(listSearch.length < 1 && action.value) {
+        state.notFound = true;
+      } else {
+        state.notFound = false;
+      } 
+      state.listSearch = listSearch;
+      return { ...state, isSearching: false };
+    case ActionTypes.SEARCH_MOVIE_FAILURE:
+      console.log(action.message)
+      return { ...state, isSearching: false};
     case ActionTypes.VIEW_TRAILER:
-      state.trailer = { ...state.trailer, ...actions.trailer };
+      state.trailer = { ...state.trailer, ...action.trailer };
       return { ...state };
+
     default:
       return { ...state };
   }

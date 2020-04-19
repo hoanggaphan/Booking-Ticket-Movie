@@ -16,18 +16,20 @@ function HomeLayout(props) {
   );
 }
 
-
 export default function HomeTemplate({ component: Component, path, ...props }) {
   return (
     <Route
       {...props}
-      render={propsComponent => {
+      render={({location}) => {
         if(path === "/booking-movie/:maLichChieu" && !localStorage.getItem("user")) {
-          return <Redirect to="/user/login" />
+          return <Redirect to={{pathname: "/user/login", state: {from: location}}} />
+        }
+        else if(path === "/account" && !localStorage.getItem("user")) {
+          return <Redirect to={{pathname: "/user/login", state: {from: location}}} />
         }
         return (
           <HomeLayout>
-            <Component {...propsComponent} />
+            <Component/>
           </HomeLayout>
         );
       }}

@@ -5,11 +5,11 @@ export default function UserTemplate({ component: Component, path, ...props }) {
   return (
     <Route
       {...props}
-      render={routeProps => {
+      render={() => {
         if (path === "/user/login" && localStorage.getItem("user")) {
           return <Redirect to="/" />;
         }
-        return <Component {...routeProps} />;
+        return <Component />;
       }}
     />
   );

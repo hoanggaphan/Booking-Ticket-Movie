@@ -131,11 +131,13 @@ const useStyles = makeStyles(theme => ({
         },
         "& .card-back": {
           color: "white",
-          fontSize: "30px"
+          fontSize: "30px",
+          outline: "unset"
         }
       }
     }
-  }
+  },
+  
 }));
 
 export default useStyles;

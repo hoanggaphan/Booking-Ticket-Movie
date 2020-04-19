@@ -3,28 +3,24 @@ import { Box, Button } from "@material-ui/core";
 import { Menu, ArrowDropDown } from "@material-ui/icons";
 import SearchMovie from "./../search-movie/search-movie";
 import { HashLink as Link } from "react-router-hash-link";
-import { actLoadUser, actGetListCinemaAPI } from "./../../redux/actions/index";
+import { actLoadUser } from "./../../redux/actions/index";
 import MyAvatar from "../avatar/avatar";
 import { connect } from "react-redux";
-import Dropdown from 'react-bootstrap/Dropdown'
+import Dropdown from 'react-bootstrap/Dropdown';
+import { useHistory, useLocation } from 'react-router-dom';
 import useStyle from "./style";
 
 const Navbar = (props) => {
   const classes = useStyle();
-  const { user, loadUser, getListCinemaAPI, listCinemaLogo, listCinemaDetail } = props;
+  const { user, loadUser } = props;
   const [show, setShow] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     if(!user && localStorage.getItem("user")) { // kiểm tra nếu có user trên store thì k cần setState
       const user = JSON.parse(localStorage.getItem("user"));
       loadUser(user);
-    }
-    // eslint-disable-next-line 
-  }, []);
-
-  useEffect(() => {
-    if(listCinemaLogo.length < 1 && listCinemaDetail.length < 1) { // kiểm tra nếu có state store thì ko cần setstate
-      getListCinemaAPI();
     }
     // eslint-disable-next-line 
   }, []);
@@ -105,7 +101,7 @@ const Navbar = (props) => {
             className="header-login login-success"
             display={{ xs: "none", sm: "flex" }}
           >
-            <Link to="/" style={{ textDecoration: "none" }}>
+            <Link to="/account" style={{ textDecoration: "none" }}>
               <MyAvatar user={user} />
             </Link>
             <Box className="header-login-txt" color="inherit">
@@ -114,7 +110,7 @@ const Navbar = (props) => {
               </Box>
               <ArrowDropDown />
               <Box className="header-logout" >
-                <Link to="/">Tài Khoản</Link>
+                <Link to="/account">Tài Khoản</Link>
                 <button
                   onClick={() => {
                     loadUser(null)
@@ -133,7 +129,7 @@ const Navbar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu show={show} >
-              <Link className="account-m" to="/">Tài Khoản</Link>
+              <Link className="account-m" to="/account">Tài Khoản</Link>
               <button
                 className="logout-m"
                 onClick={() => {
@@ -150,22 +146,23 @@ const Navbar = (props) => {
       ) : (
         <>
           <Box
-            component={Link}
-            to="/user/login"
+            onClick={() => history.push({pathname: "/user/login", state: {from: location}})}
             className="header-login"
             display={{ xs: "none", sm: "flex" }}
           >
-            <Link to="/user/login" style={{ textDecoration: "none" }}>
+            <Box style={{ textDecoration: "none" }}>
               <MyAvatar />
-            </Link>
+            </Box>
             <Box className="header-login-btn" color="inherit">
               Đăng Nhập
             </Box>
           </Box>
           <Box className="user-m">
-            <Link to="/user/login" style={{ textDecoration: "none" }}>
+            <Box 
+              onClick={() => history.push({pathname: "/user/login", state: {from: location}})}
+              style={{ textDecoration: "none", cursor: "pointer" }}>
               <MyAvatar />
-            </Link>
+            </Box>
           </Box>
         </>
       )}
@@ -178,17 +175,12 @@ const mapDispatchToProps = (dispatch) => {
     loadUser: (user) => {
       dispatch(actLoadUser(user));
     },
-    getListCinemaAPI: () => {
-      dispatch(actGetListCinemaAPI());
-    }
   };
 };
 
 const mapStateToProps = state => {
   return {
     user: state.userReducer.user,
-    listCinemaLogo: state.cinemaReducer.listCinemaLogo,
-    listCinemaDetail: state.cinemaReducer.listCinemaDetail,
   }
 }
 

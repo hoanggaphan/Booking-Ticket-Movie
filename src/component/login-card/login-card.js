@@ -1,19 +1,44 @@
-import React, { useState }  from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@material-ui/core";
-import { Visibility, VisibilityOff, KeyboardBackspace } from '@material-ui/icons';
+import Spinner from 'react-bootstrap/Spinner'
+import { Visibility, VisibilityOff, Close } from "@material-ui/icons";
 import { Card } from "react-bootstrap";
-import { Link } from 'react-router-dom';
-import useStyles from './style';
+import { Link } from "react-router-dom";
+import useStyles from "./style";
+import { connect } from "react-redux";
+import { useSnackbar } from "notistack";
+import { actClearMessage } from './../../redux/actions/index';
 
-export default function LoginCard(props) {
+function LoginCard(props) {
   const classes = useStyles();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { isFetching, message, clearMessage, status } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
-    taiKhoan: '',
-    matKhau: '',
+    taiKhoan: "",
+    matKhau: "",
   });
 
-  const handleChange = e => {
+  useEffect(() => {
+    if(message) {
+      enqueueSnackbar(message, {
+        variant: status,
+        anchorOrigin: {vertical: "top", horizontal: "center"},
+        action: (key) => (
+          <IconButton
+            style={{ color: "white", outline: "unset" }}
+            onClick={() => closeSnackbar(key)}
+          >
+            <Close />
+          </IconButton>
+        ),
+      });
+    }
+    return () =>  {clearMessage()};
+    // eslint-disable-next-line
+  }, [isFetching]);
+
+  const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
@@ -21,7 +46,7 @@ export default function LoginCard(props) {
     setShowPassword(!showPassword);
   };
 
-  const handleMouseDownPassword = e => {
+  const handleMouseDownPassword = (e) => {
     e.preventDefault();
   };
 
@@ -74,8 +99,9 @@ export default function LoginCard(props) {
                 Quên mật khẩu?
               </Link>
             </Box>
-            <Button type="submit" className="login-btn">
+            <Button disabled={isFetching} type="submit" className="login-btn">
               Đăng Nhập
+              {isFetching && <Spinner animation="border" className={classes.buttonProgress}/>}
             </Button>
           </form>
         </Card.Body>
@@ -86,16 +112,28 @@ export default function LoginCard(props) {
               Đăng Ký
             </Link>
           </Box>
-          <IconButton
-            component={Link}
-            size="small"
-            to="/"
-            className="card-back"
-          >
-            <KeyboardBackspace />
-          </IconButton>
+          <Link to="/" className="card-link">
+            Trang Chủ
+          </Link>
         </Card.Footer>
       </Card>
     </Box>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.userReducer.isFetching,
+    message: state.userReducer.message,
+    status: state.userReducer.status
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearMessage: () => {
+      dispatch(actClearMessage());
+    }
+  }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(LoginCard);

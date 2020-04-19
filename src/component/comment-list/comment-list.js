@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { Box, Button } from "@material-ui/core";
 import useStyles from "./style";
 import Comment from "./../comment/comment";
 import { connect } from "react-redux";
 import { actGetListCommentAPI } from "./../../redux/actions/index";
+import shortid from 'shortid';
 
 function CommentList(props) {
   const classes = useStyles();
-  const { listComment, getListCommentAPI } = props;
+  const { listComment, getListCommentAPI, isGettingComment } = props;
   const [visible, setVisible] = useState(5);
 
   useEffect(() => {
@@ -17,11 +18,11 @@ function CommentList(props) {
 
   return (
     <Box className={classes.root}>
-      {[...listComment]
+      {(isGettingComment ? [...Array(4)] : [...listComment])
         .reverse()
         .slice(0, visible)
         .map((comment) => (
-          <Comment key={comment.id} comment={comment} />
+          <Comment key={shortid.generate()} comment={comment} />
         ))}
       {visible < listComment.length && (
         <Button className="more-btn" variant="outlined" onClick={() => setVisible(visible + 4)}>XEM THÊM</Button>
@@ -41,7 +42,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     listComment: state.userReducer.listComment,
+    isGettingComment: state.userReducer.isGettingComment
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentList);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(CommentList));

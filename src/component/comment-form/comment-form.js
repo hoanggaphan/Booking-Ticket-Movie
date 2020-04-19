@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { Box, Button, Avatar, IconButton } from "@material-ui/core";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Modal } from "react-bootstrap";
@@ -6,12 +6,14 @@ import Rating from "@material-ui/lab/Rating";
 import CloseIcon from "@material-ui/icons/Close";
 import StarRating from "./../star-rating/star-rating";
 import useStyles from "./style";
-import { Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { actShowLogin, actPostCommentAPI } from "../../redux/actions";
 
 function CommentForm(props) {
   const classes = useStyles();
+  const history = useHistory();
+  const location = useLocation();
   const { user, isLogin, showLogin, postCommentAPI } = props;
   const [rating, setrating] = useState(5);
   const [comment, setComment] = useState("");
@@ -149,8 +151,7 @@ function CommentForm(props) {
           </Modal.Header>
           <Modal.Footer>
             <Button
-              component={Link}
-              to="/user/login"
+              onClick={() => {history.push({pathname: "/user/login", state: {from: location}})}}
               className="form-btn"
               style={{ margin: "auto" }}
             >
@@ -181,4 +182,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(CommentForm));
