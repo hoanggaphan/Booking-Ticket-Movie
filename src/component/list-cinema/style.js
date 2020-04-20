@@ -38,8 +38,8 @@ const useStyles = makeStyles(theme => ({
         outline: "none"
         },
         "& img": {
-        width: "50px!important",
-        height: "50px!important",
+        width: "50px",
+        height: "50px",
         borderRadius: "15%"
         },
         "&.active": {
@@ -59,7 +59,6 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
       "& .list-cinema-group-name": {
         fontSize: "14px",
         textAlign: "start",

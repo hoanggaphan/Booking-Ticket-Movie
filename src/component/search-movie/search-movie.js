@@ -14,7 +14,7 @@ const SearchMovie = (props) => {
   const [keyword, setKeyword] = useState("");
   let { listSearch, searchMovie, notFound, isSearching, searching } = props;
 
-  const handleKeyUp = e => {
+  const handleChange = e => {
     setKeyword(e.target.value);
     searching();
   } 
@@ -38,7 +38,7 @@ const SearchMovie = (props) => {
     } 
     return listSearch.map(movie => {
       return <Box component={Link} to={`/detail-movie/${movie.maPhim}`} className="result-item">
-        <img loading="lazy" src={movie.hinhAnh} alt={movie.biDanh} />
+        <img loading='eager' style={{width: "90px!important", height: "90px!important"}} width="90" height="90" src={movie.hinhAnh} alt={movie.biDanh} />
         <Box><span>{movie.tenPhim}</span></Box>
       </Box>;
     });
@@ -57,7 +57,7 @@ const SearchMovie = (props) => {
         </InputGroup.Prepend>
         <FormControl
           placeholder="Tìm kiếm phim"
-          onKeyUp={handleKeyUp}
+          onChange={handleChange}
           onFocus={() => setFocus(true)} 
           onBlur={() => setFocus(false)} 
         />

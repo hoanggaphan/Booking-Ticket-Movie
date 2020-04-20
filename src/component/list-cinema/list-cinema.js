@@ -98,13 +98,13 @@ function ListCinema(props) {
                     <Nav.Link eventKey={cumRapIndex}>
                       <Box className="list-cinema-group">
                         {cumRap ? (
-                          <img loading="lazy" src={cumRap.hinhAnh} alt={cumRap.maCumRap} width="50px" height="50px" />
+                          <img loading='eager'  src={cumRap.hinhAnh} alt={cumRap.maCumRap}  />
                           ) : (
                             <Box component={Skeleton} variant="rect" minWidth="50px" height="50px!important" />
                           )
                         }
                         
-                        <Box overflow="hidden" marginLeft="15px" width="100%">
+                        <Box overflow="hidden" marginLeft="15px" flexGrow="1">
                           <span className="list-cinema-group-name">
                             {cumRap ? (
                               <>

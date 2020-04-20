@@ -26,7 +26,7 @@ const Navbar = (props) => {
   }, []);
 
   return (
-    <header className={classes.header}>
+    <header className={`${classes.header} mui-fixed`}>
       {/* BUTTON HAMBURGER MOBILE*/}
       <Box display={{ sm: "none" }}>
         <Menu fontSize="large" className="header-hamburger-btn" />
@@ -77,15 +77,6 @@ const Navbar = (props) => {
           color="inherit"
         >
           Cụm Rạp
-        </Button>
-        <Button
-          activeClassName="header-navLink-active"
-          className="header-navLink"
-          component={Link}
-          to="/news"
-          color="inherit"
-        >
-          Tin Tức
         </Button>
       </Box>
 

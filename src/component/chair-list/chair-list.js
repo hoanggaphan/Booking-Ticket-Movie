@@ -8,16 +8,16 @@ import useStyles from "./style";
 
 function ChairList(props) {
   const classes = useStyles();
-  const { roomInfo, listBooking, openPaymentBox } = props;
+  const { roomInfo, listBooking, openPaymentBox, isFetching } = props;
 
   const validateNextBtn = () => {
     return listBooking.length < 1; // mảng < 1 là true
   }
-
+  
   return (
     <Box component={Grid} item xs={12} sm={10} style={{ margin: "0 auto" }}>
       <Box display="flex" justifyContent="center" flexWrap="wrap">
-        {(roomInfo ? roomInfo.danhSachGhe : [...Array(160)]).map(
+        {(isFetching ? [...Array(160)] : roomInfo.danhSachGhe ).map(
           (item, index) => (
             <Chair chair={item} key={index} />
           )
@@ -62,7 +62,8 @@ function ChairList(props) {
 
 const mapStateToProps = (state) => ({
   roomInfo: state.bookingReducer.roomInfo,
-  listBooking: state.bookingReducer.listBooking
+  listBooking: state.bookingReducer.listBooking,
+  isFetching: state.bookingReducer.isFetching,
 });
 
 const mapDispatchToProps = dispatch => {
