@@ -59,7 +59,6 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
       "& .list-cinema-group-name": {
         fontSize: "14px",
         textAlign: "start",

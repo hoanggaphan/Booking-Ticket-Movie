@@ -14,7 +14,7 @@ const SearchMovie = (props) => {
   const [keyword, setKeyword] = useState("");
   let { listSearch, searchMovie, notFound, isSearching, searching } = props;
 
-  const handleKeyUp = e => {
+  const handleChange = e => {
     setKeyword(e.target.value);
     searching();
   } 
@@ -57,7 +57,7 @@ const SearchMovie = (props) => {
         </InputGroup.Prepend>
         <FormControl
           placeholder="Tìm kiếm phim"
-          onKeyUp={handleKeyUp}
+          onChange={handleChange}
           onFocus={() => setFocus(true)} 
           onBlur={() => setFocus(false)} 
         />

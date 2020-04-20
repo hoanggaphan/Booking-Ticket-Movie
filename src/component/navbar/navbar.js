@@ -26,7 +26,7 @@ const Navbar = (props) => {
   }, []);
 
   return (
-    <header className={classes.header}>
+    <header className={`${classes.header} mui-fixed`}>
       {/* BUTTON HAMBURGER MOBILE*/}
       <Box display={{ sm: "none" }}>
         <Menu fontSize="large" className="header-hamburger-btn" />

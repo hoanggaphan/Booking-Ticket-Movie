@@ -17,7 +17,7 @@ const userReducer = (state = initialState, action) => {
       return { ...state, roomInfo: action.payload, isFetching: false };
     case ActionTypes.GET_ROOM_INFO_FAILURE:
       console.log(action.message);
-      return { ...state };
+      return { ...state, isFetching: false };
     case ActionTypes.ADD_CHAIR_BOOKING:
       return { ...state, listBooking: [...state.listBooking, action.chairInfo] };
     case ActionTypes.REMOVE_CHAIR_BOOKING:
