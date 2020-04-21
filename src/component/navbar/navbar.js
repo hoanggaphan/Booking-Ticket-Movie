@@ -103,19 +103,6 @@ const Navbar = (props) => {
                     Lịch Chiếu
                   </Button>
                 </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    className={classes.headerNavLink}
-                    component={Link}
-                    scroll={(el) =>
-                      el.scrollIntoView({ behavior: "smooth", block: "start" })
-                    }
-                    to="/#list-cinema"
-                    color="inherit"
-                  >
-                    Cụm Rạp
-                  </Button>
-                </Grid>
               </Grid>
             </Container>
           </Drawer>
