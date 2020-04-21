@@ -38,6 +38,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <SnackbarProvider
         classes={{
           root: classes.root,
@@ -48,7 +49,6 @@ function App() {
         preventDuplicate
       >
         <BrowserRouter>
-          <CssBaseline />
           <Switch>
             {renderHomeTemplate(routes.home)}
             {renderUserTemplate(routes.user)}

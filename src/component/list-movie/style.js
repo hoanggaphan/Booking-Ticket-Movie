@@ -164,7 +164,7 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     opacity: ".02",
     top: "0px",
-    right: "-200px",
+    right: "0px",
     width: "100%",
     height: "100%",
     zIndex: "-1"
