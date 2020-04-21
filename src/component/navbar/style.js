@@ -15,18 +15,6 @@ const useStyle = makeStyles(theme => ({
     "& button:focus": {
       outline: "none"
     },
-
-    "& .header-navLink": {
-      margin: "10px",
-      color: theme.palette.text.primary,
-      "@media (max-width: 700px)": {
-        margin: "4px"
-      }
-    },
-
-    "& .header-navLink-active": {
-      color: "white",
-    },
     "& .login-success": {
       position: "relative",
       
@@ -146,8 +134,15 @@ const useStyle = makeStyles(theme => ({
     
     "& .header-hamburger-btn": {
       color: theme.palette.warning.main
-    }
-  }
+    },
+  },
+  headerNavLink: {
+    margin: "10px",
+    color: `${theme.palette.text.primary}!important`,
+    "@media (max-width: 700px)": {
+      margin: "4px"
+    },
+  },
 }));
 
 export default useStyle;
