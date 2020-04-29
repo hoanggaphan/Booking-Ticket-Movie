@@ -3,6 +3,7 @@ import { URL_API } from "./../constants/config";
 import https from "https";
 
 const httpsAgent = new https.Agent({
+  keepAlive: true,
   rejectUnauthorized: false,
 });
 
