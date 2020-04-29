@@ -49,15 +49,15 @@ export default function Carousel() {
           <Box className="carousel-background-linear"></Box>
         </Box>
         <Box position="relative">
-          <img src="carousel-2.jpg" alt="carousel-2" className="carousel-img" width="100%" height="650px" loading="lazy" />
+          <img src="carousel-2.jpg" alt="carousel-2" className="carousel-img" width="100%" height="650px" />
           <Box className="carousel-background-linear"></Box>
         </Box>
         <Box position="relative">
-          <img src="carousel-3.jpg" alt="carousel-3" className="carousel-img" width="100%" height="650px" loading="lazy" />
+          <img src="carousel-3.jpg" alt="carousel-3" className="carousel-img" width="100%" height="650px" />
           <Box className="carousel-background-linear"></Box>
         </Box>
         <Box position="relative">
-          <img src="carousel-4.jpg" alt="carousel-4" className="carousel-img" width="100%" height="650px" loading="lazy" />
+          <img src="carousel-4.jpg" alt="carousel-4" className="carousel-img" width="100%" height="650px" />
           <Box className="carousel-background-linear"></Box>
         </Box>
       </Slider>

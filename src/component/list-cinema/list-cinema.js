@@ -21,7 +21,7 @@ function ListCinema(props) {
       <Nav.Item key={index}>
         <Nav.Link eventKey={index}>
           {item ? (
-            <img src={item.logo} alt={item.biDanh} loading="lazy" />
+            <img src={item.logo} alt={item.biDanh} />
           ) : (
             <Box component={Skeleton} width="50px" height="50px!important" variant="circle" />
           )}
@@ -144,7 +144,6 @@ function ListCinema(props) {
                         <Box mr="20px" maxWidth="90px">
                           {cumRap ? (
                             <img
-                              loading="lazy"
                               className="list-cinema-movie-img"
                               src={phim.hinhAnh}
                               alt={phim.tenPhim}
@@ -213,7 +212,7 @@ function ListCinema(props) {
   
   return (
     <Box className={classes.listCinema}>
-      <im loading="lazy"g src="shape-5.png" alt="shape 5" className={classes.shape} />
+      <img src="shape-5.png" alt="shape 5" className={classes.shape} />
       <Box paddingTop="80px" ></Box>
       <Box id="list-cinema" >
         <Tab.Container transition={false} id="cum-rap" defaultActiveKey={0}>

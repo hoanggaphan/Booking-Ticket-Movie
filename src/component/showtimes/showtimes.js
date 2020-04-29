@@ -40,7 +40,7 @@ function Showtimes(props) {
         return (
           <Nav.Item key={itemIndex}>
             <Nav.Link eventKey={itemIndex}>
-              <img loading="lazy" src={item.logo} alt={item.tenHeThongRap} />
+              <img src={item.logo} alt={item.tenHeThongRap} />
             </Nav.Link>
           </Nav.Item>
         );
@@ -83,7 +83,6 @@ function Showtimes(props) {
                       <Nav.Item key={index}>
                         <Nav.Link eventKey={index}>
                           <img
-                            loading="lazy"
                             src={lichChieu.thongTinRap.hinhAnh}
                             alt={lichChieu.tenCumRap}
                           />

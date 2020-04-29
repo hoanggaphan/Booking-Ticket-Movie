@@ -62,7 +62,7 @@ export const actSearchMovie = (value) => (dispatch) => {
 export const actSearching = () => {
   return { type: ActionTypes.SEARCH_MOVIE_REQUEST };
 };
-//----------------------- END ----------------------------------//
+//----------------------- END MOVIE ----------------------------------//
 
 //----------------------- API CINEMA ----------------------------------//
 export const actGetShowtimesInfoAPI = (maPhim) => {
@@ -107,7 +107,7 @@ export const actGetListCinemaAPI = () => {
       .catch((err) => console.log(err));
   };
 };
-//----------------------- END ----------------------------------//
+//----------------------- END CINEMA ----------------------------------//
 
 //----------------------- API COMMENT ----------------------------------//
 export const actGetListCommentAPI = () => {
@@ -154,7 +154,7 @@ export const actPutCommentAPI = (id, comment) => {
       .catch((error) => console.log(error));
   };
 };
-//----------------------- END ----------------------------------//
+//----------------------- END COMMENT ----------------------------------//
 
 //----------------------- API USER ----------------------------------//
 export const actLoginUserAPI = (data, history, from) => {
@@ -268,7 +268,7 @@ export const actShowLogin = (status) => {
     status,
   };
 };
-//----------------------- END ----------------------------------//
+//----------------------- END USER ----------------------------------//
 
 //----------------------- API ROOM ----------------------------------//
 export const actGetRoomInfo = (maLichChieu) => (dispatch) => {
@@ -328,4 +328,4 @@ export const actRemoveChairBooking = (index) => ({
 export const actClearListBooking = () => ({
   type: ActionTypes.CLEAR_LIST_BOOKING,
 });
-//----------------------- END ----------------------------------//
+//----------------------- END ROOM ----------------------------------//
