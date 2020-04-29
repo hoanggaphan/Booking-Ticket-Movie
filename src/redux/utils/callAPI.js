@@ -3,7 +3,7 @@ import { URL_API } from "./../constants/config";
 import https from "https";
 
 const httpsAgent = new https.Agent({
-  rejectUnauthorized: false,
+  rejectUnauthorized: true,
 });
 
 export const callAPI = (method, uri, data, token) => {
