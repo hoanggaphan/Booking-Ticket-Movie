@@ -38,7 +38,7 @@ export default function Carousel() {
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,
-    className: `${classes.carousel}`
+    className: `${classes.carousel}`,
   };
   
   return (
