@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import ModalTrailer from "../modal-trailer/modalTrailer";
 import Movie from "./../movie/movie";
-import { actgetListMovie } from "./../../redux/actions/index";
+import { actgetListMovie } from './../../redux/actions/index';
 import useStyles from "./style";
 
 function NextArrow(props) {
@@ -46,22 +46,14 @@ function ListMovie(props) {
   }, []);
 
   useEffect(() => {
-    let isMounted = true;
-    isMounted && getListMovie();
-    return () => {
-      isMounted = false;
-    };
+    getListMovie();
     //eslint-disable-next-line
-  }, []);
+  }, [])
 
   return (
     <Box position="relative">
       <Box id="showtimes" className={classes.listMovie}>
-        <img
-          src={`${process.env.PUBLIC_URL}/images/shape-6.png`}
-          className={classes.shape}
-          alt="shape 6"
-        />
+        <img src={`${process.env.PUBLIC_URL}/images/shape-6.png`} className={classes.shape} alt="shape 6" />
         <Tab.Container id="lich-chieu" defaultActiveKey="showing">
           <Nav className="list-movie-nav">
             <Box className="list-movie-nav-items">
@@ -162,12 +154,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getListMovie: () => {
-      dispatch(actgetListMovie());
-    },
-  };
-};
+      getListMovie: () => {
+          dispatch(actgetListMovie());
+      }
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListMovie);
