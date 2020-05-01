@@ -45,19 +45,19 @@ export default function Carousel() {
     <Box>
       <Slider {...settings}>
         <Box position="relative">
-          <img src="carousel-1.jpg" alt="carousel-1" className="carousel-img" width="100%" height="650px" loading="eager" onLoad={() => console.log(1)} />
+          <img src={`${process.env.PUBLIC_URL}/images/carousel-1.jpg`} alt="carousel-1" className="carousel-img" width="100%" height="650px" loading="eager" onLoad={() => console.log(1)} />
           <Box className="carousel-background-linear"></Box>
         </Box>
         <Box position="relative">
-          <img src="carousel-2.jpg" alt="carousel-2" className="carousel-img" width="100%" height="650px" />
+          <img src={`${process.env.PUBLIC_URL}/images/carousel-2.jpg`} alt="carousel-2" className="carousel-img" width="100%" height="650px" />
           <Box className="carousel-background-linear"></Box>
         </Box>
         <Box position="relative">
-          <img src="carousel-3.jpg" alt="carousel-3" className="carousel-img" width="100%" height="650px" />
+          <img src={`${process.env.PUBLIC_URL}/images/carousel-3.jpg`} alt="carousel-3" className="carousel-img" width="100%" height="650px" />
           <Box className="carousel-background-linear"></Box>
         </Box>
         <Box position="relative">
-          <img src="carousel-4.jpg" alt="carousel-4" className="carousel-img" width="100%" height="650px" />
+          <img src={`${process.env.PUBLIC_URL}/images/carousel-4.jpg`} alt="carousel-4" className="carousel-img" width="100%" height="650px" />
           <Box className="carousel-background-linear"></Box>
         </Box>
       </Slider>

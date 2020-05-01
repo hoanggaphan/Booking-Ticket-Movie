@@ -59,6 +59,9 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
       display: "flex",
       alignItems: "center",
+      "& img": {
+        minWidth: "50px",
+      },
       "& .list-cinema-group-name": {
         fontSize: "14px",
         textAlign: "start",

@@ -56,7 +56,7 @@ function LoginCard(props) {
         <Card.Header>
           <img
             className="card-img"
-            src={process.env.PUBLIC_URL + "/login-head.png"}
+            src={process.env.PUBLIC_URL + "/images/login-head.png"}
             alt="login head"
           />
           <Card.Title>Đăng Nhập</Card.Title>

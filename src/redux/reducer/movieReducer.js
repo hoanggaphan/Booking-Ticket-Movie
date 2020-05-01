@@ -4,15 +4,17 @@ const initialState = {
   listMovie: [],
   listMovieShowing: [],
   listMovieComming: [],
-  isFetchingLstMovie: true,
+
   isFechingDetailMovie: true,
-  detailMovie: null,
+  detailMovie: {},
   showtimesInfo: [],
   listCinema: [],
+
   trailer: {
     movie: {},
     isOpen: false,
   },
+
   listDiaChi: [
     {
       maCumRap: "bhd-star-cineplex-pham-hung",
@@ -174,6 +176,7 @@ const initialState = {
         "https://s3img.vcdn.vn/123phim/2018/09/mega-gs-cao-thang-15380164745357.jpg",
     },
   ],
+
   listSearch: [],
   isSearching: false,
   notFound: false,
@@ -181,12 +184,7 @@ const initialState = {
 
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.GET_LIST_MOVIE_REQUEST:
-      return { ...state, isFetchingLstMovie: true };
-    case ActionTypes.GET_LIST_MOVIE_FAILURE:
-      console.log(action.message)
-      return { ...state };
-    case ActionTypes.GET_LIST_MOVIE_SUCCESS:
+    case ActionTypes.GET_LIST_MOVIE_API:
       // Sắp xếp lại listmovie theo ngày tháng năm tăng dần
       const listMovieSorted = action.payload.sort(
         (movie1, movie2) =>
@@ -200,7 +198,7 @@ const movieReducer = (state = initialState, action) => {
         (movie) => new Date() - new Date(movie.ngayKhoiChieu) < 0
       );
       state.listMovie = listMovieSorted;
-      return { ...state, isFetchingLstMovie: false };
+      return { ...state };
 
     case ActionTypes.GET_DETAIL_MOVIE_SUCCESS:
       const d = new Date(action.detailMovie.ngayKhoiChieu);
@@ -292,6 +290,7 @@ const movieReducer = (state = initialState, action) => {
     case ActionTypes.GET_DETAIL_MOVIE_FAILURE:
       console.log(action.message)
       return { ...state, isFechingDetailMovie: false };
+
     case ActionTypes.GET_SHOWTIMES_INFO_API:
       let listCinema = [];
       action.showtimesInfo.heThongRapChieu.forEach((item) =>
@@ -315,6 +314,7 @@ const movieReducer = (state = initialState, action) => {
     case ActionTypes.SEARCH_MOVIE_FAILURE:
       console.log(action.message)
       return { ...state, isSearching: false};
+
     case ActionTypes.VIEW_TRAILER:
       state.trailer = { ...state.trailer, ...action.trailer };
       return { ...state };

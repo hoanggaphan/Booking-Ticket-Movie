@@ -107,7 +107,7 @@ function Footer(props) {
         </Grid>
         <Grid component={Box} container  pt="16px" className="footer-bottom">
           <Grid component={Box} item sm={2} md={1} xs={12}>
-            <Box component="img" width="80px" borderRadius="8px"mb="10px" src={process.env.PUBLIC_URL + "/zion-logo.jpg"} />
+            <Box component="img" width="80px" borderRadius="8px"mb="10px" src={process.env.PUBLIC_URL + "/images/zion-logo.jpg"} />
           </Grid>
           <Grid item sm={7} md={9} xs={12} className="footer-location">
             <h6>
@@ -125,7 +125,7 @@ function Footer(props) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Box component="img"  mb="10px"  width="130px" alt="Bộ Công Thương" src={process.env.PUBLIC_URL + "https://s3img.vcdn.vn/123phim/2020/03/d1e6bd560daa9e20131ea8a0f62e87f8.png"} />
+              <Box component="img"  mb="10px"  width="130px" alt="Bộ Công Thương" src="https://s3img.vcdn.vn/123phim/2020/03/d1e6bd560daa9e20131ea8a0f62e87f8.png" />
             </a>
           </Grid>
         </Grid>

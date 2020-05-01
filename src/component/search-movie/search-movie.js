@@ -30,6 +30,9 @@ const SearchMovie = (props) => {
   }, [keyword])
 
   const renderListMovie = () => {
+    if(isSearching) {
+      return <Box className={classes.loading} ><Spinner animation="border" /></Box>
+    }
     if (!keyword) {
       return <Box display="flex" alignItems="center" justifyContent="center" minHeight="80px" fontSize="16px">Nhập tên phim cần tìm</Box>
     } 
@@ -38,7 +41,7 @@ const SearchMovie = (props) => {
     } 
     return listSearch.map(movie => {
       return <Box component={Link} to={`/detail-movie/${movie.maPhim}`} className="result-item">
-        <img loading='eager' style={{width: "90px!important", height: "90px!important"}} width="90" height="90" src={movie.hinhAnh} alt={movie.biDanh} />
+        <img src={movie.hinhAnh} alt={movie.biDanh} />
         <Box><span>{movie.tenPhim}</span></Box>
       </Box>;
     });
@@ -63,7 +66,7 @@ const SearchMovie = (props) => {
         />
       </Box>
       <Box className={`${classes.result} ${focus && classes.show}`}>
-        {isSearching ? <Box className={classes.loading} ><Spinner animation="border" /></Box>  : renderListMovie()}
+        {renderListMovie()}
       </Box>
     </Box>
   );

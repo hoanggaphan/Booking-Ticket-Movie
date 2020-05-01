@@ -29,8 +29,8 @@ function PrevArrow(props) {
 function ListMovie(props) {
   const classes = useStyles();
   const [visible, setVisible] = useState(8);
-  let { listMovieComming, listMovieShowing, isFetchingLstMovie, listMovie, getListMovie } = props;
-  const render = useRender(isFetchingLstMovie, visible);
+  let { listMovieComming, listMovieShowing, listMovie, getListMovie } = props;
+  const render = useRender(visible);
 
   const memoziedSettings = useMemo(() => {
     return {
@@ -53,7 +53,7 @@ function ListMovie(props) {
   return (
     <Box position="relative">
       <Box id="showtimes" className={classes.listMovie}>
-        <img src="shape-6.PNG" className={classes.shape} alt="shape 6" />
+        <img src={`${process.env.PUBLIC_URL}/images/shape-6.png`} className={classes.shape} alt="shape 6" />
         <Tab.Container id="lich-chieu" defaultActiveKey="showing">
           <Nav className="list-movie-nav">
             <Box className="list-movie-nav-items">
@@ -125,9 +125,9 @@ function ListMovie(props) {
 }
 
 //////////////// REFACTOR CODE WITH HOOK ///////////////////
-const useRender = (isFetchingLstMovie, visible) => {
+const useRender = (visible) => {
   const renderMovieWeb = (listMovie, type) => {
-    return (isFetchingLstMovie ? [...Array(8)] : listMovie).map(
+    return (!listMovie.length ? [...Array(8)] : listMovie).map(
       (movie, index) => (
         <div className="list-movie-sliders-item">
           <Movie key={index} movie={movie} type={type} />
@@ -136,7 +136,7 @@ const useRender = (isFetchingLstMovie, visible) => {
     );
   };
   const renderMovieMobile = (listMovie, type) => {
-    return (isFetchingLstMovie ? [...Array(8)] : listMovie)
+    return (!listMovie.length ? [...Array(8)] : listMovie)
       .slice(0, visible)
       .map((movie, index) => {
         return <Movie key={index} movie={movie} type={type} />;
@@ -151,7 +151,6 @@ const mapStateToProps = (state) => {
     listMovieShowing: state.movieReducer.listMovieShowing,
     listMovieComming: state.movieReducer.listMovieComming,
     listMovie: state.movieReducer.listMovie,
-    isFetchingLstMovie: state.movieReducer.isFetchingLstMovie,
   };
 };
 

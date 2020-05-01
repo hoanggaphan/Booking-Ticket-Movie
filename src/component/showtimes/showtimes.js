@@ -3,7 +3,7 @@ import { Box, Grid } from "@material-ui/core";
 import { Nav, Tab, Dropdown } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actGetListCinemaAPI } from "./../../redux/actions/index";
+import { actGetListLogo } from "./../../redux/actions/index";
 import useStyles from "./style";
 import { Skeleton } from "@material-ui/lab";
 
@@ -12,12 +12,12 @@ function Showtimes(props) {
   let {
     listCinemaLogo,
     detailMovie,
-    getListCinemaAPI,
     isFechingDetailMovie,
+    getListLogo
   } = props;
 
   useEffect(() => {
-    getListCinemaAPI();
+    getListLogo();
     // eslint-disable-next-line
   }, []);
 
@@ -188,8 +188,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getListCinemaAPI: () => {
-      dispatch(actGetListCinemaAPI());
+    getListLogo: () => {
+      dispatch(actGetListLogo());
     },
   };
 };
