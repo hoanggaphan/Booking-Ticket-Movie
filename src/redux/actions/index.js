@@ -4,22 +4,20 @@ import Axios from "axios";
 
 //----------------------- API MOVIE ----------------------------------//
 export const actgetListMovie = () => (dispatch) => {
-  dispatch({ type: ActionTypes.GET_LIST_MOVIE_REQUEST });
   callAPI("GET", "QuanLyPhim/LayDanhSachPhim?maNhom=GP10", null, null)
     .then((response) =>
       dispatch({
-        type: ActionTypes.GET_LIST_MOVIE_SUCCESS,
+        type: ActionTypes.GET_LIST_MOVIE_API,
         payload: response.data,
       })
     )
-    .catch((error) =>
-      dispatch({ type: ActionTypes.GET_LIST_MOVIE_FAILURE, message: error })
+    .catch((error) => console.log(error.response.data)
     );
 };
 
 export const actgetDetailMovieAPI = (maPhim) => {
   return (dispatch) => {
-    dispatch({type: ActionTypes.GET_DETAIL_MOVIE_REQUEST})
+    dispatch({ type: ActionTypes.GET_DETAIL_MOVIE_REQUEST });
     callAPI("GET", `QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`)
       .then((result) =>
         dispatch({
@@ -27,7 +25,9 @@ export const actgetDetailMovieAPI = (maPhim) => {
           detailMovie: result.data,
         })
       )
-      .catch((error) => dispatch({type: ActionTypes.GET_DETAIL_MOVIE_FAILURE, message: error}));
+      .catch((error) =>
+        dispatch({ type: ActionTypes.GET_DETAIL_MOVIE_FAILURE, message: error })
+      );
   };
 };
 
@@ -83,25 +83,36 @@ export const actGetShowtimesInfoAPI = (maPhim) => {
   };
 };
 
-export const actGetListCinemaAPI = () => {
+export const actGetListLogo = () => {
   return (dispatch) => {
-    const listCinemaLogo = callAPI(
+    callAPI(
       "GET",
       "QuanLyRap/LayThongTinHeThongRap",
       null,
       null
-    );
-    const listCinemaDetail = callAPI(
+    )
+      .then((result) =>
+        dispatch({
+          type: ActionTypes.GET_LIST_LOGO_CINEMA,
+          listCinemaLogo: result.data,
+        })
+      )
+      .catch((err) => console.log(err));
+  };
+};
+
+export const actGetListCinemaDetail = () => {
+  return (dispatch) => {
+    callAPI(
       "GET",
       "QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP10",
       null,
       null
-    );
-    Promise.all([listCinemaLogo, listCinemaDetail])
-      .then(([listCinemaLogo, listCinemaDetail]) =>
+    )
+      .then((result) =>
         dispatch({
-          type: ActionTypes.GET_LIST_CINEMA_API,
-          listCinema: [listCinemaLogo.data, listCinemaDetail.data],
+          type: ActionTypes.GET_LIST_CINEMA_DETAIL,
+          listCinemaDetail: result.data,
         })
       )
       .catch((err) => console.log(err));
@@ -112,7 +123,7 @@ export const actGetListCinemaAPI = () => {
 //----------------------- API COMMENT ----------------------------------//
 export const actGetListCommentAPI = () => {
   return (dispatch) => {
-    dispatch({type: ActionTypes.GET_LIST_COMMENT_REQUEST})
+    dispatch({ type: ActionTypes.GET_LIST_COMMENT_REQUEST });
     Axios({
       method: "GET",
       url: "https://5e8d7b0622d8cd0016a794f9.mockapi.io/listcomment",
@@ -123,7 +134,9 @@ export const actGetListCommentAPI = () => {
           listComment: result.data,
         })
       )
-      .catch((error) => dispatch({type: ActionTypes.GET_LIST_COMMENT_FAILURE, message: error}));
+      .catch((error) =>
+        dispatch({ type: ActionTypes.GET_LIST_COMMENT_FAILURE, message: error })
+      );
   };
 };
 
@@ -148,9 +161,7 @@ export const actPutCommentAPI = (id, comment) => {
       method: "PUT",
       data: comment,
     })
-      .then((result) =>
-        dispatch({ type: ActionTypes.PUT_COMMENT_API, comment: result.data })
-      )
+      .then((result) => console.log(result.data))
       .catch((error) => console.log(error));
   };
 };

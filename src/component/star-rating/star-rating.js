@@ -10,14 +10,14 @@ export default function StarRating({ votes, ...props }) {
       {[...Array(parseInt(number / 2))].map((item, index) => (
         // eslint-disable-next-line
         <img
-          src={`${process.env.PUBLIC_URL}/star1.png`}
+          src={`${process.env.PUBLIC_URL}/images/star1.png`}
           key={index}
           className="star1"
         />
       ))}
       {number % 2 !== 0 && (
         <img
-          src={`${process.env.PUBLIC_URL}/starNum.png`}
+          src={`${process.env.PUBLIC_URL}/images/starNum.png`}
           className="starNum"
           alt="star 2"
         />

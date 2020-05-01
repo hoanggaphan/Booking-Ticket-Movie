@@ -59,7 +59,7 @@ const Navbar = (props) => {
               <Grid container justify="space-between" style={{margin: "10px 0"}}>
                 <Link to="/" exact>
                   <img
-                    src={process.env.PUBLIC_URL + "/logo.png"}
+                    src={process.env.PUBLIC_URL + "/images/logo.png"}
                     width="150px"
                     height="50px"
                     alt="logo"
@@ -112,7 +112,7 @@ const Navbar = (props) => {
       {/* LOGO */}
       <Link to="/" exact>
         <img
-          src={process.env.PUBLIC_URL + "/logo.png"}
+          src={process.env.PUBLIC_URL + "/images/logo.png"}
           width="150px"
           height="50px"
           alt="logo"

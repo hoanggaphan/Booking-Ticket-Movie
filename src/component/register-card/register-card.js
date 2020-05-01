@@ -143,7 +143,7 @@ function RegisterCard(props) {
         <Card.Header>
           <img
             className="card-img"
-            src={process.env.PUBLIC_URL + "/register-head.png"}
+            src={process.env.PUBLIC_URL + "/images/register-head.png"}
             alt="login head"
           />
           <Card.Title>Đăng Ký</Card.Title>

@@ -128,7 +128,7 @@ function Payment(props) {
                 control={<Radio color="default" />}
               />
               <img
-                src={`${process.env.PUBLIC_URL}/momo-logo.jpg`}
+                src={`${process.env.PUBLIC_URL}/images/momo-logo.jpg`}
                 alt="momo"
                 className="payment-icon"
               />

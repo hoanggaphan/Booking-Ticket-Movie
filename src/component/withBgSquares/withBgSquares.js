@@ -9,7 +9,7 @@ const WithBgSquares = (Component) => {
     <Box
       className={classes.withFormBG}
       style={{
-        backgroundImage: `url('${process.env.PUBLIC_URL}/dots.png')`,
+        backgroundImage: `url('${process.env.PUBLIC_URL}/images/dots.png')`,
         backgroundSize: "contain"
       }}
     >

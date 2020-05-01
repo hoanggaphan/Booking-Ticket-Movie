@@ -9,11 +9,13 @@ import {
 } from "./../../../redux/actions/index";
 import AgeType from "./../../../component/age-type/age-type";
 import { CircularProgressbar } from "react-circular-progressbar";
+
 import StarRating from "../../../component/star-rating/star-rating";
 import CommentForm from "../../../component/comment-form/comment-form";
 import CommentList from "../../../component/comment-list/comment-list";
 import ModalTrailer from "./../../../component/modal-trailer/modalTrailer";
 import Showtimes from "../../../component/showtimes/showtimes";
+
 import useStyles from "./style";
 import "react-circular-progressbar/dist/styles.css";
 import { useParams } from "react-router-dom";
@@ -50,7 +52,6 @@ function DetailMovie(props) {
           {!isFechingDetailMovie ? (
             <>
               <img
-                loading="lazy"
                 src={detailMovie.hinhAnh}
                 alt={detailMovie.biDanh}
               />
@@ -62,7 +63,6 @@ function DetailMovie(props) {
               </IconButton>
               {trailerM && (
                 <iframe
-                  loading="lazy"
                   className="trailer-mobile"
                   width="100%"
                   height="100%"
@@ -205,7 +205,7 @@ function DetailMovie(props) {
       </Box>
       <Box className="detail-bottom">
         <Box className="bottom-main-info">
-          <Tabs defaultActiveKey="detail">
+          <Tabs mountOnEnter defaultActiveKey="detail">
             <Tab eventKey="detail" title="Thông Tin">
               <Grid container>
                 {!isFechingDetailMovie ? (
@@ -280,10 +280,10 @@ function DetailMovie(props) {
                 )}
               </Grid>
             </Tab>
-            <Tab mountOnEnter eventKey="showtimes" title="Lịch Chiếu">
+            <Tab eventKey="showtimes" title="Lịch Chiếu">
               <Showtimes />
             </Tab>
-            <Tab mountOnEnter eventKey="comment" title="Đánh Giá">
+            <Tab eventKey="comment" title="Đánh Giá">
               <Box display="flex" justifyContent="center">
                 <Box width="580px">
                   <CommentForm />

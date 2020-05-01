@@ -61,13 +61,12 @@ const initialState = {
       trangChu: "https://www.megagscinemas.vn/",
     },
   ],
-  isLoading: true,
 };
 
-const cinemaReducer = (state = initialState, actions) => {
-  switch (actions.type) {
-    case ActionsType.GET_LIST_CINEMA_API:
-      state.listCinemaLogo = actions.listCinema[0].map((cinema) => {
+const cinemaReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionsType.GET_LIST_LOGO_CINEMA:
+      state.listCinemaLogo = action.listCinemaLogo.map((cinema) => {
         const item = state.listTrangChu.find(
           (item) => item.maHeThongRap === cinema.maHeThongRap
         );
@@ -76,7 +75,10 @@ const cinemaReducer = (state = initialState, actions) => {
         }
         return cinema;
       });
-      state.listCinemaDetail = actions.listCinema[1].map((cinema) => {
+      return { ...state };
+
+    case ActionsType.GET_LIST_CINEMA_DETAIL:
+      state.listCinemaDetail = action.listCinemaDetail.map((cinema) => {
         const item = state.listHinhAnh.find(
           (item) => item.maHeThongRap === cinema.maHeThongRap
         );
@@ -85,8 +87,8 @@ const cinemaReducer = (state = initialState, actions) => {
         }
         return cinema;
       });
-      state.isLoading = false;
       return { ...state };
+
     default:
       return { ...state };
   }

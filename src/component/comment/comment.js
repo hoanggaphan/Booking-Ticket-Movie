@@ -65,7 +65,7 @@ function Comment(props) {
   const handleKeyPress = (e) => {
     if (e.which === 13 && value) {
       if (user) {
-        const userReply = { hoTen: user.hoTen, message: value };
+        const userReply = { hoTen: user.hoTen, message: value, hinhAnh: "" };
         comment.danhSachTraLoi.unshift(userReply);
         putCommentAPI(comment.id, comment);
         setValue("");

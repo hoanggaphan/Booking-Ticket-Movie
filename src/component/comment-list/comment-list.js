@@ -1,20 +1,22 @@
-import React, { useEffect, useState, memo } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button } from "@material-ui/core";
 import useStyles from "./style";
 import Comment from "./../comment/comment";
 import { connect } from "react-redux";
 import { actGetListCommentAPI } from "./../../redux/actions/index";
 import shortid from 'shortid';
+import { useParams } from 'react-router-dom';
 
 function CommentList(props) {
   const classes = useStyles();
   const { listComment, getListCommentAPI, isGettingComment } = props;
   const [visible, setVisible] = useState(5);
+  const { maPhim } = useParams();
 
   useEffect(() => {
     getListCommentAPI();
     // eslint-disable-next-line
-  }, []);
+  }, [maPhim]);
 
   return (
     <Box className={classes.root}>
@@ -46,4 +48,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(CommentList));
+export default connect(mapStateToProps, mapDispatchToProps)(CommentList);

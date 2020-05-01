@@ -20,7 +20,7 @@ export default function BgApp() {
   return (
     <Box
       className={classes.backApp}
-      style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/backapp.jpg)` }}
+      style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/backapp.jpg)` }}
     >
       <Grid container component={Box} className="back-app-container">
         <Grid xs={12} md={6} className="back-app-left">
@@ -63,7 +63,7 @@ export default function BgApp() {
         <Grid xs={12} md={6} className="back-app-right">
           <img
             alt="mobile"
-            src={process.env.PUBLIC_URL + "/mobile.png"}
+            src={process.env.PUBLIC_URL + "/images/mobile.png"}
             className="right-img-mobile"
           />
           <Slider {...settings}>
@@ -86,7 +86,7 @@ export default function BgApp() {
             ].map((item) => (
               <div>
                 <img
-                  src={process.env.PUBLIC_URL + "/" + item}
+                  src={process.env.PUBLIC_URL + "/images/" + item}
                   className="right-img-slide"
                   alt={item}
                 />
