@@ -5,8 +5,10 @@ import useStyles from "./style";
 
 export default function BgApp() {
   const classes = useStyles();
-  const settings = {
-    dots: false,
+
+  const memoziedSettings = React.useMemo(() => {
+    return {
+      dots: false,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 2500,
@@ -15,7 +17,8 @@ export default function BgApp() {
     slidesToShow: 1,
     slidesToScroll: 1,
     pauseOnHover: false,
-  };
+    };
+  }, []);
 
   return (
     <Box
@@ -66,7 +69,7 @@ export default function BgApp() {
             src={process.env.PUBLIC_URL + "/images/mobile.png"}
             className="right-img-mobile"
           />
-          <Slider {...settings}>
+          <Slider {...memoziedSettings}>
             {[
               "slide2.jpg",
               "slide3.jpg",
