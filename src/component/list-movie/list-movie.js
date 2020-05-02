@@ -1,13 +1,15 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Box, Grid, Button, IconButton } from "@material-ui/core";
 import { NavigateNext, NavigateBefore } from "@material-ui/icons";
-import { Tab, Nav } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
+import Tab from "react-bootstrap/Tab";
 import { connect } from "react-redux";
 import Slider from "react-slick";
+
+import useStyles from "./style";
 import ModalTrailer from "../modal-trailer/modalTrailer";
 import Movie from "./../movie/movie";
 import { actgetListMovie } from "./../../redux/actions/index";
-import useStyles from "./style";
 
 function NextArrow(props) {
   const { onClick } = props;

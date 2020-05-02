@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, IconButton } from "@material-ui/core";
-import { PlayCircleOutline } from "@material-ui/icons";
-import { Tabs, Tab } from "react-bootstrap";
-import { connect } from "react-redux";
-import {
-  actgetDetailMovieAPI,
-  actViewTrailer,
-} from "./../../../redux/actions/index";
-import AgeType from "./../../../component/age-type/age-type";
+import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
+import Skeleton from '@material-ui/lab/Skeleton';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import { CircularProgressbar } from "react-circular-progressbar";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import "react-circular-progressbar/dist/styles.css";
 
+import useStyles from "./style";
+import { actgetDetailMovieAPI, actViewTrailer } from "./../../../redux/actions/index";
+import AgeType from "./../../../component/age-type/age-type";
 import StarRating from "../../../component/star-rating/star-rating";
 import CommentForm from "../../../component/comment-form/comment-form";
 import CommentList from "../../../component/comment-list/comment-list";
 import ModalTrailer from "./../../../component/modal-trailer/modalTrailer";
 import Showtimes from "../../../component/showtimes/showtimes";
 
-import useStyles from "./style";
-import "react-circular-progressbar/dist/styles.css";
-import { useParams } from "react-router-dom";
-import { Skeleton } from "@material-ui/lab";
 
 function DetailMovie(props) {
   const classes = useStyles();

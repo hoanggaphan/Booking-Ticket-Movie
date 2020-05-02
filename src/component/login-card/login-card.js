@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@material-ui/core";
-import Spinner from 'react-bootstrap/Spinner'
 import { Visibility, VisibilityOff, Close } from "@material-ui/icons";
-import { Card } from "react-bootstrap";
+import Spinner from 'react-bootstrap/Spinner'
+import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import useStyles from "./style";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
+
+import useStyles from "./style";
 import { actClearMessage } from './../../redux/actions/index';
 
 function LoginCard(props) {

@@ -1,7 +1,7 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 import { withStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
+
 import styles from "./style";
 
 const WithBgSquares = (Component) => {
@@ -23,11 +23,6 @@ const WithBgSquares = (Component) => {
       <Component {...props} />
     </Box>
   );
-  withBgSquares.propTypes = {
-    classes: PropTypes.object.isRequired,
-    color: PropTypes.oneOf(["primary", "warning"]).isRequired,
-    img: PropTypes.string,
-  }
   return withStyles(styles)(withBgSquares);
 };
 

@@ -1,19 +1,10 @@
 import React from "react";
-import {
-  Box,
-  TableCell,
-  TableContainer,
-  Table,
-  TableHead,
-  Paper,
-  TableRow,
-  TableBody,
-  TablePagination,
-} from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
-import useStyles from "./style";
+import { Box, TableCell, TableContainer, Table, TableHead, Paper, TableRow, TableBody, TablePagination } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { connect } from "react-redux";
 import shortid from "shortid";
+
+import useStyles from "./style";
 
 function HistoryBooking(props) {
   const classes = useStyles();

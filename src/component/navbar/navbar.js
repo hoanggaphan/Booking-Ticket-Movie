@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  Drawer,
-  IconButton,
-  Container,
-} from "@material-ui/core";
+import { Box, Button, Grid, Drawer, IconButton, Container } from "@material-ui/core";
 import { Menu, ArrowDropDown, Close } from "@material-ui/icons";
-import SearchMovie from "./../search-movie/search-movie";
+import Dropdown from "react-bootstrap/Dropdown";
 import { HashLink as Link } from "react-router-hash-link";
+import { connect } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+
+import useStyle from "./style";
+import SearchMovie from "./../search-movie/search-movie";
 import { actLoadUser } from "./../../redux/actions/index";
 import MyAvatar from "../avatar/avatar";
-import { connect } from "react-redux";
-import Dropdown from "react-bootstrap/Dropdown";
-import { useHistory, useLocation } from "react-router-dom";
-import useStyle from "./style";
 
 const Navbar = (props) => {
   const classes = useStyle();

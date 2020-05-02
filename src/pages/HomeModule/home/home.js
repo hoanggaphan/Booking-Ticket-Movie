@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+
 import MyCarousel from '../../../component/carousel/carousel';
 import ListMovie from '../../../component/list-movie/list-movie';
 import QuickTicketBook from '../../../component/quick-ticket-book/quick-ticket-book';

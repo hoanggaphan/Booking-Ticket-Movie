@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { Box } from "@material-ui/core";
-import { Tab, Tabs } from "react-bootstrap";
-import { actGetAccountUser } from "./../../../redux/actions/index";
+import Box from "@material-ui/core/Box";
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import { connect } from "react-redux";
-import useStyles from "./style";
-import AccountCard from "../../../component/account-card/account-card";
 import { useHistory } from 'react-router-dom';
+
+import useStyles from "./style";
+import { actGetAccountUser } from "./../../../redux/actions/index";
+import AccountCard from "../../../component/account-card/account-card";
 import HistoryBooking from "../../../component/history-booking/history-booking";
 
 function Account(props) {

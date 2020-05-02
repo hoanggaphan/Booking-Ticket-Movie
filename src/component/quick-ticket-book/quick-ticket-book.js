@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Box, Button } from "@material-ui/core";
-import { Dropdown } from "react-bootstrap";
-import useStyles from "./style";
+import Dropdown from "react-bootstrap/Dropdown";
 import { connect } from "react-redux";
-import { actGetShowtimesInfoAPI } from "../../redux/actions/index";
 import { Link } from 'react-router-dom';
+
+import useStyles from "./style";
+import { actGetShowtimesInfoAPI } from "../../redux/actions/index";
 
 const QuickTicketBook = props => {
   const classes = useStyles();

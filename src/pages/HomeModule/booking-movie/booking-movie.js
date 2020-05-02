@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
+import { connect } from "react-redux";
+import { useParams, useHistory } from 'react-router-dom';
+
+import useStyles from "./style";
 import { actGetRoomInfo } from "./../../../redux/actions/index";
 import Timer from "./../../../component/timer/timer";
 import ChairList from "./../../../component/chair-list/chair-list";
-import useStyles from "./style";
-import { connect } from "react-redux";
 import Payment from "../../../component/payment/payment";
-import { useParams, useHistory } from 'react-router-dom';
 
 function BookingMovie(props) {
   const classes = useStyles();

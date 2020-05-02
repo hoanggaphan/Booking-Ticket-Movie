@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Grid, Button } from "@material-ui/core";
 import Carousel from 'react-bootstrap/Carousel'
+
 import useStyles from "./style";
 
 export default function BgApp() {

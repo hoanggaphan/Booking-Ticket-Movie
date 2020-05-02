@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, FormHelperText } from "@material-ui/core";
 import { Visibility, VisibilityOff, KeyboardBackspace,Error, Close } from "@material-ui/icons";
+import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap";
-import useStyles from './style';
 import { useHistory } from 'react-router-dom'
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
+
+import useStyles from './style';
 import { actClearMessage } from './../../redux/actions/index';
 
 function RegisterCard(props) {

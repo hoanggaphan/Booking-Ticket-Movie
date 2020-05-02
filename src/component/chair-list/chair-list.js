@@ -1,10 +1,11 @@
 import React from "react";
 import { Box, Grid, Button } from "@material-ui/core";
-import { connect } from "react-redux";
 import CloseIcon from "@material-ui/icons/Close";
+import { connect } from "react-redux";
+
+import useStyles from "./style";
 import Chair from "./../../component/chair/chair";
 import { actOpenPaymentBox } from './../../redux/actions/index';
-import useStyles from "./style";
 
 function ChairList(props) {
   const classes = useStyles();

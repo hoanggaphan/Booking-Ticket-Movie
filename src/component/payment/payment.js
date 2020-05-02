@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Box, Radio, RadioGroup, FormControl, FormControlLabel, Button, IconButton } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { CreditCard, AccountBalance, Close } from "@material-ui/icons";
-import { Skeleton } from "@material-ui/lab";
 import { connect } from "react-redux";
-import { actPostBookingChair, actOpenPaymentBox, actClearMessage } from "./../../redux/actions/index";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
-import useStyles from "./style";
 import { useHistory } from 'react-router-dom';
+
+import useStyles from "./style";
+import { actPostBookingChair, actOpenPaymentBox, actClearMessage } from "./../../redux/actions/index";
 
 function Payment(props) {
   const classes = useStyles();
