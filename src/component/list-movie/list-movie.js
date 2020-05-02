@@ -46,13 +46,7 @@ function ListMovie(props) {
   }, []);
 
   useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      getListMovie();
-    }
-    return () => {
-      mounted = false;
-    };
+    getListMovie();
     //eslint-disable-next-line
   }, []);
 

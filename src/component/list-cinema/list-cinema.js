@@ -21,14 +21,8 @@ function ListCinema(props) {
   } = props;
 
   useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      getListCinemaDetail();
-      getListLogo();
-    }
-    return () => {
-      mounted = false;
-    };
+    getListCinemaDetail();
+    getListLogo();
     // eslint-disable-next-line
   }, []);
 

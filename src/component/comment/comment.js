@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@material-ui/core";
-import { Card } from "react-bootstrap";
 import { Skeleton } from "@material-ui/lab";
-import StarRating from "../star-rating/star-rating";
 import {
   FavoriteBorder,
   Favorite,
   ChatBubbleOutline,
 } from "@material-ui/icons";
+import { Card } from "react-bootstrap";
+import StarRating from "../star-rating/star-rating";
 import { connect } from "react-redux";
 import { actPutCommentAPI, actShowLogin } from "./../../redux/actions/index";
 import MyAvatar from "../avatar/avatar";
