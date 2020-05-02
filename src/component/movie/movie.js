@@ -30,7 +30,7 @@ const Movie = props => {
               className="movie-background"
               style={
                 !movie.hinhAnh
-                  ? { backgroundImage: 'url("load-error.jpg")' }
+                  ? { backgroundImage: 'url("images/load-error.jpg")' }
                   : { backgroundImage: `url(${movie.hinhAnh})` }
               }
             />
@@ -40,7 +40,7 @@ const Movie = props => {
               left="0"
               className="movie-background"
               zIndex="-2"
-              style={{ backgroundImage: 'url("load-error.jpg")' }}
+              style={{ backgroundImage: 'url("images/load-error.jpg")' }}
               borderRadius="5px"
             />
           </Box>

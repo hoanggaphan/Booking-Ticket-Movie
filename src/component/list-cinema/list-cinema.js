@@ -4,7 +4,10 @@ import { Skeleton } from "@material-ui/lab";
 import { Tab, Nav, Dropdown } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actGetListLogo, actGetListCinemaDetail } from "./../../redux/actions/index";
+import {
+  actGetListLogo,
+  actGetListCinemaDetail,
+} from "./../../redux/actions/index";
 import useStyles from "./style";
 
 function ListCinema(props) {
@@ -14,51 +17,59 @@ function ListCinema(props) {
     listCinemaDetail,
     listMovie,
     getListLogo,
-    getListCinemaDetail
+    getListCinemaDetail,
   } = props;
 
   useEffect(() => {
-    getListCinemaDetail();
-    getListLogo();
+    let mounted = true;
+    if (mounted) {
+      getListCinemaDetail();
+      getListLogo();
+    }
+    return () => {
+      mounted = false;
+    };
     // eslint-disable-next-line
   }, []);
 
   const renderCinemaLogo = () => {
-    return (!listCinemaDetail.length ? [...Array(6)] : listCinemaLogo).map((item, index) => (
-      <Nav.Item key={index}>
-        <Nav.Link eventKey={index}>
-          {item ? (
-            <img src={item.logo} alt={item.biDanh} />
-          ) : (
-            <Box
-              component={Skeleton}
-              width="50px"
-              height="50px!important"
-              variant="circle"
-            />
-          )}
-        </Nav.Link>
-      </Nav.Item>
-    ));
+    return (!listCinemaDetail.length ? [...Array(6)] : listCinemaLogo).map(
+      (item, index) => (
+        <Nav.Item key={index}>
+          <Nav.Link eventKey={index}>
+            {item ? (
+              <img src={item.logo} alt={item.biDanh} />
+            ) : (
+              <Box
+                component={Skeleton}
+                width="50px"
+                height="50px!important"
+                variant="circle"
+              />
+            )}
+          </Nav.Link>
+        </Nav.Item>
+      )
+    );
   };
 
   const renderListCinema = () => {
     // thêm hình ảnh cho list lịch chiếu theo cụm rạp vì API méo có =))
-    if(listMovie.length) {
+    if (listMovie.length) {
       listCinemaDetail = listCinemaDetail.map((cinema) => {
         cinema.lstCumRap.map((rap) => {
           rap.danhSachPhim.map((phim) => {
             const movie = listMovie.find((item) => item.maPhim === phim.maPhim);
             phim.hinhAnh = movie.hinhAnh;
             phim.ngayKhoiChieu = movie.ngayKhoiChieu;
-  
+
             //Thêm list lịch chiếu theo ngày dữa vào list lịch chiếu theo phim
             phim.lstLichChieuTheoNgay = phim.lstLichChieuTheoPhim.map(
               (lichChieu) => {
                 const d = new Date(lichChieu.ngayChieuGioChieu);
                 const date = ("0" + d.getDate()).slice(-2);
                 const month = ("0" + (d.getMonth() + 1)).slice(-2);
-  
+
                 const myLichChieu = {
                   ngayChieu: date + "/" + month,
                   suatChieu: [
@@ -102,14 +113,17 @@ function ListCinema(props) {
       });
     }
 
-    return (!listCinemaDetail.length ? [...Array(6)] : listCinemaDetail).map((item, index) => (
-      <Box component={Tab.Pane} height="100%" eventKey={index} key={index}>
-        <Tab.Container transition={false} defaultActiveKey={0}>
-          <Box component={Grid} height="100%" container>
-            <Grid item xs={5} md={4}>
-              <Nav className="list-cinema-nav">
-                {(!listCinemaDetail.length ? [...Array(6)] : item.lstCumRap).map(
-                  (cumRap, cumRapIndex) => (
+    return (!listCinemaDetail.length ? [...Array(6)] : listCinemaDetail).map(
+      (item, index) => (
+        <Box component={Tab.Pane} height="100%" eventKey={index} key={index}>
+          <Tab.Container transition={false} defaultActiveKey={0}>
+            <Box component={Grid} height="100%" container>
+              <Grid item xs={5} md={4}>
+                <Nav className="list-cinema-nav">
+                  {(!listCinemaDetail.length
+                    ? [...Array(6)]
+                    : item.lstCumRap
+                  ).map((cumRap, cumRapIndex) => (
                     <Nav.Item key={cumRap && cumRap.maCumRap}>
                       <Nav.Link eventKey={cumRapIndex}>
                         <Box className="list-cinema-group">
@@ -158,13 +172,14 @@ function ListCinema(props) {
                         </Box>
                       </Nav.Link>
                     </Nav.Item>
-                  )
-                )}
-              </Nav>
-            </Grid>
-            <Grid item xs={7} md={8}>
-              {(!listCinemaDetail.length ? [...Array(6)] : item.lstCumRap).map(
-                (cumRap, cumRapIndex) => (
+                  ))}
+                </Nav>
+              </Grid>
+              <Grid item xs={7} md={8}>
+                {(!listCinemaDetail.length
+                  ? [...Array(6)]
+                  : item.lstCumRap
+                ).map((cumRap, cumRapIndex) => (
                   <Tab.Content className="list-cinema-nav " key={cumRapIndex}>
                     <Tab.Pane eventKey={cumRapIndex}>
                       {/* render list phim */}
@@ -258,13 +273,13 @@ function ListCinema(props) {
                       ))}
                     </Tab.Pane>
                   </Tab.Content>
-                )
-              )}
-            </Grid>
-          </Box>
-        </Tab.Container>
-      </Box>
-    ));
+                ))}
+              </Grid>
+            </Box>
+          </Tab.Container>
+        </Box>
+      )
+    );
   };
 
   return (
