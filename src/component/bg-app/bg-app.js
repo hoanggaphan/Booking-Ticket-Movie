@@ -1,29 +1,17 @@
 import React from "react";
 import { Box, Grid, Button } from "@material-ui/core";
-import Slider from "react-slick";
+import Carousel from 'react-bootstrap/Carousel'
 import useStyles from "./style";
 
 export default function BgApp() {
   const classes = useStyles();
 
-  const memoziedSettings = React.useMemo(() => {
-    return {
-      dots: false,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    pauseOnHover: false,
-    };
-  }, []);
-
   return (
     <Box
       className={classes.backApp}
-      style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/backapp.jpg)` }}
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/images/backapp.jpg)`,
+      }}
     >
       <Grid container component={Box} className="back-app-container">
         <Grid xs={12} md={6} className="back-app-left">
@@ -69,7 +57,7 @@ export default function BgApp() {
             src={process.env.PUBLIC_URL + "/images/mobile.png"}
             className="right-img-mobile"
           />
-          <Slider {...memoziedSettings}>
+          <Carousel controls={false} indicators={false} interval={3000} pause={false}>
             {[
               "slide2.jpg",
               "slide3.jpg",
@@ -86,16 +74,16 @@ export default function BgApp() {
               "slide14.jpg",
               "slide15.jpg",
               "slide16.jpg",
-            ].map((item) => (
-              <div>
+            ].map((item, index) => (
+              <Carousel.Item key={index}>
                 <img
-                  src={process.env.PUBLIC_URL + "/images/" + item}
                   className="right-img-slide"
+                  src={"images/" + item}
                   alt={item}
                 />
-              </div>
+              </Carousel.Item>
             ))}
-          </Slider>
+          </Carousel>
         </Grid>
       </Grid>
     </Box>

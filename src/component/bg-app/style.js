@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
             width: "100%",
             height: "100%"
           },
-          "& .slick-slider": {
+          "& .carousel": {
             padding: "1.5% 29.2% 1.5% 29.2%",
             position: "absolute",
             top: "0",
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
             overflow: "hidden",
             height: "100%",
             width: "100%",
-            "& .slick-list": {
+            "& .carousel-inner": {
               borderRadius: "20px",
               [theme.breakpoints.up("sm")]: {
                 borderRadius: "40px",
