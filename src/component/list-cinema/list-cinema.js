@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
-import { Tab, Nav, Dropdown } from "react-bootstrap";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Tab from "react-bootstrap/Tab";
+import Nav from "react-bootstrap/Nav";
+import Dropdown from "react-bootstrap/Dropdown";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  actGetListLogo,
-  actGetListCinemaDetail,
-} from "./../../redux/actions/index";
+
 import useStyles from "./style";
+import { actGetListLogo, actGetListCinemaDetail } from "./../../redux/actions/index";
 
 function ListCinema(props) {
   const classes = useStyles();

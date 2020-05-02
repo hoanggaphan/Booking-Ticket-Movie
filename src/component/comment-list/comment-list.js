@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button } from "@material-ui/core";
-import useStyles from "./style";
-import Comment from "./../comment/comment";
 import { connect } from "react-redux";
-import { actGetListCommentAPI } from "./../../redux/actions/index";
 import shortid from 'shortid';
 import { useParams } from 'react-router-dom';
+
+import useStyles from "./style";
+import Comment from "./../comment/comment";
+import { actGetListCommentAPI } from "./../../redux/actions/index";
 
 function CommentList(props) {
   const classes = useStyles();

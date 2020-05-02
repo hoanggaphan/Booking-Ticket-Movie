@@ -2,8 +2,9 @@ import React from "react";
 import { Box, Typography, IconButton, Link, Modal } from "@material-ui/core";
 import { ErrorOutline, HighlightOff, YouTube } from '@material-ui/icons';
 import { connect } from "react-redux";
-import { actViewTrailer as actCloseModal } from "../../redux/actions/index";
+
 import useStyles from "./style";
+import { actViewTrailer as actCloseModal } from "../../redux/actions/index";
 
 function ModalTrailer(props) {
   const classes = useStyles();

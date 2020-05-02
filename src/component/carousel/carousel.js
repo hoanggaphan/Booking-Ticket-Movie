@@ -2,6 +2,7 @@ import React from "react";
 import { Box, IconButton } from "@material-ui/core";
 import { NavigateNext, NavigateBefore } from "@material-ui/icons";
 import Carousel from "react-bootstrap/Carousel";
+
 import useStyle from "./style";
 
 export default function MyCarousel() {

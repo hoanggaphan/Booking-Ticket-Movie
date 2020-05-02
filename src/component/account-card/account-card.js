@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, IconButton } from "@material-ui/core";
-import { Close } from "@material-ui/icons";
-import { Skeleton } from "@material-ui/lab";
-import { Form } from "react-bootstrap";
-import useStyles from "./style";
+import Close from "@material-ui/icons/Close";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Form from "react-bootstrap/Form";
 import { connect } from "react-redux";
-import {
-  actPutUpdateAccount,
-  actClearMessage,
-} from "./../../redux/actions/index";
 import { useSnackbar } from "notistack";
+
+import useStyles from "./style";
+import { actPutUpdateAccount, actClearMessage } from "./../../redux/actions/index";
 
 function AccountCard(props) {
   const classes = useStyles();

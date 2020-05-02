@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
-import { Nav, Tab, Dropdown } from "react-bootstrap";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Nav from "react-bootstrap/Nav";
+import Tab from "react-bootstrap/Tab";
+import Dropdown from "react-bootstrap/Dropdown";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actGetListLogo } from "./../../redux/actions/index";
+
 import useStyles from "./style";
-import { Skeleton } from "@material-ui/lab";
+import { actGetListLogo } from "./../../redux/actions/index";
 
 function Showtimes(props) {
   const classes = useStyles();

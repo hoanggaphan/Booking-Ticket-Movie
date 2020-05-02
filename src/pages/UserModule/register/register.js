@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { actRegisterUserAPI } from "./../../../redux/actions/index";
 import { connect } from "react-redux";
 import WithBgSquares from './../../../component/withBgSquares/withBgSquares';

@@ -1,11 +1,12 @@
 import React, { memo, useEffect } from "react";
 import { Box, IconButton } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
-import { Close } from "@material-ui/icons";
-import { actAddChairBooking, actRemoveChairBooking, actClearListBooking} from "./../../redux/actions/index";
-import useStyles from "./style";
+import Close from "@material-ui/icons/Close";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
+
+import useStyles from "./style";
+import { actAddChairBooking, actRemoveChairBooking, actClearListBooking} from "./../../redux/actions/index";
 
 function Chair({ chair, ...props }) {
   const classes = useStyles();

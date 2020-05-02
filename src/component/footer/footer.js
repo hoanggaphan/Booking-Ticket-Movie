@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { Apple, Android, Facebook } from '@material-ui/icons';
-import useStyles from "./style";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
+import useStyles from "./style";
 
 function Footer(props) {
   const classes = useStyles();

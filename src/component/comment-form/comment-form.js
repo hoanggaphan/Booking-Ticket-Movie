@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Avatar, IconButton } from "@material-ui/core";
 import { StarBorder, Close } from '@material-ui/icons';
+import Modal from "react-bootstrap/Modal";
 import Rating from "@material-ui/lab/Rating";
-import { Modal } from "react-bootstrap";
-import StarRating from "./../star-rating/star-rating";
-import useStyles from "./style";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { connect } from "react-redux";
+
+import useStyles from "./style";
+import StarRating from "./../star-rating/star-rating";
 import { actShowLogin, actPostCommentAPI } from "../../redux/actions";
 
 function CommentForm(props) {

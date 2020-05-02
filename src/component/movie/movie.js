@@ -1,12 +1,13 @@
 import React from "react";
 import { Box, IconButton, Button, Typography } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+import Skeleton from "@material-ui/lab/Skeleton";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
+import useStyles from "./style";
 import { actViewTrailer } from "../../redux/actions/index";
 import AgeType from "./../age-type/age-type";
-import useStyles from "./style";
 import StarRating from "../star-rating/star-rating";
 
 const Movie = props => {
