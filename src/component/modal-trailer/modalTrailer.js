@@ -1,8 +1,6 @@
 import React from "react";
 import { Box, Typography, IconButton, Link, Modal } from "@material-ui/core";
-import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import YouTubeIcon from "@material-ui/icons/YouTube";
+import { ErrorOutline, HighlightOff, YouTube } from '@material-ui/icons';
 import { connect } from "react-redux";
 import { actViewTrailer as actCloseModal } from "../../redux/actions/index";
 import useStyles from "./style";
@@ -40,7 +38,7 @@ function ModalTrailer(props) {
         ) : (
           <Box className={classes.trailerNull}>
             <Box mx="20px 10px">
-              <ErrorOutlineIcon style={{ fontSize: "100px" }} />
+              <ErrorOutline style={{ fontSize: "100px" }} />
             </Box>
             <Box maxWidth="600px">
               <Typography component="span" variant="h4">
@@ -67,7 +65,7 @@ function ModalTrailer(props) {
                 rel="noopener noreferrer"
                 className="movie-error-link"
               >
-                <YouTubeIcon style={{ fontSize: "60px" }} />
+                <YouTube style={{ fontSize: "60px" }} />
               </Link>
             </Box>
           </Box>
@@ -77,7 +75,7 @@ function ModalTrailer(props) {
           component={IconButton}
           className="modal-trailer-close-icon"
         >
-          <HighlightOffIcon style={{ fontSize: "40px" }} />
+          <HighlightOff style={{ fontSize: "40px" }} />
         </Box>
       </Box>
     </Box>

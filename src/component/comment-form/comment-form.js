@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Avatar, IconButton } from "@material-ui/core";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
-import { Modal } from "react-bootstrap";
+import { StarBorder, Close } from '@material-ui/icons';
 import Rating from "@material-ui/lab/Rating";
-import CloseIcon from "@material-ui/icons/Close";
+import { Modal } from "react-bootstrap";
 import StarRating from "./../star-rating/star-rating";
 import useStyles from "./style";
 import { useHistory, useLocation, useParams } from "react-router-dom";
@@ -107,7 +106,7 @@ function CommentForm(props) {
         >
           <Modal.Header>
             <IconButton onClick={handleClose} className="close" size="medium">
-              <CloseIcon />
+              <Close />
             </IconButton>
             <p className="rating">{rating}</p>
             <Box textAlign="center">
@@ -116,7 +115,7 @@ function CommentForm(props) {
                 value={rating / 2}
                 precision={0.5}
                 className="rating"
-                emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                emptyIcon={<StarBorder fontSize="inherit" />}
               />
             </Box>
           </Modal.Header>
@@ -150,7 +149,7 @@ function CommentForm(props) {
         >
           <Modal.Header>
             <IconButton onClick={handleClose} className="close" size="medium">
-              <CloseIcon />
+              <Close />
             </IconButton>
             <Box textAlign="center" component="h5">
               Bạn cần phải đăng nhập

@@ -1,11 +1,9 @@
 import React from "react";
 import { Box, Grid, Typography } from "@material-ui/core";
+import { Apple, Android, Facebook } from '@material-ui/icons';
 import useStyles from "./style";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import AppleIcon from '@material-ui/icons/Apple';
-import AndroidIcon from '@material-ui/icons/Android';
-import FacebookIcon from '@material-ui/icons/Facebook';
 
 function Footer(props) {
   const classes = useStyles();
@@ -75,7 +73,7 @@ function Footer(props) {
                     rel="noopener noreferrer"
                     title="apple app"
                   >
-                    <AppleIcon fontSize="large" style={{color: "white"}} />
+                    <Apple fontSize="large" style={{color: "white"}} />
                   </a>
                   <a
                     href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
@@ -83,7 +81,7 @@ function Footer(props) {
                     rel="noopener noreferrer"
                     title="android app"
                   >
-                    <AndroidIcon fontSize="large" style={{color: "white"}} />
+                    <Android fontSize="large" style={{color: "white"}} />
                   </a>
                 </Box>
               </Box>
@@ -98,7 +96,7 @@ function Footer(props) {
                     rel="noopener noreferrer"
                     title="facebook"
                   >
-                    <FacebookIcon fontSize="large" style={{color: "white"}} />
+                    <Facebook fontSize="large" style={{color: "white"}} />
                   </a>
                 </Box>
               </Box>
