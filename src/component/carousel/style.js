@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyle = makeStyles(theme => ({
-  carousel: {
+  root: {
     "& div:focus": {
       outline: "none"
     },
@@ -15,59 +15,42 @@ const useStyle = makeStyles(theme => ({
         outline: "none"
       }
     },
-    "& .slick-dots": {
-      bottom: "15%",
-      left: "50%",
-      transform: "translateX(-50%)",
-      width: "unset",
+    "& .carousel-indicators": {
+      bottom: "10%",
       "& li": {
-        width: "unset",
-        height: "unset"
-      },
-      "& li button": {
-        backgroundColor: "white",
-        opacity: "0.5",
         borderRadius: "50%",
-        width: "1vw",
-        height: "1vw"
-      },
-      "& li.slick-active button": {
-        opacity: "1"
-      },
-      "& li button::before": {
-        content: "none"
+        width: "15px",
+        height: "15px",
+        margin: "0 7px",
+        '@media (max-width: 600px)': {
+          width: "10px",
+          height: "10px",
+        }
       },
     },
-    "& .carousel-next-btn": {
-      position: "absolute",
-      right: "0",
-      top: "50%",
-      transform: "translateY(-50%)",
-      zIndex: "3",
-      opacity: ".7",
-      "&:hover": {
-        opacity: "1"
+    "& .carousel-control-prev": {
+      "& svg": {
+        fontSize: "50px",
+        [theme.breakpoints.up("lg")]: {
+          fontSize: "90px"
+        },
       },
-      "&:focus": {
+      "& button": {
         outline: "none"
-      }
-    },
-    "& .carousel-prev-btn": {
-      position: "absolute",
-      left: "0",
-      top: "50%",
-      transform: "translateY(-50%)",
-      zIndex: "3",
-      opacity: ".7",
-      "&:hover": {
-        opacity: "1"
       },
-      "&:focus": {
-        outline: "none"
-      }
     },
-    "& .carousel-icon-btn": {
-      fontSize: "8vw"
+    "& .carousel-control-next": {
+      "& svg": {
+        fontSize: "50px",
+        transition: "none",
+        [theme.breakpoints.up("lg")]: {
+          fontSize: "90px"
+        },
+      },
+      "& button": {
+        outline: "none",
+        transition: "none"
+      },
     },
     "& .carousel-background-linear": {
       width: "100%",
