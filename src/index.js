@@ -1,12 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-// import * as serviceWorker from "./serviceWorker";
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
-import { Provider } from "react-redux";
-import rootReducer from "./redux/reducer/rootReducer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ReactDOM from "react-dom";
+import { createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+
+// import * as serviceWorker from "./serviceWorker";
+import App from "./App";
+import rootReducer from "./redux/reducer/rootReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

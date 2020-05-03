@@ -76,27 +76,25 @@ const useStyles = makeStyles(theme => ({
         }
       }
     },
-    "& .list-movie-sliders": {
+    "& .carousel": {
       display: "none",
       "@media (min-width: 1080px)": {
         display: "block"
       },
-      "& .list-movie-sliders-item": {
-        outline: "none",
-        "& div": {
-          outline: "none"
-        }
-      }
-    },
-    "& .list-movie-alert": {
-      backgroundColor: "#1f2251",
-      color: "rgba(255,255,255,.5)",
-      margin: "0 10px",
-      alignItems: "center",
-      fontSize: "14px",
-      [theme.breakpoints.up("sm")]: {
-        fontSize: "16px"
-      }
+      "& .carousel-control-prev": {
+        bottom: "0",
+        width: "35px",
+        height: "35px",
+        top: "47%",
+        transform: "translate(-110%, -47%)"
+      },
+      "& .carousel-control-next": {
+        bottom: "0",
+        width: "35px",
+        height: "35px",
+        top: "47%",
+        transform: "translate(100%, -50%)"
+      },
     },
     "& .list-movie-mobile": {
       display: "block",
@@ -113,52 +111,6 @@ const useStyles = makeStyles(theme => ({
         }
       }
     },
-    "& .next-arrow": {
-      position: "absolute",
-      top: "47%",
-      transform: "translateY(-50%)",
-      right: "-60px",
-      display: "none",
-      opacity: ".7",
-      "&:hover": {
-        opacity: "1"
-      },
-      "&:focus": {
-        outline: "none"
-      },
-      "@media (min-width: 1080px)": {
-        display: "block"
-      },
-      [theme.breakpoints.up("lg")]: {
-        right: "-100px"
-      }
-    },
-    "& .prev-arrow": {
-      position: "absolute",
-      top: "47%",
-      left: "-60px",
-      display: "none",
-      transform: "translateY(-50%)",
-      opacity: ".7",
-      "&:hover": {
-        opacity: "1"
-      },
-      "&:focus": {
-        outline: "none"
-      },
-      "@media (min-width: 1080px)": {
-        display: "block"
-      },
-      [theme.breakpoints.up("lg")]: {
-        left: "-100px"
-      }
-    },
-    "& .icon-arrow": {
-      fontSize: "50px",
-      [theme.breakpoints.up("lg")]: {
-        fontSize: "90px"
-      }
-    }
   },
   shape: {
     position: "absolute",

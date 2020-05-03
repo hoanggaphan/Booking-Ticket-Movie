@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "react-circular-progressbar/dist/styles.css";
 import { Box, Grid, IconButton } from "@material-ui/core";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -7,7 +8,6 @@ import Tabs from 'react-bootstrap/Tabs';
 import { CircularProgressbar } from "react-circular-progressbar";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import "react-circular-progressbar/dist/styles.css";
 
 import useStyles from "./style";
 import { actgetDetailMovieAPI, actViewTrailer } from "./../../../redux/actions/index";

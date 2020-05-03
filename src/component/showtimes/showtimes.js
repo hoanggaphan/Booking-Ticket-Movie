@@ -88,6 +88,8 @@ function Showtimes(props) {
                           <img
                             src={lichChieu.thongTinRap.hinhAnh}
                             alt={lichChieu.tenCumRap}
+                            width = "50"
+                            height = "50"
                           />
                           <Box className="cinema-box">
                             <span className="cinema-name">
