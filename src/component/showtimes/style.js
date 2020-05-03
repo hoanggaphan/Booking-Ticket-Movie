@@ -126,6 +126,7 @@ const useStyle = makeStyles((theme) => ({
     alignItems: "center",
     borderBottom: "1px solid rgba(255, 255, 255, .1)",
     padding: '5px 0',
+    flexWrap: "wrap",
     "& .nav-item": {
       "& .nav-link": {
         opacity: ".4",
