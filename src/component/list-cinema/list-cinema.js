@@ -46,7 +46,7 @@ function ListCinema(props) {
       )
     );
   };
-
+  
   const renderListCinema = () => {
     // thêm hình ảnh cho list lịch chiếu theo cụm rạp vì API méo có =))
     if (listMovie.length) {

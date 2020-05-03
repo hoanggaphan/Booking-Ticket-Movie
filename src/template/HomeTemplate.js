@@ -5,15 +5,15 @@ import { Route, Redirect } from "react-router-dom";
 import Navbar from "./../component/navbar/navbar";
 import MyFooter from "../component/footer/footer";
 
+const style = {
+  backgroundImage: `url('${process.env.PUBLIC_URL}/images/dots.png')`,
+  backgroundSize: "contain",
+  overflow: "hidden",
+};
+
 function HomeLayout(props) {
   return (
-    <Box
-      style={{
-        backgroundImage: `url('${process.env.PUBLIC_URL}/dots.png')`,
-        backgroundSize: "contain",
-        overflow: "hidden",
-      }}
-    >
+    <Box style={style}>
       <Navbar />
       <Box component="main" pt="65px">
         {props.children}
