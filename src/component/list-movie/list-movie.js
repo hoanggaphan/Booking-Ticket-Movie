@@ -1,51 +1,28 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { Box, Grid, Button, IconButton } from "@material-ui/core";
-import { NavigateNext, NavigateBefore } from "@material-ui/icons";
+import React, { useState, useEffect } from "react";
+import { Box, Grid, Button } from "@material-ui/core";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
+import Carousel from "react-bootstrap/Carousel";
 import { connect } from "react-redux";
-import Slider from "react-slick";
+import shortid from 'shortid';
 
 import useStyles from "./style";
 import ModalTrailer from "../modal-trailer/modalTrailer";
 import Movie from "./../movie/movie";
 import { actgetListMovie } from "./../../redux/actions/index";
 
-function NextArrow(props) {
-  const { onClick } = props;
-  return (
-    <IconButton size="small" onClick={onClick} className="next-arrow">
-      <NavigateNext className="icon-arrow" />
-    </IconButton>
-  );
-}
-function PrevArrow(props) {
-  const { onClick } = props;
-  return (
-    <IconButton size="small" onClick={onClick} className="prev-arrow">
-      <NavigateBefore className="icon-arrow" />
-    </IconButton>
-  );
-}
-
 function ListMovie(props) {
   const classes = useStyles();
-  const [visible, setVisible] = useState(8);
-  let { listMovieComming, listMovieShowing, listMovie, getListMovie } = props;
-  const render = useRender(visible);
 
-  const memoziedSettings = useMemo(() => {
-    return {
-      className: "list-movie-sliders",
-      infinite: true,
-      slidesToShow: 1,
-      speed: 500,
-      rows: 2,
-      slidesPerRow: 4,
-      nextArrow: <NextArrow />,
-      prevArrow: <PrevArrow />,
-    };
-  }, []);
+  let { listMovieComming, listMovieShowing, listMovie, getListMovie } = props;
+
+  const [visible, setVisible] = useState(8);
+
+  const perSlide = 8; // Số item trên trang
+  const slideShowing = Math.ceil(listMovieShowing.length / perSlide); // Số trang
+  const slideComming = Math.ceil(listMovieComming.length / perSlide); // Số trang
+
+  const render = useRender(visible, perSlide);
 
   useEffect(() => {
     getListMovie();
@@ -78,9 +55,19 @@ function ListMovie(props) {
           <Tab.Content>
             <Tab.Pane eventKey="showing">
               {/* VIEW IN WEB */}
-              <Slider {...memoziedSettings}>
-                {render.renderMovieWeb(listMovieShowing, "showing")}
-              </Slider>
+              <Carousel interval={null} indicators={false}>
+                {[...Array(slideShowing)].map((item, indexSlide) => (
+                  <Carousel.Item>
+                    <Box display="flex" flexWrap="wrap">
+                      {render.renderMovieWeb(
+                        listMovieShowing,
+                        indexSlide,
+                        "showing"
+                      )}
+                    </Box>
+                  </Carousel.Item>
+                ))}
+              </Carousel>
 
               {/* VIEW IN MOBILE */}
               <Box className="list-movie-mobile">
@@ -101,9 +88,19 @@ function ListMovie(props) {
             </Tab.Pane>
             <Tab.Pane eventKey="comming">
               {/* VIEW IN WEB */}
-              <Slider {...memoziedSettings}>
-                {render.renderMovieWeb(listMovieComming, "comming")}
-              </Slider>
+              <Carousel interval={null} indicators={false}>
+                {[...Array(slideComming)].map((item, indexSlide) => (
+                  <Carousel.Item>
+                    <Box display="flex" flexWrap="wrap">
+                      {render.renderMovieWeb(
+                        listMovieComming,
+                        indexSlide,
+                        "comming"
+                      )}
+                    </Box>
+                  </Carousel.Item>
+                ))}
+              </Carousel>
 
               {/* VIEW IN MOBILE */}
               <Box className="list-movie-mobile">
@@ -131,23 +128,26 @@ function ListMovie(props) {
 }
 
 //////////////// REFACTOR CODE WITH HOOK ///////////////////
-const useRender = (visible) => {
-  const renderMovieWeb = (listMovie, type) => {
-    return (!listMovie.length ? [...Array(8)] : listMovie).map(
-      (movie, index) => (
-        <div className="list-movie-sliders-item">
-          <Movie key={index} movie={movie} type={type} />
-        </div>
-      )
+const useRender = (visible, perSlide) => {
+  const renderMovieWeb = (listMovie, indexSlide, type) => {
+    listMovie = listMovie.slice(
+      indexSlide * perSlide,
+      (indexSlide + 1) * perSlide
     );
+    return (!listMovie.length
+      ? [...Array(8)]
+      : listMovie
+    ).map((movie, index) => <Movie key={shortid.generate()} movie={movie} type={type} />);
   };
-  const renderMovieMobile = (listMovie, type) => {
+
+  const renderMovieMobile = (listMovie, indexSlide, type) => {
     return (!listMovie.length ? [...Array(8)] : listMovie)
       .slice(0, visible)
       .map((movie, index) => {
-        return <Movie key={index} movie={movie} type={type} />;
+        return <Movie key={shortid.generate()} movie={movie} type={type} />;
       });
   };
+
   return { renderMovieWeb, renderMovieMobile };
 };
 

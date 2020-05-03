@@ -1,14 +1,15 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "./style/theme";
+import { makeStyles } from "@material-ui/core/styles";
+import { SnackbarProvider } from "notistack";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import * as routes from "./routes";
+import theme from "./style/theme";
 import HomeTemplate from "./template/HomeTemplate";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import * as routes from "./routes";
 import UserTemplate from "./template/UserTemplate";
-import { SnackbarProvider } from "notistack";
-import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {

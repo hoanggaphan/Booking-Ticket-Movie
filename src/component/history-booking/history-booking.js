@@ -1,5 +1,15 @@
 import React from "react";
-import { Box, TableCell, TableContainer, Table, TableHead, Paper, TableRow, TableBody, TablePagination } from "@material-ui/core";
+import {
+  Box,
+  TableCell,
+  TableContainer,
+  Table,
+  TableHead,
+  Paper,
+  TableRow,
+  TableBody,
+  TablePagination,
+} from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { connect } from "react-redux";
 import shortid from "shortid";
@@ -12,12 +22,14 @@ function HistoryBooking(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, thongTinDatVe.length - page * rowsPerPage);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
@@ -37,53 +49,59 @@ function HistoryBooking(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {[...thongTinDatVe]
-                  .reverse()
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((item) => (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={shortid.generate()}
-                    >
-                      <TableCell>
-                        {new Date(item.ngayDat).toLocaleTimeString()} -{" "}
-                        {new Date(item.ngayDat).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>{item.tenPhim}</TableCell>
-                      <TableCell>
-                        Ghế:{" "}
-                        {item.danhSachGhe.map((ghe) =>
-                          ghe.danhSachGheRefact.map((refact, index) => (
-                            <span key={index}>
-                              {(index ? "," : "") + " " + refact}
-                            </span>
-                          ))
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        {item.danhSachGhe.map((ghe) => (
-                          <Box key={ghe.maGhe}>
-                            {ghe.tenHeThongRap} - {ghe.tenRap}
-                          </Box>
-                        ))}
-                      </TableCell>
-                      <TableCell>{item.giaVe.toLocaleString()} đ</TableCell>
-                    </TableRow>
-                  ))}
+                {(rowsPerPage > 0
+                  ? [...thongTinDatVe]
+                      .reverse()
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                  : [...thongTinDatVe]
+                ).map((item) => (
+                  <TableRow hover key={shortid.generate()}>
+                    <TableCell>
+                      {new Date(item.ngayDat).toLocaleTimeString()} -{" "}
+                      {new Date(item.ngayDat).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>{item.tenPhim}</TableCell>
+                    <TableCell>
+                      Ghế:{" "}
+                      {item.danhSachGhe.map((ghe) =>
+                        ghe.danhSachGheRefact.map((refact, index) => (
+                          <span key={index}>
+                            {(index ? "," : "") + " " + refact}
+                          </span>
+                        ))
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {item.danhSachGhe.map((ghe) => (
+                        <Box key={ghe.maGhe}>
+                          {ghe.tenHeThongRap} - {ghe.tenRap}
+                        </Box>
+                      ))}
+                    </TableCell>
+                    <TableCell>{item.giaVe.toLocaleString()} đ</TableCell>
+                  </TableRow>
+                ))}
+
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </TableContainer>
           <TablePagination
-            labelRowsPerPage="số hàng"
             rowsPerPageOptions={[10, 25, { value: -1, label: "tất cả" }]}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+            labelRowsPerPage="số hàng"
             component="div"
             count={thongTinDatVe.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         </Paper>
       ) : (
@@ -92,14 +110,6 @@ function HistoryBooking(props) {
     </>
   );
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//       getListCommentAPI: () => {
-//         dispatch(actGetListCommentAPI());
-//       },
-//     };
-//   };
 
 const mapStateToProps = (state) => {
   return {

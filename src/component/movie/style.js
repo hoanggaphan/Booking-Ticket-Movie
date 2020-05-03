@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
       width: "25%",
     },
     "@media (min-width: 1080px)": {
-      width: "100%",
+      width: "25%",
       padding: "0 10px",
     },
     "&:hover": {

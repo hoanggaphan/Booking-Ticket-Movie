@@ -27,8 +27,7 @@ const useStyle = makeStyles((theme) => ({
               opacity: "1"
             },
             "& img": {
-              width: "50px",
-              height: "50px",
+              minWidth: "50px",
               borderRadius: "15%",
               display: "block",
             },
