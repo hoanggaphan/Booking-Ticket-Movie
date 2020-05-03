@@ -11,6 +11,7 @@ function MyCarousel() {
   return (
     <Box>
       <Carousel
+        touch
         className={classes.root}
         nextIcon={
           <IconButton>
