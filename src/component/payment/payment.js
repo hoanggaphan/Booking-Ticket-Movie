@@ -1,32 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { Box, Radio, RadioGroup, FormControl, FormControlLabel, Button, IconButton } from "@material-ui/core";
+import {
+  Box,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+  Button,
+  IconButton,
+} from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { CreditCard, AccountBalance, Close } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 import useStyles from "./style";
-import { actPostBookingChair, actOpenPaymentBox, actClearMessage } from "./../../redux/actions/index";
+import {
+  actPostBookingChair,
+  actOpenPaymentBox,
+  actClearMessage,
+} from "./../../redux/actions/index";
 
 function Payment(props) {
   const classes = useStyles();
   const { maLichChieu } = useParams();
   const [value, setValue] = useState("momo");
-  const { roomInfo, isFetching, listBooking, postBookingChair, user, openPaymentBox, isPaying, message, status, clearMessage } = props;
+  const {
+    roomInfo,
+    isFetching,
+    listBooking,
+    postBookingChair,
+    user,
+    openPaymentBox,
+    isPaying,
+    message,
+    status,
+    clearMessage,
+  } = props;
   const sum = listBooking.reduce((sum, item) => sum + item.giaVe, 0);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const history = useHistory();
 
   useEffect(() => {
-    if(message) {
+    if (message) {
       enqueueSnackbar(message, {
         variant: status,
-        anchorOrigin: {vertical: "top", horizontal: "center"},
+        anchorOrigin: { vertical: "top", horizontal: "center" },
         action: (key) => (
           <IconButton
-            style={{ color: "white", outline: "unset" }}
+            className={classes.iconSnack}
             onClick={() => closeSnackbar(key)}
           >
             <Close />
@@ -34,7 +57,9 @@ function Payment(props) {
         ),
       });
     }
-    return () =>  {clearMessage()};
+    return () => {
+      clearMessage();
+    };
     // eslint-disable-next-line
   }, [isPaying]);
 
@@ -59,10 +84,10 @@ function Payment(props) {
         const message = "Phải chọn ít nhất 1 ghế";
         enqueueSnackbar(message, {
           variant: "warning",
-          anchorOrigin: {vertical: "top", horizontal: "center"},
+          anchorOrigin: { vertical: "top", horizontal: "center" },
           action: (key) => (
             <IconButton
-              style={{ color: "white", outline: "unset" }}
+              className={classes.iconSnack}
               onClick={() => closeSnackbar(key)}
             >
               <Close />
@@ -70,13 +95,15 @@ function Payment(props) {
           ),
         });
       }
-    } 
+    }
   };
 
   return (
     <Box className={classes.root}>
-      <Box display={{xs: "flex", md: "none"}} justifyContent="flex-end" >
-        <IconButton onClick={() => openPaymentBox(false)} style={{marginRight: "-20px", outline: "unset"}}><Close/></IconButton>
+      <Box display={{ xs: "flex", md: "none" }} justifyContent="flex-end">
+        <IconButton onClick={() => openPaymentBox(false)} className="icon">
+          <Close />
+        </IconButton>
       </Box>
       {!isFetching ? (
         <>
@@ -112,11 +139,7 @@ function Payment(props) {
       </Box>
       <Box className="payments-box">
         <h5>Hình thức thanh toán</h5>
-        <FormControl
-          component="fieldset"
-          className="payment-form"
-          style={{ width: "100%" }}
-        >
+        <FormControl component="fieldset" className="payment-form">
           <RadioGroup
             aria-label="payment-group"
             className="payment-group"
@@ -182,11 +205,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actPostBookingChair(info, token, history));
     },
     openPaymentBox: (status) => {
-      dispatch(actOpenPaymentBox(status))
+      dispatch(actOpenPaymentBox(status));
     },
     clearMessage: () => {
-      dispatch(actClearMessage())
-    }
+      dispatch(actClearMessage());
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Payment);

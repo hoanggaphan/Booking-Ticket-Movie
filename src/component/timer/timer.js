@@ -21,6 +21,13 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "center",
     },
   },
+  skeleton: {
+    margin: "auto",
+  },
+  iconSnack: {
+    color: "white",
+    outline: "unset",
+  },
 }));
 
 function Timer(props) {
@@ -34,15 +41,15 @@ function Timer(props) {
   useEffect(() => {
     if (counter > 0) {
       setTimeout(() => setCounter(counter - 1), 1000);
-      if(counter === 59) {
+      if (counter === 59) {
         const message = "Sắp hết thời gian đặt ghế";
         enqueueSnackbar(message, {
           variant: "warning",
-          anchorOrigin: {vertical: "top", horizontal: "center"},
+          anchorOrigin: { vertical: "top", horizontal: "center" },
           action: (key) => (
             <IconButton
-            style={{ color: "white", outline: "unset" }}
-            onClick={() => closeSnackbar(key)}
+              className={classes.iconSnack}
+              onClick={() => closeSnackbar(key)}
             >
               <Close />
             </IconButton>
@@ -69,7 +76,7 @@ function Timer(props) {
         <>
           <Skeleton variant="text" width="120px" height="20px" />
           <Skeleton
-            style={{ margin: "auto" }}
+            className={classes.skeleton}
             variant="text"
             width="100px"
             height="40px"

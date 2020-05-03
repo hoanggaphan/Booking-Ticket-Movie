@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgba(255,255,255,.8)",
     borderRadius: "50%",
     cursor: "pointer",
-    position: "relative"
+    position: "relative",
   },
   vip: {
     width: "calc(100%/16 - 1%)", // 16 ghế 1 hàng
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.warning.main,
     borderRadius: "50%",
     cursor: "pointer",
-    position: "relative"
+    position: "relative",
   },
   selecting: {
     width: "calc(100%/16 - 1%)", // 16 ghế 1 hàng
@@ -26,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.success.main,
     borderRadius: "50%",
     cursor: "pointer",
-    position: "relative"
+    position: "relative",
   },
   selected: {
     opacity: ".5",
-    cursor: "unset"
+    cursor: "unset",
   },
   icon: {
     position: "absolute",
@@ -41,10 +41,13 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   iconSnack: {
-    "& button": {
-      outline: "none"
-    }
-  }
+    color: "white",
+    outline: "unset",
+  },
+  skeleton: {
+    paddingTop: "calc(100%/14 - 1%)",
+    margin: ".7% .5%",
+  },
 }));
 
 export default useStyles;

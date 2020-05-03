@@ -56,7 +56,7 @@ function RegisterCard(props) {
         anchorOrigin: {vertical: "top", horizontal: "center"},
         action: (key) => (
           <IconButton
-            style={{ color: "white", outline: "unset" }}
+            className={classes.iconBtn}
             onClick={() => closeSnackbar(key)}
           >
             <Close />

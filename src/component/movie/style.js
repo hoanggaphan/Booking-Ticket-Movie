@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  movie: {
+  movie: props => ( {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -56,6 +56,10 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
+        backgroundImage: props.hinhAnh ? `url(${props.hinhAnh})` : ""
+      },
+      "& .movie-background-err": {
+        backgroundImage: 'url("images/load-error.jpg")'
       },
       "& .movie-starpoint": {
         position: "absolute",
@@ -79,6 +83,7 @@ const useStyles = makeStyles(theme => ({
         }
       },
       "& .movie-date": {
+        lineHeight: "1.6",
         color: theme.palette.text.primary,
         position: "absolute",
         bottom: "5px",
@@ -176,7 +181,7 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: "210% 210%"
       }
     }
-  }
+  })
 }));
 
 export default useStyles;

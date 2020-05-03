@@ -16,7 +16,7 @@ function ChairList(props) {
   }
   
   return (
-    <Box component={Grid} item xs={12} sm={10} style={{ margin: "0 auto" }}>
+    <Box component={Grid} item xs={12} sm={10} m="auto!important">
       <Box display="flex" justifyContent="center" flexWrap="wrap">
         {(isFetching ? [...Array(160)] : roomInfo.danhSachGhe ).map(
           (item, index) => (

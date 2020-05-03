@@ -10,14 +10,14 @@ import { actViewTrailer } from "../../redux/actions/index";
 import AgeType from "./../age-type/age-type";
 import StarRating from "../star-rating/star-rating";
 
-const Movie = props => {
-  const classes = useStyles();
+const Movie = (props) => {
   const { movie, type } = props;
-  
+  const classes = useStyles(movie);
+
   const handleViewTrailer = () => {
     const trailer = {
       movie,
-      isOpen: true
+      isOpen: true,
     };
     props.viewTrailer(trailer);
   };
@@ -27,21 +27,13 @@ const Movie = props => {
       <Box className="movie-wrapper">
         {movie ? (
           <Box position="relative">
-            <Box
-              className="movie-background"
-              style={
-                !movie.hinhAnh
-                  ? { backgroundImage: 'url("images/load-error.jpg")' }
-                  : { backgroundImage: `url(${movie.hinhAnh})` }
-              }
-            />
+            <Box className="movie-background" />
             <Box
               position="absolute"
               top="0"
               left="0"
-              className="movie-background"
+              className="movie-background movie-background-err"
               zIndex="-2"
-              style={{ backgroundImage: 'url("images/load-error.jpg")' }}
               borderRadius="5px"
             />
           </Box>
@@ -77,7 +69,7 @@ const Movie = props => {
         {/* STAR RATING */}
         {movie && type === "showing" && (
           <Box className="movie-starpoint">
-            <p >{movie.danhGia}</p>
+            <p>{movie.danhGia}</p>
             <Box>
               <StarRating votes={movie.danhGia} xs />
             </Box>
@@ -85,7 +77,7 @@ const Movie = props => {
         )}
         {/* DATE COMMING */}
         {movie && type === "comming" && (
-          <Box className="movie-date" style={{ lineHeight: "1.6" }}>
+          <Box className="movie-date">
             <Typography component="span" variant="h6">
               {new Date(movie.ngayKhoiChieu).getDate() +
                 "/" +
@@ -143,11 +135,11 @@ const Movie = props => {
 };
 
 /////////////////// Connect with redux ///////////////////
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    viewTrailer: trailer => {
+    viewTrailer: (trailer) => {
       dispatch(actViewTrailer(trailer));
-    }
+    },
   };
 };
 

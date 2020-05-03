@@ -44,7 +44,16 @@ const useStyles = makeStyles(theme => ({
         color: "unset"
       }
     },
-  }
+  },
+  iconError: {
+    fontSize: "100px"
+  },
+  iconYoutube: {
+    fontSize: "60px"
+  },
+  Highlight: {
+    fontSize: "40px"
+  },
 }));
 
 export default useStyles;

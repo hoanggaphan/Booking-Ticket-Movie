@@ -69,17 +69,13 @@ function Showtimes(props) {
             <Tab.Container transition={false} defaultActiveKey={0}>
               <Grid
                 container
-                style={{
-                  paddingTop: "10px",
-                  paddingBottom: "10px",
-                  width: "100%",
-                }}
+                className={classes.gridContainer}
               >
                 <Grid
                   item
                   xs={12}
                   sm={5}
-                  style={{ borderRight: "1px solid rgba(255, 255, 255, .1)" }}
+                  className={classes.gridItem}
                 >
                   <Nav className="flex-column">
                     {item.lstLichChieu.map((lichChieu, index) => (
@@ -145,27 +141,27 @@ function Showtimes(props) {
           <Skeleton
             variant="rect"
             width="100%"
-            style={{ marginBottom: "15px" }}
+            className={classes.skeleton}
           />
           <Skeleton
             variant="rect"
             width="100%"
-            style={{ marginBottom: "15px" }}
+            className={classes.skeleton}
           />
           <Skeleton
             variant="rect"
             width="100%"
-            style={{ marginBottom: "15px" }}
+            className={classes.skeleton}
           />
           <Skeleton
             variant="rect"
             width="100%"
-            style={{ marginBottom: "15px" }}
+            className={classes.skeleton}
           />
           <Skeleton
             variant="rect"
             width="50%"
-            style={{ marginBottom: "15px" }}
+            className={classes.skeleton}
           />
         </Box>
       );

@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: "12px",
       },
       "& .payment-form": {
+        width: "100%",
         "& .payment-group": {
           alignItems: "center",
           "& .payment-control": {
@@ -96,11 +97,19 @@ const useStyles = makeStyles((theme) => ({
             transform: "translateY(-1px)",
           },
           "&:active": {
-            transform: "translateY(1px)"
-          }
+            transform: "translateY(1px)",
+          },
         },
-      }
+      },
     },
+    "& .icon": {
+      marginRight: "-20px",
+      outline: "unset",
+    },
+  },
+  iconSnack: {
+    color: "white",
+    outline: "unset",
   },
 }));
 
