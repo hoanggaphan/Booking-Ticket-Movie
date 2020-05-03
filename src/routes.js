@@ -14,17 +14,14 @@ const home = [
   {
     path: "/detail-movie/:maPhim",
     component: DetailMovie,
-    exact: false
   },
   {
     path: "/booking-movie/:maLichChieu",
     component: BookingMovie,
-    exact: false
   },
   {
     path: "/account",
     component: Account,
-    exact: false
   }
 ];
 
@@ -32,12 +29,10 @@ const user = [
   {
     path: "/user/login",
     component: Login,
-    exact: false
   },
   {
     path: "/user/register",
     component: Register,
-    exact: false
   },
 ];
 

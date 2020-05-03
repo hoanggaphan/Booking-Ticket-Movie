@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import Carousel from "react-bootstrap/Carousel";
 import { connect } from "react-redux";
-import shortid from 'shortid';
+import shortid from "shortid";
 
 import useStyles from "./style";
 import ModalTrailer from "../modal-trailer/modalTrailer";
@@ -19,8 +19,8 @@ function ListMovie(props) {
   const [visible, setVisible] = useState(8);
 
   const perSlide = 8; // Số item trên trang
-  const slideShowing = Math.ceil(listMovieShowing.length / perSlide); // Số trang
-  const slideComming = Math.ceil(listMovieComming.length / perSlide); // Số trang
+  const slideShowing = Math.ceil(listMovieShowing.length / perSlide) || 1; // Số trang
+  const slideComming = Math.ceil(listMovieComming.length / perSlide) || 1; // Số trang
 
   const render = useRender(visible, perSlide);
 
@@ -134,16 +134,15 @@ const useRender = (visible, perSlide) => {
       indexSlide * perSlide,
       (indexSlide + 1) * perSlide
     );
-    return (!listMovie.length
-      ? [...Array(8)]
-      : listMovie
-    ).map((movie, index) => <Movie key={shortid.generate()} movie={movie} type={type} />);
+    return (!listMovie.length ? [...Array(8)] : listMovie).map((movie) => (
+      <Movie key={shortid.generate()} movie={movie} type={type} />
+    ));
   };
 
-  const renderMovieMobile = (listMovie, indexSlide, type) => {
+  const renderMovieMobile = (listMovie, type) => {
     return (!listMovie.length ? [...Array(8)] : listMovie)
       .slice(0, visible)
-      .map((movie, index) => {
+      .map((movie) => {
         return <Movie key={shortid.generate()} movie={movie} type={type} />;
       });
   };
