@@ -39,7 +39,7 @@ function ModalTrailer(props) {
         ) : (
           <Box className={classes.trailerNull}>
             <Box mx="20px 10px">
-              <ErrorOutline style={{ fontSize: "100px" }} />
+              <ErrorOutline className={classes.iconError} />
             </Box>
             <Box maxWidth="600px">
               <Typography component="span" variant="h4">
@@ -66,7 +66,7 @@ function ModalTrailer(props) {
                 rel="noopener noreferrer"
                 className="movie-error-link"
               >
-                <YouTube style={{ fontSize: "60px" }} />
+                <YouTube className={classes.iconYoutube} />
               </Link>
             </Box>
           </Box>
@@ -76,7 +76,7 @@ function ModalTrailer(props) {
           component={IconButton}
           className="modal-trailer-close-icon"
         >
-          <HighlightOff style={{ fontSize: "40px" }} />
+          <HighlightOff className={classes.Highlight} />
         </Box>
       </Box>
     </Box>

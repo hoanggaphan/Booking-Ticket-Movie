@@ -25,7 +25,7 @@ function Chair({ chair, ...props }) {
           variant: "warning",
           anchorOrigin: {vertical: "top", horizontal: "center"},
           action: (key) => (
-            <IconButton style={{color: "white", outline: "unset"}} onClick={() => closeSnackbar(key)}>
+            <IconButton className={classes.iconSnack} onClick={() => closeSnackbar(key)}>
               <Close />
             </IconButton>
           ),
@@ -91,7 +91,7 @@ function Chair({ chair, ...props }) {
         <Skeleton
           variant="circle"
           width="calc(100%/14 - 1%)"
-          style={{ paddingTop: "calc(100%/14 - 1%)", margin: ".7% .5%" }}
+          className={classes.skeleton}
         />
       )}
     </>

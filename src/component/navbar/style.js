@@ -136,12 +136,29 @@ const useStyle = makeStyles(theme => ({
       color: theme.palette.warning.main
     },
   },
+  mobileGrid: {
+    margin: "10px 0",
+    justifyContent: "space-between"
+  },
+  webGrid: {
+    marginBottom: "10px"
+  },
   headerNavLink: {
     margin: "10px",
     color: `${theme.palette.text.primary}!important`,
     "@media (max-width: 700px)": {
       margin: "4px"
     },
+  },
+  icon: {
+    outline: "none"
+  },
+  linkLogin: {
+    textDecoration: "none"
+  },
+  linkLoginM: {
+    textDecoration: "none",
+    cursor: "pointer"
   },
 }));
 

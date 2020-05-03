@@ -140,6 +140,17 @@ const useStyle = makeStyles((theme) => ({
       }
     },
     
+  },
+  skeleton: {
+    marginBottom: "15px"
+  },
+  gridContainer: {
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    width: "100%",
+  },
+  gridItem: {
+    borderRight: "1px solid rgba(255, 255, 255, .1)" 
   }
 }));
 

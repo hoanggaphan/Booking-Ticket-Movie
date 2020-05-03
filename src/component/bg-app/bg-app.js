@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, Button } from "@material-ui/core";
-import Carousel from 'react-bootstrap/Carousel'
+import Carousel from "react-bootstrap/Carousel";
 
 import useStyles from "./style";
 
@@ -8,12 +8,7 @@ export default function BgApp() {
   const classes = useStyles();
 
   return (
-    <Box
-      className={classes.backApp}
-      style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL}/images/backapp.jpg)`,
-      }}
-    >
+    <Box className={classes.backApp}>
       <Grid container component={Box} className="back-app-container">
         <Grid xs={12} md={6} className="back-app-left">
           <Box width="100%">
@@ -58,7 +53,12 @@ export default function BgApp() {
             src={process.env.PUBLIC_URL + "/images/mobile.png"}
             className="right-img-mobile"
           />
-          <Carousel controls={false} indicators={false} interval={3000} pause={false}>
+          <Carousel
+            controls={false}
+            indicators={false}
+            interval={3000}
+            pause={false}
+          >
             {[
               "slide2.jpg",
               "slide3.jpg",

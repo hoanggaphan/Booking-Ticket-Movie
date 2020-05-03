@@ -6,13 +6,7 @@ import styles from "./style";
 
 const WithBgSquares = (Component) => {
   const withBgSquares = ({ classes, ...props }) => (
-    <Box
-      className={classes.withFormBG}
-      style={{
-        backgroundImage: `url('${process.env.PUBLIC_URL}/images/dots.png')`,
-        backgroundSize: "contain"
-      }}
-    >
+    <Box className={classes.withFormBG}>
       <Box className="squares square1"></Box>
       <Box className="squares square2"></Box>
       <Box className="squares square3"></Box>

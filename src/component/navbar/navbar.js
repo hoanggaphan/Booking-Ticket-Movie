@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Grid, Drawer, IconButton, Container } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Grid,
+  Drawer,
+  IconButton,
+  Container,
+} from "@material-ui/core";
 import { Menu, ArrowDropDown, Close } from "@material-ui/icons";
 import Dropdown from "react-bootstrap/Dropdown";
 import { HashLink as Link } from "react-router-hash-link";
@@ -50,7 +57,7 @@ const Navbar = (props) => {
           </IconButton>
           <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
             <Container>
-              <Grid container justify="space-between" style={{margin: "10px 0"}}>
+              <Grid container className={classes.mobileGrid}>
                 <Link to="/" exact>
                   <img
                     src={process.env.PUBLIC_URL + "/images/logo.png"}
@@ -61,18 +68,18 @@ const Navbar = (props) => {
                 </Link>
                 <IconButton
                   onClick={toggleDrawer(false)}
-                  style={{ outline: "none" }}
+                  className={classes.icon}
                 >
                   <Close />
                 </IconButton>
               </Grid>
-              <Grid container  style={{marginBottom: "10px"}}>
+              <Grid container className={classes.webGrid}>
                 <Grid item xs={12}>
                   <SearchMovie />
                 </Grid>
               </Grid>
-              <Grid container  style={{marginBottom: "10px"}}>
-                <Grid item xs={12} >
+              <Grid container className={classes.webGrid}>
+                <Grid item xs={12}>
                   <Button
                     className={classes.headerNavLink}
                     component={Link}
@@ -160,7 +167,7 @@ const Navbar = (props) => {
             className="header-login login-success"
             display={{ xs: "none", sm: "flex" }}
           >
-            <Link to="/account" style={{ textDecoration: "none" }}>
+            <Link to="/account">
               <MyAvatar user={user} />
             </Link>
             <Box className="header-login-txt" color="inherit">
@@ -220,7 +227,7 @@ const Navbar = (props) => {
             className="header-login"
             display={{ xs: "none", sm: "flex" }}
           >
-            <Box style={{ textDecoration: "none" }}>
+            <Box className={classes.linkLogin}>
               <MyAvatar />
             </Box>
             <Box className="header-login-btn" color="inherit">
@@ -235,7 +242,7 @@ const Navbar = (props) => {
                   state: { from: location },
                 })
               }
-              style={{ textDecoration: "none", cursor: "pointer" }}
+              className={classes.linkLoginM}
             >
               <MyAvatar />
             </Box>

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   registerCard: {
     "& .card": {
       backgroundColor: theme.palette.background.paper,
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
           position: "absolute",
           bottom: "-30px",
           left: "0",
-          opacity: ".5"
+          opacity: ".5",
         },
         "& .card-title": {
           textAlign: "center",
@@ -31,41 +31,41 @@ const useStyles = makeStyles(theme => ({
           margin: "unset",
           marginLeft: "-6px",
           "@media (max-width: 360px)": {
-            fontSize: "50px"
-          }
-        }
+            fontSize: "50px",
+          },
+        },
       },
       "& .card-body": {
         marginTop: "10px",
         "& label.Mui-focused": {
-          color: theme.palette.warning.main
+          color: theme.palette.warning.main,
         },
         "& .form-input": {
           color: "white",
           "& fieldset": {
-            borderColor: "rgba(255, 255, 255, 0.23)"
+            borderColor: "rgba(255, 255, 255, 0.23)",
           },
           "&:hover fieldset": {
-            borderColor: "rgba(255, 255, 255, 0.23)"
+            borderColor: "rgba(255, 255, 255, 0.23)",
           },
           "& button": {
             "& svg": {
               color: "rgba(255, 255, 255, 0.23)",
-              transition: "all .1s"
-            }
+              transition: "all .1s",
+            },
           },
           "&.Mui-focused": {
             "& fieldset": {
-              borderColor: theme.palette.warning.main
+              borderColor: theme.palette.warning.main,
             },
             "& button svg": {
-              color: "white"
-            }
+              color: "white",
+            },
           },
 
           "& input:-webkit-autofill": {
-            boxShadow: `0 0 0 20px ${theme.palette.background.paper} inset`
-          }
+            boxShadow: `0 0 0 20px ${theme.palette.background.paper} inset`,
+          },
         },
         "& .form-text-error": {
           paddingTop: "3px",
@@ -75,26 +75,26 @@ const useStyles = makeStyles(theme => ({
           display: "flex",
           alignItems: "center",
           "& div": {
-            fontSize: "12px"
-          }
+            fontSize: "12px",
+          },
         },
         "& .error": {
           "& label.Mui-focused": {
-            color: `${theme.palette.secondary.main}!important`
+            color: `${theme.palette.secondary.main}!important`,
           },
           "& .Mui-error": {
-            color: theme.palette.secondary.main
+            color: theme.palette.secondary.main,
           },
           "& .form-input": {
             "&.Mui-focused": {
               "& fieldset": {
-                borderColor: `${theme.palette.secondary.main}!important`
-              }
-            }
+                borderColor: `${theme.palette.secondary.main}!important`,
+              },
+            },
           },
           "& .form-text-error": {
-            visibility: "visible!important"
-          }
+            visibility: "visible!important",
+          },
         },
 
         "& .register-btn": {
@@ -108,12 +108,12 @@ const useStyles = makeStyles(theme => ({
           outline: "none",
           "&:hover": {
             transform: "translateY(-1px)",
-            boxShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)"
+            boxShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)",
           },
           "&:active": {
-            transform: "translateY(1px)"
-          }
-        }
+            transform: "translateY(1px)",
+          },
+        },
       },
       "& .card-footer": {
         border: "none",
@@ -126,18 +126,21 @@ const useStyles = makeStyles(theme => ({
           color: "#ba54f5",
           textDecoration: "underline",
           "&:hover": {
-            color: theme.palette.primary.main
-          }
+            color: theme.palette.primary.main,
+          },
         },
         "& .card-back": {
           color: "white",
           fontSize: "30px",
-          outline: "unset"
-        }
-      }
-    }
+          outline: "unset",
+        },
+      },
+    },
   },
-  
+  iconBtn: {
+    color: "white",
+    outline: "unset",
+  },
 }));
 
 export default useStyles;

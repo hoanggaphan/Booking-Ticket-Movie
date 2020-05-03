@@ -87,7 +87,8 @@ const useStyles = makeStyles(theme => ({
         "& .form-btn": {
           outline: "none",
           background: theme.palette.warning.main,
-          color: "white"
+          color: "white",
+          margin: "auto"
         }
       },
       

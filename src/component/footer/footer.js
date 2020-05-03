@@ -54,7 +54,7 @@ function Footer(props) {
             </Box>
           </Grid>
           <Grid component={Box} px="20px" display={{xs: "none", md: "block"}} item xs={4}>
-            <Typography style={{paddingLeft: "15px"}} variant="h6" className="footer-title">
+            <Typography variant="h6" className="footer-title">
               ĐỐI TÁC
             </Typography>
             <Box display="flex" justifyContent="space-between" px="15px">
@@ -74,7 +74,7 @@ function Footer(props) {
                     rel="noopener noreferrer"
                     title="apple app"
                   >
-                    <Apple fontSize="large" style={{color: "white"}} />
+                    <Apple fontSize="large" className={classes.icon} />
                   </a>
                   <a
                     href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
@@ -82,7 +82,7 @@ function Footer(props) {
                     rel="noopener noreferrer"
                     title="android app"
                   >
-                    <Android fontSize="large" style={{color: "white"}} />
+                    <Android fontSize="large" className={classes.icon} />
                   </a>
                 </Box>
               </Box>
@@ -97,7 +97,7 @@ function Footer(props) {
                     rel="noopener noreferrer"
                     title="facebook"
                   >
-                    <Facebook fontSize="large" style={{color: "white"}} />
+                    <Facebook fontSize="large" className={classes.icon} />
                   </a>
                 </Box>
               </Box>

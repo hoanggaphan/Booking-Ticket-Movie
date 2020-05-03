@@ -27,7 +27,7 @@ function LoginCard(props) {
         anchorOrigin: {vertical: "top", horizontal: "center"},
         action: (key) => (
           <IconButton
-            style={{ color: "white", outline: "unset" }}
+            className={classes.icon}
             onClick={() => closeSnackbar(key)}
           >
             <Close />

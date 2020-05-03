@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      backgroundImage: `url(images/backapp.jpg)`,
       "& div:focus": {
         outline: "none",
       },

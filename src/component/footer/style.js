@@ -1,6 +1,6 @@
-import {makeStyles} from '@material-ui/styles';
+import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   footer: {
     borderTop: `2px solid ${theme.palette.warning.main}`,
     background: theme.palette.background.footer,
@@ -15,11 +15,12 @@ const useStyles = makeStyles(theme => ({
       },
       "& .footer-title": {
         color: theme.palette.text.warning,
+        paddingLeft: "15px",
         marginBottom: "16px",
         display: "none",
         [theme.breakpoints.up("sm")]: {
-          display: "block"
-        }
+          display: "block",
+        },
       },
       "& .footer-link": {
         display: "block",
@@ -30,7 +31,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: "10px",
         "&:hover": {
           color: theme.palette.text.primary,
-        }
+        },
       },
       "& .footer-logo": {
         "&:hover": {
@@ -41,8 +42,8 @@ const useStyles = makeStyles(theme => ({
           width: "30px",
           height: "30px",
           backgroundColor: "white",
-          borderRadius: "50%"
-        }
+          borderRadius: "50%",
+        },
       },
       "& .footer-bottom": {
         textAlign: "center",
@@ -53,19 +54,21 @@ const useStyles = makeStyles(theme => ({
           padding: "0 15px",
           "& p": {
             marginBottom: "5px",
-            color: theme.palette.text.default
+            color: theme.palette.text.default,
           },
           "& h6": {
             fontSize: "12px",
             [theme.breakpoints.up("sm")]: {
               fontSize: "14px",
             },
-          }
-        }
-
-      }
-    }
-  }
-}))
+          },
+        },
+      },
+    },
+  },
+  icon: {
+    color: "white",
+  },
+}));
 
 export default useStyles;

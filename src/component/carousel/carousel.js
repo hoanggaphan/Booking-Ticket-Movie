@@ -5,7 +5,7 @@ import Carousel from "react-bootstrap/Carousel";
 
 import useStyle from "./style";
 
-export default function MyCarousel() {
+function MyCarousel() {
   const classes = useStyle();
 
   return (
@@ -67,3 +67,5 @@ export default function MyCarousel() {
     </Box>
   );
 }
+
+export default MyCarousel;

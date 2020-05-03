@@ -160,7 +160,6 @@ function CommentForm(props) {
             <Button
               onClick={() => {history.push({pathname: "/user/login", state: {from: location}})}}
               className="form-btn"
-              style={{ margin: "auto" }}
             >
               Đăng nhập
             </Button>
