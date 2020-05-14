@@ -2,6 +2,8 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 
 import useStyles from "./style";
+import star1 from './../../assets/images/star1.png';
+import starNum from './../../assets/images/starNum.png';
 
 export default function StarRating({ votes, ...props }) {
   const classes = useStyles(props);
@@ -11,14 +13,14 @@ export default function StarRating({ votes, ...props }) {
       {[...Array(parseInt(number / 2))].map((item, index) => (
         // eslint-disable-next-line
         <img
-          src={`${process.env.PUBLIC_URL}/images/star1.png`}
+          src={star1}
           key={index}
           className="star1"
         />
       ))}
       {number % 2 !== 0 && (
         <img
-          src={`${process.env.PUBLIC_URL}/images/starNum.png`}
+          src={starNum}
           className="starNum"
           alt="star 2"
         />

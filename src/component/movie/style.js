@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import loadError from './../../assets/images/load-error.jpg';
 
 const useStyles = makeStyles(theme => ({
   movie: props => ( {
@@ -59,7 +60,7 @@ const useStyles = makeStyles(theme => ({
         backgroundImage: props.hinhAnh ? `url(${props.hinhAnh})` : ""
       },
       "& .movie-background-err": {
-        backgroundImage: 'url("images/load-error.jpg")'
+        backgroundImage: `url(${loadError})`
       },
       "& .movie-starpoint": {
         position: "absolute",

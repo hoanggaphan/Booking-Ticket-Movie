@@ -6,7 +6,7 @@ import { SnackbarProvider } from "notistack";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import * as routes from "./routes";
-import theme from "./style/theme";
+import theme from "./assets/style/theme";
 import HomeTemplate from "./template/HomeTemplate";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import UserTemplate from "./template/UserTemplate";

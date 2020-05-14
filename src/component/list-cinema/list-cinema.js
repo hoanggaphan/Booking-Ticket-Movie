@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 import useStyles from "./style";
 import { actGetListLogo, actGetListCinemaDetail } from "./../../redux/actions/index";
+import shape5 from './../../assets/images/shape-5.png';
 
 function ListCinema(props) {
   const classes = useStyles();
@@ -279,7 +280,7 @@ function ListCinema(props) {
   return (
     <Box className={classes.listCinema}>
       <img
-        src={`${process.env.PUBLIC_URL}/images/shape-5.png`}
+        src={shape5}
         alt="shape 5"
         className={classes.shape}
       />

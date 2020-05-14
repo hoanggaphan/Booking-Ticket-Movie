@@ -21,6 +21,7 @@ import {
   actOpenPaymentBox,
   actClearMessage,
 } from "./../../redux/actions/index";
+import momo from './../../assets/images/momo-logo.jpg';
 
 function Payment(props) {
   const classes = useStyles();
@@ -152,7 +153,7 @@ function Payment(props) {
                 control={<Radio color="default" />}
               />
               <img
-                src={`${process.env.PUBLIC_URL}/images/momo-logo.jpg`}
+                src={momo}
                 alt="momo"
                 className="payment-icon"
               />

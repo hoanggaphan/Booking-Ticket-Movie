@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
+import backApp from './../../assets/images/backapp.jpg';
 
 const useStyles = makeStyles(theme => ({
   backApp: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles(theme => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundImage: `url(images/backapp.jpg)`,
+      backgroundImage: `url(${backApp})`,
       "& div:focus": {
         outline: "none",
       },

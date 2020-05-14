@@ -3,10 +3,21 @@ import { Box, Grid, Button } from "@material-ui/core";
 import Carousel from "react-bootstrap/Carousel";
 
 import useStyles from "./style";
+import slide2 from "./../../assets/images/slide2.jpg";
+import slide3 from "./../../assets/images/slide3.jpg";
+import slide4 from "./../../assets/images/slide4.jpg";
+import slide5 from "./../../assets/images/slide5.jpg";
+import slide6 from "./../../assets/images/slide6.jpg";
+import slide7 from "./../../assets/images/slide7.jpg";
+import slide8 from "./../../assets/images/slide8.jpg";
+import slide9 from "./../../assets/images/slide9.jpg";
+import mobile from './../../assets/images/mobile.png';
 
 export default function BgApp() {
   const classes = useStyles();
-
+  
+  const slides = [slide2, slide3, slide4, slide5, slide6, slide7, slide8, slide9];
+  
   return (
     <Box className={classes.backApp}>
       <Grid container component={Box} className="back-app-container">
@@ -50,7 +61,7 @@ export default function BgApp() {
         <Grid xs={12} md={6} className="back-app-right">
           <img
             alt="mobile"
-            src={process.env.PUBLIC_URL + "/images/mobile.png"}
+            src={mobile}
             className="right-img-mobile"
           />
           <Carousel
@@ -59,29 +70,9 @@ export default function BgApp() {
             interval={3000}
             pause={false}
           >
-            {[
-              "slide2.jpg",
-              "slide3.jpg",
-              "slide4.jpg",
-              "slide5.jpg",
-              "slide6.jpg",
-              "slide7.jpg",
-              "slide8.jpg",
-              "slide9.jpg",
-              "slide10.jpg",
-              "slide11.jpg",
-              "slide12.jpg",
-              "slide13.jpg",
-              "slide14.jpg",
-              "slide15.jpg",
-              "slide16.jpg",
-            ].map((item, index) => (
+            {slides.map((item, index) => (
               <Carousel.Item key={index}>
-                <img
-                  className="right-img-slide"
-                  src={"images/" + item}
-                  alt={item}
-                />
+                <img className="right-img-slide" src={item} alt={item} />
               </Carousel.Item>
             ))}
           </Carousel>

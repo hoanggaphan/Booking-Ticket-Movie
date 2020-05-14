@@ -4,9 +4,10 @@ import { Route, Redirect } from "react-router-dom";
 
 import Navbar from "./../component/navbar/navbar";
 import MyFooter from "../component/footer/footer";
+import dots from './../assets/images/dots.png';
 
 const style = {
-  backgroundImage: `url('${process.env.PUBLIC_URL}/images/dots.png')`,
+  backgroundImage: `url(${dots})`,
   backgroundSize: "contain",
   overflow: "hidden",
 };
