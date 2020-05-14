@@ -10,6 +10,7 @@ import useStyles from "./style";
 import ModalTrailer from "../modal-trailer/modalTrailer";
 import Movie from "./../movie/movie";
 import { actgetListMovie } from "./../../redux/actions/index";
+import shape6 from './../../assets/images/shape-6.png';
 
 function ListMovie(props) {
   const classes = useStyles();
@@ -33,7 +34,7 @@ function ListMovie(props) {
     <Box position="relative">
       <Box id="showtimes" className={classes.listMovie}>
         <img
-          src={`${process.env.PUBLIC_URL}/images/shape-6.png`}
+          src={shape6}
           className={classes.shape}
           alt="shape 6"
         />

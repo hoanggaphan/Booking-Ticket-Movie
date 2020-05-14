@@ -17,6 +17,7 @@ import useStyle from "./style";
 import SearchMovie from "./../search-movie/search-movie";
 import { actLoadUser } from "./../../redux/actions/index";
 import MyAvatar from "../avatar/avatar";
+import logo from './../../assets/images/logo.png';
 
 const Navbar = (props) => {
   const classes = useStyle();
@@ -60,7 +61,7 @@ const Navbar = (props) => {
               <Grid container className={classes.mobileGrid}>
                 <Link to="/" exact>
                   <img
-                    src={process.env.PUBLIC_URL + "/images/logo.png"}
+                    src={logo}
                     width="150px"
                     height="50px"
                     alt="logo"
@@ -113,7 +114,7 @@ const Navbar = (props) => {
       {/* LOGO */}
       <Link to="/" exact>
         <img
-          src={process.env.PUBLIC_URL + "/images/logo.png"}
+          src={logo}
           width="150px"
           height="50px"
           alt="logo"

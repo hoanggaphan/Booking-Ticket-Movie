@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import useStyles from "./style";
+import zionLogo from './../../assets/images/zion-logo.jpg';
 
 function Footer(props) {
   const classes = useStyles();
@@ -106,7 +107,7 @@ function Footer(props) {
         </Grid>
         <Grid component={Box} container  pt="16px" className="footer-bottom">
           <Grid component={Box} item sm={2} md={1} xs={12}>
-            <Box component="img" width="80px" borderRadius="8px"mb="10px" src={process.env.PUBLIC_URL + "/images/zion-logo.jpg"} />
+            <Box component="img" width="80px" borderRadius="8px"mb="10px" src={zionLogo} />
           </Grid>
           <Grid item sm={7} md={9} xs={12} className="footer-location">
             <h6>

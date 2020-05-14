@@ -4,6 +4,10 @@ import { NavigateNext, NavigateBefore } from "@material-ui/icons";
 import Carousel from "react-bootstrap/Carousel";
 
 import useStyle from "./style";
+import carousel1 from './../../assets/images/carousel-1.jpg';
+import carousel2 from './../../assets/images/carousel-2.jpg';
+import carousel3 from './../../assets/images/carousel-3.jpg';
+import carousel4 from './../../assets/images/carousel-4.jpg';
 
 function MyCarousel() {
   const classes = useStyle();
@@ -26,7 +30,7 @@ function MyCarousel() {
       >
         <Carousel.Item>
           <img
-            src={`${process.env.PUBLIC_URL}/images/carousel-1.jpg`}
+            src={carousel1}
             alt="carousel-1"
             className="carousel-img"
             width="100%"
@@ -36,7 +40,7 @@ function MyCarousel() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            src={`${process.env.PUBLIC_URL}/images/carousel-2.jpg`}
+            src={carousel2}
             alt="carousel-2"
             className="carousel-img"
             width="100%"
@@ -46,7 +50,7 @@ function MyCarousel() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            src={`${process.env.PUBLIC_URL}/images/carousel-3.jpg`}
+            src={carousel3}
             alt="carousel-1"
             className="carousel-img"
             width="100%"
@@ -56,7 +60,7 @@ function MyCarousel() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            src={`${process.env.PUBLIC_URL}/images/carousel-4.jpg`}
+            src={carousel4}
             alt="carousel-1"
             className="carousel-img"
             width="100%"

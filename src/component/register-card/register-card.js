@@ -9,6 +9,7 @@ import { useSnackbar } from "notistack";
 
 import useStyles from './style';
 import { actClearMessage } from './../../redux/actions/index';
+import register from './../../assets/images/register-head.png';
 
 function RegisterCard(props) {
   const classes = useStyles();
@@ -144,7 +145,7 @@ function RegisterCard(props) {
         <Card.Header>
           <img
             className="card-img"
-            src={process.env.PUBLIC_URL + "/images/register-head.png"}
+            src={register}
             alt="login head"
           />
           <Card.Title>Đăng Ký</Card.Title>
