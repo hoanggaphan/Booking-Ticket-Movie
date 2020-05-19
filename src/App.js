@@ -1,15 +1,15 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
-import DefaultBG from "component/fallback/DefaultBG";
+import DefaultBG from "common/Fallback/DefaultBG";
 import { SnackbarProvider } from "notistack";
-import PageNotFound from "pages/PageNotFound/PageNotFound";
+import PageNotFound from "common/PageNotFound";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import theme from "./assets/style/theme";
+import theme from "./assets/styles/theme";
 
 // Code Spliting
-const HomeLayout = lazy(() => import("routes/Home/Layout"));
-const UserLayout = lazy(() => import("routes/User/Layout"));
+const HomeLayout = lazy(() => import("features/home/Layout"));
+const UserLayout = lazy(() => import("features/user/Layout"));
 
 const useStyles = makeStyles({
   root: {
