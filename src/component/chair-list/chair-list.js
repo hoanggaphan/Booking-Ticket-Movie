@@ -1,11 +1,10 @@
-import React from "react";
-import { Box, Grid, Button } from "@material-ui/core";
+import { Box, Button, Grid } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+import Chair from "component/chair/chair";
+import React from "react";
 import { connect } from "react-redux";
-
+import { actOpenPaymentBox } from "redux/actions/index";
 import useStyles from "./style";
-import Chair from "./../../component/chair/chair";
-import { actOpenPaymentBox } from './../../redux/actions/index';
 
 function ChairList(props) {
   const classes = useStyles();
@@ -13,19 +12,25 @@ function ChairList(props) {
 
   const validateNextBtn = () => {
     return listBooking.length < 1; // mảng < 1 là true
-  }
-  
+  };
+
   return (
     <Box component={Grid} item xs={12} sm={10} m="auto!important">
       <Box display="flex" justifyContent="center" flexWrap="wrap">
-        {(isFetching ? [...Array(160)] : roomInfo.danhSachGhe ).map(
+        {(isFetching ? [...Array(160)] : roomInfo.danhSachGhe).map(
           (item, index) => (
             <Chair chair={item} key={index} />
           )
         )}
       </Box>
-      <Box mt="15px" textAlign="center" display={{xs: "block", md: "none"}}>
-        <Button disabled={validateNextBtn()} className={classes.nextBtn} onClick={() => openPaymentBox(true)} >Kế Tiếp</Button>
+      <Box mt="15px" textAlign="center" display={{ xs: "block", md: "none" }}>
+        <Button
+          disabled={validateNextBtn()}
+          className={classes.nextBtn}
+          onClick={() => openPaymentBox(true)}
+        >
+          Kế Tiếp
+        </Button>
       </Box>
       <Box className={classes.types}>
         <Box className="type-box">
@@ -67,12 +72,12 @@ const mapStateToProps = (state) => ({
   isFetching: state.bookingReducer.isFetching,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     openPaymentBox: (status) => {
       dispatch(actOpenPaymentBox(status));
-    } 
-  }
-}
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChairList);

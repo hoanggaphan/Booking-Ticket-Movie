@@ -1,14 +1,13 @@
-import React, { useState, useEffect, memo } from "react";
 import Box from "@material-ui/core/Box";
 import SearchIcon from "@material-ui/icons/Search";
-import InputGroup from "react-bootstrap/InputGroup";
+import React, { memo, useEffect, useState } from "react";
 import FormControl from "react-bootstrap/FormControl";
+import InputGroup from "react-bootstrap/InputGroup";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { actSearching, actSearchMovie } from "redux/actions/index";
 import useStyles from "./style";
-import { actSearchMovie, actSearching } from "./../../redux/actions/index";
 
 const SearchMovie = (props) => {
   const classes = useStyles();
@@ -69,7 +68,7 @@ const SearchMovie = (props) => {
       return (
         <Box
           component={Link}
-          to={`/detail-movie/${movie.maPhim}`}
+          to={`/home/detail-movie/${movie.maPhim}`}
           className="result-item"
         >
           <img src={movie.hinhAnh} alt={movie.biDanh} />

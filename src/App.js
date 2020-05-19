@@ -1,15 +1,15 @@
-import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import DefaultBG from "component/fallback/DefaultBG";
 import { SnackbarProvider } from "notistack";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-
-import * as routes from "./routes";
+import PageNotFound from "pages/PageNotFound/PageNotFound";
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import theme from "./assets/style/theme";
-import HomeTemplate from "./template/HomeTemplate";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import UserTemplate from "./template/UserTemplate";
+
+// Code Spliting
+const HomeLayout = lazy(() => import("routes/Home/Layout"));
+const UserLayout = lazy(() => import("routes/User/Layout"));
 
 const useStyles = makeStyles({
   root: {
@@ -25,18 +25,6 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
 
-  const renderHomeTemplate = (routes) => {
-    return routes.map((route, index) => (
-      <HomeTemplate key={index} {...route} />
-    ));
-  };
-
-  const renderUserTemplate = (routes) => {
-    return routes.map((route, index) => (
-      <UserTemplate key={index} {...route} />
-    ));
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -50,13 +38,17 @@ function App() {
         preventDuplicate
       >
         <BrowserRouter>
-          <Switch>
-            {renderHomeTemplate(routes.home)}
-            {renderUserTemplate(routes.user)}
+          <Suspense fallback={<DefaultBG />}>
+            <Switch>
+              <Redirect exact from="/" to="/home" />
 
-            {/* Trang 404 not found */}
-            <Route path="" component={PageNotFound} />
-          </Switch>
+              <Route path="/home" component={HomeLayout} />
+              <Route path="/user" component={UserLayout} />
+
+              {/* Trang 404 not found */}
+              <Route component={PageNotFound} />
+            </Switch>
+          </Suspense>
         </BrowserRouter>
       </SnackbarProvider>
     </ThemeProvider>

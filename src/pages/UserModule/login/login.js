@@ -1,32 +1,29 @@
+import loginCard from "component/login-card/login-card";
+import WithBgSquares from "component/withBgSquares/withBgSquares";
 import React from "react";
-
-import { actLoginUserAPI } from './../../../redux/actions/index';
 import { connect } from "react-redux";
-import LoginCard from "../../../component/login-card/login-card";
-import WithBgSquares from '../../../component/withBgSquares/withBgSquares';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from "react-router-dom";
+import { actLoginUserAPI } from "redux/actions";
 
-const EnhancedLogin = WithBgSquares(LoginCard);
+const EnhancedLogin = WithBgSquares(loginCard);
 function Login(props) {
   const location = useLocation();
   const history = useHistory();
-  const { from } = location.state || { from: { pathname: "/" }};
+  const { from } = location.state || { from: { pathname: "/home" } };
 
-  const handleSubmit = values => e => {
+  const handleSubmit = (values) => (e) => {
     e.preventDefault();
     props.actLoginUser(values, history, from);
-  }
-  return (
-    <EnhancedLogin onSubmit={handleSubmit} color="primary"/>
-  );
+  };
+  return <EnhancedLogin onSubmit={handleSubmit} color="primary" />;
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     actLoginUser: (data, history, from) => {
       dispatch(actLoginUserAPI(data, history, from));
-    }
-  }
-}
+    },
+  };
+};
 
-export default connect(null, mapDispatchToProps) (Login);
+export default connect(null, mapDispatchToProps)(Login);

@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
-import "react-circular-progressbar/dist/styles.css";
 import { Box, Grid, IconButton } from "@material-ui/core";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
-import Skeleton from '@material-ui/lab/Skeleton';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import Skeleton from "@material-ui/lab/Skeleton";
+import AgeType from "component/age-type/age-type";
+import CommentForm from "component/comment-form/comment-form";
+import CommentList from "component/comment-list/comment-list";
+import ModalTrailer from "component/modal-trailer/modalTrailer";
+import Showtimes from "component/showtimes/showtimes";
+import StarRating from "component/star-rating/star-rating";
+import React, { useEffect, useState } from "react";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import { actgetDetailMovieAPI, actViewTrailer } from "redux/actions/index";
 import useStyles from "./style";
-import { actgetDetailMovieAPI, actViewTrailer } from "./../../../redux/actions/index";
-import AgeType from "./../../../component/age-type/age-type";
-import StarRating from "../../../component/star-rating/star-rating";
-import CommentForm from "../../../component/comment-form/comment-form";
-import CommentList from "../../../component/comment-list/comment-list";
-import ModalTrailer from "./../../../component/modal-trailer/modalTrailer";
-import Showtimes from "../../../component/showtimes/showtimes";
-
 
 function DetailMovie(props) {
   const classes = useStyles();
@@ -49,10 +47,7 @@ function DetailMovie(props) {
         <Box className="top-background-blur">
           {!isFechingDetailMovie ? (
             <>
-              <img
-                src={detailMovie.hinhAnh}
-                alt={detailMovie.biDanh}
-              />
+              <img src={detailMovie.hinhAnh} alt={detailMovie.biDanh} />
               <IconButton
                 className="play-btn-visible"
                 onClick={() => setTrailerM(detailMovie.trailer)}
@@ -73,7 +68,7 @@ function DetailMovie(props) {
               )}
             </>
           ) : (
-            <Box width="100%" height= "calc(100vw * 2/5)"></Box>
+            <Box width="100%" height="calc(100vw * 2/5)"></Box>
           )}
         </Box>
         <Box className="top-background-linear"></Box>

@@ -1,14 +1,13 @@
-import React from "react";
-import { Box, IconButton, Button, Typography } from "@material-ui/core";
-import Skeleton from "@material-ui/lab/Skeleton";
+import { Box, Button, IconButton, Typography } from "@material-ui/core";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import { Link } from "react-router-dom";
+import Skeleton from "@material-ui/lab/Skeleton";
+import AgeType from "component/age-type/age-type";
+import StarRating from "component/star-rating/star-rating";
+import React from "react";
 import { connect } from "react-redux";
-
+import { Link } from "react-router-dom";
+import { actViewTrailer } from "redux/actions/index";
 import useStyles from "./style";
-import { actViewTrailer } from "../../redux/actions/index";
-import AgeType from "./../age-type/age-type";
-import StarRating from "../star-rating/star-rating";
 
 const Movie = (props) => {
   const { movie, type } = props;
@@ -50,7 +49,7 @@ const Movie = (props) => {
         {movie && (
           <Box
             component={Link}
-            to={`/detail-movie/${movie.maPhim}`}
+            to={`/home/detail-movie/${movie.maPhim}`}
             width="100%"
             height="100%"
             position="absolute"
@@ -90,7 +89,7 @@ const Movie = (props) => {
         {movie && (
           <Box
             component={Link}
-            to={`/detail-movie/${movie.maPhim}`}
+            to={`/home/detail-movie/${movie.maPhim}`}
             className="movie-overplay"
           ></Box>
         )}
@@ -123,7 +122,7 @@ const Movie = (props) => {
             className="movie-book-btn"
             variant="contained"
             size="large"
-            to={`/detail-movie/${movie.maPhim}`}
+            to={`/home/detail-movie/${movie.maPhim}`}
             component={Link}
           >
             MUA Vé

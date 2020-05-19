@@ -1,4 +1,4 @@
-import * as ActionTypes from "./../constants/ActionTypes";
+import * as ActionTypes from "redux/constants/ActionTypes";
 const initialState = {
   roomInfo: null,
   isFetching: true,
@@ -6,7 +6,7 @@ const initialState = {
   open: false,
   isPaying: false,
   message: "",
-  status: ""
+  status: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -19,7 +19,10 @@ const userReducer = (state = initialState, action) => {
       console.log(action.message);
       return { ...state, isFetching: false };
     case ActionTypes.ADD_CHAIR_BOOKING:
-      return { ...state, listBooking: [...state.listBooking, action.chairInfo] };
+      return {
+        ...state,
+        listBooking: [...state.listBooking, action.chairInfo],
+      };
     case ActionTypes.REMOVE_CHAIR_BOOKING:
       const listBooking = [...state.listBooking];
       listBooking.splice(action.index, 1);
@@ -31,11 +34,21 @@ const userReducer = (state = initialState, action) => {
       return { ...state, isPaying: true, message: "", status: "" };
     case ActionTypes.POST_BOOKING_CHAIR_SUCCESS:
       console.log(action.payload);
-      return { ...state, isPaying: false, message: action.message, status: action.status };
+      return {
+        ...state,
+        isPaying: false,
+        message: action.message,
+        status: action.status,
+      };
     case ActionTypes.POST_BOOKING_CHAIR_FAILURE:
-      return { ...state, isPaying: false, message: action.message, status: action.status };
+      return {
+        ...state,
+        isPaying: false,
+        message: action.message,
+        status: action.status,
+      };
     case ActionTypes.CLEAR_MESSAGE:
-      return { ...state, message: ""};
+      return { ...state, message: "" };
     case ActionTypes.OPEN_PAYMENT_BOX:
       return { ...state, open: action.status };
     default:

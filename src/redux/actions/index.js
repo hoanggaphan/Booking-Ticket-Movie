@@ -1,6 +1,6 @@
-import * as ActionTypes from "./../constants/ActionTypes";
-import { callAPI } from "./../utils/callAPI";
 import Axios from "axios";
+import * as ActionTypes from "redux/constants/ActionTypes";
+import { callAPI } from "redux/utils/callAPI";
 
 //----------------------- API MOVIE ----------------------------------//
 export const actgetListMovie = () => (dispatch) => {
@@ -11,8 +11,7 @@ export const actgetListMovie = () => (dispatch) => {
         payload: response.data,
       })
     )
-    .catch((error) => console.log(error.response.data)
-    );
+    .catch((error) => console.log(error.response.data));
 };
 
 export const actgetDetailMovieAPI = (maPhim) => {
@@ -85,12 +84,7 @@ export const actGetShowtimesInfoAPI = (maPhim) => {
 
 export const actGetListLogo = () => {
   return (dispatch) => {
-    callAPI(
-      "GET",
-      "QuanLyRap/LayThongTinHeThongRap",
-      null,
-      null
-    )
+    callAPI("GET", "QuanLyRap/LayThongTinHeThongRap", null, null)
       .then((result) =>
         dispatch({
           type: ActionTypes.GET_LIST_LOGO_CINEMA,
@@ -313,7 +307,7 @@ export const actPostBookingChair = (info, token, history) => (dispatch) => {
         message: "Đặt ghế thành công",
         status: "success",
       });
-      history.replace("/account");
+      history.replace("/home/account");
     })
     .catch((error) =>
       dispatch({

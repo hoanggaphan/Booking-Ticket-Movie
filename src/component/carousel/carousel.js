@@ -1,13 +1,12 @@
-import React from "react";
 import { Box, IconButton } from "@material-ui/core";
-import { NavigateNext, NavigateBefore } from "@material-ui/icons";
+import { NavigateBefore, NavigateNext } from "@material-ui/icons";
+import carousel1 from "assets/images/carousel-1.jpg";
+import carousel2 from "assets/images/carousel-2.jpg";
+import carousel3 from "assets/images/carousel-3.jpg";
+import carousel4 from "assets/images/carousel-4.jpg";
+import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-
 import useStyle from "./style";
-import carousel1 from './../../assets/images/carousel-1.jpg';
-import carousel2 from './../../assets/images/carousel-2.jpg';
-import carousel3 from './../../assets/images/carousel-3.jpg';
-import carousel4 from './../../assets/images/carousel-4.jpg';
 
 function MyCarousel() {
   const classes = useStyle();

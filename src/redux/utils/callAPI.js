@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { URL_API } from "./../constants/config";
+import { URL_API } from "redux/constants/config";
 
 export const callAPI = (method, uri, data, token) => {
   return Axios({

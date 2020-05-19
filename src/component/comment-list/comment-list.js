@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { Box, Button } from "@material-ui/core";
+import Comment from "component/comment/comment";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import shortid from 'shortid';
-import { useParams } from 'react-router-dom';
-
+import { useParams } from "react-router-dom";
+import { actGetListCommentAPI } from "redux/actions/index";
+import shortid from "shortid";
 import useStyles from "./style";
-import Comment from "./../comment/comment";
-import { actGetListCommentAPI } from "./../../redux/actions/index";
 
 function CommentList(props) {
   const classes = useStyles();
@@ -28,7 +27,13 @@ function CommentList(props) {
           <Comment key={shortid.generate()} comment={comment} />
         ))}
       {visible < listComment.length && (
-        <Button className="more-btn" variant="outlined" onClick={() => setVisible(visible + 4)}>XEM THÊM</Button>
+        <Button
+          className="more-btn"
+          variant="outlined"
+          onClick={() => setVisible(visible + 4)}
+        >
+          XEM THÊM
+        </Button>
       )}
     </Box>
   );
@@ -45,7 +50,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     listComment: state.userReducer.listComment,
-    isGettingComment: state.userReducer.isGettingComment
+    isGettingComment: state.userReducer.isGettingComment,
   };
 };
 

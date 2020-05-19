@@ -1,27 +1,25 @@
-import React, { useState, useEffect } from "react";
 import {
   Box,
-  Radio,
-  RadioGroup,
+  Button,
   FormControl,
   FormControlLabel,
-  Button,
   IconButton,
+  Radio,
+  RadioGroup,
 } from "@material-ui/core";
+import { AccountBalance, Close, CreditCard } from "@material-ui/icons";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { CreditCard, AccountBalance, Close } from "@material-ui/icons";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import momo from "assets/images/momo-logo.jpg";
 import { useSnackbar } from "notistack";
-import { useHistory } from "react-router-dom";
-
-import useStyles from "./style";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import {
-  actPostBookingChair,
-  actOpenPaymentBox,
   actClearMessage,
-} from "./../../redux/actions/index";
-import momo from './../../assets/images/momo-logo.jpg';
+  actOpenPaymentBox,
+  actPostBookingChair,
+} from "redux/actions/index";
+import useStyles from "./style";
 
 function Payment(props) {
   const classes = useStyles();
@@ -152,11 +150,7 @@ function Payment(props) {
                 value="momo"
                 control={<Radio color="default" />}
               />
-              <img
-                src={momo}
-                alt="momo"
-                className="payment-icon"
-              />
+              <img src={momo} alt="momo" className="payment-icon" />
               <span>Thanh toán qua MoMo</span>
             </Box>
             <Box className="payment-control">
