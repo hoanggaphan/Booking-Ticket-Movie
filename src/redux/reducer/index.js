@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import bookingReducer from "./bookingReducer";
-import cinemaReducer from "./cinemaReducer";
-import movieReducer from "./movieReducer";
-import userReducer from "./userReducer";
+import bookingReducer from "./booking";
+import cinemaReducer from "./cinema";
+import movieReducer from "./movie";
+import userReducer from "./user";
 
 const rootReducers = combineReducers({
   movieReducer,

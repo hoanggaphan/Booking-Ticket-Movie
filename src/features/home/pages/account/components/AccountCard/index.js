@@ -5,7 +5,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { connect } from "react-redux";
-import { actClearMessage, actPutUpdateAccount } from "redux/actions";
+import { actClearMessage, actPutUpdateAccount } from "redux/actions/user";
 import useStyles from "./styles";
 
 function AccountCard(props) {

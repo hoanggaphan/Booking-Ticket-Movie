@@ -14,11 +14,8 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import {
-  actClearMessage,
-  actOpenPaymentBox,
-  actPostBookingChair,
-} from "redux/actions";
+import { actOpenPaymentBox, actPostBookingChair } from "redux/actions/booking";
+import { actClearMessage } from "redux/actions/user";
 import useStyles from "./styles";
 
 function Payment(props) {

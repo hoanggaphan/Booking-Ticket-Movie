@@ -7,7 +7,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { connect } from "react-redux";
-import { actgetListMovie } from "redux/actions";
+import { actgetListMovie } from "redux/actions/movie";
 import shortid from "shortid";
 import useStyles from "./styles";
 

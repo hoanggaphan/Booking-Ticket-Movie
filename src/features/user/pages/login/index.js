@@ -3,7 +3,7 @@ import loginCard from "features/user/pages/login/components/LoginCard";
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { actLoginUserAPI } from "redux/actions";
+import { actLoginUserAPI } from "redux/actions/user";
 
 const EnhancedLogin = WithBgSquares(loginCard);
 function Login(props) {

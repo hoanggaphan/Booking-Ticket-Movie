@@ -15,7 +15,7 @@ import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actClearMessage } from "redux/actions";
+import { actClearMessage } from "redux/actions/user";
 import useStyles from "./styles";
 
 function LoginCard(props) {

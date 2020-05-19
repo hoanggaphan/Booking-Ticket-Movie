@@ -3,7 +3,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Chair from "features/home/pages/booking-movie/components/Chair";
 import React from "react";
 import { connect } from "react-redux";
-import { actOpenPaymentBox } from "redux/actions";
+import { actOpenPaymentBox } from "redux/actions/booking";
 import useStyles from "./styles";
 
 function ChairList(props) {

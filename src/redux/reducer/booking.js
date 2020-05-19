@@ -9,7 +9,7 @@ const initialState = {
   status: "",
 };
 
-const userReducer = (state = initialState, action) => {
+const bookingReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.GET_ROOM_INFO_REQUEST:
       return { ...state, isFetching: true };
@@ -56,4 +56,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default bookingReducer;
