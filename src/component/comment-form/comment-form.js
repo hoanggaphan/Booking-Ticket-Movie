@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Box, Button, Avatar, IconButton } from "@material-ui/core";
-import { StarBorder, Close } from '@material-ui/icons';
-import Modal from "react-bootstrap/Modal";
+import { Avatar, Box, Button, IconButton } from "@material-ui/core";
+import { Close, StarBorder } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import StarRating from "component/star-rating/star-rating";
+import React, { useEffect, useState } from "react";
+import Modal from "react-bootstrap/Modal";
 import { connect } from "react-redux";
-
+import { useHistory, useLocation, useParams } from "react-router-dom";
+import { actPostCommentAPI, actShowLogin } from "redux/actions";
 import useStyles from "./style";
-import StarRating from "./../star-rating/star-rating";
-import { actShowLogin, actPostCommentAPI } from "../../redux/actions";
 
 function CommentForm(props) {
   const classes = useStyles();
@@ -48,8 +47,8 @@ function CommentForm(props) {
   }, []);
 
   useEffect(() => {
-    setComment("")
-    setrating(5)
+    setComment("");
+    setrating(5);
     // eslint-disable-next-line
   }, [maPhim]);
 
@@ -158,7 +157,12 @@ function CommentForm(props) {
           </Modal.Header>
           <Modal.Footer>
             <Button
-              onClick={() => {history.push({pathname: "/user/login", state: {from: location}})}}
+              onClick={() => {
+                history.push({
+                  pathname: "/user/login",
+                  state: { from: location },
+                });
+              }}
               className="form-btn"
             >
               Đăng nhập

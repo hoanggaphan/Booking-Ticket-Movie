@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
-  Grid,
-  Drawer,
-  IconButton,
   Container,
+  Drawer,
+  Grid,
+  IconButton,
 } from "@material-ui/core";
-import { Menu, ArrowDropDown, Close } from "@material-ui/icons";
+import { ArrowDropDown, Close, Menu } from "@material-ui/icons";
+import logo from "assets/images/logo.png";
+import MyAvatar from "component/avatar/avatar";
+import SearchMovie from "component/search-movie/search-movie";
+import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import { HashLink as Link } from "react-router-hash-link";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-
+import { HashLink as Link } from "react-router-hash-link";
+import { actLoadUser } from "redux/actions/index";
 import useStyle from "./style";
-import SearchMovie from "./../search-movie/search-movie";
-import { actLoadUser } from "./../../redux/actions/index";
-import MyAvatar from "../avatar/avatar";
-import logo from './../../assets/images/logo.png';
 
 const Navbar = (props) => {
   const classes = useStyle();
@@ -59,13 +58,8 @@ const Navbar = (props) => {
           <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
             <Container>
               <Grid container className={classes.mobileGrid}>
-                <Link to="/" exact>
-                  <img
-                    src={logo}
-                    width="150px"
-                    height="50px"
-                    alt="logo"
-                  />
+                <Link to="/home" exact>
+                  <img src={logo} width="150px" height="50px" alt="logo" />
                 </Link>
                 <IconButton
                   onClick={toggleDrawer(false)}
@@ -85,7 +79,7 @@ const Navbar = (props) => {
                     className={classes.headerNavLink}
                     component={Link}
                     exact
-                    to="/"
+                    to="/home"
                     color="inherit"
                   >
                     Trang Chủ
@@ -96,7 +90,7 @@ const Navbar = (props) => {
                     className={classes.headerNavLink}
                     component={Link}
                     onClick={toggleDrawer(false)}
-                    to="/#showtimes"
+                    to="/home/#showtimes"
                     scroll={(el) =>
                       el.scrollIntoView({ behavior: "smooth", block: "start" })
                     }
@@ -112,13 +106,8 @@ const Navbar = (props) => {
       </>
 
       {/* LOGO */}
-      <Link to="/" exact>
-        <img
-          src={logo}
-          width="150px"
-          height="50px"
-          alt="logo"
-        />
+      <Link to="/home" exact>
+        <img src={logo} width="150px" height="50px" alt="logo" />
       </Link>
 
       {/* NAV LINK */}
@@ -127,7 +116,7 @@ const Navbar = (props) => {
           className={classes.headerNavLink}
           component={Link}
           exact
-          to="/"
+          to="/home"
           color="inherit"
         >
           Trang Chủ
@@ -135,7 +124,7 @@ const Navbar = (props) => {
         <Button
           className={classes.headerNavLink}
           component={Link}
-          to="/#showtimes"
+          to="/home/#showtimes"
           scroll={(el) =>
             el.scrollIntoView({ behavior: "smooth", block: "start" })
           }
@@ -149,7 +138,7 @@ const Navbar = (props) => {
           scroll={(el) =>
             el.scrollIntoView({ behavior: "smooth", block: "start" })
           }
-          to="/#list-cinema"
+          to="/home/#list-cinema"
           color="inherit"
         >
           Cụm Rạp
@@ -168,7 +157,7 @@ const Navbar = (props) => {
             className="header-login login-success"
             display={{ xs: "none", sm: "flex" }}
           >
-            <Link to="/account">
+            <Link to="/home/account">
               <MyAvatar user={user} />
             </Link>
             <Box className="header-login-txt" color="inherit">
@@ -181,7 +170,7 @@ const Navbar = (props) => {
               </Box>
               <ArrowDropDown />
               <Box className="header-logout">
-                <Link to="/account">Tài Khoản</Link>
+                <Link to="/home/account">Tài Khoản</Link>
                 <button
                   onClick={() => {
                     loadUser(null);
@@ -200,7 +189,7 @@ const Navbar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu show={show}>
-              <Link className="account-m" to="/account">
+              <Link className="account-m" to="/home/account">
                 Tài Khoản
               </Link>
               <button

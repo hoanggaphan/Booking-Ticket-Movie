@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
+import React, { useEffect } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
-import Dropdown from "react-bootstrap/Dropdown";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { actGetListLogo } from "redux/actions/index";
 import useStyles from "./style";
-import { actGetListLogo } from "./../../redux/actions/index";
 
 function Showtimes(props) {
   const classes = useStyles();
@@ -16,7 +15,7 @@ function Showtimes(props) {
     listCinemaLogo,
     detailMovie,
     isFechingDetailMovie,
-    getListLogo
+    getListLogo,
   } = props;
 
   useEffect(() => {
@@ -67,16 +66,8 @@ function Showtimes(props) {
         return (
           <Tab.Pane className="main-pane" key={itemIndex} eventKey={itemIndex}>
             <Tab.Container transition={false} defaultActiveKey={0}>
-              <Grid
-                container
-                className={classes.gridContainer}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  sm={5}
-                  className={classes.gridItem}
-                >
+              <Grid container className={classes.gridContainer}>
+                <Grid item xs={12} sm={5} className={classes.gridItem}>
                   <Nav className="flex-column">
                     {item.lstLichChieu.map((lichChieu, index) => (
                       <Nav.Item key={index}>
@@ -84,8 +75,8 @@ function Showtimes(props) {
                           <img
                             src={lichChieu.thongTinRap.hinhAnh}
                             alt={lichChieu.tenCumRap}
-                            width = "50"
-                            height = "50"
+                            width="50"
+                            height="50"
                           />
                           <Box className="cinema-box">
                             <span className="cinema-name">
@@ -117,7 +108,7 @@ function Showtimes(props) {
                               {thoiGian.suatChieu.map((suat) => (
                                 <Dropdown.Item>
                                   <Link
-                                    to={`/booking-movie/${suat.maLichChieu}`}
+                                    to={`/home/booking-movie/${suat.maLichChieu}`}
                                   >
                                     {suat.gioChieu}
                                   </Link>
@@ -138,31 +129,11 @@ function Showtimes(props) {
     } else {
       return (
         <Box padding="15px 15px 0">
-          <Skeleton
-            variant="rect"
-            width="100%"
-            className={classes.skeleton}
-          />
-          <Skeleton
-            variant="rect"
-            width="100%"
-            className={classes.skeleton}
-          />
-          <Skeleton
-            variant="rect"
-            width="100%"
-            className={classes.skeleton}
-          />
-          <Skeleton
-            variant="rect"
-            width="100%"
-            className={classes.skeleton}
-          />
-          <Skeleton
-            variant="rect"
-            width="50%"
-            className={classes.skeleton}
-          />
+          <Skeleton variant="rect" width="100%" className={classes.skeleton} />
+          <Skeleton variant="rect" width="100%" className={classes.skeleton} />
+          <Skeleton variant="rect" width="100%" className={classes.skeleton} />
+          <Skeleton variant="rect" width="100%" className={classes.skeleton} />
+          <Skeleton variant="rect" width="50%" className={classes.skeleton} />
         </Box>
       );
     }

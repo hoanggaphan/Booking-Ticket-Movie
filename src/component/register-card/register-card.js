@@ -1,15 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Box, Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, FormHelperText } from "@material-ui/core";
-import { Visibility, VisibilityOff, KeyboardBackspace,Error, Close } from "@material-ui/icons";
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
-import { useHistory } from 'react-router-dom'
-import { connect } from "react-redux";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@material-ui/core";
+import {
+  Close,
+  Error,
+  KeyboardBackspace,
+  Visibility,
+  VisibilityOff,
+} from "@material-ui/icons";
+import register from "assets/images/register-head.png";
 import { useSnackbar } from "notistack";
-
-import useStyles from './style';
-import { actClearMessage } from './../../redux/actions/index';
-import register from './../../assets/images/register-head.png';
+import React, { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import { connect } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { actClearMessage } from "redux/actions/index";
+import useStyles from "./style";
 
 function RegisterCard(props) {
   const classes = useStyles();
@@ -25,36 +38,36 @@ function RegisterCard(props) {
     email: "",
     soDt: "",
     maNhom: "GP10",
-    maLoaiNguoiDung: "KhachHang"
+    maLoaiNguoiDung: "KhachHang",
   });
   const [error, setError] = useState({
     hoTen: {
       message: "",
-      isError: false
+      isError: false,
     },
     taiKhoan: {
       message: "",
-      isError: false
+      isError: false,
     },
     matKhau: {
       message: "",
-      isError: false
+      isError: false,
     },
     email: {
       message: "",
-      isError: false
+      isError: false,
     },
     soDt: {
       message: "",
-      isError: false
-    }
+      isError: false,
+    },
   });
 
   useEffect(() => {
-    if(message) {
+    if (message) {
       enqueueSnackbar(message, {
         variant: status,
-        anchorOrigin: {vertical: "top", horizontal: "center"},
+        anchorOrigin: { vertical: "top", horizontal: "center" },
         action: (key) => (
           <IconButton
             className={classes.iconBtn}
@@ -65,11 +78,13 @@ function RegisterCard(props) {
         ),
       });
     }
-    return () =>  {clearMessage()};
+    return () => {
+      clearMessage();
+    };
     // eslint-disable-next-line
   }, [isFetching]);
 
-  const handleError = e => {
+  const handleError = (e) => {
     const { name, value } = e.target;
     let message = "";
     let isError = false;
@@ -99,7 +114,7 @@ function RegisterCard(props) {
         }
         break;
       case "email":
-        // eslint-disable-next-line 
+        // eslint-disable-next-line
         const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (value && !value.match(mailformat)) {
           isError = true;
@@ -118,16 +133,21 @@ function RegisterCard(props) {
     }
     setError({ ...error, [name]: { message, isError } });
   };
-  
+
   const formValidation = () => {
-    setNotValid(prevState => {
-      prevState = error.hoTen.isError || error.taiKhoan.isError || error.matKhau.isError || error.email.isError || error.soDt.isError;
+    setNotValid((prevState) => {
+      prevState =
+        error.hoTen.isError ||
+        error.taiKhoan.isError ||
+        error.matKhau.isError ||
+        error.email.isError ||
+        error.soDt.isError;
       return prevState;
     });
-  }
-  useEffect(formValidation, [error]) // Khi state input thay đổi setState lại cho form
+  };
+  useEffect(formValidation, [error]); // Khi state input thay đổi setState lại cho form
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
@@ -135,7 +155,7 @@ function RegisterCard(props) {
     setShowPassword(!showPassword);
   };
 
-  const handleMouseDownPassword = e => {
+  const handleMouseDownPassword = (e) => {
     e.preventDefault();
   };
 
@@ -143,15 +163,11 @@ function RegisterCard(props) {
     <Box className={classes.registerCard} maxWidth="390px" m="10px">
       <Card>
         <Card.Header>
-          <img
-            className="card-img"
-            src={register}
-            alt="login head"
-          />
+          <img className="card-img" src={register} alt="login head" />
           <Card.Title>Đăng Ký</Card.Title>
         </Card.Header>
         <Card.Body>
-          <form onSubmit={props.onSubmit(values, notValid)} >
+          <form onSubmit={props.onSubmit(values, notValid)}>
             <FormControl
               className={`${error.hoTen.isError && "error"}`}
               required
@@ -280,7 +296,7 @@ function RegisterCard(props) {
           </form>
         </Card.Body>
         <Card.Footer>
-          <Link to="/" className="card-link">
+          <Link to="/home" className="card-link">
             Trang Chủ
           </Link>
           <IconButton
@@ -300,7 +316,7 @@ const mapStateToProps = (state) => {
   return {
     isFetching: state.userReducer.isFetching,
     message: state.userReducer.message,
-    status: state.userReducer.status
+    status: state.userReducer.status,
   };
 };
 
@@ -308,8 +324,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearMessage: () => {
       dispatch(actClearMessage());
-    }
-  }
+    },
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (RegisterCard);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterCard);

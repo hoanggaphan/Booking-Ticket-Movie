@@ -1,19 +1,18 @@
-import React from "react";
 import {
   Box,
+  Paper,
+  Table,
+  TableBody,
   TableCell,
   TableContainer,
-  Table,
   TableHead,
-  Paper,
-  TableRow,
-  TableBody,
   TablePagination,
+  TableRow,
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
+import React from "react";
 import { connect } from "react-redux";
 import shortid from "shortid";
-
 import useStyles from "./style";
 
 function HistoryBooking(props) {
@@ -22,7 +21,9 @@ function HistoryBooking(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, thongTinDatVe.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage -
+    Math.min(rowsPerPage, thongTinDatVe.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

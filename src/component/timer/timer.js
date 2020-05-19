@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
 import { Box, IconButton } from "@material-ui/core";
-import Skeleton from "@material-ui/lab/Skeleton";
 import Close from "@material-ui/icons/Close";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { makeStyles } from "@material-ui/styles";
+import { useSnackbar } from "notistack";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme) => ({
   root: {

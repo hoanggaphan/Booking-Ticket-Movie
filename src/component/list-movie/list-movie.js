@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Box, Grid, Button } from "@material-ui/core";
+import { Box, Button, Grid } from "@material-ui/core";
+import shape6 from "assets/images/shape-6.png";
+import ModalTrailer from "component/modal-trailer/modalTrailer";
+import Movie from "component/movie/movie";
+import React, { useEffect, useState } from "react";
+import Carousel from "react-bootstrap/Carousel";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
-import Carousel from "react-bootstrap/Carousel";
 import { connect } from "react-redux";
+import { actgetListMovie } from "redux/actions/index";
 import shortid from "shortid";
-
 import useStyles from "./style";
-import ModalTrailer from "../modal-trailer/modalTrailer";
-import Movie from "./../movie/movie";
-import { actgetListMovie } from "./../../redux/actions/index";
-import shape6 from './../../assets/images/shape-6.png';
 
 function ListMovie(props) {
   const classes = useStyles();
@@ -33,11 +32,7 @@ function ListMovie(props) {
   return (
     <Box position="relative">
       <Box id="showtimes" className={classes.listMovie}>
-        <img
-          src={shape6}
-          className={classes.shape}
-          alt="shape 6"
-        />
+        <img src={shape6} className={classes.shape} alt="shape 6" />
         <Tab.Container id="lich-chieu" defaultActiveKey="showing">
           <Nav className="list-movie-nav">
             <Box className="list-movie-nav-items">

@@ -1,10 +1,9 @@
+import { Box, IconButton, Link, Modal, Typography } from "@material-ui/core";
+import { ErrorOutline, HighlightOff, YouTube } from "@material-ui/icons";
 import React from "react";
-import { Box, Typography, IconButton, Link, Modal } from "@material-ui/core";
-import { ErrorOutline, HighlightOff, YouTube } from '@material-ui/icons';
 import { connect } from "react-redux";
-
+import { actViewTrailer as actCloseModal } from "redux/actions/index";
 import useStyles from "./style";
-import { actViewTrailer as actCloseModal } from "../../redux/actions/index";
 
 function ModalTrailer(props) {
   const classes = useStyles();
@@ -12,7 +11,7 @@ function ModalTrailer(props) {
 
   const handleOnCloseModal = () => {
     const valid = {
-      isOpen: false
+      isOpen: false,
     };
     onCloseModal(valid);
   };
@@ -84,17 +83,17 @@ function ModalTrailer(props) {
 }
 
 //////////// Connect with Redux ////////////////////
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    trailer: state.movieReducer.trailer
+    trailer: state.movieReducer.trailer,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onCloseModal: valid => {
+    onCloseModal: (valid) => {
       dispatch(actCloseModal(valid));
-    }
+    },
   };
 };
 

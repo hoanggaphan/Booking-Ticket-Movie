@@ -1,4 +1,4 @@
-import * as ActionsType from "./../constants/ActionTypes";
+import * as ActionsType from "redux/constants/ActionTypes";
 
 const initialState = {
   listCinemaLogo: [],

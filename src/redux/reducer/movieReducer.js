@@ -1,4 +1,4 @@
-import * as ActionTypes from "./../constants/ActionTypes";
+import * as ActionTypes from "redux/constants/ActionTypes";
 
 const initialState = {
   listMovie: [],
@@ -206,7 +206,8 @@ const movieReducer = (state = initialState, action) => {
       const month = ("0" + (d.getMonth() + 1)).slice(-2);
       const year = d.getFullYear();
       const ngayKhoiChieu = `${date}.${month}.${year}`; // Định dạng ngày lại dd/mm/yyyy
-      let lichChieu = action.detailMovie.lichChieu.map((rap) => { // Thêm địa chỉ, hình ảnh rap vào thongTinRap vì API thiếu
+      let lichChieu = action.detailMovie.lichChieu.map((rap) => {
+        // Thêm địa chỉ, hình ảnh rap vào thongTinRap vì API thiếu
         const item1 = state.listDiaChi.find(
           (diaChi) => diaChi.maCumRap === rap.thongTinRap.maCumRap
         );
@@ -218,23 +219,29 @@ const movieReducer = (state = initialState, action) => {
         const d = new Date(rap.ngayChieuGioChieu);
         const date = ("0" + d.getDate()).slice(-2);
         const month = ("0" + (d.getMonth() + 1)).slice(-2);
-        rap.thoiGianChieu = [{
-          ngayChieu: date + "/" + month,
-          suatChieu: [{
-              maLichChieu: rap.maLichChieu,
-              gioChieu: new Date(rap.ngayChieuGioChieu).toLocaleTimeString(),
-          }],
-
-        }]
+        rap.thoiGianChieu = [
+          {
+            ngayChieu: date + "/" + month,
+            suatChieu: [
+              {
+                maLichChieu: rap.maLichChieu,
+                gioChieu: new Date(rap.ngayChieuGioChieu).toLocaleTimeString(),
+              },
+            ],
+          },
+        ];
         return rap;
       });
-      lichChieu = lichChieu.reduce((accumulator, current) => { // Gộp cụm rạp lặp lại thành 1
+      lichChieu = lichChieu.reduce((accumulator, current) => {
+        // Gộp cụm rạp lặp lại thành 1
         const length = accumulator.length;
         if (length < 1) {
           accumulator.push(current);
         } else {
-          const index = accumulator.findIndex(item => item.thongTinRap.maCumRap === current.thongTinRap.maCumRap);
-          if(index > -1) {
+          const index = accumulator.findIndex(
+            (item) => item.thongTinRap.maCumRap === current.thongTinRap.maCumRap
+          );
+          if (index > -1) {
             accumulator[index].thoiGianChieu.push(...current.thoiGianChieu);
           } else {
             accumulator.push(current);
@@ -242,43 +249,52 @@ const movieReducer = (state = initialState, action) => {
         }
         return accumulator;
       }, []);
-      lichChieu = lichChieu.map(item => {
-         item.thoiGianChieu = item.thoiGianChieu.reduce((accumulator, current) => { // Gộp ngày chiếu lặp lại thành 1
-          const length = accumulator.length;
-          if (length < 1) {
-            accumulator.push(current);
-          } else {
-            const index = accumulator.findIndex(thoiGian => thoiGian.ngayChieu === current.ngayChieu);
-            if(index > -1) {
-              accumulator[index].suatChieu.push(...current.suatChieu);
-            } else {
+      lichChieu = lichChieu.map((item) => {
+        item.thoiGianChieu = item.thoiGianChieu.reduce(
+          (accumulator, current) => {
+            // Gộp ngày chiếu lặp lại thành 1
+            const length = accumulator.length;
+            if (length < 1) {
               accumulator.push(current);
+            } else {
+              const index = accumulator.findIndex(
+                (thoiGian) => thoiGian.ngayChieu === current.ngayChieu
+              );
+              if (index > -1) {
+                accumulator[index].suatChieu.push(...current.suatChieu);
+              } else {
+                accumulator.push(current);
+              }
             }
-          }
-          return accumulator;
-        }, []);
+            return accumulator;
+          },
+          []
+        );
         return item;
-      })
-      lichChieu = lichChieu.reduce((accumulator, current) => { //gộp cụm rạp thành 1 hệ thống rạp
+      });
+      lichChieu = lichChieu.reduce((accumulator, current) => {
+        //gộp cụm rạp thành 1 hệ thống rạp
         const length = accumulator.length;
         if (length < 1) {
           const heThongRap = {
-            maHeThongRap: current.thongTinRap.maHeThongRap, 
-            tenHeThongRap: current.thongTinRap.maHeThongRap, 
-            lstLichChieu: [current]
+            maHeThongRap: current.thongTinRap.maHeThongRap,
+            tenHeThongRap: current.thongTinRap.maHeThongRap,
+            lstLichChieu: [current],
           };
-          accumulator = [...accumulator, heThongRap]
+          accumulator = [...accumulator, heThongRap];
         } else {
-          const index = accumulator.findIndex(item => item.maHeThongRap === current.thongTinRap.maHeThongRap);
-          if(index > -1) {
+          const index = accumulator.findIndex(
+            (item) => item.maHeThongRap === current.thongTinRap.maHeThongRap
+          );
+          if (index > -1) {
             accumulator[index].lstLichChieu.push(current);
           } else {
             const heThongRap = {
-              maHeThongRap: current.thongTinRap.maHeThongRap, 
-              tenHeThongRap: current.thongTinRap.maHeThongRap, 
-              lstLichChieu: [current]
+              maHeThongRap: current.thongTinRap.maHeThongRap,
+              tenHeThongRap: current.thongTinRap.maHeThongRap,
+              lstLichChieu: [current],
             };
-            accumulator = [...accumulator, heThongRap]
+            accumulator = [...accumulator, heThongRap];
           }
         }
         return accumulator;
@@ -288,7 +304,7 @@ const movieReducer = (state = initialState, action) => {
     case ActionTypes.GET_DETAIL_MOVIE_REQUEST:
       return { ...state, isFechingDetailMovie: true };
     case ActionTypes.GET_DETAIL_MOVIE_FAILURE:
-      console.log(action.message)
+      console.log(action.message);
       return { ...state, isFechingDetailMovie: false };
 
     case ActionTypes.GET_SHOWTIMES_INFO_API:
@@ -304,16 +320,16 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, isSearching: true };
     case ActionTypes.SEARCH_MOVIE_SUCCESS:
       const listSearch = action.payload;
-      if(listSearch.length < 1 && action.value) {
+      if (listSearch.length < 1 && action.value) {
         state.notFound = true;
       } else {
         state.notFound = false;
-      } 
+      }
       state.listSearch = listSearch;
       return { ...state, isSearching: false };
     case ActionTypes.SEARCH_MOVIE_FAILURE:
-      console.log(action.message)
-      return { ...state, isSearching: false};
+      console.log(action.message);
+      return { ...state, isSearching: false };
 
     case ActionTypes.VIEW_TRAILER:
       state.trailer = { ...state.trailer, ...action.trailer };

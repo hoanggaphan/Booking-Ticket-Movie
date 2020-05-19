@@ -1,23 +1,31 @@
+import { Box, Button, Grid } from "@material-ui/core";
+import mobile from "assets/images/mobile.png";
+import slide2 from "assets/images/slide2.jpg";
+import slide3 from "assets/images/slide3.jpg";
+import slide4 from "assets/images/slide4.jpg";
+import slide5 from "assets/images/slide5.jpg";
+import slide6 from "assets/images/slide6.jpg";
+import slide7 from "assets/images/slide7.jpg";
+import slide8 from "assets/images/slide8.jpg";
+import slide9 from "assets/images/slide9.jpg";
 import React from "react";
-import { Box, Grid, Button } from "@material-ui/core";
 import Carousel from "react-bootstrap/Carousel";
-
 import useStyles from "./style";
-import slide2 from "./../../assets/images/slide2.jpg";
-import slide3 from "./../../assets/images/slide3.jpg";
-import slide4 from "./../../assets/images/slide4.jpg";
-import slide5 from "./../../assets/images/slide5.jpg";
-import slide6 from "./../../assets/images/slide6.jpg";
-import slide7 from "./../../assets/images/slide7.jpg";
-import slide8 from "./../../assets/images/slide8.jpg";
-import slide9 from "./../../assets/images/slide9.jpg";
-import mobile from './../../assets/images/mobile.png';
 
 export default function BgApp() {
   const classes = useStyles();
-  
-  const slides = [slide2, slide3, slide4, slide5, slide6, slide7, slide8, slide9];
-  
+
+  const slides = [
+    slide2,
+    slide3,
+    slide4,
+    slide5,
+    slide6,
+    slide7,
+    slide8,
+    slide9,
+  ];
+
   return (
     <Box className={classes.backApp}>
       <Grid container component={Box} className="back-app-container">
@@ -59,11 +67,7 @@ export default function BgApp() {
           </Box>
         </Grid>
         <Grid xs={12} md={6} className="back-app-right">
-          <img
-            alt="mobile"
-            src={mobile}
-            className="right-img-mobile"
-          />
+          <img alt="mobile" src={mobile} className="right-img-mobile" />
           <Carousel
             controls={false}
             indicators={false}

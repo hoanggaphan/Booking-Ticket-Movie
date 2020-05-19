@@ -1,31 +1,28 @@
-import React from 'react';
-
-import { actRegisterUserAPI } from "./../../../redux/actions/index";
+import registerCard from "component/register-card/register-card";
+import WithBgSquares from "component/withBgSquares/withBgSquares";
+import React from "react";
 import { connect } from "react-redux";
-import WithBgSquares from './../../../component/withBgSquares/withBgSquares';
-import RegisterCard from './../../../component/register-card/register-card';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { actRegisterUserAPI } from "redux/actions";
 
-const EnhancedRegister = WithBgSquares(RegisterCard)
+const EnhancedRegister = WithBgSquares(registerCard);
 function Register(props) {
   const history = useHistory();
-  const handleSubmit = (values, notValid) => e => {
+  const handleSubmit = (values, notValid) => (e) => {
     e.preventDefault();
-    if(notValid === false) {
+    if (notValid === false) {
       props.actRegisterUser(values, history);
     }
   };
 
-  return (
-    <EnhancedRegister onSubmit={handleSubmit} color="warning"/>
-  )
+  return <EnhancedRegister onSubmit={handleSubmit} color="warning" />;
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     actRegisterUser: (data, history) => {
       dispatch(actRegisterUserAPI(data, history));
-    }
+    },
   };
 };
 

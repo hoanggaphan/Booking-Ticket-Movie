@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
-import { FavoriteBorder, Favorite, ChatBubbleOutline } from "@material-ui/icons";
+import {
+  ChatBubbleOutline,
+  Favorite,
+  FavoriteBorder,
+} from "@material-ui/icons";
 import Skeleton from "@material-ui/lab/Skeleton";
+import MyAvatar from "component/avatar/avatar";
+import StarRating from "component/star-rating/star-rating";
+import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { connect } from "react-redux";
-
+import { actPutCommentAPI, actShowLogin } from "redux/actions/index";
 import useStyles from "./style";
-import StarRating from "../star-rating/star-rating";
-import { actPutCommentAPI, actShowLogin } from "./../../redux/actions/index";
-import MyAvatar from "../avatar/avatar";
 
 function Comment(props) {
   const classes = useStyles();

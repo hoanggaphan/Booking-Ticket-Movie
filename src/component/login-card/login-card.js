@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Box, Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@material-ui/core";
-import { Visibility, VisibilityOff, Close } from "@material-ui/icons";
-import Spinner from 'react-bootstrap/Spinner'
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@material-ui/core";
+import { Close, Visibility, VisibilityOff } from "@material-ui/icons";
+import loginHead from "assets/images/login-head.png";
 import { useSnackbar } from "notistack";
-
+import React, { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { actClearMessage } from "redux/actions/index";
 import useStyles from "./style";
-import { actClearMessage } from './../../redux/actions/index';
-import loginHead from './../../assets/images/login-head.png';
 
 function LoginCard(props) {
   const classes = useStyles();
@@ -22,10 +29,10 @@ function LoginCard(props) {
   });
 
   useEffect(() => {
-    if(message) {
+    if (message) {
       enqueueSnackbar(message, {
         variant: status,
-        anchorOrigin: {vertical: "top", horizontal: "center"},
+        anchorOrigin: { vertical: "top", horizontal: "center" },
         action: (key) => (
           <IconButton
             className={classes.icon}
@@ -36,7 +43,9 @@ function LoginCard(props) {
         ),
       });
     }
-    return () =>  {clearMessage()};
+    return () => {
+      clearMessage();
+    };
     // eslint-disable-next-line
   }, [isFetching]);
 
@@ -56,11 +65,7 @@ function LoginCard(props) {
     <Box className={classes.loginCard} maxWidth="390px" m="10px">
       <Card>
         <Card.Header>
-          <img
-            className="card-img"
-            src={loginHead}
-            alt="login head"
-          />
+          <img className="card-img" src={loginHead} alt="login head" />
           <Card.Title>Đăng Nhập</Card.Title>
         </Card.Header>
         <Card.Body>
@@ -98,7 +103,12 @@ function LoginCard(props) {
             </FormControl>
             <Button disabled={isFetching} type="submit" className="login-btn">
               Đăng Nhập
-              {isFetching && <Spinner animation="border" className={classes.buttonProgress}/>}
+              {isFetching && (
+                <Spinner
+                  animation="border"
+                  className={classes.buttonProgress}
+                />
+              )}
             </Button>
           </form>
         </Card.Body>
@@ -109,7 +119,7 @@ function LoginCard(props) {
               Đăng Ký
             </Link>
           </Box>
-          <Link to="/" className="card-link">
+          <Link to="/home" className="card-link">
             Trang Chủ
           </Link>
         </Card.Footer>
@@ -122,7 +132,7 @@ const mapStateToProps = (state) => {
   return {
     isFetching: state.userReducer.isFetching,
     message: state.userReducer.message,
-    status: state.userReducer.status
+    status: state.userReducer.status,
   };
 };
 
@@ -130,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearMessage: () => {
       dispatch(actClearMessage());
-    }
-  }
+    },
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(LoginCard);

@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
-import Tab from "react-bootstrap/Tab";
-import Nav from "react-bootstrap/Nav";
+import shape5 from "assets/images/shape-5.png";
+import React, { useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import Nav from "react-bootstrap/Nav";
+import Tab from "react-bootstrap/Tab";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { actGetListCinemaDetail, actGetListLogo } from "redux/actions/index";
 import useStyles from "./style";
-import { actGetListLogo, actGetListCinemaDetail } from "./../../redux/actions/index";
-import shape5 from './../../assets/images/shape-5.png';
 
 function ListCinema(props) {
   const classes = useStyles();
@@ -47,7 +46,7 @@ function ListCinema(props) {
       )
     );
   };
-  
+
   const renderListCinema = () => {
     // thêm hình ảnh cho list lịch chiếu theo cụm rạp vì API méo có =))
     if (listMovie.length) {
@@ -241,7 +240,7 @@ function ListCinema(props) {
                                         {lichChieu.suatChieu.map((suat) => (
                                           <Dropdown.Item
                                             as={Link}
-                                            to={`/booking-movie/${suat.maLichChieu}`}
+                                            to={`home/booking-movie/${suat.maLichChieu}`}
                                             key={suat.maLichChieu}
                                           >
                                             {suat.gioChieu}
@@ -279,11 +278,7 @@ function ListCinema(props) {
 
   return (
     <Box className={classes.listCinema}>
-      <img
-        src={shape5}
-        alt="shape 5"
-        className={classes.shape}
-      />
+      <img src={shape5} alt="shape 5" className={classes.shape} />
       <Box paddingTop="80px"></Box>
       <Box id="list-cinema">
         <Tab.Container transition={false} id="cum-rap" defaultActiveKey={0}>
