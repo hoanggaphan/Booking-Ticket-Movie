@@ -6,7 +6,7 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { actGetAccountUser } from "redux/actions";
+import { actGetAccountUser } from "redux/actions/user";
 import useStyles from "./styles";
 
 function Account(props) {

@@ -8,7 +8,7 @@ import {
   actAddChairBooking,
   actClearListBooking,
   actRemoveChairBooking,
-} from "redux/actions";
+} from "redux/actions/booking";
 import useStyles from "./styles";
 
 function Chair({ chair, ...props }) {

@@ -3,7 +3,7 @@ import WithBgSquares from "common/WithBgSquares";
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { actRegisterUserAPI } from "redux/actions";
+import { actRegisterUserAPI } from "redux/actions/user";
 
 const EnhancedRegister = WithBgSquares(registerCard);
 function Register(props) {

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actGetShowtimesInfoAPI } from "redux/actions";
+import { actGetShowtimesInfoAPI } from "redux/actions/cinema";
 import useStyles from "./styles";
 
 const QuickTicketBook = (props) => {

@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actGetListLogo } from "redux/actions";
+import { actGetListLogo } from "redux/actions/cinema";
 import useStyles from "./styles";
 
 function Showtimes(props) {

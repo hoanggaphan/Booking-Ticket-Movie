@@ -3,7 +3,7 @@ import Comment from "features/home/pages/detail-movie/components/Comment";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { actGetListCommentAPI } from "redux/actions";
+import { actGetListCommentAPI } from "redux/actions/comment";
 import shortid from "shortid";
 import useStyles from "./styles";
 

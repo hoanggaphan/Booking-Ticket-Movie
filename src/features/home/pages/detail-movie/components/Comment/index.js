@@ -10,7 +10,8 @@ import RatingStar from "common/RatingStar";
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { connect } from "react-redux";
-import { actPutCommentAPI, actShowLogin } from "redux/actions";
+import { actPutCommentAPI } from "redux/actions/comment";
+import { actShowLogin } from "redux/actions/user";
 import useStyles from "./styles";
 
 function Comment(props) {

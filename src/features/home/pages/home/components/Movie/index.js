@@ -6,7 +6,7 @@ import RatingStar from "common/RatingStar";
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actViewTrailer } from "redux/actions";
+import { actViewTrailer } from "redux/actions/movie";
 import useStyles from "./styles";
 
 const Movie = (props) => {

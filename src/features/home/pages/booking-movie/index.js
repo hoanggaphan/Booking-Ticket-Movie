@@ -6,7 +6,7 @@ import Payment from "features/home/pages/booking-movie/components/Payment";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { actGetRoomInfo } from "redux/actions";
+import { actGetRoomInfo } from "redux/actions/booking";
 import useStyles from "./styles";
 
 function BookingMoviePage(props) {

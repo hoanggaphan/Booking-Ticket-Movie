@@ -6,7 +6,8 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { connect } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { actPostCommentAPI, actShowLogin } from "redux/actions";
+import { actPostCommentAPI } from "redux/actions/comment";
+import { actShowLogin } from "redux/actions/user";
 import useStyles from "./styles";
 
 function CommentForm(props) {

@@ -15,7 +15,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
-import { actLoadUser } from "redux/actions";
+import { actLoadUser } from "redux/actions/user";
 import useStyle from "./styles";
 
 const Navbar = (props) => {

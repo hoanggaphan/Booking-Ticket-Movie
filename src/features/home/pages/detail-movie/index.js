@@ -14,7 +14,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { actgetDetailMovieAPI, actViewTrailer } from "redux/actions";
+import { actgetDetailMovieAPI, actViewTrailer } from "redux/actions/movie";
 import useStyles from "./styles";
 
 function DetailMoviePage(props) {

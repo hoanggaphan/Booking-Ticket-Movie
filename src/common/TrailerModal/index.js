@@ -2,7 +2,7 @@ import { Box, IconButton, Link, Modal, Typography } from "@material-ui/core";
 import { ErrorOutline, HighlightOff, YouTube } from "@material-ui/icons";
 import React from "react";
 import { connect } from "react-redux";
-import { actViewTrailer as actCloseModal } from "redux/actions";
+import { actViewTrailer as actCloseModal } from "redux/actions/movie";
 import useStyles from "./styles";
 
 function TrailerModal(props) {

@@ -21,7 +21,7 @@ import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { actClearMessage } from "redux/actions";
+import { actClearMessage } from "redux/actions/user";
 import useStyles from "./styles";
 
 function RegisterCard(props) {

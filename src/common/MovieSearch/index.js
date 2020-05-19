@@ -6,7 +6,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actSearching, actSearchMovie } from "redux/actions";
+import { actSearching, actSearchMovie } from "redux/actions/movie";
 import useStyles from "./styles";
 
 const MovieSearch = (props) => {
