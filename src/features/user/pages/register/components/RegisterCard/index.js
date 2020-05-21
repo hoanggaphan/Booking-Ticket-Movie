@@ -19,18 +19,23 @@ import register from "assets/images/register-head.png";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { actClearMessage } from "redux/actions/user";
 import useStyles from "./styles";
 
 function RegisterCard(props) {
+  const dispatch = useDispatch();
+  const isFetching = useSelector((state) => state.userReducer.isFetching);
+  const message = useSelector((state) => state.userReducer.message);
+  const status = useSelector((state) => state.userReducer.status);
+
   const classes = useStyles();
   const history = useHistory();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const { message, status, isFetching, clearMessage } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [notValid, setNotValid] = useState(true);
+
   const [values, setValues] = useState({
     hoTen: "",
     taiKhoan: "",
@@ -40,6 +45,7 @@ function RegisterCard(props) {
     maNhom: "GP10",
     maLoaiNguoiDung: "KhachHang",
   });
+
   const [error, setError] = useState({
     hoTen: {
       message: "",
@@ -79,7 +85,7 @@ function RegisterCard(props) {
       });
     }
     return () => {
-      clearMessage();
+      dispatch(actClearMessage());
     };
     // eslint-disable-next-line
   }, [isFetching]);
@@ -312,20 +318,4 @@ function RegisterCard(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isFetching: state.userReducer.isFetching,
-    message: state.userReducer.message,
-    status: state.userReducer.status,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    clearMessage: () => {
-      dispatch(actClearMessage());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterCard);
+export default RegisterCard;

@@ -2,15 +2,20 @@ import { Box, Grid, Typography } from "@material-ui/core";
 import { Android, Apple, Facebook } from "@material-ui/icons";
 import zionLogo from "assets/images/zion-logo.jpg";
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
 
-function Footer(props) {
+Footer.propTypes = {};
+
+function Footer() {
   const classes = useStyles();
+  const listCinemaLogo = useSelector(
+    (state) => state.cinemaReducer.listCinemaLogo
+  );
 
   const renderLogo = () => {
-    return props.listCinemaLogo.map((item, index) => {
+    return listCinemaLogo.map((item, index) => {
       return (
         <a
           title={item.maHeThongRap}
@@ -173,9 +178,4 @@ function Footer(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    listCinemaLogo: state.cinemaReducer.listCinemaLogo,
-  };
-};
-export default connect(mapStateToProps, null)(Footer);
+export default Footer;

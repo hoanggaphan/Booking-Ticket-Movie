@@ -12,28 +12,26 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import momo from "assets/images/momo-logo.jpg";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { actOpenPaymentBox, actPostBookingChair } from "redux/actions/booking";
 import { actClearMessage } from "redux/actions/user";
 import useStyles from "./styles";
 
-function Payment(props) {
+function Payment() {
+  const dispatch = useDispatch();
+  const roomInfo = useSelector((state) => state.bookingReducer.roomInfo);
+  const isFetching = useSelector((state) => state.bookingReducer.isFetching);
+  const listBooking = useSelector((state) => state.bookingReducer.listBooking);
+  const isPaying = useSelector((state) => state.bookingReducer.isPaying);
+  const message = useSelector((state) => state.bookingReducer.message);
+  const status = useSelector((state) => state.bookingReducer.status);
+  const user = useSelector((state) => state.userReducer.user);
+
   const classes = useStyles();
   const { maLichChieu } = useParams();
   const [value, setValue] = useState("momo");
-  const {
-    roomInfo,
-    isFetching,
-    listBooking,
-    postBookingChair,
-    user,
-    openPaymentBox,
-    isPaying,
-    message,
-    status,
-    clearMessage,
-  } = props;
+
   const sum = listBooking.reduce((sum, item) => sum + item.giaVe, 0);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const history = useHistory();
@@ -54,7 +52,7 @@ function Payment(props) {
       });
     }
     return () => {
-      clearMessage();
+      dispatch(actClearMessage());
     };
     // eslint-disable-next-line
   }, [isPaying]);
@@ -75,7 +73,7 @@ function Payment(props) {
           taiKhoanNguoiDung: user.taiKhoan,
         };
         const token = user.accessToken;
-        postBookingChair(info, token, history);
+        dispatch(actPostBookingChair(info, token, history));
       } else {
         const message = "Phải chọn ít nhất 1 ghế";
         enqueueSnackbar(message, {
@@ -97,7 +95,10 @@ function Payment(props) {
   return (
     <Box className={classes.root}>
       <Box display={{ xs: "flex", md: "none" }} justifyContent="flex-end">
-        <IconButton onClick={() => openPaymentBox(false)} className="icon">
+        <IconButton
+          onClick={() => dispatch(actOpenPaymentBox(false))}
+          className="icon"
+        >
           <Close />
         </IconButton>
       </Box>
@@ -179,29 +180,5 @@ function Payment(props) {
     </Box>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    roomInfo: state.bookingReducer.roomInfo,
-    isFetching: state.bookingReducer.isFetching,
-    listBooking: state.bookingReducer.listBooking,
-    isPaying: state.bookingReducer.isPaying,
-    message: state.bookingReducer.message,
-    status: state.bookingReducer.status,
-    user: state.userReducer.user,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    postBookingChair: (info, token, history) => {
-      dispatch(actPostBookingChair(info, token, history));
-    },
-    openPaymentBox: (status) => {
-      dispatch(actOpenPaymentBox(status));
-    },
-    clearMessage: () => {
-      dispatch(actClearMessage());
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Payment);
+export default Payment;

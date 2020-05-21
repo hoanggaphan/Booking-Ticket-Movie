@@ -2,8 +2,8 @@ import { Box, Grid, IconButton } from "@material-ui/core";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import Skeleton from "@material-ui/lab/Skeleton";
 import AgeType from "common/AgeType";
-import TrailerModal from "common/TrailerModal";
 import RatingStar from "common/RatingStar";
+import TrailerModal from "common/TrailerModal";
 import CommentForm from "features/home/pages/detail-movie/components/CommentForm";
 import CommentList from "features/home/pages/detail-movie/components/CommentList";
 import Showtimes from "features/home/pages/detail-movie/components/Showtimes";
@@ -12,24 +12,24 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { actgetDetailMovieAPI, actViewTrailer } from "redux/actions/movie";
 import useStyles from "./styles";
 
-function DetailMoviePage(props) {
+function DetailMoviePage() {
+  const dispatch = useDispatch();
+  const detailMovie = useSelector((state) => state.movieReducer.detailMovie);
+  const isFechingDetailMovie = useSelector(
+    (state) => state.movieReducer.isFechingDetailMovie
+  );
+
   const classes = useStyles();
   const { maPhim } = useParams();
   const [trailerM, setTrailerM] = useState("");
-  const {
-    detailMovie,
-    getDetailMovieAPI,
-    viewTrailer,
-    isFechingDetailMovie,
-  } = props;
 
   useEffect(() => {
-    getDetailMovieAPI(maPhim);
+    dispatch(actgetDetailMovieAPI(maPhim));
     // eslint-disable-next-line
   }, [maPhim]);
 
@@ -38,7 +38,7 @@ function DetailMoviePage(props) {
       isOpen: true,
       movie: detailMovie,
     };
-    viewTrailer(trailer);
+    dispatch(actViewTrailer(trailer));
   };
 
   return (
@@ -292,22 +292,4 @@ function DetailMoviePage(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getDetailMovieAPI: (maPhim) => {
-      dispatch(actgetDetailMovieAPI(maPhim));
-    },
-    viewTrailer: (trailer) => {
-      dispatch(actViewTrailer(trailer));
-    },
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    detailMovie: state.movieReducer.detailMovie,
-    isFechingDetailMovie: state.movieReducer.isFechingDetailMovie,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DetailMoviePage);
+export default DetailMoviePage;

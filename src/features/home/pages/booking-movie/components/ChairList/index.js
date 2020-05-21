@@ -2,13 +2,16 @@ import { Box, Button, Grid } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Chair from "features/home/pages/booking-movie/components/Chair";
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actOpenPaymentBox } from "redux/actions/booking";
 import useStyles from "./styles";
 
-function ChairList(props) {
+function ChairList() {
+  const dispatch = useDispatch();
+  const roomInfo = useSelector((state) => state.bookingReducer.roomInfo);
+  const listBooking = useSelector((state) => state.bookingReducer.listBooking);
+  const isFetching = useSelector((state) => state.bookingReducer.isFetching);
   const classes = useStyles();
-  const { roomInfo, listBooking, openPaymentBox, isFetching } = props;
 
   const validateNextBtn = () => {
     return listBooking.length < 1; // mảng < 1 là true
@@ -27,7 +30,7 @@ function ChairList(props) {
         <Button
           disabled={validateNextBtn()}
           className={classes.nextBtn}
-          onClick={() => openPaymentBox(true)}
+          onClick={() => dispatch(actOpenPaymentBox(true))}
         >
           Kế Tiếp
         </Button>
@@ -66,18 +69,4 @@ function ChairList(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  roomInfo: state.bookingReducer.roomInfo,
-  listBooking: state.bookingReducer.listBooking,
-  isFetching: state.bookingReducer.isFetching,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    openPaymentBox: (status) => {
-      dispatch(actOpenPaymentBox(status));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChairList);
+export default ChairList;

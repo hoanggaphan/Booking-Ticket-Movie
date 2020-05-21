@@ -4,28 +4,33 @@ import Rating from "@material-ui/lab/Rating";
 import RatingStar from "common/RatingStar";
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { actPostCommentAPI } from "redux/actions/comment";
 import { actShowLogin } from "redux/actions/user";
 import useStyles from "./styles";
 
-function CommentForm(props) {
+function CommentForm() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
+  const isLogin = useSelector((state) => state.userReducer.isLogin);
+
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
   const { maPhim } = useParams();
-  const { user, isLogin, showLogin, postCommentAPI } = props;
+
   const [rating, setrating] = useState(5);
   const [comment, setComment] = useState("");
   const [error, setError] = useState(false);
+
   const handleClose = () => {
     setError(false);
-    showLogin(false);
+    dispatch(actShowLogin(false));
   };
   const handleShow = () => {
     setError(false);
-    showLogin(true);
+    dispatch(actShowLogin(false));
   };
 
   useEffect(() => {
@@ -42,7 +47,7 @@ function CommentForm(props) {
 
   useEffect(() => {
     return () => {
-      showLogin(false);
+      dispatch(actShowLogin(false));
     };
     // eslint-disable-next-line
   }, []);
@@ -68,7 +73,7 @@ function CommentForm(props) {
         danhSachTraLoi: [],
         danhSachLike: [],
       };
-      postCommentAPI(newUser);
+      dispatch(actPostCommentAPI(newUser));
       setComment("");
       setError(false);
       return;
@@ -175,22 +180,4 @@ function CommentForm(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userReducer.user,
-    isLogin: state.userReducer.isLogin,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    showLogin: (status) => {
-      dispatch(actShowLogin(status));
-    },
-    postCommentAPI: (comment) => {
-      dispatch(actPostCommentAPI(comment));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);
+export default CommentForm;

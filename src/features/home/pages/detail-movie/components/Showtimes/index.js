@@ -4,22 +4,25 @@ import React, { useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { actGetListLogo } from "redux/actions/cinema";
 import useStyles from "./styles";
 
-function Showtimes(props) {
+function Showtimes() {
+  const dispatch = useDispatch();
+  const listCinemaLogo = useSelector(
+    (state) => state.cinemaReducer.listCinemaLogo
+  );
+  const detailMovie = useSelector((state) => state.movieReducer.detailMovie);
+  const isFechingDetailMovie = useSelector(
+    (state) => state.movieReducer.isFechingDetailMovie
+  );
+
   const classes = useStyles();
-  let {
-    listCinemaLogo,
-    detailMovie,
-    isFechingDetailMovie,
-    getListLogo,
-  } = props;
 
   useEffect(() => {
-    getListLogo();
+    dispatch(actGetListLogo());
     // eslint-disable-next-line
   }, []);
 
@@ -151,18 +154,4 @@ function Showtimes(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    listCinemaLogo: state.cinemaReducer.listCinemaLogo,
-    detailMovie: state.movieReducer.detailMovie,
-    isFechingDetailMovie: state.movieReducer.isFechingDetailMovie,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getListLogo: () => {
-      dispatch(actGetListLogo());
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Showtimes);
+export default Showtimes;

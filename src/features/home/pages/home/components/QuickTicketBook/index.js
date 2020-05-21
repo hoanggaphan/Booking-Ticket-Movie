@@ -1,14 +1,19 @@
 import { Box, Button } from "@material-ui/core";
 import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { actGetShowtimesInfoAPI } from "redux/actions/cinema";
 import useStyles from "./styles";
 
 const QuickTicketBook = (props) => {
+  const dispatch = useDispatch();
+  const listMovieShowing = useSelector(
+    (state) => state.movieReducer.listMovieShowing
+  );
+  const listCinema = useSelector((state) => state.movieReducer.listCinema);
+
   const classes = useStyles();
-  const { listMovieShowing, listCinema, getShowtimesInfoAPI } = props;
   const [lichChieuPhim, setLichChieuPhim] = useState([]);
   const [suatChieu, setSuatChieu] = useState([]);
   const [maLichChieu, setMaLichChieu] = useState(null);
@@ -30,7 +35,7 @@ const QuickTicketBook = (props) => {
     setMaLichChieu(null);
     setLichChieuPhim([]);
     setSuatChieu([]);
-    getShowtimesInfoAPI(movie.maPhim);
+    dispatch(actGetShowtimesInfoAPI(movie.maPhim));
   };
   const renderDropdownMovie = () => {
     return listMovieShowing.map((movie, index) => {
@@ -184,22 +189,4 @@ const QuickTicketBook = (props) => {
   );
 };
 
-///////////////////////// REFACTOR CODE WITH HOOK ///////////////////////
-
-///////////////////////// CONNECT WITH REDUX ///////////////////////////
-const mapStateToProps = (state) => {
-  return {
-    listMovieShowing: state.movieReducer.listMovieShowing,
-    listCinema: state.movieReducer.listCinema,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getShowtimesInfoAPI: (maPhim) => {
-      dispatch(actGetShowtimesInfoAPI(maPhim));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(QuickTicketBook);
+export default QuickTicketBook;

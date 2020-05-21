@@ -2,8 +2,8 @@ import { Box, IconButton } from "@material-ui/core";
 import Close from "@material-ui/icons/Close";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useSnackbar } from "notistack";
-import React, { memo, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   actAddChairBooking,
   actClearListBooking,
@@ -11,16 +11,13 @@ import {
 } from "redux/actions/booking";
 import useStyles from "./styles";
 
-function Chair({ chair, ...props }) {
+function Chair({ chair }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
+  const listBooking = useSelector((state) => state.bookingReducer.listBooking);
+
   const classes = useStyles();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const {
-    listBooking,
-    addChairBooking,
-    removeChairBooking,
-    clearListBooking,
-    user,
-  } = props;
 
   const findIndexChairBooking = () => {
     return listBooking.findIndex((item) => item.maGhe === chair.maGhe);
@@ -44,16 +41,16 @@ function Chair({ chair, ...props }) {
         });
       } else {
         if (index > -1) {
-          removeChairBooking(index);
+          dispatch(actRemoveChairBooking(index));
         } else {
-          addChairBooking(chair);
+          dispatch(actAddChairBooking(chair));
         }
       }
     }
   };
 
   useEffect(() => {
-    return () => clearListBooking();
+    return () => dispatch(actClearListBooking());
     // eslint-disable-next-line
   }, []);
 
@@ -110,21 +107,4 @@ function Chair({ chair, ...props }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  addChairBooking: (chairInfo) => {
-    dispatch(actAddChairBooking(chairInfo));
-  },
-  removeChairBooking: (chairInfo) => {
-    dispatch(actRemoveChairBooking(chairInfo));
-  },
-  clearListBooking: () => {
-    dispatch(actClearListBooking());
-  },
-});
-
-const mapStateToProps = (state) => ({
-  listBooking: state.bookingReducer.listBooking,
-  user: state.userReducer.user,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Chair));
+export default Chair;

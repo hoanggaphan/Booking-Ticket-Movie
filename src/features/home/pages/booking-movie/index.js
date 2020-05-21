@@ -4,19 +4,24 @@ import Timer from "common/Timer";
 import ChairList from "features/home/pages/booking-movie/components/ChairList";
 import Payment from "features/home/pages/booking-movie/components/Payment";
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { actGetRoomInfo } from "redux/actions/booking";
 import useStyles from "./styles";
 
-function BookingMoviePage(props) {
+function BookingMoviePage() {
+  const dispatch = useDispatch();
+  const isFetching = useSelector((state) => state.bookingReducer.isFetching);
+  const roomInfo = useSelector((state) => state.bookingReducer.roomInfo);
+  const user = useSelector((state) => state.userReducer.user);
+  const open = useSelector((state) => state.bookingReducer.open);
+
   const classes = useStyles();
-  const { getRoomInfo, isFetching, roomInfo, user, open } = props;
   const { maLichChieu } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    getRoomInfo(maLichChieu);
+    dispatch(actGetRoomInfo(maLichChieu));
     // eslint-disable-next-line
   }, []);
 
@@ -86,21 +91,4 @@ function BookingMoviePage(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getRoomInfo: (maLichChieu) => {
-      dispatch(actGetRoomInfo(maLichChieu));
-    },
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    isFetching: state.bookingReducer.isFetching,
-    roomInfo: state.bookingReducer.roomInfo,
-    user: state.userReducer.user,
-    open: state.bookingReducer.open,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BookingMoviePage);
+export default BookingMoviePage;

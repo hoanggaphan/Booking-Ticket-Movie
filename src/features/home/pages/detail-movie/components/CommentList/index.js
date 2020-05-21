@@ -1,20 +1,25 @@
 import { Box, Button } from "@material-ui/core";
 import Comment from "features/home/pages/detail-movie/components/Comment";
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { actGetListCommentAPI } from "redux/actions/comment";
 import shortid from "shortid";
 import useStyles from "./styles";
 
 function CommentList(props) {
+  const dispatch = useDispatch();
+  const listComment = useSelector((state) => state.userReducer.listComment);
+  const isGettingComment = useSelector(
+    (state) => state.userReducer.isGettingComment
+  );
+
   const classes = useStyles();
-  const { listComment, getListCommentAPI, isGettingComment } = props;
   const [visible, setVisible] = useState(5);
   const { maPhim } = useParams();
 
   useEffect(() => {
-    getListCommentAPI();
+    dispatch(actGetListCommentAPI());
     // eslint-disable-next-line
   }, [maPhim]);
 
@@ -39,19 +44,4 @@ function CommentList(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getListCommentAPI: () => {
-      dispatch(actGetListCommentAPI());
-    },
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    listComment: state.userReducer.listComment,
-    isGettingComment: state.userReducer.isGettingComment,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommentList);
+export default CommentList;

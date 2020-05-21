@@ -13,15 +13,20 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { actClearMessage } from "redux/actions/user";
 import useStyles from "./styles";
 
 function LoginCard(props) {
+  const dispatch = useDispatch();
+  const isFetching = useSelector((state) => state.userReducer.isFetching);
+  const message = useSelector((state) => state.userReducer.message);
+  const status = useSelector((state) => state.userReducer.status);
+
   const classes = useStyles();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const { isFetching, message, clearMessage, status } = props;
+
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
     taiKhoan: "",
@@ -44,7 +49,7 @@ function LoginCard(props) {
       });
     }
     return () => {
-      clearMessage();
+      dispatch(actClearMessage());
     };
     // eslint-disable-next-line
   }, [isFetching]);
@@ -128,19 +133,4 @@ function LoginCard(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isFetching: state.userReducer.isFetching,
-    message: state.userReducer.message,
-    status: state.userReducer.status,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    clearMessage: () => {
-      dispatch(actClearMessage());
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(LoginCard);
+export default LoginCard;

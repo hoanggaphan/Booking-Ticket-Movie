@@ -4,7 +4,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { makeStyles } from "@material-ui/styles";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,12 +31,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Timer(props) {
+  const roomInfo = useSelector((state) => state.bookingReducer.roomInfo);
+
   const classes = useStyles();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const history = useHistory();
+
   const [counter, setCounter] = useState(props.seconds);
   const minutes = parseInt(counter / 60);
   const seconds = counter % 60;
-  const history = useHistory();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (counter > 0) {
@@ -64,7 +67,7 @@ function Timer(props) {
 
   return (
     <Box className={classes.root}>
-      {props.roomInfo ? (
+      {roomInfo ? (
         <>
           <h6 className="timer-text">Thời gian giữ ghế</h6>
           <Box className="timer-num">
@@ -87,8 +90,4 @@ function Timer(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  roomInfo: state.bookingReducer.roomInfo,
-});
-
-export default connect(mapStateToProps, null)(Timer);
+export default Timer;
