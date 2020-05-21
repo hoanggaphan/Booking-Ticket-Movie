@@ -9,14 +9,18 @@ import MyAvatar from "common/Avatar";
 import RatingStar from "common/RatingStar";
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actPutCommentAPI } from "redux/actions/comment";
 import { actShowLogin } from "redux/actions/user";
 import useStyles from "./styles";
 
 function Comment(props) {
+  const { comment } = props;
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
+
   const classes = useStyles();
-  const { comment, putCommentAPI, user, showLogin } = props;
   const [like, setLike] = useState(0);
   const [status, setStatus] = useState({ like: false, comment: false });
   const [value, setValue] = useState("");
@@ -43,23 +47,23 @@ function Comment(props) {
         setLike(like - 1);
         comment.like = like - 1;
         comment.danhSachLike[index].liked = false;
-        putCommentAPI(comment.id, comment);
+        dispatch(actPutCommentAPI(comment.id, comment));
       } else if (item && !item.liked) {
         setStatus({ ...status, like: true });
         setLike(like + 1);
         comment.like = like + 1;
         comment.danhSachLike[index].liked = true;
-        putCommentAPI(comment.id, comment);
+        dispatch(actPutCommentAPI(comment.id, comment));
       } else {
         setStatus({ ...status, like: true });
         setLike(like + 1);
         comment.like = like + 1;
         const cloneUser = { taiKhoan: user.taiKhoan, liked: true };
         comment.danhSachLike = [...comment.danhSachLike, cloneUser];
-        putCommentAPI(comment.id, comment);
+        dispatch(actPutCommentAPI(comment.id, comment));
       }
     } else {
-      showLogin(true);
+      dispatch(actShowLogin(true));
     }
   };
 
@@ -68,11 +72,11 @@ function Comment(props) {
       if (user) {
         const userReply = { hoTen: user.hoTen, message: value, hinhAnh: "" };
         comment.danhSachTraLoi.unshift(userReply);
-        putCommentAPI(comment.id, comment);
+        dispatch(actPutCommentAPI(comment.id, comment));
         setValue("");
         return;
       }
-      showLogin(true);
+      dispatch(actShowLogin(true));
     }
   };
 
@@ -213,20 +217,4 @@ function Comment(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userReducer.user,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    putCommentAPI: (id, comment) => {
-      dispatch(actPutCommentAPI(id, comment));
-    },
-    showLogin: (status) => {
-      dispatch(actShowLogin(status));
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Comment);
+export default Comment;

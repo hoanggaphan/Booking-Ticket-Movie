@@ -4,19 +4,22 @@ import BookingHistory from "features/home/pages/account/components/BookingHistor
 import React, { useEffect } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { actGetAccountUser } from "redux/actions/user";
 import useStyles from "./styles";
 
-function Account(props) {
+function Account() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
+
   const classes = useStyles();
-  const { getAccountUser, user } = props;
   const history = useHistory();
   const userLocal = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    getAccountUser({ taiKhoan: userLocal.taiKhoan });
+    const taiKhoan = { taiKhoan: userLocal.taiKhoan };
+    dispatch(actGetAccountUser(taiKhoan));
     // eslint-disable-next-line
   }, []);
 
@@ -41,18 +44,4 @@ function Account(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getAccountUser: (taiKhoan) => {
-      dispatch(actGetAccountUser(taiKhoan));
-    },
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    user: state.userReducer.user,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Account);
+export default Account;

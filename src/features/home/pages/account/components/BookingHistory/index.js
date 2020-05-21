@@ -11,13 +11,15 @@ import {
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import shortid from "shortid";
 import useStyles from "./styles";
 
-function BookingHistory(props) {
+function BookingHistory() {
+  const thongTinDatVe = useSelector((state) => state.userReducer.thongTinDatVe);
+  const isFetching = useSelector((state) => state.userReducer.isFetching);
+
   const classes = useStyles();
-  const { thongTinDatVe, isFetching } = props;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -112,10 +114,4 @@ function BookingHistory(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    thongTinDatVe: state.userReducer.thongTinDatVe,
-    isFetching: state.userReducer.isFetching,
-  };
-};
-export default connect(mapStateToProps, null)(BookingHistory);
+export default BookingHistory;

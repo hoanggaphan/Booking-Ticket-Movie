@@ -12,15 +12,17 @@ import MyAvatar from "common/Avatar";
 import MovieSearch from "common/MovieSearch";
 import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { actLoadUser } from "redux/actions/user";
 import useStyle from "./styles";
 
-const Navbar = (props) => {
+const Navbar = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
+
   const classes = useStyle();
-  const { user, loadUser } = props;
   const [show, setShow] = useState(false);
   const history = useHistory();
   const location = useLocation();
@@ -29,7 +31,7 @@ const Navbar = (props) => {
     if (!user && localStorage.getItem("user")) {
       // kiểm tra nếu có user trên store thì k cần setState
       const user = JSON.parse(localStorage.getItem("user"));
-      loadUser(user);
+      dispatch(actLoadUser(user));
     }
     // eslint-disable-next-line
   }, []);
@@ -106,24 +108,24 @@ const Navbar = (props) => {
       </>
 
       {/* LOGO */}
-      <Link to="/home" exact>
+      <Link to="/home">
         <img src={logo} width="150px" height="50px" alt="logo" />
       </Link>
 
       {/* NAV LINK */}
       <Box component="nav" display={{ xs: "none", sm: "block" }}>
-        <Button
+        <Link
           className={classes.headerNavLink}
-          component={Link}
-          exact
           to="/home"
+          scroll={(el) =>
+            el.scrollIntoView({ behavior: "smooth", block: "start" })
+          }
           color="inherit"
         >
           Trang Chủ
-        </Button>
-        <Button
+        </Link>
+        <Link
           className={classes.headerNavLink}
-          component={Link}
           to="/home/#showtimes"
           scroll={(el) =>
             el.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -131,10 +133,9 @@ const Navbar = (props) => {
           color="inherit"
         >
           Lịch Chiếu
-        </Button>
-        <Button
+        </Link>
+        <Link
           className={classes.headerNavLink}
-          component={Link}
           scroll={(el) =>
             el.scrollIntoView({ behavior: "smooth", block: "start" })
           }
@@ -142,7 +143,7 @@ const Navbar = (props) => {
           color="inherit"
         >
           Cụm Rạp
-        </Button>
+        </Link>
       </Box>
 
       {/* SEARCH MOVIE */}
@@ -173,7 +174,7 @@ const Navbar = (props) => {
                 <Link to="/home/account">Tài Khoản</Link>
                 <button
                   onClick={() => {
-                    loadUser(null);
+                    dispatch(actLoadUser(null));
                     localStorage.removeItem("user");
                   }}
                 >
@@ -195,7 +196,7 @@ const Navbar = (props) => {
               <button
                 className="logout-m"
                 onClick={() => {
-                  loadUser(null);
+                  dispatch(actLoadUser(null));
                   localStorage.removeItem("user");
                   setShow(false);
                 }}
@@ -243,18 +244,4 @@ const Navbar = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadUser: (user) => {
-      dispatch(actLoadUser(user));
-    },
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    user: state.userReducer.user,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default Navbar;

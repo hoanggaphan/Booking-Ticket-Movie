@@ -4,21 +4,20 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actClearMessage, actPutUpdateAccount } from "redux/actions/user";
 import useStyles from "./styles";
 
-function AccountCard(props) {
+function AccountCard() {
+  const dispatch = useDispatch();
+  const account = useSelector((state) => state.userReducer.account);
+  const isFetching = useSelector((state) => state.userReducer.isFetching);
+  const isUpdating = useSelector((state) => state.userReducer.isUpdating);
+  const message = useSelector((state) => state.userReducer.message);
+  const status = useSelector((state) => state.userReducer.status);
+
   const classes = useStyles();
-  const {
-    account,
-    putUpdateAccount,
-    isFetching,
-    isUpdating,
-    clearMessage,
-    message,
-    status,
-  } = props;
+
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [values, setValues] = useState({
     hoTen: "",
@@ -53,7 +52,7 @@ function AccountCard(props) {
       });
     }
     return () => {
-      clearMessage();
+      dispatch(actClearMessage());
     };
     // eslint-disable-next-line
   }, [isUpdating]);
@@ -123,7 +122,7 @@ function AccountCard(props) {
     e.preventDefault();
     if (formValid) {
       const token = JSON.parse(localStorage.getItem("user")).accessToken;
-      putUpdateAccount(values, token);
+      dispatch(actPutUpdateAccount(values, token));
     }
   };
 
@@ -271,25 +270,4 @@ function AccountCard(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    account: state.userReducer.account,
-    isFetching: state.userReducer.isFetching,
-    isUpdating: state.userReducer.isUpdating,
-    message: state.userReducer.message,
-    status: state.userReducer.status,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    putUpdateAccount: (account, token) => {
-      dispatch(actPutUpdateAccount(account, token));
-    },
-    clearMessage: () => {
-      dispatch(actClearMessage());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AccountCard);
+export default AccountCard;

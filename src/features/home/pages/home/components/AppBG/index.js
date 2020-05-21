@@ -29,7 +29,7 @@ export default function AppBG() {
   return (
     <Box className={classes.backApp}>
       <Grid container component={Box} className="back-app-container">
-        <Grid xs={12} md={6} className="back-app-left">
+        <Grid item xs={12} md={6} className="back-app-left">
           <Box width="100%">
             <p className="left-text">
               Ứng dụng tiện lợi dành cho người yêu điện ảnh
@@ -66,7 +66,7 @@ export default function AppBG() {
             </p>
           </Box>
         </Grid>
-        <Grid xs={12} md={6} className="back-app-right">
+        <Grid item xs={12} md={6} className="back-app-right">
           <img alt="mobile" src={mobile} className="right-img-mobile" />
           <Carousel
             controls={false}

@@ -1,29 +1,33 @@
 import Box from "@material-ui/core/Box";
 import SearchIcon from "@material-ui/icons/Search";
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import Spinner from "react-bootstrap/Spinner";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { actSearching, actSearchMovie } from "redux/actions/movie";
 import useStyles from "./styles";
 
-const MovieSearch = (props) => {
+const MovieSearch = () => {
+  const dispatch = useDispatch();
+  const listSearch = useSelector((state) => state.movieReducer.listSearch);
+  const notFound = useSelector((state) => state.movieReducer.notFound);
+  const isSearching = useSelector((state) => state.movieReducer.isSearching);
+
   const classes = useStyles();
   const [focus, setFocus] = useState(false);
   const [keyword, setKeyword] = useState("");
-  let { listSearch, searchMovie, notFound, isSearching, searching } = props;
 
   const handleChange = (e) => {
     setKeyword(e.target.value);
-    searching();
+    dispatch(actSearching());
   };
 
   useEffect(() => {
     // if this effect not run again, it wait 300ms and call API later
     const timeout = setTimeout(() => {
-      searchMovie(keyword);
+      dispatch(actSearchMovie(keyword));
     }, 300);
     // if this effect run again, because `keyword` changed, we remove the previous timeout
     return () => clearTimeout(timeout);
@@ -102,24 +106,4 @@ const MovieSearch = (props) => {
   );
 };
 
-///////////// Connect with Redux ////////////////
-const mapStateToProps = (state) => {
-  return {
-    listSearch: state.movieReducer.listSearch,
-    notFound: state.movieReducer.notFound,
-    isSearching: state.movieReducer.isSearching,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    searchMovie: (value) => {
-      dispatch(actSearchMovie(value));
-    },
-    searching: () => {
-      dispatch(actSearching());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(memo(MovieSearch));
+export default MovieSearch;

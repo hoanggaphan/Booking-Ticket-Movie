@@ -4,13 +4,15 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import AgeType from "common/AgeType";
 import RatingStar from "common/RatingStar";
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { actViewTrailer } from "redux/actions/movie";
 import useStyles from "./styles";
 
 const Movie = (props) => {
   const { movie, type } = props;
+
+  const dispatch = useDispatch();
   const classes = useStyles(movie);
 
   const handleViewTrailer = () => {
@@ -18,7 +20,7 @@ const Movie = (props) => {
       movie,
       isOpen: true,
     };
-    props.viewTrailer(trailer);
+    dispatch(actViewTrailer(trailer));
   };
 
   return (
@@ -134,12 +136,5 @@ const Movie = (props) => {
 };
 
 /////////////////// Connect with redux ///////////////////
-const mapDispatchToProps = (dispatch) => {
-  return {
-    viewTrailer: (trailer) => {
-      dispatch(actViewTrailer(trailer));
-    },
-  };
-};
 
-export default connect(null, mapDispatchToProps)(Movie);
+export default Movie;

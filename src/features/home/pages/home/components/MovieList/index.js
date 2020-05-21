@@ -6,16 +6,22 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actgetListMovie } from "redux/actions/movie";
 import shortid from "shortid";
 import useStyles from "./styles";
 
-function MovieList(props) {
+function MovieList() {
+  const dispatch = useDispatch();
+  const listMovieShowing = useSelector(
+    (state) => state.movieReducer.listMovieShowing
+  );
+  const listMovieComming = useSelector(
+    (state) => state.movieReducer.listMovieComming
+  );
+  const listMovie = useSelector((state) => state.movieReducer.listMovie);
+
   const classes = useStyles();
-
-  let { listMovieComming, listMovieShowing, listMovie, getListMovie } = props;
-
   const [visible, setVisible] = useState(8);
 
   const perSlide = 8; // Số item trên trang
@@ -25,7 +31,7 @@ function MovieList(props) {
   const render = useRender(visible, perSlide);
 
   useEffect(() => {
-    getListMovie();
+    dispatch(actgetListMovie());
     //eslint-disable-next-line
   }, []);
 
@@ -53,7 +59,7 @@ function MovieList(props) {
               {/* VIEW IN WEB */}
               <Carousel interval={null} indicators={false}>
                 {[...Array(slideShowing)].map((item, indexSlide) => (
-                  <Carousel.Item>
+                  <Carousel.Item key={shortid.generate()}>
                     <Box display="flex" flexWrap="wrap">
                       {render.renderMovieWeb(
                         listMovieShowing,
@@ -86,7 +92,7 @@ function MovieList(props) {
               {/* VIEW IN WEB */}
               <Carousel interval={null} indicators={false}>
                 {[...Array(slideComming)].map((item, indexSlide) => (
-                  <Carousel.Item>
+                  <Carousel.Item key={shortid.generate()}>
                     <Box display="flex" flexWrap="wrap">
                       {render.renderMovieWeb(
                         listMovieComming,
@@ -146,21 +152,4 @@ const useRender = (visible, perSlide) => {
   return { renderMovieWeb, renderMovieMobile };
 };
 
-//////////////// Connect with Redux //////////////////////
-const mapStateToProps = (state) => {
-  return {
-    listMovieShowing: state.movieReducer.listMovieShowing,
-    listMovieComming: state.movieReducer.listMovieComming,
-    listMovie: state.movieReducer.listMovie,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getListMovie: () => {
-      dispatch(actgetListMovie());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MovieList);
+export default MovieList;

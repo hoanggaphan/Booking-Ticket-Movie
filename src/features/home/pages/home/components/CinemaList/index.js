@@ -1,28 +1,31 @@
 import { Box, Grid } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import shape5 from "assets/images/shape-5.png";
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { actGetListCinemaDetail, actGetListLogo } from "redux/actions/cinema";
+import shortid from "shortid";
 import useStyles from "./styles";
 
-function CinemaList(props) {
+function CinemaList() {
+  const dispatch = useDispatch();
+  const listCinemaLogo = useSelector(
+    (state) => state.cinemaReducer.listCinemaLogo
+  );
+  let listCinemaDetail = useSelector(
+    (state) => state.cinemaReducer.listCinemaDetail
+  );
+  const listMovie = useSelector((state) => state.movieReducer.listMovie);
+
   const classes = useStyles();
-  let {
-    listCinemaLogo,
-    listCinemaDetail,
-    listMovie,
-    getListLogo,
-    getListCinemaDetail,
-  } = props;
 
   useEffect(() => {
-    getListCinemaDetail();
-    getListLogo();
+    dispatch(actGetListCinemaDetail());
+    dispatch(actGetListLogo());
     // eslint-disable-next-line
   }, []);
 
@@ -118,7 +121,7 @@ function CinemaList(props) {
                     ? [...Array(6)]
                     : item.lstCumRap
                   ).map((cumRap, cumRapIndex) => (
-                    <Nav.Item key={cumRap && cumRap.maCumRap}>
+                    <Nav.Item key={shortid.generate()}>
                       <Nav.Link eventKey={cumRapIndex}>
                         <Box className="list-cinema-group">
                           {cumRap ? (
@@ -182,7 +185,7 @@ function CinemaList(props) {
                         : cumRap.danhSachPhim
                       ).map((phim) => (
                         <Box
-                          key={cumRap && phim.maPhim}
+                          key={shortid.generate()}
                           className="list-cinema-movie"
                         >
                           <Box mr="20px" maxWidth="90px">
@@ -227,7 +230,7 @@ function CinemaList(props) {
                                 ? Array.from(new Array(3))
                                 : phim.lstLichChieuTheoNgay
                               ).map((lichChieu) => (
-                                <>
+                                <Fragment key={shortid.generate()}>
                                   {lichChieu ? (
                                     <Dropdown key={lichChieu.ngayChieu}>
                                       <Dropdown.Toggle
@@ -259,7 +262,7 @@ function CinemaList(props) {
                                       mb="10px"
                                     />
                                   )}
-                                </>
+                                </Fragment>
                               ))}
                             </Box>
                           </Box>
@@ -296,22 +299,4 @@ function CinemaList(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    listCinemaLogo: state.cinemaReducer.listCinemaLogo,
-    listCinemaDetail: state.cinemaReducer.listCinemaDetail,
-    listMovie: state.movieReducer.listMovie,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getListLogo: () => {
-      dispatch(actGetListLogo());
-    },
-    getListCinemaDetail: () => {
-      dispatch(actGetListCinemaDetail());
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(CinemaList);
+export default CinemaList;
