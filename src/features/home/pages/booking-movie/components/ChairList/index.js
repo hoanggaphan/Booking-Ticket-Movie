@@ -10,7 +10,6 @@ function ChairList() {
   const dispatch = useDispatch();
   const roomInfo = useSelector((state) => state.bookingReducer.roomInfo);
   const listBooking = useSelector((state) => state.bookingReducer.listBooking);
-  const isFetching = useSelector((state) => state.bookingReducer.isFetching);
   const classes = useStyles();
 
   const validateNextBtn = () => {
@@ -20,7 +19,7 @@ function ChairList() {
   return (
     <Box component={Grid} item xs={12} sm={10} m="auto!important">
       <Box display="flex" justifyContent="center" flexWrap="wrap">
-        {(isFetching ? [...Array(160)] : roomInfo.danhSachGhe).map(
+        {(!roomInfo ? [...Array(160)] : roomInfo.danhSachGhe).map(
           (item, index) => (
             <Chair chair={item} key={index} />
           )

@@ -21,9 +21,7 @@ import useStyles from "./styles";
 function Payment() {
   const dispatch = useDispatch();
   const roomInfo = useSelector((state) => state.bookingReducer.roomInfo);
-  const isFetching = useSelector((state) => state.bookingReducer.isFetching);
   const listBooking = useSelector((state) => state.bookingReducer.listBooking);
-  const isPaying = useSelector((state) => state.bookingReducer.isPaying);
   const message = useSelector((state) => state.bookingReducer.message);
   const status = useSelector((state) => state.bookingReducer.status);
   const user = useSelector((state) => state.userReducer.user);
@@ -55,7 +53,7 @@ function Payment() {
       dispatch(actClearMessage());
     };
     // eslint-disable-next-line
-  }, [isPaying]);
+  }, [message]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -102,7 +100,7 @@ function Payment() {
           <Close />
         </IconButton>
       </Box>
-      {!isFetching ? (
+      {roomInfo ? (
         <>
           <h5 className="movie-name">{roomInfo.thongTinPhim.tenPhim}</h5>
           <Box className="cinema-name">

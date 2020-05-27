@@ -7,12 +7,9 @@ import { actGetListCommentAPI } from "redux/actions/comment";
 import shortid from "shortid";
 import useStyles from "./styles";
 
-function CommentList(props) {
+function CommentList() {
   const dispatch = useDispatch();
   const listComment = useSelector((state) => state.userReducer.listComment);
-  const isGettingComment = useSelector(
-    (state) => state.userReducer.isGettingComment
-  );
 
   const classes = useStyles();
   const [visible, setVisible] = useState(5);
@@ -25,13 +22,13 @@ function CommentList(props) {
 
   return (
     <Box className={classes.root}>
-      {(isGettingComment ? [...Array(4)] : [...listComment])
+      {(!listComment ? [...Array(4)] : [...listComment])
         .reverse()
         .slice(0, visible)
         .map((comment) => (
           <Comment key={shortid.generate()} comment={comment} />
         ))}
-      {visible < listComment.length && (
+      {listComment && visible < listComment.length && (
         <Button
           className="more-btn"
           variant="outlined"

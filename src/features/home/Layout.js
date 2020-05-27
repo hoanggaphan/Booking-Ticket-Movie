@@ -3,7 +3,7 @@ import dots from "assets/images/dots.png";
 import MyFooter from "common/Footer";
 import Navbar from "common/Navbar";
 import React from "react";
-import HomeRoutes from "./routes";
+import HomeRoutes from './routes/index';
 
 const style = {
   backgroundImage: `url(${dots})`,

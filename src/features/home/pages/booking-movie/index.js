@@ -11,7 +11,6 @@ import useStyles from "./styles";
 
 function BookingMoviePage() {
   const dispatch = useDispatch();
-  const isFetching = useSelector((state) => state.bookingReducer.isFetching);
   const roomInfo = useSelector((state) => state.bookingReducer.roomInfo);
   const user = useSelector((state) => state.userReducer.user);
   const open = useSelector((state) => state.bookingReducer.open);
@@ -37,7 +36,7 @@ function BookingMoviePage() {
       <Grid item xs={12} md={9} className="room-box">
         <Box className="info-box">
           <Box>
-            {!isFetching ? (
+            {roomInfo ? (
               <>
                 <Box display="flex">
                   <h6 className="title">Tên rạp:</h6>
