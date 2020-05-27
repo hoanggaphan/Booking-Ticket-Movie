@@ -1,52 +1,43 @@
+// -------------------------- MOVIE ------------------------------- //
 export const GET_LIST_MOVIE_API = "GET_LIST_MOVIE_API";
+export const GET_DETAIL_MOVIE = "GET_DETAIL_MOVIE";
+export const SEARCH_MOVIE = "SEARCH_MOVIE";
+export const VIEW_TRAILER = "VIEW_TRAILER";
+// -------------------------- END MOVIE ------------------------------- //
 
-export const GET_DETAIL_MOVIE_REQUEST = "GET_DETAIL_MOVIE_REQUEST";
-export const GET_DETAIL_MOVIE_SUCCESS = "GET_DETAIL_MOVIE_SUCCESS";
-export const GET_DETAIL_MOVIE_FAILURE = "GET_DETAIL_MOVIE_FAILURE";
 
+// -------------------------- CINEMA ------------------------------- //
 export const GET_LIST_LOGO_CINEMA = "GET_LIST_LOGO_CINEMA";
 export const GET_LIST_CINEMA_DETAIL = "GET_LIST_CINEMA_DETAIL";
 export const GET_SHOWTIMES_INFO_API = "GET_SHOWTIMES_INFO_API";
+export const GET_ROOM_INFO = "GET_ROOM_INFO";
+// -------------------------- END CINEMA ------------------------------- //
 
-export const VIEW_TRAILER = "VIEW_TRAILER";
 
-export const SEARCH_MOVIE_REQUEST = "SEARCH_MOVIE_REQUEST";
-export const SEARCH_MOVIE_SUCCESS = "SEARCH_MOVIE_SUCCESS";
-export const SEARCH_MOVIE_FAILURE = "SEARCH_MOVIE_FAILURE";
-
-export const GET_ROOM_INFO_REQUEST = "GET_ROOM_INFO_REQUEST";
-export const GET_ROOM_INFO_SUCCESS = "GET_ROOM_INFO_SUCCESS";
-export const GET_ROOM_INFO_FAILURE = "GET_ROOM_INFO_FAILURE";
-
-export const POST_BOOKING_CHAIR_REQUEST = "POST_BOOKING_CHAIR_REQUEST";
-export const POST_BOOKING_CHAIR_SUCCESS = "POST_BOOKING_CHAIR_SUCCESS";
-export const POST_BOOKING_CHAIR_FAILURE = "POST_BOOKING_CHAIR_FAILURE";
+// -------------------------- BOOKING ------------------------------- //
+export const POST_BOOKING_CHAIR = "POST_BOOKING_CHAIR";
 export const ADD_CHAIR_BOOKING = "ADD_CHAIR_BOOKING";
 export const REMOVE_CHAIR_BOOKING = "REMOVE_CHAIR_BOOKING";
-export const CLEAR_LIST_BOOKING = "CLEAR_LIST_BOOKING";
 export const OPEN_PAYMENT_BOX = "OPEN_PAYMENT_BOX";
+export const CLEAR_LIST_BOOKING = "CLEAR_LIST_BOOKING";
+// -------------------------- END BOOKING ------------------------------- //
 
-export const GET_LIST_COMMENT_REQUEST = "GET_LIST_COMMENT_REQUEST";
-export const GET_LIST_COMMENT_SUCCESS = "GET_LIST_COMMENT_SUCCESS";
-export const GET_LIST_COMMENT_FAILURE = "GET_LIST_COMMENT_FAILURE";
-export const POST_COMMENT_API = "POST_COMMENT_API";
 
-export const POST_LOGIN_USER_REQUEST = "POST_LOGIN_USER_REQUEST";
-export const POST_LOGIN_USER_SUCCESS = "POST_LOGIN_USER_SUCCESS";
-export const POST_LOGIN_USER_FAILURE = "POST_LOGIN_USER_FAILURE";
+// -------------------------- USER ------------------------------- //
+export const POST_LOGIN_USER = "POST_LOGIN_USER";
+export const POST_REGISTER_USER = "POST_REGISTER_USER";
 
-export const POST_REGISTER_USER_REQUEST = "POST_REGISTER_USER_REQUEST";
-export const POST_REGISTER_USER_SUCCESS = "POST_REGISTER_USER_SUCCESS";
-export const POST_REGISTER_USER_FAILURE = "POST_REGISTER_USER_FAILURE";
-
-export const GET_ACCOUNT_USER_REQUEST = "GET_ACCOUNT_USER_REQUEST";
-export const GET_ACCOUNT_USER_SUCCESS = "GET_ACCOUNT_USER_SUCCESS";
-export const GET_ACCOUNT_USER_FAILURE = "GET_ACCOUNT_USER_FAILURE";
-
-export const PUT_UPDATE_ACCOUNT_REQUEST = "PUT_UPDATE_ACCOUNT_REQUEST";
-export const PUT_UPDATE_ACCOUNT_SUCCESS = "PUT_UPDATE_ACCOUNT_SUCCESS";
-export const PUT_UPDATE_ACCOUNT_FAILURE = "PUT_UPDATE_ACCOUNT_FAILURE";
+export const GET_ACCOUNT_USER = "GET_ACCOUNT_USER";
+export const PUT_UPDATE_ACCOUNT = "PUT_UPDATE_ACCOUNT";
 
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 export const LOAD_USER = "LOAD_USER";
 export const SHOW_LOGIN = "SHOW_LOGIN";
+// -------------------------- END USER ------------------------------- //
+
+
+
+// -------------------------- COMMENT ------------------------------- //
+export const GET_LIST_COMMENT = "GET_LIST_COMMENT";
+export const POST_COMMENT_API = "POST_COMMENT_API";
+// -------------------------- END COMMENT ------------------------------- //

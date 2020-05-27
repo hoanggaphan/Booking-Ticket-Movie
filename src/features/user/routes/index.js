@@ -1,22 +1,20 @@
-import { loginUserAuth } from "auth/loginUser";
 import PageNotFound from "common/PageNotFound";
 import Login from "features/user/pages/login";
 import Register from "features/user/pages/register";
 import React from "react";
-import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoutes";
 
 function UserRoutes() {
   const { path } = useRouteMatch();
-  const isLogin = loginUserAuth();
 
   return (
     <Switch>
-      <Route
-        exact
-        path={`${path}/login`}
-        render={() => (isLogin ? <Redirect to="/home" /> : <Login />)}
-      />
+      <ProtectedRoute path={`${path}/login`} component={Login} />
+
       <Route path={`${path}/register`} component={Register} />
+
+      {/* Page 404 */}
       <Route component={PageNotFound} />
     </Switch>
   );

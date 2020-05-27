@@ -5,8 +5,7 @@ const initialState = {
   listMovieShowing: [],
   listMovieComming: [],
 
-  isFechingDetailMovie: true,
-  detailMovie: {},
+  detailMovie: null,
   showtimesInfo: [],
   listCinema: [],
 
@@ -177,8 +176,8 @@ const initialState = {
     },
   ],
 
-  listSearch: [],
-  isSearching: false,
+  listSearch: null,
+  isTyping: false,
   notFound: false,
 };
 
@@ -200,7 +199,9 @@ const movieReducer = (state = initialState, action) => {
       state.listMovie = listMovieSorted;
       return { ...state };
 
-    case ActionTypes.GET_DETAIL_MOVIE_SUCCESS:
+    case ActionTypes.GET_DETAIL_MOVIE:
+      if (!action.detailMovie) return { ...state, detailMovie: null };
+
       const d = new Date(action.detailMovie.ngayKhoiChieu);
       const date = ("0" + d.getDate()).slice(-2);
       const month = ("0" + (d.getMonth() + 1)).slice(-2);
@@ -300,12 +301,7 @@ const movieReducer = (state = initialState, action) => {
         return accumulator;
       }, []);
       state.detailMovie = { ...action.detailMovie, ngayKhoiChieu, lichChieu };
-      return { ...state, isFechingDetailMovie: false };
-    case ActionTypes.GET_DETAIL_MOVIE_REQUEST:
-      return { ...state, isFechingDetailMovie: true };
-    case ActionTypes.GET_DETAIL_MOVIE_FAILURE:
-      console.log(action.message);
-      return { ...state, isFechingDetailMovie: false };
+      return { ...state };
 
     case ActionTypes.GET_SHOWTIMES_INFO_API:
       let listCinema = [];
@@ -316,20 +312,16 @@ const movieReducer = (state = initialState, action) => {
       state.listCinema = listCinema;
       return { ...state };
 
-    case ActionTypes.SEARCH_MOVIE_REQUEST:
-      return { ...state, isSearching: true };
-    case ActionTypes.SEARCH_MOVIE_SUCCESS:
-      const listSearch = action.payload;
-      if (listSearch.length < 1 && action.value) {
+    case ActionTypes.SEARCH_MOVIE:
+      const { listSearch, q, isTyping } = action;
+      if (!listSearch) return { ...state, listSearch, isTyping };
+
+      if (!listSearch.length && q) {
         state.notFound = true;
       } else {
         state.notFound = false;
       }
-      state.listSearch = listSearch;
-      return { ...state, isSearching: false };
-    case ActionTypes.SEARCH_MOVIE_FAILURE:
-      console.log(action.message);
-      return { ...state, isSearching: false };
+      return { ...state, listSearch, isTyping };
 
     case ActionTypes.VIEW_TRAILER:
       state.trailer = { ...state.trailer, ...action.trailer };

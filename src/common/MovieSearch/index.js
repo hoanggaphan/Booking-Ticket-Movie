@@ -1,47 +1,50 @@
 import Box from "@material-ui/core/Box";
 import SearchIcon from "@material-ui/icons/Search";
-import React, { useEffect, useState } from "react";
+import React, { useState, useRef } from "react";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import Spinner from "react-bootstrap/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { actSearching, actSearchMovie } from "redux/actions/movie";
+import { actSearchMovie, actTyping } from "redux/actions/movie";
 import useStyles from "./styles";
 
 const MovieSearch = () => {
   const dispatch = useDispatch();
   const listSearch = useSelector((state) => state.movieReducer.listSearch);
   const notFound = useSelector((state) => state.movieReducer.notFound);
-  const isSearching = useSelector((state) => state.movieReducer.isSearching);
+  const isTyping = useSelector(state => state.movieReducer.isTyping);
 
   const classes = useStyles();
   const [focus, setFocus] = useState(false);
   const [keyword, setKeyword] = useState("");
 
+  const typingTimeoutRef = useRef(null);
+
   const handleChange = (e) => {
-    setKeyword(e.target.value);
-    dispatch(actSearching());
+    const q = e.target.value;
+    setKeyword(q);
+
+    dispatch(actTyping());
+
+    if(typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      dispatch(actSearchMovie(q));
+    }, 500)
   };
 
-  useEffect(() => {
-    // if this effect not run again, it wait 300ms and call API later
-    const timeout = setTimeout(() => {
-      dispatch(actSearchMovie(keyword));
-    }, 300);
-    // if this effect run again, because `keyword` changed, we remove the previous timeout
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line
-  }, [keyword]);
-
   const renderListMovie = () => {
-    if (isSearching) {
+    if (isTyping) {
       return (
         <Box className={classes.loading}>
           <Spinner animation="border" />
         </Box>
       );
     }
+
     if (!keyword) {
       return (
         <Box
@@ -55,6 +58,7 @@ const MovieSearch = () => {
         </Box>
       );
     }
+
     if (notFound) {
       return (
         <Box
@@ -68,9 +72,11 @@ const MovieSearch = () => {
         </Box>
       );
     }
+
     return listSearch.map((movie) => {
       return (
         <Box
+          key={movie.maPhim}
           component={Link}
           to={`/home/detail-movie/${movie.maPhim}`}
           className="result-item"

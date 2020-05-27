@@ -1,53 +1,26 @@
 import * as ActionTypes from "redux/constants/ActionTypes";
 const initialState = {
   user: null,
+  status: "",
+  message: "",
+  isFetching: false, // sử dụng cho login, register, getAccount
+
   account: null,
   thongTinDatVe: [],
-  listComment: [],
   isLogin: false,
-  isFetching: false, // sử dụng cho login, register, getAccount
   isUpdating: false,
-  message: "",
-  status: "",
-  isGettingComment: false,
+
+  listComment: null,
 };
 
 const userReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionTypes.POST_LOGIN_USER_REQUEST:
-      return { ...state, isFetching: true, message: "" };
-    case ActionTypes.POST_LOGIN_USER_SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        user: action.user,
-        message: action.message,
-        status: action.status,
-      };
-    case ActionTypes.POST_LOGIN_USER_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        message: action.message,
-        status: action.status,
-      };
+  const { type } = action;
+  switch (type) {
+    case ActionTypes.POST_LOGIN_USER:
+      return { ...state, ...action };
 
-    case ActionTypes.POST_REGISTER_USER_REQUEST:
-      return { ...state, isFetching: true, message: "" };
-    case ActionTypes.POST_REGISTER_USER_SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        message: action.message,
-        status: action.status,
-      };
-    case ActionTypes.POST_REGISTER_USER_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        message: action.message,
-        status: action.status,
-      };
+    case ActionTypes.POST_REGISTER_USER:
+      return { ...state, ...action };
 
     case ActionTypes.CLEAR_MESSAGE:
       return { ...state, message: "" };
@@ -55,9 +28,11 @@ const userReducer = (state = initialState, action) => {
     case ActionTypes.LOAD_USER:
       return { ...state, user: action.user };
 
-    case ActionTypes.GET_ACCOUNT_USER_REQUEST:
-      return { ...state, isFetching: true };
-    case ActionTypes.GET_ACCOUNT_USER_SUCCESS:
+    case ActionTypes.GET_ACCOUNT_USER:
+      if (action.isFetching) return { ...state, ...action };
+
+      if (action.message) return console.log(action.message);
+
       state.thongTinDatVe = action.account.thongTinDatVe.map((item) => {
         item.danhSachGhe = item.danhSachGhe.reduce((array, itemCurrent) => {
           const index = array.findIndex(
@@ -74,14 +49,13 @@ const userReducer = (state = initialState, action) => {
         }, []);
         return item;
       });
-      return { ...state, isFetching: false, account: action.account };
-    case ActionTypes.GET_ACCOUNT_USER_FAILURE:
-      console.log(action.message);
-      return { ...state, isFetching: false };
+      return { ...state, ...action };
 
-    case ActionTypes.PUT_UPDATE_ACCOUNT_REQUEST:
-      return { ...state, isUpdating: true };
-    case ActionTypes.PUT_UPDATE_ACCOUNT_SUCCESS:
+    case ActionTypes.PUT_UPDATE_ACCOUNT:
+      if (action.isUpdating) return { ...state,...action };
+
+      if(action.status === "error") return {...state, ...action}
+
       const user = { ...state.user };
       for (const propUser in user) {
         for (const propAccount in action.account) {
@@ -90,34 +64,17 @@ const userReducer = (state = initialState, action) => {
           }
         }
       }
+
       localStorage.setItem("user", JSON.stringify(user));
       state.user = user;
       state.account = action.account;
-      return {
-        ...state,
-        isUpdating: false,
-        message: action.message,
-        status: "success",
-      };
-    case ActionTypes.PUT_UPDATE_ACCOUNT_FAILURE:
-      return {
-        ...state,
-        isUpdating: false,
-        message: action.message,
-        status: "error",
-      };
 
-    case ActionTypes.GET_LIST_COMMENT_REQUEST:
-      return { ...state, isGettingComment: true };
-    case ActionTypes.GET_LIST_COMMENT_SUCCESS:
-      return {
-        ...state,
-        listComment: action.listComment,
-        isGettingComment: false,
-      };
-    case ActionTypes.GET_LIST_COMMENT_FAILURE:
-      console.log(action.message);
-      return { ...state, isGettingComment: false };
+      return { ...state, ...action };
+
+    case ActionTypes.GET_LIST_COMMENT:
+      let { listComment } = action;
+      if (!listComment) return { ...state, listComment };
+      return { ...state, listComment };
 
     case ActionTypes.POST_COMMENT_API:
       state.listComment = [...state.listComment, action.comment];

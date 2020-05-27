@@ -15,9 +15,6 @@ function Showtimes() {
     (state) => state.cinemaReducer.listCinemaLogo
   );
   const detailMovie = useSelector((state) => state.movieReducer.detailMovie);
-  const isFechingDetailMovie = useSelector(
-    (state) => state.movieReducer.isFechingDetailMovie
-  );
 
   const classes = useStyles();
 
@@ -28,7 +25,7 @@ function Showtimes() {
 
   const refactorLichChieu = () => {
     //thêm logo cho rạp vì api thiếu
-    if (!isFechingDetailMovie) {
+    if (detailMovie) {
       return detailMovie.lichChieu.map((item) => {
         const index = listCinemaLogo.findIndex(
           (cinema) => cinema.maHeThongRap === item.maHeThongRap
@@ -40,7 +37,7 @@ function Showtimes() {
   };
 
   const renderLogo = () => {
-    if (!isFechingDetailMovie) {
+    if (detailMovie) {
       return refactorLichChieu().map((item, itemIndex) => {
         return (
           <Nav.Item key={itemIndex}>
@@ -64,7 +61,7 @@ function Showtimes() {
   };
 
   const renderContent = () => {
-    if (!isFechingDetailMovie) {
+    if (detailMovie) {
       return refactorLichChieu().map((item, itemIndex) => {
         return (
           <Tab.Pane className="main-pane" key={itemIndex} eventKey={itemIndex}>

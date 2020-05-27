@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { actGetShowtimesInfoAPI } from "redux/actions/cinema";
 import useStyles from "./styles";
 
-const QuickTicketBook = (props) => {
+const QuickTicketBook = () => {
   const dispatch = useDispatch();
   const listMovieShowing = useSelector(
     (state) => state.movieReducer.listMovieShowing

@@ -31,8 +31,9 @@ function RegisterCard(props) {
   const status = useSelector((state) => state.userReducer.status);
 
   const classes = useStyles();
-  const history = useHistory();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const history = useHistory();
+  
   const [showPassword, setShowPassword] = useState(false);
   const [notValid, setNotValid] = useState(true);
 

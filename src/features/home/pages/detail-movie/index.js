@@ -20,9 +20,6 @@ import useStyles from "./styles";
 function DetailMoviePage() {
   const dispatch = useDispatch();
   const detailMovie = useSelector((state) => state.movieReducer.detailMovie);
-  const isFechingDetailMovie = useSelector(
-    (state) => state.movieReducer.isFechingDetailMovie
-  );
 
   const classes = useStyles();
   const { maPhim } = useParams();
@@ -45,7 +42,7 @@ function DetailMoviePage() {
     <Box className={classes.root}>
       <Box className="detail-top">
         <Box className="top-background-blur">
-          {!isFechingDetailMovie ? (
+          {detailMovie ? (
             <>
               <img src={detailMovie.hinhAnh} alt={detailMovie.biDanh} />
               <IconButton
@@ -80,7 +77,7 @@ function DetailMoviePage() {
             sm={3}
             className="main-info-left"
           >
-            {!isFechingDetailMovie ? (
+            {detailMovie ? (
               <>
                 <Box
                   style={{ backgroundImage: `url('${detailMovie.hinhAnh}')` }}
@@ -106,7 +103,7 @@ function DetailMoviePage() {
             className="main-info-center"
           >
             <Box width="100%">
-              {!isFechingDetailMovie ? (
+              {detailMovie ? (
                 <>
                   <Box>{detailMovie.ngayKhoiChieu}</Box>
                   <Box display="flex" alignItems="center">
@@ -131,7 +128,7 @@ function DetailMoviePage() {
             sm={2}
             className="main-info-right"
           >
-            {!isFechingDetailMovie ? (
+            {detailMovie ? (
               <CircularProgressbar
                 value={detailMovie.danhGia}
                 maxValue={10}
@@ -162,7 +159,7 @@ function DetailMoviePage() {
               />
             )}
 
-            {!isFechingDetailMovie ? (
+            {detailMovie ? (
               <>
                 <Box my="10px">
                   <RatingStar
@@ -183,7 +180,7 @@ function DetailMoviePage() {
         </Grid>
       </Box>
       <Box display={{ xs: "block", sm: "none" }} className="info-mobile">
-        {!isFechingDetailMovie ? (
+        {detailMovie ? (
           <>
             <Box>{detailMovie.ngayKhoiChieu}</Box>
             <span className="name-info">{detailMovie.tenPhim}</span>
@@ -201,7 +198,7 @@ function DetailMoviePage() {
           <Tabs mountOnEnter defaultActiveKey="detail">
             <Tab eventKey="detail" title="Thông Tin">
               <Grid container>
-                {!isFechingDetailMovie ? (
+                {detailMovie ? (
                   <>
                     <Grid item xs={12} sm={6}>
                       <Box display="flex">
