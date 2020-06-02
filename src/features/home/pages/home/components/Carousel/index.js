@@ -6,7 +6,7 @@ import carousel3 from "assets/images/carousel-3.jpg";
 import carousel4 from "assets/images/carousel-4.jpg";
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import useStyle from "./styles";
+import useStyle from "./Carousel.styles";
 
 function MyCarousel() {
   const classes = useStyle();
@@ -15,7 +15,7 @@ function MyCarousel() {
     <Box>
       <Carousel
         touch
-        className={classes.root}
+        className={classes.carousel}
         nextIcon={
           <IconButton>
             <NavigateNext />
@@ -31,41 +31,44 @@ function MyCarousel() {
           <img
             src={carousel1}
             alt="carousel-1"
-            className="carousel-img"
+            className={classes.carousel__img}
             width="100%"
             height="650px"
           />
-          <Box className="carousel-background-linear" />
+          <Box className={classes.carousel__backgroundLinear} />
         </Carousel.Item>
+
         <Carousel.Item>
           <img
             src={carousel2}
             alt="carousel-2"
-            className="carousel-img"
+            className={classes.carousel__img}
             width="100%"
             height="650px"
           />
-          <Box className="carousel-background-linear" />
+          <Box className={classes.carousel__backgroundLinear} />
         </Carousel.Item>
+
         <Carousel.Item>
           <img
             src={carousel3}
             alt="carousel-1"
-            className="carousel-img"
+            className={classes.carousel__img}
             width="100%"
             height="650px"
           />
-          <Box className="carousel-background-linear" />
+          <Box className={classes.carousel__backgroundLinear} />
         </Carousel.Item>
+
         <Carousel.Item>
           <img
             src={carousel4}
             alt="carousel-1"
-            className="carousel-img"
+            className={classes.carousel__img}
             width="100%"
             height="650px"
           />
-          <Box className="carousel-background-linear" />
+          <Box className={classes.carousel__backgroundLinear} />
         </Carousel.Item>
       </Carousel>
     </Box>

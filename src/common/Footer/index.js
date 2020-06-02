@@ -1,18 +1,26 @@
 import { Box, Grid, Typography } from "@material-ui/core";
 import { Android, Apple, Facebook } from "@material-ui/icons";
 import zionLogo from "assets/images/zion-logo.jpg";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import useStyles from "./styles";
+import { actGetListLogo } from "redux/actions/cinema";
+import useStyles from "./Footer.styles";
 
 Footer.propTypes = {};
 
 function Footer() {
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const listCinemaLogo = useSelector(
     (state) => state.cinemaReducer.listCinemaLogo
   );
+
+  useEffect(() => {
+    dispatch(actGetListLogo());
+    // eslint-disable-next-line
+  }, []);
 
   const renderLogo = () => {
     return listCinemaLogo.map((item, index) => {
@@ -68,6 +76,7 @@ function Footer() {
               </Box>
             </Box>
           </Grid>
+
           <Grid
             component={Box}
             px="20px"
@@ -82,6 +91,7 @@ function Footer() {
               {renderLogo()}
             </Box>
           </Grid>
+
           <Grid component={Box} px="15px" item xs={6} sm={4}>
             <Box display="flex" justifyContent="space-around">
               <Box width="50%" display={{ xs: "none", md: "block" }}>
@@ -133,6 +143,7 @@ function Footer() {
             </Box>
           </Grid>
         </Grid>
+
         <Grid component={Box} container pt="16px" className="footer-bottom">
           <Grid component={Box} item sm={2} md={1} xs={12}>
             <Box
@@ -143,6 +154,7 @@ function Footer() {
               src={zionLogo}
             />
           </Grid>
+
           <Grid item sm={7} md={9} xs={12} className="footer-location">
             <h6>PHIMHUB – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN XXX</h6>
             <p>
@@ -157,6 +169,7 @@ function Footer() {
             <p>Số Điện Thoại (Hotline): 0906 799 313</p>
             <p>Email: phansihoang1998@gmail.com</p>
           </Grid>
+
           <Grid item sm={3} md={2} xs={12} component={Box}>
             <a
               href="http://online.gov.vn/Home/WebDetails/62782?AspxAutoDetectCookieSupport=1"

@@ -1,8 +1,8 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import DefaultBG from "common/Fallback/DefaultBG";
-import { SnackbarProvider } from "notistack";
 import PageNotFound from "common/PageNotFound";
+import { SnackbarProvider } from "notistack";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import theme from "./assets/styles/theme";

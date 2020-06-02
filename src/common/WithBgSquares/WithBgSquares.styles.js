@@ -1,3 +1,5 @@
+import dots from 'assets/images/dots.png'
+
 const styles = (theme) => ({
   "@keyframes move-left-right": {
     "0%": {
@@ -10,22 +12,27 @@ const styles = (theme) => ({
       transform: "translateX(-10px)",
     },
   },
+
   withFormBG: {
     width: "100%",
     minHeight: "100vh",
     overflow: "hidden",
-    position: "relative",
+
     display: "flex",
-    justifyContent: "center",
+    position: "relative",
     alignItems: "center",
-    backgroundImage: `url('${process.env.PUBLIC_URL}/images/dots.png')`,
+    justifyContent: "center",
+
+    backgroundImage: `url('${dots}')`,
     backgroundSize: "contain",
+
     "& .squares": {
       position: "absolute",
       overflow: "hidden",
       borderRadius: "20%",
-      background: (props) => `${theme.palette.squares[props.color]}`,
       transition: "0.5s ease-out",
+      background: (props) => `${theme.palette.squares[props.color]}`,
+
       "&.square1": {
         animation: `$move-left-right 4s infinite`,
         height: "300px",
@@ -34,6 +41,7 @@ const styles = (theme) => ({
         left: "3%",
         top: "-21%",
       },
+
       "&.square2": {
         animation: `$move-left-right 6s infinite`,
         height: "400px",
@@ -42,6 +50,7 @@ const styles = (theme) => ({
         right: "-5%",
         top: "-12%",
       },
+
       "&.square3": {
         animation: `$move-left-right 5s infinite`,
         height: "200px",
@@ -50,6 +59,7 @@ const styles = (theme) => ({
         left: "-5%",
         bottom: "0",
       },
+
       "&.square4": {
         animation: `$move-left-right 10s infinite`,
         height: "100px",
@@ -58,6 +68,7 @@ const styles = (theme) => ({
         right: "27%",
         top: "70%",
       },
+
       "&.square5": {
         animation: `$move-left-right 6s infinite`,
         height: "250px",
@@ -66,6 +77,7 @@ const styles = (theme) => ({
         left: "32%",
         bottom: "29%",
       },
+
       "&.square6": {
         animation: `$move-left-right 9s infinite`,
         height: "80px",
@@ -74,6 +86,7 @@ const styles = (theme) => ({
         left: "10%",
         top: "35%",
       },
+      
       "&.square7": {
         animation: `$move-left-right 3s infinite`,
         height: "300px",

@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { actLoadUser } from "redux/actions/user";
-import useStyle from "./styles";
+import useStyle from "./Navbar.styles";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -47,6 +47,24 @@ const Navbar = () => {
     }
 
     setState(open);
+  };
+
+  const handleClickLogin = () => {
+    history.push({
+      pathname: "/user/login",
+      state: { from: location },
+    });
+  };
+
+  const handleClickLogout = () => {
+    dispatch(actLoadUser(null));
+    localStorage.removeItem("user");
+  };
+
+  const handleClickLogoutPhone = () => {
+    dispatch(actLoadUser(null));
+    localStorage.removeItem("user");
+    setShow(false);
   };
 
   return (
@@ -139,7 +157,7 @@ const Navbar = () => {
           scroll={(el) =>
             el.scrollIntoView({ behavior: "smooth", block: "start" })
           }
-          to="/home/#list-cinema"
+          to="/home/cinema-list"
           color="inherit"
         >
           Cụm Rạp
@@ -172,14 +190,7 @@ const Navbar = () => {
               <ArrowDropDown />
               <Box className="header-logout">
                 <Link to="/home/account">Tài Khoản</Link>
-                <button
-                  onClick={() => {
-                    dispatch(actLoadUser(null));
-                    localStorage.removeItem("user");
-                  }}
-                >
-                  Đăng xuất
-                </button>
+                <button onClick={handleClickLogout}>Đăng xuất</button>
               </Box>
             </Box>
           </Box>
@@ -193,14 +204,7 @@ const Navbar = () => {
               <Link className="account-m" to="/home/account">
                 Tài Khoản
               </Link>
-              <button
-                className="logout-m"
-                onClick={() => {
-                  dispatch(actLoadUser(null));
-                  localStorage.removeItem("user");
-                  setShow(false);
-                }}
-              >
+              <button className="logout-m" onClick={handleClickLogoutPhone}>
                 Đăng xuất
               </button>
             </Dropdown.Menu>
@@ -209,12 +213,7 @@ const Navbar = () => {
       ) : (
         <>
           <Box
-            onClick={() =>
-              history.push({
-                pathname: "/user/login",
-                state: { from: location },
-              })
-            }
+            onClick={handleClickLogin}
             className="header-login"
             display={{ xs: "none", sm: "flex" }}
           >
@@ -226,15 +225,7 @@ const Navbar = () => {
             </Box>
           </Box>
           <Box className="user-m">
-            <Box
-              onClick={() =>
-                history.push({
-                  pathname: "/user/login",
-                  state: { from: location },
-                })
-              }
-              className={classes.linkLoginM}
-            >
+            <Box onClick={handleClickLogin} className={classes.linkLoginM}>
               <MyAvatar />
             </Box>
           </Box>

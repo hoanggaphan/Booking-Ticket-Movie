@@ -4,7 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { actGetShowtimesInfoAPI } from "redux/actions/cinema";
-import useStyles from "./styles";
+import useStyles from "./QuickTicketBook.styles";
 
 const QuickTicketBook = () => {
   const dispatch = useDispatch();
@@ -37,15 +37,6 @@ const QuickTicketBook = () => {
     setSuatChieu([]);
     dispatch(actGetShowtimesInfoAPI(movie.maPhim));
   };
-  const renderDropdownMovie = () => {
-    return listMovieShowing.map((movie, index) => {
-      return (
-        <Dropdown.Item key={index} onClick={() => handleSetMovieName(movie)}>
-          {movie.tenPhim}
-        </Dropdown.Item>
-      );
-    });
-  };
 
   const handleSetCinemaName = ({ lichChieuPhim, tenCumRap }) => {
     setName((prevState) => ({
@@ -58,15 +49,6 @@ const QuickTicketBook = () => {
     setSuatChieu([]);
     setLichChieuPhim(lichChieuPhim);
   };
-  const renderDropdownCenima = () => {
-    return listCinema.map((item, index) => {
-      return (
-        <Dropdown.Item key={index} onClick={() => handleSetCinemaName(item)}>
-          {item.tenCumRap}
-        </Dropdown.Item>
-      );
-    });
-  };
 
   const handleSetDayName = ({ ngayChieu, suatChieu }) => {
     setName((prevState) => ({
@@ -77,6 +59,12 @@ const QuickTicketBook = () => {
     setMaLichChieu(null);
     setSuatChieu(suatChieu);
   };
+
+  const handleSetTimeName = ({ gioChieu, maLichChieu }) => {
+    setName((prevState) => ({ ...prevState, time: gioChieu }));
+    setMaLichChieu(maLichChieu);
+  };
+
   const renderDropdownDays = () => {
     let ngayGioChieu = lichChieuPhim.map((item) => {
       return {
@@ -115,10 +103,26 @@ const QuickTicketBook = () => {
     });
   };
 
-  const handleSetTimeName = ({ gioChieu, maLichChieu }) => {
-    setName((prevState) => ({ ...prevState, time: gioChieu }));
-    setMaLichChieu(maLichChieu);
+  const renderDropdownMovie = () => {
+    return listMovieShowing.map((movie, index) => {
+      return (
+        <Dropdown.Item key={index} onClick={() => handleSetMovieName(movie)}>
+          {movie.tenPhim}
+        </Dropdown.Item>
+      );
+    });
   };
+
+  const renderDropdownCenima = () => {
+    return listCinema.map((item, index) => {
+      return (
+        <Dropdown.Item key={index} onClick={() => handleSetCinemaName(item)}>
+          {item.tenCumRap}
+        </Dropdown.Item>
+      );
+    });
+  };
+
   const renderDropdownTime = () => {
     return suatChieu.map((item, index) => {
       return (
@@ -137,11 +141,12 @@ const QuickTicketBook = () => {
         </Dropdown.Toggle>
         <Dropdown.Menu flip={false}>{renderDropdownMovie()}</Dropdown.Menu>
       </Dropdown>
+
       <Dropdown>
         <Dropdown.Toggle as={Box}>
           <span>{name.cinema}</span>
         </Dropdown.Toggle>
-        {listCinema.length > 0 ? (
+        {listCinema.length ? (
           <Dropdown.Menu flip={false}>{renderDropdownCenima()}</Dropdown.Menu>
         ) : (
           <Dropdown.Menu flip={false}>
@@ -149,11 +154,12 @@ const QuickTicketBook = () => {
           </Dropdown.Menu>
         )}
       </Dropdown>
+
       <Dropdown>
         <Dropdown.Toggle as={Box}>
           <span>{name.day}</span>
         </Dropdown.Toggle>
-        {lichChieuPhim.length > 0 ? (
+        {lichChieuPhim.length ? (
           <Dropdown.Menu flip={false}>{renderDropdownDays()}</Dropdown.Menu>
         ) : (
           <Dropdown.Menu flip={false}>
@@ -161,11 +167,12 @@ const QuickTicketBook = () => {
           </Dropdown.Menu>
         )}
       </Dropdown>
+
       <Dropdown>
         <Dropdown.Toggle as={Box}>
           <span>{name.time}</span>
         </Dropdown.Toggle>
-        {suatChieu.length > 0 ? (
+        {suatChieu.length ? (
           <Dropdown.Menu flip={false}>{renderDropdownTime()}</Dropdown.Menu>
         ) : (
           <Dropdown.Menu flip={false}>
@@ -173,14 +180,14 @@ const QuickTicketBook = () => {
           </Dropdown.Menu>
         )}
       </Dropdown>
-      <Box className="quick-book-btn">
+
+      <Box className={classes.quickBook__button}>
         <Button
           component={Link}
           variant="contained"
           color="primary"
           disabled={maLichChieu ? false : true}
           to={`/home/booking-movie/${maLichChieu}`}
-          className="btn-book"
         >
           MUA VÉ NGAY
         </Button>

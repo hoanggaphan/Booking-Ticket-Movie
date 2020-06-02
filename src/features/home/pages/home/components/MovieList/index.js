@@ -8,8 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { useDispatch, useSelector } from "react-redux";
 import { actgetListMovie } from "redux/actions/movie";
-import shortid from "shortid";
-import useStyles from "./styles";
+import useStyles from "./MovieList.styles";
 
 function MovieList() {
   const dispatch = useDispatch();
@@ -35,13 +34,17 @@ function MovieList() {
     //eslint-disable-next-line
   }, []);
 
+  const handleLoadMore = () => {
+    setVisible(listMovie.length);
+  };
+
   return (
     <Box position="relative">
       <Box id="showtimes" className={classes.listMovie}>
         <img src={shape6} className={classes.shape} alt="shape 6" />
         <Tab.Container id="lich-chieu" defaultActiveKey="showing">
-          <Nav className="list-movie-nav">
-            <Box className="list-movie-nav-items">
+          <Nav className={classes.listMovie__nav}>
+            <Box className={classes.listMovie__navItems}>
               <Nav.Item>
                 <Nav.Link eventKey="showing">
                   Đang Chiếu ({listMovieShowing.length})
@@ -59,7 +62,7 @@ function MovieList() {
               {/* VIEW IN WEB */}
               <Carousel interval={null} indicators={false}>
                 {[...Array(slideShowing)].map((item, indexSlide) => (
-                  <Carousel.Item key={shortid.generate()}>
+                  <Carousel.Item key={indexSlide}>
                     <Box display="flex" flexWrap="wrap">
                       {render.renderMovieWeb(
                         listMovieShowing,
@@ -72,27 +75,28 @@ function MovieList() {
               </Carousel>
 
               {/* VIEW IN MOBILE */}
-              <Box className="list-movie-mobile">
+              <Box className={classes.listMovie__phone}>
                 <Grid container>
                   {render.renderMovieMobile(listMovieShowing, "showing")}
                 </Grid>
                 {listMovieShowing.length > visible && (
                   <Button
-                    className="list-movie-mobile-btn-more"
+                    className={classes.listMovie__moreButton}
                     variant="outlined"
                     size="large"
-                    onClick={() => setVisible(listMovie.length)}
+                    onClick={handleLoadMore}
                   >
                     Xem Thêm
                   </Button>
                 )}
               </Box>
             </Tab.Pane>
+
             <Tab.Pane eventKey="comming">
               {/* VIEW IN WEB */}
               <Carousel interval={null} indicators={false}>
                 {[...Array(slideComming)].map((item, indexSlide) => (
-                  <Carousel.Item key={shortid.generate()}>
+                  <Carousel.Item key={indexSlide}>
                     <Box display="flex" flexWrap="wrap">
                       {render.renderMovieWeb(
                         listMovieComming,
@@ -105,16 +109,16 @@ function MovieList() {
               </Carousel>
 
               {/* VIEW IN MOBILE */}
-              <Box className="list-movie-mobile">
+              <Box className={classes.listMovie__phone}>
                 <Grid container>
                   {render.renderMovieMobile(listMovieComming, "comming")}
                 </Grid>
                 {listMovieComming.length > visible && (
                   <Button
-                    className="list-movie-mobile-btn-more"
+                    className={classes.listMovie__moreButton}
                     variant="outlined"
                     size="large"
-                    onClick={() => setVisible(listMovie.length)}
+                    onClick={handleLoadMore}
                   >
                     Xem Thêm
                   </Button>
@@ -136,18 +140,15 @@ const useRender = (visible, perSlide) => {
       indexSlide * perSlide,
       (indexSlide + 1) * perSlide
     );
-    return (!listMovie.length ? [...Array(8)] : listMovie).map((movie) => (
-      <Movie key={shortid.generate()} movie={movie} type={type} />
+    return listMovie.map((movie) => (
+      <Movie key={movie.maPhim} movie={movie} type={type} />
     ));
   };
 
-  const renderMovieMobile = (listMovie, type) => {
-    return (!listMovie.length ? [...Array(8)] : listMovie)
+  const renderMovieMobile = (listMovie, type) =>
+    listMovie
       .slice(0, visible)
-      .map((movie) => {
-        return <Movie key={shortid.generate()} movie={movie} type={type} />;
-      });
-  };
+      .map((movie) => <Movie key={movie.maPhim} movie={movie} type={type} />);
 
   return { renderMovieWeb, renderMovieMobile };
 };
