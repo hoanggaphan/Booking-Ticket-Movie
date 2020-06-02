@@ -3,7 +3,7 @@ import { ErrorOutline, HighlightOff, YouTube } from "@material-ui/icons";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actViewTrailer as actCloseModal } from "redux/actions/movie";
-import useStyles from "./styles";
+import useStyles from "./TrailerModal.styles";
 
 function TrailerModal() {
   const dispatch = useDispatch();

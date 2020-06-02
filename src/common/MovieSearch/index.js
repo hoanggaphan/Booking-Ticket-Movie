@@ -7,7 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { actSearchMovie, actTyping } from "redux/actions/movie";
-import useStyles from "./styles";
+import useStyles from "./MovieSearch.styles";
 
 const MovieSearch = () => {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const MovieSearch = () => {
     }, 500)
   };
 
+  
   const renderListMovie = () => {
     if (isTyping) {
       return (

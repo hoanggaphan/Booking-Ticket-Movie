@@ -1,13 +1,12 @@
 import { Box, Button, IconButton, Typography } from "@material-ui/core";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import Skeleton from "@material-ui/lab/Skeleton";
 import AgeType from "common/AgeType";
 import RatingStar from "common/RatingStar";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { actViewTrailer } from "redux/actions/movie";
-import useStyles from "./styles";
+import useStyles from "./Movie.styles";
 
 const Movie = (props) => {
   const { movie, type } = props;
@@ -24,61 +23,38 @@ const Movie = (props) => {
   };
 
   return (
-    <Box className={classes.movie}>
-      <Box className="movie-wrapper">
-        {movie ? (
-          <Box position="relative">
-            <Box className="movie-background" />
-            <Box
-              position="absolute"
-              top="0"
-              left="0"
-              className="movie-background movie-background-err"
-              zIndex="-2"
-              borderRadius="5px"
-            />
-          </Box>
-        ) : (
-          <Box
-            component={Skeleton}
-            variant="rect"
-            paddingTop="150%"
-            animation="pulse"
-          />
-        )}
+    <Box className={classes.card}>
+      {/* BODY */}
+      <Box className={classes.body}>
+        <Box position="relative">
+          <Box className={classes.body__background} />
+        </Box>
 
-        {/* LINK DETAIL MOVIE IN MOBILE */}
-        {movie && (
-          <Box
-            component={Link}
-            to={`/home/detail-movie/${movie.maPhim}`}
-            width="100%"
-            height="100%"
-            position="absolute"
-            top="0"
-            left="0"
-          ></Box>
-        )}
+        <Box
+          component={Link}
+          to={`/home/detail-movie/${movie.maPhim}`}
+          width="100%"
+          height="100%"
+          position="absolute"
+          top="0"
+          left="0"
+        ></Box>
 
-        {/* AGE TYPES */}
-        {movie && (
-          <Box className="movie-age">
-            <AgeType type="C18" />
-          </Box>
-        )}
+        <Box className={classes.body__age}>
+          <AgeType type="C18" />
+        </Box>
 
-        {/* STAR RATING */}
-        {movie && type === "showing" && (
-          <Box className="movie-starpoint">
+        {type === "showing" && (
+          <Box className={classes.body__starPoint}>
             <p>{movie.danhGia}</p>
             <Box>
               <RatingStar votes={movie.danhGia} xs />
             </Box>
           </Box>
         )}
-        {/* DATE COMMING */}
-        {movie && type === "comming" && (
-          <Box className="movie-date">
+
+        {type === "comming" && (
+          <Box className={classes.body__date}>
             <Typography component="span" variant="h6">
               {new Date(movie.ngayKhoiChieu).getDate() +
                 "/" +
@@ -87,41 +63,29 @@ const Movie = (props) => {
           </Box>
         )}
 
-        {/* OVERPLAY */}
-        {movie && (
-          <Box
-            component={Link}
-            to={`/home/detail-movie/${movie.maPhim}`}
-            className="movie-overplay"
-          ></Box>
-        )}
+        <Box
+          className={classes.body__overplay}
+          component={Link}
+          to={`/home/detail-movie/${movie.maPhim}`}
+        ></Box>
 
-        {/* PLAY BUTTON */}
-        {movie && (
-          <IconButton onClick={handleViewTrailer} className="movie-play-btn">
-            <PlayCircleOutlineIcon />
-          </IconButton>
-        )}
+        <IconButton
+          className={classes.body__playButton}
+          onClick={handleViewTrailer}
+        >
+          <PlayCircleOutlineIcon />
+        </IconButton>
       </Box>
+      {/* END BODY */}
 
-      {/* DETAIL MOVIE IN WEB */}
-      <Box display={{ xs: "none", sm: "block" }} className="movie-name">
-        {movie ? (
-          <>
-            <Box component="h4">{movie.tenPhim}</Box>
-            <Box component="span">
-              120 phút{type === "showing" && "- 7.5 IMDb"}
-            </Box>
-          </>
-        ) : (
-          <>
-            <Box component={Skeleton} variant="text" />
-            <Box component={Skeleton} variant="text" width="75%" />
-          </>
-        )}
-        {movie && type === "showing" && (
+      {/* FOOTER */}
+      <Box display={{ xs: "none", sm: "block" }} className={classes.footer}>
+        <Box component="h4">{movie.tenPhim}</Box>
+        <Box component="span">120 phút{type === "showing" && "- 7.5 IMDb"}</Box>
+
+        {type === "showing" && (
           <Button
-            className="movie-book-btn"
+            className={classes.footer__bookButton}
             variant="contained"
             size="large"
             to={`/home/detail-movie/${movie.maPhim}`}
@@ -134,7 +98,5 @@ const Movie = (props) => {
     </Box>
   );
 };
-
-/////////////////// Connect with redux ///////////////////
 
 export default Movie;

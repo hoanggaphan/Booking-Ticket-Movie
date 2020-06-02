@@ -1,7 +1,7 @@
 import Box from "@material-ui/core/Box";
 import { withStyles } from "@material-ui/core/styles";
 import React from "react";
-import styles from "./styles";
+import styles from "./WithBgSquares.styles";
 
 const WithBgSquares = (Component) => {
   const withBgSquares = ({ classes, ...props }) => (

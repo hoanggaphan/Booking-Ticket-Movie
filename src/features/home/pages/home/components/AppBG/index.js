@@ -10,26 +10,27 @@ import slide8 from "assets/images/slide8.jpg";
 import slide9 from "assets/images/slide9.jpg";
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import useStyles from "./styles";
+import useStyles from "./AppBg.styles";
 
-export default function AppBG() {
+const slides = [
+  slide2,
+  slide3,
+  slide4,
+  slide5,
+  slide6,
+  slide7,
+  slide8,
+  slide9,
+];
+
+function AppBg() {
   const classes = useStyles();
-
-  const slides = [
-    slide2,
-    slide3,
-    slide4,
-    slide5,
-    slide6,
-    slide7,
-    slide8,
-    slide9,
-  ];
 
   return (
     <Box className={classes.backApp}>
-      <Grid container component={Box} className="back-app-container">
-        <Grid item xs={12} md={6} className="back-app-left">
+      <Grid container component={Box} className={classes.wrapper}>
+        
+        <Grid item xs={12} md={6} className={classes.backApp__left}>
           <Box width="100%">
             <p className="left-text">
               Ứng dụng tiện lợi dành cho người yêu điện ảnh
@@ -66,13 +67,13 @@ export default function AppBG() {
             </p>
           </Box>
         </Grid>
-        <Grid item xs={12} md={6} className="back-app-right">
+
+        <Grid item xs={12} md={6} className={classes.backApp__right}>
           <img alt="mobile" src={mobile} className="right-img-mobile" />
           <Carousel
             controls={false}
             indicators={false}
-            interval={3000}
-            pause={false}
+            interval={2000}
           >
             {slides.map((item, index) => (
               <Carousel.Item key={index}>
@@ -81,7 +82,10 @@ export default function AppBG() {
             ))}
           </Carousel>
         </Grid>
+
       </Grid>
     </Box>
   );
 }
+
+export default AppBg;

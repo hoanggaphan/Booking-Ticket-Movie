@@ -1,5 +1,5 @@
 import React from "react";
-import useStyles from "./styles";
+import useStyles from "./AgeType.styles";
 
 export default function AgeType({ type, ...props }) {
   const classes = useStyles(props);

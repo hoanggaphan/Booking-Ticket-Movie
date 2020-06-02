@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  booking: {
     transform: "translate(-50%, 50%)",
     zIndex: "2",
     position: "absolute",

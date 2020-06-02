@@ -190,13 +190,17 @@ const movieReducer = (state = initialState, action) => {
           new Date(movie1.ngayKhoiChieu).getTime() -
           new Date(movie2.ngayKhoiChieu).getTime()
       );
+
       state.listMovieShowing = listMovieSorted.filter(
         (movie) => new Date() - new Date(movie.ngayKhoiChieu) >= 0
       );
+
       state.listMovieComming = listMovieSorted.filter(
         (movie) => new Date() - new Date(movie.ngayKhoiChieu) < 0
       );
+
       state.listMovie = listMovieSorted;
+
       return { ...state };
 
     case ActionTypes.GET_DETAIL_MOVIE:
@@ -207,19 +211,24 @@ const movieReducer = (state = initialState, action) => {
       const month = ("0" + (d.getMonth() + 1)).slice(-2);
       const year = d.getFullYear();
       const ngayKhoiChieu = `${date}.${month}.${year}`; // Định dạng ngày lại dd/mm/yyyy
+
+      // Thêm địa chỉ, hình ảnh rap vào thongTinRap vì API thiếu
       let lichChieu = action.detailMovie.lichChieu.map((rap) => {
-        // Thêm địa chỉ, hình ảnh rap vào thongTinRap vì API thiếu
         const item1 = state.listDiaChi.find(
           (diaChi) => diaChi.maCumRap === rap.thongTinRap.maCumRap
         );
+
         const item2 = state.listHinhAnh.find(
           (hinhAnh) => hinhAnh.maHeThongRap === rap.thongTinRap.maHeThongRap
         );
+
         if (item1) rap.thongTinRap.diaChi = item1.diaChi;
         if (item2) rap.thongTinRap.hinhAnh = item2.hinhAnh;
+
         const d = new Date(rap.ngayChieuGioChieu);
         const date = ("0" + d.getDate()).slice(-2);
         const month = ("0" + (d.getMonth() + 1)).slice(-2);
+
         rap.thoiGianChieu = [
           {
             ngayChieu: date + "/" + month,
@@ -231,25 +240,31 @@ const movieReducer = (state = initialState, action) => {
             ],
           },
         ];
+
         return rap;
       });
+
+      // Gộp cụm rạp lặp lại thành 1
       lichChieu = lichChieu.reduce((accumulator, current) => {
-        // Gộp cụm rạp lặp lại thành 1
         const length = accumulator.length;
+
         if (length < 1) {
           accumulator.push(current);
         } else {
           const index = accumulator.findIndex(
             (item) => item.thongTinRap.maCumRap === current.thongTinRap.maCumRap
           );
+
           if (index > -1) {
             accumulator[index].thoiGianChieu.push(...current.thoiGianChieu);
           } else {
             accumulator.push(current);
           }
+          
         }
         return accumulator;
       }, []);
+
       lichChieu = lichChieu.map((item) => {
         item.thoiGianChieu = item.thoiGianChieu.reduce(
           (accumulator, current) => {
@@ -273,6 +288,7 @@ const movieReducer = (state = initialState, action) => {
         );
         return item;
       });
+
       lichChieu = lichChieu.reduce((accumulator, current) => {
         //gộp cụm rạp thành 1 hệ thống rạp
         const length = accumulator.length;
@@ -300,7 +316,9 @@ const movieReducer = (state = initialState, action) => {
         }
         return accumulator;
       }, []);
+
       state.detailMovie = { ...action.detailMovie, ngayKhoiChieu, lichChieu };
+      
       return { ...state };
 
     case ActionTypes.GET_SHOWTIMES_INFO_API:
