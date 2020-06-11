@@ -1,13 +1,5 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-} from "@material-ui/core";
-import { Close, Visibility, VisibilityOff } from "@material-ui/icons";
+import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import loginHead from "assets/images/login-head.png";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
@@ -25,7 +17,7 @@ function LoginCard(props) {
   const status = useSelector((state) => state.userReducer.status);
 
   const classes = useStyles();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
@@ -35,18 +27,7 @@ function LoginCard(props) {
 
   useEffect(() => {
     if (message) {
-      enqueueSnackbar(message, {
-        variant: status,
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-        action: (key) => (
-          <IconButton
-            className={classes.icon}
-            onClick={() => closeSnackbar(key)}
-          >
-            <Close />
-          </IconButton>
-        ),
-      });
+      enqueueSnackbar(message, { variant: status });
     }
     return () => {
       dispatch(actClearMessage());

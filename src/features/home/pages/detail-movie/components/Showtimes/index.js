@@ -1,4 +1,4 @@
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, Button } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React, { useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -96,29 +96,31 @@ function Showtimes() {
                 </Grid>
                 <Grid item xs={12} sm={7}>
                   <Tab.Content>
-                    {item.lstLichChieu.map((lichChieu, index) => (
-                      <Tab.Pane key={index} eventKey={index}>
-                        {lichChieu.thoiGianChieu.map((thoiGian) => (
-                          <Dropdown>
-                            <Dropdown.Toggle>
-                              {thoiGian.ngayChieu}
-                            </Dropdown.Toggle>
+                    {item.lstLichChieu.map((lichChieu, index) => {
+                      return (
+                        <Tab.Pane key={index} eventKey={index}>
+                          {lichChieu.thoiGianChieu.map((thoiGian) => (
+                            <Dropdown key={thoiGian.ngayChieu}>
+                              <Dropdown.Toggle>
+                                {thoiGian.ngayChieu}
+                              </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                              {thoiGian.suatChieu.map((suat) => (
-                                <Dropdown.Item>
-                                  <Link
-                                    to={`/home/booking-movie/${suat.maLichChieu}`}
-                                  >
-                                    {suat.gioChieu}
-                                  </Link>
-                                </Dropdown.Item>
-                              ))}
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        ))}
-                      </Tab.Pane>
-                    ))}
+                              <Dropdown.Menu>
+                                {thoiGian.suatChieu.map((suat) => (
+                                  <Dropdown.Item as={Button} key={suat.maLichChieu}>
+                                    <Link
+                                      to={`/home/booking-movie/${suat.maLichChieu}`}
+                                    >
+                                      {suat.gioChieu}
+                                    </Link>
+                                  </Dropdown.Item>
+                                ))}
+                              </Dropdown.Menu>
+                            </Dropdown>
+                          ))}
+                        </Tab.Pane>
+                      );
+                    })}
                   </Tab.Content>
                 </Grid>
               </Grid>

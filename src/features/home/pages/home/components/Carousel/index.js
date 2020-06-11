@@ -1,18 +1,18 @@
-import { Box, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import carousel1 from "assets/images/carousel-1.jpg";
 import carousel2 from "assets/images/carousel-2.jpg";
 import carousel3 from "assets/images/carousel-3.jpg";
 import carousel4 from "assets/images/carousel-4.jpg";
-import React from "react";
+import React, { memo } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import useStyle from "./Carousel.styles";
 
 function MyCarousel() {
   const classes = useStyle();
-
+  
   return (
-    <Box>
+    <section>
       <Carousel
         touch
         className={classes.carousel}
@@ -35,7 +35,7 @@ function MyCarousel() {
             width="100%"
             height="650px"
           />
-          <Box className={classes.carousel__backgroundLinear} />
+          <div className={classes.carousel__backgroundLinear} />
         </Carousel.Item>
 
         <Carousel.Item>
@@ -46,7 +46,7 @@ function MyCarousel() {
             width="100%"
             height="650px"
           />
-          <Box className={classes.carousel__backgroundLinear} />
+          <div className={classes.carousel__backgroundLinear} />
         </Carousel.Item>
 
         <Carousel.Item>
@@ -57,7 +57,7 @@ function MyCarousel() {
             width="100%"
             height="650px"
           />
-          <Box className={classes.carousel__backgroundLinear} />
+          <div className={classes.carousel__backgroundLinear} />
         </Carousel.Item>
 
         <Carousel.Item>
@@ -68,11 +68,11 @@ function MyCarousel() {
             width="100%"
             height="650px"
           />
-          <Box className={classes.carousel__backgroundLinear} />
+          <div className={classes.carousel__backgroundLinear} />
         </Carousel.Item>
       </Carousel>
-    </Box>
+    </section>
   );
 }
 
-export default MyCarousel;
+export default memo(MyCarousel);

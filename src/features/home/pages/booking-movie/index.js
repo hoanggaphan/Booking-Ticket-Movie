@@ -72,7 +72,19 @@ function BookingMoviePage() {
             )}
           </Box>
           <Box className="timer-box">
-            <Timer seconds={300} />
+            {roomInfo ? (
+              <Timer seconds={300} />
+            ) : (
+              <>
+                <Skeleton variant="text" width="120px" height="20px" />
+                <Skeleton
+                  className={classes.skeleton}
+                  variant="text"
+                  width="100px"
+                  height="40px"
+                />
+              </>
+            )}
           </Box>
         </Box>
         <Box className="tivi-box">

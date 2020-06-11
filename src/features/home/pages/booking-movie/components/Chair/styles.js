@@ -40,10 +40,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
   },
-  iconSnack: {
-    color: "white",
-    outline: "unset",
-  },
   skeleton: {
     paddingTop: "calc(100%/14 - 1%)",
     margin: ".7% .5%",

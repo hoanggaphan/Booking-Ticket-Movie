@@ -1,20 +1,5 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-} from "@material-ui/core";
-import {
-  Close,
-  Error,
-  KeyboardBackspace,
-  Visibility,
-  VisibilityOff,
-} from "@material-ui/icons";
+import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@material-ui/core";
+import { Error, KeyboardBackspace, Visibility, VisibilityOff } from "@material-ui/icons";
 import register from "assets/images/register-head.png";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
@@ -31,9 +16,9 @@ function RegisterCard(props) {
   const status = useSelector((state) => state.userReducer.status);
 
   const classes = useStyles();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [notValid, setNotValid] = useState(true);
 
@@ -72,18 +57,7 @@ function RegisterCard(props) {
 
   useEffect(() => {
     if (message) {
-      enqueueSnackbar(message, {
-        variant: status,
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-        action: (key) => (
-          <IconButton
-            className={classes.iconBtn}
-            onClick={() => closeSnackbar(key)}
-          >
-            <Close />
-          </IconButton>
-        ),
-      });
+      enqueueSnackbar(message, { variant: status });
     }
     return () => {
       dispatch(actClearMessage());

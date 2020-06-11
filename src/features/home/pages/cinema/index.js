@@ -1,5 +1,5 @@
 import React from 'react';
-import CinemaList from "features/home/pages/home/components/CinemaList";
+import CinemaList from "./components/CinemaList";
 
 function Cinema() {
     return (

@@ -1,7 +1,6 @@
 import { Box, Grid, IconButton } from "@material-ui/core";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import Skeleton from "@material-ui/lab/Skeleton";
-import AgeType from "common/AgeType";
 import RatingStar from "common/RatingStar";
 import TrailerModal from "common/TrailerModal";
 import CommentForm from "features/home/pages/detail-movie/components/CommentForm";
@@ -16,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { actgetDetailMovieAPI, actViewTrailer } from "redux/actions/movie";
 import useStyles from "./styles";
+import Sticker from "common/Sticker";
 
 function DetailMoviePage() {
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ function DetailMoviePage() {
                 <>
                   <Box>{detailMovie.ngayKhoiChieu}</Box>
                   <Box display="flex" alignItems="center">
-                    <AgeType type="C18" fontSize="16px" />
+                    <Sticker text="C18" fontSize="16px" />
                     <span className="name-info">{detailMovie.tenPhim}</span>
                   </Box>
                   <Box>120 phút - 7.5 IMDb - 2D/Digital</Box>
@@ -168,7 +168,6 @@ function DetailMoviePage() {
                     votes={detailMovie.danhGia}
                   />
                 </Box>
-                <p>{detailMovie.danhGia} người đánh giá</p>
               </>
             ) : (
               <>
@@ -195,7 +194,9 @@ function DetailMoviePage() {
       </Box>
       <Box className="detail-bottom">
         <Box className="bottom-main-info">
-          <Tabs mountOnEnter defaultActiveKey="detail">
+
+          <Tabs defaultActiveKey="detail">
+
             <Tab eventKey="detail" title="Thông Tin">
               <Grid container>
                 {detailMovie ? (
@@ -270,9 +271,11 @@ function DetailMoviePage() {
                 )}
               </Grid>
             </Tab>
+
             <Tab eventKey="showtimes" title="Lịch Chiếu">
               <Showtimes />
             </Tab>
+
             <Tab eventKey="comment" title="Đánh Giá">
               <Box display="flex" justifyContent="center">
                 <Box width="580px">
@@ -282,6 +285,7 @@ function DetailMoviePage() {
               </Box>
             </Tab>
           </Tabs>
+
         </Box>
       </Box>
       <TrailerModal />

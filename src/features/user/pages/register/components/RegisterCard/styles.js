@@ -137,10 +137,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  iconBtn: {
-    color: "white",
-    outline: "unset",
-  },
 }));
 
 export default useStyles;

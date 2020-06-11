@@ -114,9 +114,6 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "-18px",
     color: theme.palette.default.main
   },
-  icon: {
-    color: "white", outline: "unset"
-  }
 }));
 
 export default useStyles;

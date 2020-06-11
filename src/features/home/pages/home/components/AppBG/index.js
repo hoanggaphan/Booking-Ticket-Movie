@@ -8,7 +8,7 @@ import slide6 from "assets/images/slide6.jpg";
 import slide7 from "assets/images/slide7.jpg";
 import slide8 from "assets/images/slide8.jpg";
 import slide9 from "assets/images/slide9.jpg";
-import React from "react";
+import React, { memo } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import useStyles from "./AppBg.styles";
 
@@ -27,7 +27,7 @@ function AppBg() {
   const classes = useStyles();
 
   return (
-    <Box className={classes.backApp}>
+    <section className={classes.backApp}>
       <Grid container component={Box} className={classes.wrapper}>
         
         <Grid item xs={12} md={6} className={classes.backApp__left}>
@@ -84,8 +84,8 @@ function AppBg() {
         </Grid>
 
       </Grid>
-    </Box>
+    </section>
   );
 }
 
-export default AppBg;
+export default memo(AppBg);

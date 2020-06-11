@@ -1,6 +1,6 @@
 import { Box, IconButton, Link, Modal, Typography } from "@material-ui/core";
 import { ErrorOutline, HighlightOff, YouTube } from "@material-ui/icons";
-import React from "react";
+import React, { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actViewTrailer as actCloseModal } from "redux/actions/movie";
 import useStyles from "./TrailerModal.styles";
@@ -83,4 +83,4 @@ function TrailerModal() {
   );
 }
 
-export default TrailerModal;
+export default memo(TrailerModal);

@@ -30,7 +30,7 @@ function CommentForm() {
   };
   const handleShow = () => {
     setError(false);
-    dispatch(actShowLogin(false));
+    dispatch(actShowLogin(true));
   };
 
   useEffect(() => {

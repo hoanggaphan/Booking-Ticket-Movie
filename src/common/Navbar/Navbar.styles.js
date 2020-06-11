@@ -3,14 +3,8 @@ import { makeStyles } from "@material-ui/styles";
 const useStyle = makeStyles((theme) => ({
   header: {
     width: "100%",
-    height: "65px",
     zIndex: "1000",
-    padding: "0 1%",
-
-    display: "flex",
     position: "fixed",
-    alignItems: "center",
-    justifyContent: "space-between",
 
     backgroundColor: "rgb(23,25,64)",
     boxShadow: "0 0 30px 6px rgba(0,0,0,.3)",
@@ -104,7 +98,8 @@ const useStyle = makeStyles((theme) => ({
     "& .user-m": {
       display: "none",
       padding: "0",
-
+      paddingRight: "12px",
+      
       "@media (max-width: 1080px)": {
         display: "block",
       },
@@ -165,6 +160,16 @@ const useStyle = makeStyles((theme) => ({
     "& .header-hamburger-btn": {
       color: theme.palette.warning.main,
     },
+  },
+
+  wrapper: {
+    maxWidth: "940px",
+    height: "65px",
+    margin: "0 auto",
+
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 
   mobileGrid: {

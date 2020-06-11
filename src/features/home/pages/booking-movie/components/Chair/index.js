@@ -1,14 +1,10 @@
-import { Box, IconButton } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import Close from "@material-ui/icons/Close";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  actAddChairBooking,
-  actClearListBooking,
-  actRemoveChairBooking,
-} from "redux/actions/booking";
+import { actAddChairBooking, actClearListBooking, actRemoveChairBooking } from "redux/actions/booking";
 import useStyles from "./styles";
 
 function Chair({ chair }) {
@@ -17,7 +13,7 @@ function Chair({ chair }) {
   const listBooking = useSelector((state) => state.bookingReducer.listBooking);
 
   const classes = useStyles();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const findIndexChairBooking = () => {
     return listBooking.findIndex((item) => item.maGhe === chair.maGhe);
@@ -27,18 +23,7 @@ function Chair({ chair }) {
     if (user) {
       if (listBooking.length === 3 && index < 0) {
         const message = "Không được chọn quá 3 ghế";
-        enqueueSnackbar(message, {
-          variant: "warning",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
-          action: (key) => (
-            <IconButton
-              className={classes.iconSnack}
-              onClick={() => closeSnackbar(key)}
-            >
-              <Close />
-            </IconButton>
-          ),
-        });
+        enqueueSnackbar(message, { variant: "warning" });
       } else {
         if (index > -1) {
           dispatch(actRemoveChairBooking(index));

@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 import { actGetListLogo } from "redux/actions/cinema";
 import useStyles from "./Footer.styles";
 
-Footer.propTypes = {};
-
 function Footer() {
   const dispatch = useDispatch();
 
