@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 import { actGetListCinemaDetail } from "redux/actions/cinema";
 import useStyles from "./CinemaList.styles";
 
-const refactorCinemaList = (listMovie, listCinemaDetail) => {
+const refactorCinemaList = (movieList, listCinemaDetail) => {
   // thêm hình ảnh cho list lịch chiếu theo cụm rạp vì API méo có =))
   return listCinemaDetail.map((cinema) => {
     cinema.lstCumRap.map((rap) => {
       rap.danhSachPhim.map((phim) => {
-        const movie = listMovie.find((item) => item.maPhim === phim.maPhim);
+        const movie = movieList.find((item) => item.maPhim === phim.maPhim);
         phim.hinhAnh = movie.hinhAnh;
         phim.ngayKhoiChieu = movie.ngayKhoiChieu;
 
@@ -80,7 +80,7 @@ function CinemaList() {
   let listCinemaDetail = useSelector(
     (state) => state.cinemaReducer.listCinemaDetail
   );
-  const listMovie = useSelector((state) => state.movieReducer.listMovie);
+  const movieList = useSelector((state) => state.movieReducer.movieList);
 
   const classes = useStyles();
 
@@ -90,12 +90,12 @@ function CinemaList() {
   }, []);
 
   useEffect(() => {
-    if(listMovie.length && listCinemaDetail.length && !cinemaList.length) {
-      const newCinemaList = refactorCinemaList(listMovie, listCinemaDetail);
+    if(movieList.length && listCinemaDetail.length && !cinemaList.length) {
+      const newCinemaList = refactorCinemaList(movieList, listCinemaDetail);
       setCinemaList(newCinemaList)
     }
     // eslint-disable-next-line
-  }, [listMovie, listCinemaDetail]);
+  }, [movieList, listCinemaDetail]);
   
   const renderCinemaLogo = () => {
     return listCinemaLogo.map((item, index) => (

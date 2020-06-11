@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Drawer,
-  Grid,
-  IconButton,
-} from "@material-ui/core";
+import { Box, Button, Container, Drawer, Grid, IconButton } from "@material-ui/core";
 import { ArrowDropDown, Close, Menu } from "@material-ui/icons";
 import logo from "assets/images/logo.png";
 import MyAvatar from "common/Avatar";
@@ -69,61 +62,64 @@ const Navbar = () => {
 
   return (
     <header className={`${classes.header} mui-fixed`}>
+      <div className={classes.wrapper}>
+
       {/* BUTTON HAMBURGER MOBILE*/}
-      <>
-        <Box display={{ sm: "none" }}>
-          <IconButton onClick={toggleDrawer(true)}>
-            <Menu fontSize="large" className="header-hamburger-btn" />
-          </IconButton>
-          <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
-            <Container>
-              <Grid container className={classes.mobileGrid}>
-                <Link to="/home" exact>
-                  <img src={logo} width="150px" height="50px" alt="logo" />
-                </Link>
-                <IconButton
+      <Box display={{ sm: "none" }}>
+        <IconButton onClick={toggleDrawer(true)}>
+          <Menu fontSize="large" className="header-hamburger-btn" />
+        </IconButton>
+        <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
+          <Container>
+            <Grid container className={classes.mobileGrid}>
+              <Link to="/home">
+                <img src={logo} width="150px" height="50px" alt="logo" />
+              </Link>
+              <IconButton
+                onClick={toggleDrawer(false)}
+                className={classes.icon}
+              >
+                <Close />
+              </IconButton>
+            </Grid>
+            <Grid container className={classes.webGrid}>
+              <Grid item xs={12}>
+                <MovieSearch />
+              </Grid>
+            </Grid>
+            <Grid container className={classes.webGrid}>
+              <Grid item xs={12}>
+                <Button
+                  className={classes.headerNavLink}
+                  component={Link}
                   onClick={toggleDrawer(false)}
-                  className={classes.icon}
+                  to="/home/#movie-list"
+                  scroll={(el) =>
+                    el.scrollIntoView({ behavior: "smooth", block: "start" })
+                  }
+                  color="inherit"
                 >
-                  <Close />
-                </IconButton>
+                  Phim
+                </Button>
               </Grid>
-              <Grid container className={classes.webGrid}>
-                <Grid item xs={12}>
-                  <MovieSearch />
-                </Grid>
+              <Grid item xs={12}>
+                <Button
+                  className={classes.headerNavLink}
+                  component={Link}
+                  onClick={toggleDrawer(false)}
+                  to="/home/cinema"
+                  scroll={(el) =>
+                    el.scrollIntoView({ behavior: "smooth", block: "start" })
+                  }
+                  color="inherit"
+                >
+                  Cụm Rạp
+                </Button>
               </Grid>
-              <Grid container className={classes.webGrid}>
-                <Grid item xs={12}>
-                  <Button
-                    className={classes.headerNavLink}
-                    component={Link}
-                    exact
-                    to="/home"
-                    color="inherit"
-                  >
-                    Trang Chủ
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    className={classes.headerNavLink}
-                    component={Link}
-                    onClick={toggleDrawer(false)}
-                    to="/home/#showtimes"
-                    scroll={(el) =>
-                      el.scrollIntoView({ behavior: "smooth", block: "start" })
-                    }
-                    color="inherit"
-                  >
-                    Lịch Chiếu
-                  </Button>
-                </Grid>
-              </Grid>
-            </Container>
-          </Drawer>
-        </Box>
-      </>
+            </Grid>
+          </Container>
+        </Drawer>
+      </Box>
 
       {/* LOGO */}
       <Link to="/home">
@@ -134,30 +130,21 @@ const Navbar = () => {
       <Box component="nav" display={{ xs: "none", sm: "block" }}>
         <Link
           className={classes.headerNavLink}
-          to="/home"
+          to="/home/#movie-list"
           scroll={(el) =>
             el.scrollIntoView({ behavior: "smooth", block: "start" })
           }
           color="inherit"
         >
-          Trang Chủ
+          Phim
         </Link>
-        <Link
-          className={classes.headerNavLink}
-          to="/home/#showtimes"
-          scroll={(el) =>
-            el.scrollIntoView({ behavior: "smooth", block: "start" })
-          }
-          color="inherit"
-        >
-          Lịch Chiếu
-        </Link>
+
         <Link
           className={classes.headerNavLink}
           scroll={(el) =>
             el.scrollIntoView({ behavior: "smooth", block: "start" })
           }
-          to="/home/cinema-list"
+          to="/home/cinema"
           color="inherit"
         >
           Cụm Rạp
@@ -231,6 +218,7 @@ const Navbar = () => {
           </Box>
         </>
       )}
+      </div>
     </header>
   );
 };

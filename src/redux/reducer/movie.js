@@ -1,9 +1,9 @@
 import * as ActionTypes from "redux/constants/ActionTypes";
 
 const initialState = {
-  listMovie: [],
-  listMovieShowing: [],
-  listMovieComming: [],
+  movieList: [],
+  movieListShowing: [],
+  movieListComming: [],
 
   detailMovie: null,
   showtimesInfo: [],
@@ -183,24 +183,23 @@ const initialState = {
 
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.GET_LIST_MOVIE_API:
+    case ActionTypes.GET_MOVIE_LIST:
       // Sắp xếp lại listmovie theo ngày tháng năm tăng dần
-      const listMovieSorted = action.payload.sort(
+      const movieListSorted = action.movieList.sort(
         (movie1, movie2) =>
           new Date(movie1.ngayKhoiChieu).getTime() -
           new Date(movie2.ngayKhoiChieu).getTime()
       );
 
-      state.listMovieShowing = listMovieSorted.filter(
+      state.movieListShowing = movieListSorted.filter(
         (movie) => new Date() - new Date(movie.ngayKhoiChieu) >= 0
       );
 
-      state.listMovieComming = listMovieSorted.filter(
+      state.movieListComming = movieListSorted.filter(
         (movie) => new Date() - new Date(movie.ngayKhoiChieu) < 0
       );
 
-      state.listMovie = listMovieSorted;
-
+      state.movieList = movieListSorted;
       return { ...state };
 
     case ActionTypes.GET_DETAIL_MOVIE:
@@ -260,7 +259,6 @@ const movieReducer = (state = initialState, action) => {
           } else {
             accumulator.push(current);
           }
-          
         }
         return accumulator;
       }, []);
@@ -318,10 +316,10 @@ const movieReducer = (state = initialState, action) => {
       }, []);
 
       state.detailMovie = { ...action.detailMovie, ngayKhoiChieu, lichChieu };
-      
       return { ...state };
 
     case ActionTypes.GET_SHOWTIMES_INFO_API:
+      console.log(action.showtimesInfo)
       let listCinema = [];
       action.showtimesInfo.heThongRapChieu.forEach((item) =>
         item.cumRapChieu.forEach((item) => listCinema.push(item))

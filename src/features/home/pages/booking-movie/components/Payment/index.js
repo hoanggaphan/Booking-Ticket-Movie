@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  IconButton,
-  Radio,
-  RadioGroup,
-} from "@material-ui/core";
+import { Box, Button, FormControl, FormControlLabel, IconButton, Radio, RadioGroup } from "@material-ui/core";
 import { AccountBalance, Close, CreditCard } from "@material-ui/icons";
 import Skeleton from "@material-ui/lab/Skeleton";
 import momo from "assets/images/momo-logo.jpg";
@@ -31,23 +23,12 @@ function Payment() {
   const [value, setValue] = useState("momo");
 
   const sum = listBooking.reduce((sum, item) => sum + item.giaVe, 0);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
 
   useEffect(() => {
     if (message) {
-      enqueueSnackbar(message, {
-        variant: status,
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-        action: (key) => (
-          <IconButton
-            className={classes.iconSnack}
-            onClick={() => closeSnackbar(key)}
-          >
-            <Close />
-          </IconButton>
-        ),
-      });
+      enqueueSnackbar(message, { variant: status });
     }
     return () => {
       dispatch(actClearMessage());
@@ -74,18 +55,7 @@ function Payment() {
         dispatch(actPostBookingChair(info, token, history));
       } else {
         const message = "Phải chọn ít nhất 1 ghế";
-        enqueueSnackbar(message, {
-          variant: "warning",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
-          action: (key) => (
-            <IconButton
-              className={classes.iconSnack}
-              onClick={() => closeSnackbar(key)}
-            >
-              <Close />
-            </IconButton>
-          ),
-        });
+        enqueueSnackbar(message, { variant: "warning" });
       }
     }
   };

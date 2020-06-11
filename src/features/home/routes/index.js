@@ -9,7 +9,7 @@ const HomePage = lazy(() => import("features/home/pages/home"));
 const BookingMoviePage = lazy(() => import("features/home/pages/booking-movie"));
 const Account = lazy(() => import("features/home/pages/account"));
 const DetailMoviePage = lazy(() => import("features/home/pages/detail-movie"));
-const CinemaList = lazy(() => import("features/home/pages/cinema"))
+const Cinema = lazy(() => import("features/home/pages/cinema"))
 
 function HomeRoutes() {
   const { path } = useRouteMatch();
@@ -28,8 +28,8 @@ function HomeRoutes() {
           component={DetailMoviePage}
         />
         <Route
-          path={`${path}/cinema-list`}
-          component={CinemaList}
+          path={`${path}/cinema`}
+          component={Cinema}
         />
 
         <ProtectedRoute

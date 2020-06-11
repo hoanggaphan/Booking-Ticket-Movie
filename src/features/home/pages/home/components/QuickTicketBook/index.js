@@ -1,5 +1,5 @@
 import { Box, Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,8 +8,8 @@ import useStyles from "./QuickTicketBook.styles";
 
 const QuickTicketBook = () => {
   const dispatch = useDispatch();
-  const listMovieShowing = useSelector(
-    (state) => state.movieReducer.listMovieShowing
+  const movieList = useSelector(
+    (state) => state.movieReducer.movieList
   );
   const listCinema = useSelector((state) => state.movieReducer.listCinema);
 
@@ -104,7 +104,7 @@ const QuickTicketBook = () => {
   };
 
   const renderDropdownMovie = () => {
-    return listMovieShowing.map((movie, index) => {
+    return movieList.map((movie, index) => {
       return (
         <Dropdown.Item key={index} onClick={() => handleSetMovieName(movie)}>
           {movie.tenPhim}
@@ -134,7 +134,7 @@ const QuickTicketBook = () => {
   };
 
   return (
-    <Box className={classes.quickBook}>
+    <section className={classes.quickBook}>
       <Dropdown>
         <Dropdown.Toggle as={Box}>
           <span>{name.movie}</span>
@@ -192,8 +192,8 @@ const QuickTicketBook = () => {
           MUA VÉ NGAY
         </Button>
       </Box>
-    </Box>
+    </section>
   );
 };
 
-export default QuickTicketBook;
+export default memo(QuickTicketBook);

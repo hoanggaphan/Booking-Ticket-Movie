@@ -6,6 +6,12 @@ const useStyle = makeStyles((theme) => ({
       outline: "none",
     },
 
+    "& .carousel-inner": {
+      "& .carousel-item": {
+        backgroundColor: theme.palette.img.placeholder
+      }
+    },
+
     "& .carousel-indicators": {
       bottom: "10%",
 

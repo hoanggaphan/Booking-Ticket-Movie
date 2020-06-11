@@ -107,10 +107,6 @@ const useStyles = makeStyles((theme) => ({
       outline: "unset",
     },
   },
-  iconSnack: {
-    color: "white",
-    outline: "unset",
-  },
 }));
 
 export default useStyles;

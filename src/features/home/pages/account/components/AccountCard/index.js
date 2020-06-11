@@ -1,5 +1,4 @@
-import { Box, Button, IconButton } from "@material-ui/core";
-import Close from "@material-ui/icons/Close";
+import { Box, Button } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
@@ -18,7 +17,7 @@ function AccountCard() {
 
   const classes = useStyles();
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [values, setValues] = useState({
     hoTen: "",
     taiKhoan: "",
@@ -38,18 +37,7 @@ function AccountCard() {
 
   useEffect(() => {
     if (message) {
-      enqueueSnackbar(message, {
-        variant: status,
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-        action: (key) => (
-          <IconButton
-            style={{ color: "white", outline: "unset" }}
-            onClick={() => closeSnackbar(key)}
-          >
-            <Close />
-          </IconButton>
-        ),
-      });
+      enqueueSnackbar(message, { variant: status });
     }
     return () => {
       dispatch(actClearMessage());

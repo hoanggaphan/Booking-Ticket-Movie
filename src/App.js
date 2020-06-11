@@ -1,8 +1,8 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import DefaultBG from "common/Fallback/DefaultBG";
 import PageNotFound from "common/PageNotFound";
-import { SnackbarProvider } from "notistack";
+import Snackbar from "common/Snackbar";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import theme from "./assets/styles/theme";
@@ -11,32 +11,11 @@ import theme from "./assets/styles/theme";
 const HomeLayout = lazy(() => import("features/home/Layout"));
 const UserLayout = lazy(() => import("features/user/Layout"));
 
-const useStyles = makeStyles({
-  root: {
-    "& span": {
-      color: "white",
-    },
-  },
-  containerAnchorOriginTopCenter: {
-    top: "65px",
-  },
-});
-
 function App() {
-  const classes = useStyles();
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <SnackbarProvider
-        classes={{
-          root: classes.root,
-          containerAnchorOriginTopCenter:
-            classes.containerAnchorOriginTopCenter,
-        }}
-        autoHideDuration={4000}
-        preventDuplicate
-      >
+      <Snackbar>
         <BrowserRouter>
           <Suspense fallback={<DefaultBG />}>
             <Switch>
@@ -50,7 +29,7 @@ function App() {
             </Switch>
           </Suspense>
         </BrowserRouter>
-      </SnackbarProvider>
+      </Snackbar>
     </ThemeProvider>
   );
 }

@@ -2,6 +2,7 @@ import * as ActionTypes from "redux/constants/ActionTypes";
 const initialState = {
   roomInfo: null,
   listBooking: [],
+
   open: false,
   message: "",
   status: "",
@@ -10,20 +11,20 @@ const initialState = {
 const bookingReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.GET_ROOM_INFO:
-      let { roomInfo } = action;
-      if (!roomInfo) return { ...state, roomInfo };
-      return { ...state, roomInfo };
+      if (!action.roomInfo) return { ...state, roomInfo: action.roomInfo };
+      state.roomInfo = action.roomInfo;
+      return { ...state };
 
     case ActionTypes.ADD_CHAIR_BOOKING:
-      return {
-        ...state,
-        listBooking: [...state.listBooking, action.chairInfo],
-      };
+      state.listBooking = [...state.listBooking, action.chairInfo];
+      return { ...state };
+
     case ActionTypes.REMOVE_CHAIR_BOOKING:
       const listBooking = [...state.listBooking];
       listBooking.splice(action.index, 1);
       state.listBooking = listBooking;
       return { ...state };
+
     case ActionTypes.CLEAR_LIST_BOOKING:
       return { ...state, listBooking: [] };
 
@@ -33,8 +34,10 @@ const bookingReducer = (state = initialState, action) => {
 
     case ActionTypes.CLEAR_MESSAGE:
       return { ...state, message: "" };
+
     case ActionTypes.OPEN_PAYMENT_BOX:
       return { ...state, open: action.status };
+
     default:
       return { ...state };
   }
