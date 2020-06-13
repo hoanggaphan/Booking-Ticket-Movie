@@ -4,17 +4,13 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
-import { actClearMessage, actPutUpdateAccount } from "redux/actions/user";
-import useStyles from "./styles";
+import { actUpdateAccount } from "redux/actions/user";
+import useStyles from "./AccountCard.styles";
 
 function AccountCard() {
   const dispatch = useDispatch();
   const account = useSelector((state) => state.userReducer.account);
   const isFetching = useSelector((state) => state.userReducer.isFetching);
-  const isUpdating = useSelector((state) => state.userReducer.isUpdating);
-  const message = useSelector((state) => state.userReducer.message);
-  const status = useSelector((state) => state.userReducer.status);
-
   const classes = useStyles();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -34,16 +30,6 @@ function AccountCard() {
     soDT: "",
   });
   const [formValid, setFormValid] = useState(false);
-
-  useEffect(() => {
-    if (message) {
-      enqueueSnackbar(message, { variant: status });
-    }
-    return () => {
-      dispatch(actClearMessage());
-    };
-    // eslint-disable-next-line
-  }, [isUpdating]);
 
   useEffect(() => {
     if (account) {
@@ -110,13 +96,13 @@ function AccountCard() {
     e.preventDefault();
     if (formValid) {
       const token = JSON.parse(localStorage.getItem("user")).accessToken;
-      dispatch(actPutUpdateAccount(values, token));
+      dispatch(actUpdateAccount(values, token, enqueueSnackbar));
     }
   };
 
   return (
     <Box className={classes.root}>
-      <Form onSubmit={handleSubmit} autocomplete="off" className="form-submit">
+      <Form onSubmit={handleSubmit} autoComplete="off" className="form-submit">
         <Form.Group>
           {!isFetching ? (
             <>

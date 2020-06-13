@@ -94,6 +94,10 @@ const useStyles = makeStyles((theme) => ({
           },
           "& .form-text-error": {
             visibility: "visible!important",
+
+            "& svg": {
+              marginRight: "5px"
+            }
           },
         },
 

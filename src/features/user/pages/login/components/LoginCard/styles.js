@@ -104,16 +104,6 @@ const useStyles = makeStyles(theme => ({
       }
     }
   },
-  buttonProgress: {
-    width: "33px!important",
-    height: "33px!important",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    marginTop: "-18px",
-    marginLeft: "-18px",
-    color: theme.palette.default.main
-  },
 }));
 
 export default useStyles;

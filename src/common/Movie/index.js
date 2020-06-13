@@ -21,7 +21,7 @@ function Movie(props) {
 
   return (
     <div className={classes.movie}>
-      <Link to={`/home/detail-movie/${item.maPhim}`}>
+      <Link to={`/home/movie-detail/${item.maPhim}`}>
         <div className={classes.movie__thumbnail}>
           <img
             src={item.hinhAnh}

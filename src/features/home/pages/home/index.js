@@ -5,17 +5,13 @@ import ModalTrailer from "common/TrailerModal";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actgetMovieList } from "redux/actions/movie";
-import {
-  actGetFilm24hNews,
-  actGetReviewNews,
-  actGetPromotionNews,
-} from "redux/actions/news";
+import { actGetFilm24hNews, actGetPromotionNews, actGetReviewNews } from "redux/actions/news";
 import AppBg from "./components/AppBg";
-import Carousel from "./components/Carousel";
+import HeaderSlider from "./components/HeaderSlider";
 import ListSlider from "./components/ListSlider";
+import News from "./components/News";
 import QuickTicketBook from "./components/QuickTicketBook";
-import TabGrid from "./components/TabGrid";
-import useStyles from "./styles";
+import useStyles from "./home.styles";
 
 function HomePage() {
   const classes = useStyles();
@@ -44,7 +40,7 @@ function HomePage() {
   return (
     <>
       <Box position="relative">
-        <Carousel />
+        <HeaderSlider />
         <div className={classes.home__booking}>
           <QuickTicketBook />
         </div>
@@ -74,13 +70,13 @@ function HomePage() {
           />
         </section>
 
-        <section className={classes.home__slider}>
+        <section id="news" className={classes.home__slider}>
           <MyTabs
             titleList={["Điện ảnh 24h", "Review", "Khuyến Mãi"]}
             componentList={[
-              <TabGrid list={film24h} />,
-              <TabGrid list={review} />,
-              <TabGrid list={promotion} />,
+              <News list={film24h} />,
+              <News list={review} />,
+              <News list={promotion} />,
             ]}
             color="primary"
           />

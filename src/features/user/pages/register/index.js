@@ -3,17 +3,19 @@ import WithBgSquares from "common/WithBgSquares";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { actRegisterUserAPI } from "redux/actions/user";
+import { actRegisterUser } from "redux/actions/user";
+import { useSnackbar } from "notistack";
 
 const EnhancedRegister = WithBgSquares(registerCard);
 function Register() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = (values, notValid) => (e) => {
     e.preventDefault();
     if (notValid === false) {
-      dispatch(actRegisterUserAPI(values, history));
+      dispatch(actRegisterUser(values, history, enqueueSnackbar));
     }
   };
 

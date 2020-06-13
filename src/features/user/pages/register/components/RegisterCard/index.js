@@ -1,24 +1,14 @@
 import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@material-ui/core";
 import { Error, KeyboardBackspace, Visibility, VisibilityOff } from "@material-ui/icons";
 import register from "assets/images/register-head.png";
-import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { actClearMessage } from "redux/actions/user";
 import useStyles from "./styles";
 
 function RegisterCard(props) {
-  const dispatch = useDispatch();
-  const isFetching = useSelector((state) => state.userReducer.isFetching);
-  const message = useSelector((state) => state.userReducer.message);
-  const status = useSelector((state) => state.userReducer.status);
-
   const classes = useStyles();
-  const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-
   const [showPassword, setShowPassword] = useState(false);
   const [notValid, setNotValid] = useState(true);
 
@@ -54,16 +44,6 @@ function RegisterCard(props) {
       isError: false,
     },
   });
-
-  useEffect(() => {
-    if (message) {
-      enqueueSnackbar(message, { variant: status });
-    }
-    return () => {
-      dispatch(actClearMessage());
-    };
-    // eslint-disable-next-line
-  }, [isFetching]);
 
   const handleError = (e) => {
     const { name, value } = e.target;
@@ -168,7 +148,7 @@ function RegisterCard(props) {
               />
               <FormHelperText className="form-text-error">
                 <Error />
-                <div>{error.hoTen.message}</div>
+                <>{error.hoTen.message}</>
               </FormHelperText>
             </FormControl>
             <FormControl
@@ -190,7 +170,7 @@ function RegisterCard(props) {
               />
               <FormHelperText className="form-text-error">
                 <Error />
-                <div>{error.taiKhoan.message}</div>
+                <>{error.taiKhoan.message}</>
               </FormHelperText>
             </FormControl>
             <FormControl
@@ -224,7 +204,7 @@ function RegisterCard(props) {
               />
               <FormHelperText className="form-text-error">
                 <Error />
-                <div>{error.matKhau.message}</div>
+                <>{error.matKhau.message}</>
               </FormHelperText>
             </FormControl>
             <FormControl
@@ -246,7 +226,7 @@ function RegisterCard(props) {
               />
               <FormHelperText className="form-text-error">
                 <Error />
-                <div>{error.email.message}</div>
+                <>{error.email.message}</>
               </FormHelperText>
             </FormControl>
             <FormControl
@@ -268,7 +248,7 @@ function RegisterCard(props) {
               />
               <FormHelperText className="form-text-error">
                 <Error />
-                <div>{error.soDt.message}</div>
+                <>{error.soDt.message}</>
               </FormHelperText>
             </FormControl>
             <Button type="submit" className="register-btn">

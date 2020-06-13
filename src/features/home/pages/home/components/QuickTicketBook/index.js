@@ -3,7 +3,7 @@ import React, { useState, memo } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { actGetShowtimesInfoAPI } from "redux/actions/cinema";
+import { actGetShowtimesInfoAPI } from "redux/actions/movie";
 import useStyles from "./QuickTicketBook.styles";
 
 const QuickTicketBook = () => {
@@ -187,7 +187,7 @@ const QuickTicketBook = () => {
           variant="contained"
           color="primary"
           disabled={maLichChieu ? false : true}
-          to={`/home/booking-movie/${maLichChieu}`}
+          to={`/home/booking/${maLichChieu}`}
         >
           MUA VÉ NGAY
         </Button>

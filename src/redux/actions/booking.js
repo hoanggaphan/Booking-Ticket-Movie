@@ -1,39 +1,31 @@
 import * as ActionTypes from "redux/constants/ActionTypes";
 import { callAPI } from "redux/utils/callAPI";
 
-export const actGetRoomInfo = (maLichChieu) => async (dispatch) => {
-  dispatch({ type: ActionTypes.GET_ROOM_INFO, roomInfo: null });
-  try {
-    const response = await callAPI(
-      "GET",
-      `QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`
+export const actGetRoomInfo = (maLichChieu) => (dispatch) => {
+  dispatch({ type: ActionTypes.GET_ROOM_INFO_REQUEST, roomInfo: null });
+
+  callAPI("GET", `QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`)
+    .then((response) =>
+      dispatch({
+        type: ActionTypes.GET_ROOM_INFO_SUCCESS,
+        roomInfo: response.data,
+      })
+    )
+    .catch((error) =>
+      dispatch({ type: ActionTypes.GET_ROOM_INFO_FAILED, error: error })
     );
-    dispatch({
-      type: ActionTypes.GET_ROOM_INFO,
-      roomInfo: response.data,
-    });
-  } catch (error) {
-    console.error(error.response.data);
-  }
 };
-export const actPostBookingChair = (info, token, history) => async (
+export const actBookingChair = (info, token, history, enqueueSnackbar) => (
   dispatch
 ) => {
-  try {
-    const response = await callAPI("POST", "QuanLyDatVe/DatVe", info, token);
-    dispatch({
-      type: ActionTypes.POST_BOOKING_CHAIR,
-      message: response.data,
-      status: "success",
-    });
-    history.replace("/home/account");
-  } catch (error) {
-    dispatch({
-      type: ActionTypes.POST_BOOKING_CHAIR,
-      message: error.response.data,
-      status: "error",
-    });
-  }
+  callAPI("POST", "QuanLyDatVe/DatVe", info, token)
+    .then((response) => {
+      enqueueSnackbar(response.data, { variant: "success" });
+      history.replace("/home/account");
+    })
+    .catch((error) =>
+      enqueueSnackbar(error.response.data, { variant: "error" })
+    );
 };
 
 export const actOpenPaymentBox = (status) => {

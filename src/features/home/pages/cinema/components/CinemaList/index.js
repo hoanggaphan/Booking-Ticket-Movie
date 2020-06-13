@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { actGetListCinemaDetail } from "redux/actions/cinema";
+import { actGetCinemaList } from "redux/actions/cinema";
 import useStyles from "./CinemaList.styles";
 
 const refactorCinemaList = (movieList, listCinemaDetail) => {
@@ -85,7 +85,7 @@ function CinemaList() {
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(actGetListCinemaDetail());
+    dispatch(actGetCinemaList());
     // eslint-disable-next-line
   }, []);
 
@@ -190,7 +190,7 @@ function CinemaList() {
                                         {lichChieu.suatChieu.map((suat) => (
                                           <Dropdown.Item
                                             as={Link}
-                                            to={`home/booking-movie/${suat.maLichChieu}`}
+                                            to={`home/booking/${suat.maLichChieu}`}
                                             key={suat.maLichChieu}
                                           >
                                             {suat.gioChieu}

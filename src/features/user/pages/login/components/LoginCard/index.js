@@ -1,39 +1,26 @@
-import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput
+} from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import loginHead from "assets/images/login-head.png";
-import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
-import Spinner from "react-bootstrap/Spinner";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { actClearMessage } from "redux/actions/user";
 import useStyles from "./styles";
 
 function LoginCard(props) {
-  const dispatch = useDispatch();
-  const isFetching = useSelector((state) => state.userReducer.isFetching);
-  const message = useSelector((state) => state.userReducer.message);
-  const status = useSelector((state) => state.userReducer.status);
-
   const classes = useStyles();
-  const { enqueueSnackbar } = useSnackbar();
-
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
     taiKhoan: "",
     matKhau: "",
   });
-
-  useEffect(() => {
-    if (message) {
-      enqueueSnackbar(message, { variant: status });
-    }
-    return () => {
-      dispatch(actClearMessage());
-    };
-    // eslint-disable-next-line
-  }, [isFetching]);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -87,14 +74,8 @@ function LoginCard(props) {
                 }
               />
             </FormControl>
-            <Button disabled={isFetching} type="submit" className="login-btn">
+            <Button type="submit" className="login-btn">
               Đăng Nhập
-              {isFetching && (
-                <Spinner
-                  animation="border"
-                  className={classes.buttonProgress}
-                />
-              )}
             </Button>
           </form>
         </Card.Body>

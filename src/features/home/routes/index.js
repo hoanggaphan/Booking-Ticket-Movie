@@ -6,9 +6,9 @@ import ProtectedRoute from "./ProtectedRoute";
 
 // Code spliting
 const HomePage = lazy(() => import("features/home/pages/home"));
-const BookingMoviePage = lazy(() => import("features/home/pages/booking-movie"));
+const MovieBookingPage = lazy(() => import("features/home/pages/movie-booking"));
 const Account = lazy(() => import("features/home/pages/account"));
-const DetailMoviePage = lazy(() => import("features/home/pages/detail-movie"));
+const MovieDetailPage = lazy(() => import("features/home/pages/movie-detail"));
 const Cinema = lazy(() => import("features/home/pages/cinema"))
 
 function HomeRoutes() {
@@ -24,8 +24,8 @@ function HomeRoutes() {
           component={HomePage} 
         />
         <Route
-          path={`${path}/detail-movie/:maPhim`}
-          component={DetailMoviePage}
+          path={`${path}/movie-detail/:maPhim`}
+          component={MovieDetailPage}
         />
         <Route
           path={`${path}/cinema`}
@@ -33,8 +33,8 @@ function HomeRoutes() {
         />
 
         <ProtectedRoute
-          path={`${path}/booking-movie/:maLichChieu`}
-          component={BookingMoviePage}
+          path={`${path}/booking/:maLichChieu`}
+          component={MovieBookingPage}
         />
         <ProtectedRoute 
           path={`${path}/account`} 

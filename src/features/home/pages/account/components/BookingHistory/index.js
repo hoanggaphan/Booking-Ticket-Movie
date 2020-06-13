@@ -2,8 +2,7 @@ import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import { useSelector } from "react-redux";
-import shortid from "shortid";
-import useStyles from "./styles";
+import useStyles from "./BookingHistory.styles";
 
 function BookingHistory() {
   const thongTinDatVe = useSelector((state) => state.userReducer.thongTinDatVe);
@@ -32,6 +31,7 @@ function BookingHistory() {
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader>
+
               <TableHead>
                 <TableRow>
                   <TableCell>Ngày đặt</TableCell>
@@ -41,6 +41,7 @@ function BookingHistory() {
                   <TableCell>Tổng tiền</TableCell>
                 </TableRow>
               </TableHead>
+
               <TableBody>
                 {(rowsPerPage > 0
                   ? [...thongTinDatVe]
@@ -50,13 +51,16 @@ function BookingHistory() {
                         page * rowsPerPage + rowsPerPage
                       )
                   : [...thongTinDatVe]
-                ).map((item) => (
-                  <TableRow hover key={shortid.generate()}>
+                ).map((item, index) => {
+                  return <TableRow hover key={item.ngayDat}>
+
                     <TableCell>
                       {new Date(item.ngayDat).toLocaleTimeString()} -{" "}
                       {new Date(item.ngayDat).toLocaleDateString()}
                     </TableCell>
+
                     <TableCell>{item.tenPhim}</TableCell>
+
                     <TableCell>
                       Ghế:{" "}
                       {item.danhSachGhe.map((ghe) =>
@@ -67,6 +71,7 @@ function BookingHistory() {
                         ))
                       )}
                     </TableCell>
+
                     <TableCell>
                       {item.danhSachGhe.map((ghe) => (
                         <Box key={ghe.maGhe}>
@@ -74,9 +79,11 @@ function BookingHistory() {
                         </Box>
                       ))}
                     </TableCell>
+
                     <TableCell>{item.giaVe.toLocaleString()} đ</TableCell>
+                    
                   </TableRow>
-                ))}
+                })}
 
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 53 * emptyRows }}>
@@ -84,8 +91,10 @@ function BookingHistory() {
                   </TableRow>
                 )}
               </TableBody>
+
             </Table>
           </TableContainer>
+
           <TablePagination
             rowsPerPageOptions={[10, 25, { value: -1, label: "tất cả" }]}
             labelRowsPerPage="số hàng"

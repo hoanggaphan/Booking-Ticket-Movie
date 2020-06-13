@@ -4,7 +4,7 @@ import zionLogo from "assets/images/zion-logo.jpg";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { actGetListLogo } from "redux/actions/cinema";
+import { actGetCinemaLogo } from "redux/actions/cinema";
 import useStyles from "./Footer.styles";
 
 function Footer() {
@@ -16,7 +16,7 @@ function Footer() {
   );
 
   useEffect(() => {
-    dispatch(actGetListLogo());
+    dispatch(actGetCinemaLogo());
     // eslint-disable-next-line
   }, []);
 
