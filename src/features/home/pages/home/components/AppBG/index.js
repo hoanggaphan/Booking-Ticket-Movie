@@ -9,27 +9,28 @@ import slide7 from "assets/images/slide7.jpg";
 import slide8 from "assets/images/slide8.jpg";
 import slide9 from "assets/images/slide9.jpg";
 import React, { memo } from "react";
-import Carousel from "react-bootstrap/Carousel";
+import Slider from "react-slick";
 import useStyles from "./AppBg.styles";
 
-const slides = [
-  slide2,
-  slide3,
-  slide4,
-  slide5,
-  slide6,
-  slide7,
-  slide8,
-  slide9,
-];
+const slides = [slide2, slide3, slide4, slide5, slide6, slide7, slide8, slide9];
+
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  pauseOnHover: false
+};
 
 function AppBg() {
   const classes = useStyles();
 
   return (
-    <section className={classes.backApp}>
+    <section id="app" className={classes.backApp}>
       <Grid container component={Box} className={classes.wrapper}>
-        
         <Grid item xs={12} md={6} className={classes.backApp__left}>
           <Box width="100%">
             <p className="left-text">
@@ -70,19 +71,14 @@ function AppBg() {
 
         <Grid item xs={12} md={6} className={classes.backApp__right}>
           <img alt="mobile" src={mobile} className="right-img-mobile" />
-          <Carousel
-            controls={false}
-            indicators={false}
-            interval={2000}
-          >
+          <Slider {...settings}>
             {slides.map((item, index) => (
-              <Carousel.Item key={index}>
+              <div key={index}>
                 <img className="right-img-slide" src={item} alt={item} />
-              </Carousel.Item>
+              </div>
             ))}
-          </Carousel>
+          </Slider>
         </Grid>
-
       </Grid>
     </section>
   );

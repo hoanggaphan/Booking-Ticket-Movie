@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
     },
 
-    "& .carousel": {
+    "& .slick-slider": {
       width: "100%",
       height: "100%",
       padding: "1.5% 29.2% 1.5% 29.2%",
@@ -91,8 +91,10 @@ const useStyles = makeStyles((theme) => ({
       overflow: "hidden",
       position: "absolute",
 
-      "& .carousel-inner": {
+      "& .slick-list": {
         borderRadius: "20px",
+        overflow: "hidden",
+        cursor: "pointer",
 
         "@media (min-width: 600px)": {
           borderRadius: "40px",

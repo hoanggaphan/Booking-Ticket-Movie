@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "4px",
     overflow: "hidden",
     position: "relative",
-    backgroundColor: theme.palette.img.placeholder,
+    backgroundColor: theme.palette.background.paper,
 
     "&:hover $movie__overplay": {
       opacity: "1",

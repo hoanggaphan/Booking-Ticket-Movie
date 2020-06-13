@@ -184,9 +184,14 @@ const useStyle = makeStyles((theme) => ({
   headerNavLink: {
     margin: "10px",
     color: `${theme.palette.text.primary}!important`,
-    "@media (max-width: 700px)": {
-      margin: "4px",
+    
+    "&:hover": {
+      textDecoration: "none",
     },
+
+    "& button": {
+      justifyContent: "unset"
+    }
   },
 
   icon: {

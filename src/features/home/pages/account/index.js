@@ -7,7 +7,7 @@ import Tabs from "react-bootstrap/Tabs";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { actGetAccountUser } from "redux/actions/user";
-import useStyles from "./styles";
+import useStyles from "./account.styles";
 
 function Account() {
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ function Account() {
 
   const classes = useStyles();
   const history = useHistory();
+  
   const userLocal = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {

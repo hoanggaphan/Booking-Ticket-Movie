@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     "& .react-tabs__tab-panel--selected": {
-      animation: "$fadeIn .5s ease-in-out",
+      animation: "$fadeIn .3s ease-in-out",
     },
   },
 

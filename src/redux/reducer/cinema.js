@@ -65,7 +65,7 @@ const initialState = {
 
 const cinemaReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionsType.GET_LIST_LOGO_CINEMA:
+    case ActionsType.GET_CINEMA_LOGO:
       state.listCinemaLogo = action.listCinemaLogo.map((cinema) => {
         const item = state.listTrangChu.find(
           (item) => item.maHeThongRap === cinema.maHeThongRap
@@ -77,7 +77,7 @@ const cinemaReducer = (state = initialState, action) => {
       });
       return { ...state };
 
-    case ActionsType.GET_LIST_CINEMA_DETAIL:
+    case ActionsType.GET_CINEMA_LIST:
       state.listCinemaDetail = action.listCinemaDetail.map((cinema) => {
         const item = state.listHinhAnh.find(
           (item) => item.maHeThongRap === cinema.maHeThongRap

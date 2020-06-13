@@ -12,7 +12,6 @@ import useStyles from "./MovieSearch.styles";
 const MovieSearch = () => {
   const dispatch = useDispatch();
   const listSearch = useSelector((state) => state.movieReducer.listSearch);
-  const notFound = useSelector((state) => state.movieReducer.notFound);
   const isTyping = useSelector(state => state.movieReducer.isTyping);
 
   const classes = useStyles();
@@ -41,7 +40,9 @@ const MovieSearch = () => {
     if (isTyping) {
       return (
         <Box className={classes.loading}>
-          <Spinner animation="border" />
+          <Spinner animation="grow" size="sm" />
+          <Spinner animation="grow" />
+          Loading...
         </Box>
       );
     }
@@ -60,7 +61,7 @@ const MovieSearch = () => {
       );
     }
 
-    if (notFound) {
+    if (!listSearch.length) {
       return (
         <Box
           display="flex"
@@ -79,7 +80,7 @@ const MovieSearch = () => {
         <Box
           key={movie.maPhim}
           component={Link}
-          to={`/home/detail-movie/${movie.maPhim}`}
+          to={`/home/movie-detail/${movie.maPhim}`}
           className="result-item"
         >
           <img src={movie.hinhAnh} alt={movie.biDanh} />
@@ -92,7 +93,7 @@ const MovieSearch = () => {
   };
 
   return (
-    <Box maxWidth="300px" position="relative">
+    <div className={classes.root}>
       <Box component={InputGroup} className={`${classes.search}`}>
         <InputGroup.Prepend className={`${focus && "focus"}`}>
           <InputGroup.Text>
@@ -109,7 +110,7 @@ const MovieSearch = () => {
       <Box className={`${classes.result} ${focus && classes.show}`}>
         {renderListMovie()}
       </Box>
-    </Box>
+    </div>
   );
 };
 

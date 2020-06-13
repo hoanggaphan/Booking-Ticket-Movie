@@ -1,4 +1,11 @@
-import { Box, Button, Container, Drawer, Grid, IconButton } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Drawer,
+  Grid,
+  IconButton,
+} from "@material-ui/core";
 import { ArrowDropDown, Close, Menu } from "@material-ui/icons";
 import logo from "assets/images/logo.png";
 import MyAvatar from "common/Avatar";
@@ -63,161 +70,209 @@ const Navbar = () => {
   return (
     <header className={`${classes.header} mui-fixed`}>
       <div className={classes.wrapper}>
+        {/* BUTTON HAMBURGER MOBILE*/}
+        <Box display={{ sm: "none" }}>
+          <IconButton onClick={toggleDrawer(true)}>
+            <Menu fontSize="large" className="header-hamburger-btn" />
+          </IconButton>
 
-      {/* BUTTON HAMBURGER MOBILE*/}
-      <Box display={{ sm: "none" }}>
-        <IconButton onClick={toggleDrawer(true)}>
-          <Menu fontSize="large" className="header-hamburger-btn" />
-        </IconButton>
-        <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
-          <Container>
-            <Grid container className={classes.mobileGrid}>
-              <Link to="/home">
-                <img src={logo} width="150px" height="50px" alt="logo" />
-              </Link>
-              <IconButton
-                onClick={toggleDrawer(false)}
-                className={classes.icon}
-              >
-                <Close />
-              </IconButton>
-            </Grid>
-            <Grid container className={classes.webGrid}>
-              <Grid item xs={12}>
-                <MovieSearch />
-              </Grid>
-            </Grid>
-            <Grid container className={classes.webGrid}>
-              <Grid item xs={12}>
-                <Button
-                  className={classes.headerNavLink}
-                  component={Link}
+          <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
+            <Container>
+              <Grid container className={classes.mobileGrid}>
+                <Link to="/home">
+                  <img src={logo} width="150px" height="50px" alt="logo" />
+                </Link>
+
+                <IconButton
                   onClick={toggleDrawer(false)}
-                  to="/home/#movie-list"
-                  scroll={(el) =>
-                    el.scrollIntoView({ behavior: "smooth", block: "start" })
-                  }
-                  color="inherit"
+                  className={classes.icon}
                 >
-                  Phim
-                </Button>
+                  <Close />
+                </IconButton>
               </Grid>
-              <Grid item xs={12}>
-                <Button
-                  className={classes.headerNavLink}
-                  component={Link}
-                  onClick={toggleDrawer(false)}
-                  to="/home/cinema"
-                  scroll={(el) =>
-                    el.scrollIntoView({ behavior: "smooth", block: "start" })
-                  }
-                  color="inherit"
-                >
-                  Cụm Rạp
-                </Button>
+
+              <Grid container className={classes.webGrid}>
+                <Grid item xs={12}>
+                  <MovieSearch />
+                </Grid>
               </Grid>
-            </Grid>
-          </Container>
-        </Drawer>
-      </Box>
 
-      {/* LOGO */}
-      <Link to="/home">
-        <img src={logo} width="150px" height="50px" alt="logo" />
-      </Link>
+              <Grid container className={classes.webGrid}>
+                <Grid item xs={12}>
+                  <Link
+                    className={classes.headerNavLink}
+                    onClick={toggleDrawer(false)}
+                    to="/home/#movie-list"
+                    scroll={(el) =>
+                      el.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                  >
+                    <Button>Phim</Button>
+                  </Link>
+                </Grid>
 
-      {/* NAV LINK */}
-      <Box component="nav" display={{ xs: "none", sm: "block" }}>
-        <Link
-          className={classes.headerNavLink}
-          to="/home/#movie-list"
-          scroll={(el) =>
-            el.scrollIntoView({ behavior: "smooth", block: "start" })
-          }
-          color="inherit"
-        >
-          Phim
+                <Grid item xs={12}>
+                  <Link
+                    className={classes.headerNavLink}
+                    onClick={toggleDrawer(false)}
+                    to="/home/cinema"
+                    scroll={(el) =>
+                      el.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                  >
+                    <Button>Cụm Rạp</Button>
+                  </Link>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Link
+                    className={classes.headerNavLink}
+                    onClick={toggleDrawer(false)}
+                    to="/home/#news"
+                    scroll={(el) =>
+                      el.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                  >
+                    <Button>Tin Tức</Button>
+                  </Link>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Link
+                    className={classes.headerNavLink}
+                    onClick={toggleDrawer(false)}
+                    to="/home/#app"
+                    scroll={(el) =>
+                      el.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                  >
+                    <Button>Ứng dụng</Button>
+                  </Link>
+                </Grid>
+              </Grid>
+            </Container>
+          </Drawer>
+        </Box>
+
+        {/* LOGO */}
+        <Link to="/home">
+          <img src={logo} width="150px" height="50px" alt="logo" />
         </Link>
 
-        <Link
-          className={classes.headerNavLink}
-          scroll={(el) =>
-            el.scrollIntoView({ behavior: "smooth", block: "start" })
-          }
-          to="/home/cinema"
-          color="inherit"
-        >
-          Cụm Rạp
-        </Link>
-      </Box>
-
-      {/* SEARCH MOVIE */}
-      <Box display={{ xs: "none", md: "block" }}>
-        <MovieSearch />
-      </Box>
-
-      {/* USER LOGIN */}
-      {user ? (
-        <>
-          <Box
-            className="header-login login-success"
-            display={{ xs: "none", sm: "flex" }}
+        {/* NAV LINK */}
+        <Box component="nav" display={{ xs: "none", sm: "block" }}>
+          <Link
+            className={classes.headerNavLink}
+            to="/home/#movie-list"
+            scroll={(el) =>
+              el.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            color="inherit"
           >
-            <Link to="/home/account">
-              <MyAvatar user={user} />
-            </Link>
-            <Box className="header-login-txt" color="inherit">
-              <Box
-                textOverflow="ellipsis"
-                overflow="hidden"
-                whiteSpace="nowrap"
-              >
-                {user.hoTen}
-              </Box>
-              <ArrowDropDown />
-              <Box className="header-logout">
-                <Link to="/home/account">Tài Khoản</Link>
-                <button onClick={handleClickLogout}>Đăng xuất</button>
-              </Box>
-            </Box>
-          </Box>
-          <Dropdown className="user-m">
-            <Dropdown.Toggle>
-              <MyAvatar user={user} />
-              <ArrowDropDown />
-            </Dropdown.Toggle>
+            Phim
+          </Link>
 
-            <Dropdown.Menu show={show}>
-              <Link className="account-m" to="/home/account">
-                Tài Khoản
+          <Link
+            className={classes.headerNavLink}
+            scroll={(el) =>
+              el.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            to="/home/cinema"
+            color="inherit"
+          >
+            Cụm Rạp
+          </Link>
+
+          <Link
+            className={classes.headerNavLink}
+            scroll={(el) =>
+              el.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            to="/home/#news"
+            color="inherit"
+          >
+            Tin Tức
+          </Link>
+
+          <Link
+            className={classes.headerNavLink}
+            scroll={(el) =>
+              el.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            to="/home/#app"
+            color="inherit"
+          >
+            Ứng dụng
+          </Link>
+        </Box>
+
+        {/* SEARCH MOVIE */}
+        <Box display={{ xs: "none", md: "block" }}>
+          <MovieSearch />
+        </Box>
+
+        {/* USER LOGIN */}
+        {user ? (
+          <>
+            <Box
+              className="header-login login-success"
+              display={{ xs: "none", sm: "flex" }}
+            >
+              <Link to="/home/account">
+                <MyAvatar user={user} />
               </Link>
-              <button className="logout-m" onClick={handleClickLogoutPhone}>
-                Đăng xuất
-              </button>
-            </Dropdown.Menu>
-          </Dropdown>
-        </>
-      ) : (
-        <>
-          <Box
-            onClick={handleClickLogin}
-            className="header-login"
-            display={{ xs: "none", sm: "flex" }}
-          >
-            <Box className={classes.linkLogin}>
-              <MyAvatar />
+              <Box className="header-login-txt" color="inherit">
+                <Box
+                  textOverflow="ellipsis"
+                  overflow="hidden"
+                  whiteSpace="nowrap"
+                >
+                  {user.hoTen}
+                </Box>
+                <ArrowDropDown />
+                <Box className="header-logout">
+                  <Link to="/home/account">Tài Khoản</Link>
+                  <button onClick={handleClickLogout}>Đăng xuất</button>
+                </Box>
+              </Box>
             </Box>
-            <Box className="header-login-btn" color="inherit">
-              Đăng Nhập
+            <Dropdown className="user-m">
+              <Dropdown.Toggle>
+                <MyAvatar user={user} />
+                <ArrowDropDown />
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu show={show}>
+                <Link className="account-m" to="/home/account">
+                  Tài Khoản
+                </Link>
+                <button className="logout-m" onClick={handleClickLogoutPhone}>
+                  Đăng xuất
+                </button>
+              </Dropdown.Menu>
+            </Dropdown>
+          </>
+        ) : (
+          <>
+            <Box
+              onClick={handleClickLogin}
+              className="header-login"
+              display={{ xs: "none", sm: "flex" }}
+            >
+              <Box className={classes.linkLogin}>
+                <MyAvatar />
+              </Box>
+              <Box className="header-login-btn" color="inherit">
+                Đăng Nhập
+              </Box>
             </Box>
-          </Box>
-          <Box className="user-m">
-            <Box onClick={handleClickLogin} className={classes.linkLoginM}>
-              <MyAvatar />
+            <Box className="user-m">
+              <Box onClick={handleClickLogin} className={classes.linkLoginM}>
+                <MyAvatar />
+              </Box>
             </Box>
-          </Box>
-        </>
-      )}
+          </>
+        )}
       </div>
     </header>
   );

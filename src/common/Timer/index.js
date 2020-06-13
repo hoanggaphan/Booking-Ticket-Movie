@@ -23,15 +23,17 @@ function Timer(props) {
   const seconds = counter % 60;
 
   useEffect(() => {
-    if (counter > 0) {
-      setTimeout(() => setCounter(counter - 1), 1000);
-      if (counter === 59) {
-        const message = "Sắp hết thời gian đặt ghế";
-        enqueueSnackbar(message, { variant: "warning" });
-      }
-    } else if (counter === 0) {
+    const clockTimeout = setTimeout(() => setCounter(counter - 1), 1000);
+    if (counter === 59) {
+      const message = "Sắp hết thời gian đặt ghế";
+      enqueueSnackbar(message, { variant: "warning" });
+    } else if (counter <= 0) {
       history.goBack();
     }
+
+    return () => {
+      clearTimeout(clockTimeout);
+    };
     // eslint-disable-next-line
   }, [counter]);
 

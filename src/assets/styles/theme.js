@@ -8,7 +8,7 @@ const theme = createMuiTheme({
           color: "inherit",
           userDrag: "none"
         },
-        "div:focus": {
+        "div:focus, button:focus": {
           outline: "none",
         }
       },
@@ -75,9 +75,6 @@ const theme = createMuiTheme({
       danger: "#fd5d93",
     },
 
-    img: {
-      placeholder: "#e8e8e8"
-    }
   },
 });
 

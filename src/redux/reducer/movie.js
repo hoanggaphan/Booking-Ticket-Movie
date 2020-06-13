@@ -5,7 +5,7 @@ const initialState = {
   movieListShowing: [],
   movieListComming: [],
 
-  detailMovie: null,
+  movieDetail: null,
   showtimesInfo: [],
   listCinema: [],
 
@@ -176,9 +176,8 @@ const initialState = {
     },
   ],
 
-  listSearch: null,
+  listSearch: [],
   isTyping: false,
-  notFound: false,
 };
 
 const movieReducer = (state = initialState, action) => {
@@ -201,18 +200,24 @@ const movieReducer = (state = initialState, action) => {
 
       state.movieList = movieListSorted;
       return { ...state };
+    
+    case ActionTypes.GET_MOVIE_DETAIL_REQUEST:
+        state.movieDetail = null;
+        return { ...state }
 
-    case ActionTypes.GET_DETAIL_MOVIE:
-      if (!action.detailMovie) return { ...state, detailMovie: null };
+    case ActionTypes.GET_MOVIE_DETAIL_FAILED:
+        console.error(action.error)
+        return { ...state }
 
-      const d = new Date(action.detailMovie.ngayKhoiChieu);
+    case ActionTypes.GET_MOVIE_DETAIL_SUCCESS:
+      const d = new Date(action.movieDetail.ngayKhoiChieu);
       const date = ("0" + d.getDate()).slice(-2);
       const month = ("0" + (d.getMonth() + 1)).slice(-2);
       const year = d.getFullYear();
       const ngayKhoiChieu = `${date}.${month}.${year}`; // Định dạng ngày lại dd/mm/yyyy
 
       // Thêm địa chỉ, hình ảnh rap vào thongTinRap vì API thiếu
-      let lichChieu = action.detailMovie.lichChieu.map((rap) => {
+      let lichChieu = action.movieDetail.lichChieu.map((rap) => {
         const item1 = state.listDiaChi.find(
           (diaChi) => diaChi.maCumRap === rap.thongTinRap.maCumRap
         );
@@ -315,10 +320,10 @@ const movieReducer = (state = initialState, action) => {
         return accumulator;
       }, []);
 
-      state.detailMovie = { ...action.detailMovie, ngayKhoiChieu, lichChieu };
+      state.movieDetail = { ...action.movieDetail, ngayKhoiChieu, lichChieu };
       return { ...state };
 
-    case ActionTypes.GET_SHOWTIMES_INFO_API:
+    case ActionTypes.GET_SHOWTIMES_INFO:
       console.log(action.showtimesInfo)
       let listCinema = [];
       action.showtimesInfo.heThongRapChieu.forEach((item) =>
@@ -329,15 +334,9 @@ const movieReducer = (state = initialState, action) => {
       return { ...state };
 
     case ActionTypes.SEARCH_MOVIE:
-      const { listSearch, q, isTyping } = action;
-      if (!listSearch) return { ...state, listSearch, isTyping };
-
-      if (!listSearch.length && q) {
-        state.notFound = true;
-      } else {
-        state.notFound = false;
-      }
-      return { ...state, listSearch, isTyping };
+      state.isTyping = action.isTyping;
+      state.listSearch = action.listSearch;
+      return { ...state };
 
     case ActionTypes.VIEW_TRAILER:
       state.trailer = { ...state.trailer, ...action.trailer };
