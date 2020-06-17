@@ -64,7 +64,7 @@ function MovieDetailPage() {
               )}
             </>
           ) : (
-            <Box width="100%" height="calc(100vw * 2/5)"></Box>
+            <Box width="100%" height="calc(100vw * 2/5)" />
           )}
         </Box>
 
@@ -106,9 +106,13 @@ function MovieDetailPage() {
             <Box width="100%">
               {movieDetail ? (
                 <>
-                  <Box>{movieDetail.ngayKhoiChieu}</Box>
-                  <Box display="flex" alignItems="center">
-                    <Sticker text="C18" fontSize="16px" />
+                  <Box display="flex">
+                    {movieDetail.ngayKhoiChieu}{" "}
+                    <Box ml="10px">
+                      <Sticker text="C18" fontSize="16px" />
+                    </Box>
+                  </Box>
+                  <Box>
                     <span className="name-info">{movieDetail.tenPhim}</span>
                   </Box>
                   <Box>120 phút - 7.5 IMDb - 2D/Digital</Box>
@@ -193,10 +197,10 @@ function MovieDetailPage() {
       <Box className="detail-bottom">
         {movieDetail ? (
           <MyTabs
-            titleList={["Thông Tin", "Lịch Chiếu", "Đánh Giá"]}
+            titleList={["Lịch Chiếu", "Thông Tin", "Đánh Giá"]}
             componentList={[
-              <Detail movieDetail={movieDetail} />,
               <Showtimes movieDetail={movieDetail} />,
+              <Detail movieDetail={movieDetail} />,
               <Comment />,
             ]}
             color="warning"

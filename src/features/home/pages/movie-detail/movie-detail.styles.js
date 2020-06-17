@@ -108,7 +108,6 @@ const useStyles = makeStyles((theme) => ({
 
           "& .name-info": {
             fontSize: "24px",
-            marginLeft: "5px",
             color: theme.palette.text.primary,
           },
         },
@@ -129,6 +128,7 @@ const useStyles = makeStyles((theme) => ({
       padding: "0 15px",
       margin: "0 auto",
       maxWidth: "870px",
+      marginBottom: "40px",
       
       "@media (max-width: 600px)": {
         transform: "unset",
