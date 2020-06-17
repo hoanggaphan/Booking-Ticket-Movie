@@ -1,7 +1,6 @@
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React, { memo } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { useSelector } from "react-redux";
@@ -74,30 +73,45 @@ function Showtimes({ movieDetail }) {
                   ))}
                 </Nav>
               </Grid>
+
               <Grid item xs={12} sm={7}>
                 <Tab.Content>
                   {item.lstLichChieu.map((lichChieu, index) => {
                     return (
                       <Tab.Pane key={index} eventKey={index}>
-                        {lichChieu.thoiGianChieu.map((thoiGian) => (
-                          <Dropdown key={thoiGian.ngayChieu}>
-                            <Dropdown.Toggle>
-                              {thoiGian.ngayChieu}
-                            </Dropdown.Toggle>
+                        <Grid container spacing={3}>
+                          {lichChieu.thoiGianChieu.map((thoiGian) => (
+                            <Grid
+                              key={thoiGian.ngayChieu}
+                              component={Box}
+                              sm={6}
+                              item
+                              width="100%"
+                              border="1px solid rgba(255,255,255,.1)"
+                              textAlign="center"
+                            >
+                              <Typography className={classes.date}>
+                                {thoiGian.ngayChieu}
+                              </Typography>
 
-                            <Dropdown.Menu>
-                              {thoiGian.suatChieu.map((suat) => (
-                                <Dropdown.Item
-                                  as={Link}
-                                  to={`/home/booking/${suat.maLichChieu}`}
-                                  key={suat.maLichChieu}
-                                >
-                                  {suat.gioChieu}
-                                </Dropdown.Item>
-                              ))}
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        ))}
+                              <Box
+                                display="flex"
+                                flexWrap="wrap"
+                                justifyContent="center"
+                              >
+                                {thoiGian.suatChieu.map((suat) => (
+                                  <Link
+                                    key={suat.maLichChieu}
+                                    to={`/home/booking/${suat.maLichChieu}`}
+                                    className={classes.time}
+                                  >
+                                    {suat.gioChieu}
+                                  </Link>
+                                ))}
+                              </Box>
+                            </Grid>
+                          ))}
+                        </Grid>
                       </Tab.Pane>
                     );
                   })}

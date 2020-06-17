@@ -235,7 +235,7 @@ const movieReducer = (state = initialState, action) => {
 
         rap.thoiGianChieu = [
           {
-            ngayChieu: date + "/" + month,
+            ngayChieu: date + "-" + month,
             suatChieu: [
               {
                 maLichChieu: rap.maLichChieu,
