@@ -3,16 +3,35 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyle = makeStyles((theme) => ({
   headerSlider: {
     position: "relative",
-    
+
+    "& .slick-slider": {
+      overflow: "hidden",
+    },
+
+    "& .slick-track": {
+      height: "100%",
+
+      "& div": {
+        height: "100%",
+      }
+    },
+
+    "& .slick-list": {
+      maxWidth: "100%",
+      height: "calc(100vw * (9/16))",
+      maxHeight: "650px",
+    },
+
     "& .slider-prev, .slider-next": {
       position: "absolute",
       top: "45%",
+      transform: "translateY(-50%)",
       zIndex: "1",
 
       "& svg": {
         fontSize: "40px",
 
-        "@media (min-width: 1280px)": {
+        "@media (min-width: 600px)": {
           fontSize: "70px",
         },
       },
@@ -22,7 +41,7 @@ const useStyle = makeStyles((theme) => ({
       left: "0",
 
       "@media (min-width: 600px)": {
-        left: "20px"    
+        left: "20px",
       },
     },
 
@@ -30,7 +49,7 @@ const useStyle = makeStyles((theme) => ({
       right: "0",
 
       "@media (min-width: 600px)": {
-        right: "20px"    
+        right: "20px",
       },
     },
 
@@ -39,20 +58,18 @@ const useStyle = makeStyles((theme) => ({
       backgroundColor: theme.palette.background.paper,
     },
   },
-  
+
   // aspect ratio
   headerSlider__img: {
-    maxWidth: "100%",
-    maxHeight: "650px",
-    height: "calc(100vw * (9/16))",
+    width: "100%",
+    height: "100%",
     display: "block!important",
   },
 
   headerSlider__backgroundLinear: {
     width: "100%",
     height: "100%",
-    background:
-      "linear-gradient(20deg, rgba(0, 0, 0, .5), transparent 40%),linear-gradient(-20deg, rgba(0, 0, 0, .5), transparent 40%)",
+    background: "linear-gradient(0deg, rgba(0, 0, 0, .7), transparent 55%)",
 
     top: "0",
     left: "0",

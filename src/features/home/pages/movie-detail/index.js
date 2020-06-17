@@ -1,21 +1,20 @@
 import { Box, Grid, IconButton } from "@material-ui/core";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import Skeleton from "@material-ui/lab/Skeleton";
+import MyTabs from "common/MyTab";
 import RatingStar from "common/RatingStar";
 import Sticker from "common/Sticker";
 import TrailerModal from "common/TrailerModal";
 import React, { useEffect, useState } from "react";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { actGetMovieDetail, actViewTrailer } from "redux/actions/movie";
-import CommentForm from "./components/CommentForm";
-import CommentList from "./components/CommentList";
+import Detail from "./components/Detail";
 import Showtimes from "./components/Showtimes";
 import useStyles from "./movie-detail.styles";
+import Comment from "./components/Comment";
 
 function MovieDetailPage() {
   const dispatch = useDispatch();
@@ -138,10 +137,10 @@ function MovieDetailPage() {
                 background
                 styles={{
                   path: {
-                    stroke: `#7ed321`,
+                    stroke: `#00f2c3`,
                   },
                   trail: {
-                    stroke: "#3a3a3a",
+                    stroke: "#1f2251",
                   },
                   text: {
                     fill: "white",
@@ -161,7 +160,7 @@ function MovieDetailPage() {
               />
             )}
 
-            {movieDetail ? (
+            {movieDetail && (
               <>
                 <Box my="10px">
                   <RatingStar
@@ -170,11 +169,6 @@ function MovieDetailPage() {
                     votes={movieDetail.danhGia}
                   />
                 </Box>
-              </>
-            ) : (
-              <>
-                <Skeleton variant="text" width="100%" />
-                <Skeleton variant="text" width="50%" />
               </>
             )}
           </Grid>
@@ -197,102 +191,26 @@ function MovieDetailPage() {
       </Box>
 
       <Box className="detail-bottom">
-        <Box className="bottom-main-info">
-
-          <Tabs defaultActiveKey="detail">
-
-            <Tab eventKey="detail" title="Thông Tin">
-              <Grid container>
-                {movieDetail ? (
-                  <>
-                    <Grid item xs={12} sm={6}>
-                      <Box display="flex">
-                        <Box component="p" className="detail-title">
-                          Ngày phát hành
-                        </Box>
-                        <Box component="p" className="detail-info">
-                          <>{movieDetail.ngayKhoiChieu}</>
-                        </Box>
-                      </Box>
-                      <Box display="flex">
-                        <Box component="p" className="detail-title">
-                          Đạo diễn
-                        </Box>
-                        <Box component="p" className="detail-info">
-                          Dave Wilson
-                        </Box>
-                      </Box>
-                      <Box display="flex">
-                        <Box component="p" className="detail-title">
-                          Diễn viên
-                        </Box>
-                        <Box component="p" className="detail-info">
-                          Toby Kebbell, Eiza González, Vin Diesel
-                        </Box>
-                      </Box>
-                      <Box display="flex">
-                        <Box component="p" className="detail-title">
-                          Thể Loại
-                        </Box>
-                        <Box component="p" className="detail-info">
-                          hành động
-                        </Box>
-                      </Box>
-                      <Box display="flex">
-                        <Box component="p" className="detail-title">
-                          Định dạng
-                        </Box>
-                        <Box component="p" className="detail-info">
-                          2D/Digital
-                        </Box>
-                      </Box>
-                      <Box display="flex">
-                        <Box component="p" className="detail-title">
-                          Quốc Gia SX
-                        </Box>
-                        <Box component="p" className="detail-info">
-                          Mỹ
-                        </Box>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <Box component="p" className="detail-title">
-                        Nội dung
-                      </Box>
-                      <Box component="p" className="detail-content">
-                        {movieDetail.moTa}
-                      </Box>
-                    </Grid>
-                  </>
-                ) : (
-                  <>
-                    <Skeleton variant="text" width="100%" />
-                    <Skeleton variant="text" width="100%" />
-                    <Skeleton variant="text" width="100%" />
-                    <Skeleton variant="text" width="100%" />
-                    <Skeleton variant="text" width="50%" />
-                  </>
-                )}
-              </Grid>
-            </Tab>
-
-            <Tab eventKey="showtimes" title="Lịch Chiếu">
-              <Showtimes />
-            </Tab>
-
-            <Tab eventKey="comment" title="Đánh Giá">
-              <Box display="flex" justifyContent="center">
-                <Box width="580px">
-                  <CommentForm />
-                  <CommentList />
-                </Box>
-              </Box>
-            </Tab>
-          </Tabs>
-
-        </Box>
+        {movieDetail ? (
+          <MyTabs
+            titleList={["Thông Tin", "Lịch Chiếu", "Đánh Giá"]}
+            componentList={[
+              <Detail movieDetail={movieDetail} />,
+              <Showtimes movieDetail={movieDetail} />,
+              <Comment />,
+            ]}
+            color="warning"
+          />
+        ) : (
+          <>
+            <Skeleton variant="text" width="100%" />
+            <Skeleton variant="text" width="100%" />
+            <Skeleton variant="text" width="100%" />
+            <Skeleton variant="text" width="70%" />
+          </>
+        )}
       </Box>
-      
+
       <TrailerModal />
     </Box>
   );

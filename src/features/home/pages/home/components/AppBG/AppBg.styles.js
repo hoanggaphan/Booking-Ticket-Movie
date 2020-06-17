@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import backApp from "assets/images/backapp.jpg";
 
 const useStyles = makeStyles((theme) => ({

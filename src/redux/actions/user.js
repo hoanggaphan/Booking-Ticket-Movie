@@ -121,8 +121,6 @@ export const actUpdateAccount = (account, token, enqueueSnackbar) => (
 
 //////////////////////////////////////////////////////////////////////////////
 export const actGetCommentList = () => (dispatch) => {
-  dispatch({ type: ActionTypes.GET_COMMENT_LIST, listComment: null });
-
   Axios({
     method: "GET",
     url: "https://5e8d7b0622d8cd0016a794f9.mockapi.io/listcomment",

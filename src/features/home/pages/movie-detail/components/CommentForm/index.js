@@ -1,13 +1,12 @@
 import { Avatar, Box, Button, IconButton } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
 import { Close, StarBorder } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import RatingStar from "common/RatingStar";
-import React, { useEffect, useState } from "react";
-import Modal from "react-bootstrap/Modal";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { actAddComment } from "redux/actions/user";
-import { actShowLogin } from "redux/actions/user";
+import { actAddComment, actShowLogin } from "redux/actions/user";
 import useStyles from "./CommentForm.styles";
 
 function CommentForm() {
@@ -28,22 +27,11 @@ function CommentForm() {
     setError(false);
     dispatch(actShowLogin(false));
   };
+
   const handleShow = () => {
     setError(false);
     dispatch(actShowLogin(true));
   };
-
-  useEffect(() => {
-    // bỏ class open của react-bootstrap
-    document.body.classList.remove("modal-open");
-    document.body.style.overflow = "unset";
-    document.body.style.paddingRight = "unset";
-    return () => {
-      document.body.style.overflow = "unset";
-      document.body.style.paddingRight = "unset";
-      document.body.classList.remove("modal-open");
-    };
-  }, [isLogin]);
 
   useEffect(() => {
     return () => {
@@ -102,83 +90,80 @@ function CommentForm() {
           />
         </Box>
       </Box>
+
       {user ? (
-        <Modal
-          className={classes.modal}
-          show={isLogin}
-          centered
-          onHide={handleClose}
-          animation={false}
-        >
-          <Modal.Header>
-            <IconButton onClick={handleClose} className="close" size="medium">
-              <Close />
-            </IconButton>
-            <p className="rating">{rating}</p>
-            <Box textAlign="center">
-              <Rating
-                name="movie-rating"
-                onChange={(e) => setrating(e.target.value * 2)}
-                value={rating / 2}
-                precision={0.5}
-                className="rating"
-                emptyIcon={<StarBorder fontSize="inherit" />}
-              />
+        <Modal open={isLogin} onClose={handleClose}>
+          <div className={classes.modalContainer}>
+            <Box padding="1rem">
+              <Box display="flex" justifyContent="flex-end">
+                <IconButton onClick={handleClose} size="medium">
+                  <Close />
+                </IconButton>
+              </Box>
+              <p className={classes.ratingText}>{rating}</p>
+              <Box textAlign="center">
+                <Rating
+                  className={classes.ratingStar}
+                  name="movie-rating"
+                  onChange={(e) => setrating(e.target.value * 2)}
+                  value={rating / 2}
+                  precision={0.5}
+                  emptyIcon={<StarBorder fontSize="inherit" />}
+                />
+              </Box>
             </Box>
-          </Modal.Header>
-          <Modal.Body>
-            <textarea
-              placeholder="Nói cho mọi người biết bạn nghĩ gì về phim này..."
-              className="comment"
-              value={comment}
-              onChange={handleChange}
-            ></textarea>
-          </Modal.Body>
-          {error && (
-            <Box className="modal-error">
-              Hãy cho PHIMHUB biết suy nghĩ của bạn
+            <Box padding="1rem">
+              <textarea
+                value={comment}
+                onChange={handleChange}
+                className={classes.textArea}
+                placeholder="Nói cho mọi người biết bạn nghĩ gì về phim này..."
+              ></textarea>
             </Box>
-          )}
-          <Modal.Footer>
-            <Button className="form-btn" onClick={addComment}>
-              Đăng
-            </Button>
-          </Modal.Footer>
+            {error && (
+              <Box className={classes.error}>
+                Hãy cho PHIMHUB biết suy nghĩ của bạn
+              </Box>
+            )}
+            <Box textAlign="center" padding=".75rem">
+              <Button className={classes.button} onClick={addComment}>
+                Đăng
+              </Button>
+            </Box>
+          </div>
         </Modal>
       ) : (
-        <Modal
-          className={classes.modal}
-          show={isLogin}
-          centered
-          onHide={handleClose}
-          animation={false}
-          size="sm"
-        >
-          <Modal.Header>
-            <IconButton onClick={handleClose} className="close" size="medium">
-              <Close />
-            </IconButton>
-            <Box textAlign="center" component="h5">
-              Bạn cần phải đăng nhập
+        <Modal open={isLogin} onClose={handleClose}>
+          <div className={classes.modalContainerSm}>
+            <Box padding="1rem">
+              <Box display="flex" justifyContent="flex-end">
+                <IconButton onClick={handleClose} size="medium">
+                  <Close />
+                </IconButton>
+              </Box>
+              <Box component="h5" textAlign="center" margin="0">
+                Bạn cần phải đăng nhập
+              </Box>
             </Box>
-          </Modal.Header>
-          <Modal.Footer>
-            <Button
-              onClick={() => {
-                history.push({
-                  pathname: "/user/login",
-                  state: { from: location },
-                });
-              }}
-              className="form-btn"
-            >
-              Đăng nhập
-            </Button>
-          </Modal.Footer>
+
+            <Box padding=".75rem" textAlign="center">
+              <Button
+                onClick={() => {
+                  history.push({
+                    pathname: "/user/login",
+                    state: { from: location },
+                  });
+                }}
+                className={classes.button}
+              >
+                Đăng nhập
+              </Button>
+            </Box>
+          </div>
         </Modal>
       )}
     </>
   );
 }
 
-export default CommentForm;
+export default memo(CommentForm);

@@ -127,63 +127,11 @@ const useStyles = makeStyles((theme) => ({
     "& .detail-bottom": {
       transform: "translateY(-70px)",
       padding: "0 15px",
-
+      margin: "0 auto",
+      maxWidth: "870px",
+      
       "@media (max-width: 600px)": {
         transform: "unset",
-      },
-
-      "& .detail-title": {
-        width: "35%",
-        fontWeight: "500",
-        color: theme.palette.text.primary,
-      },
-
-      "& .detail-info": {
-        width: "40%",
-        paddingLeft: "20px",
-        color: theme.palette.text.helper,
-      },
-
-      "& .detail-content": {
-        color: theme.palette.text.helper,
-      },
-
-      "& .bottom-main-info": {
-        margin: "0 auto",
-        maxWidth: "870px",
-
-        "& .nav": {
-          alignItems: "center",
-          marginBottom: "20px",
-          justifyContent: "center",
-
-          "& .nav-link": {
-            border: "unset",
-            fontSize: "18px",
-            fontWeight: "500",
-            
-            transition: "all .2s",
-            backgroundColor: "unset",
-            color: theme.palette.text.primary,
-
-            "&.active": {
-              fontSize: "20px",
-              color: theme.palette.warning.main,
-            },
-
-            "&:hover": {
-              fontSize: "20px",
-            },
-
-            "&:focus": {
-              outline: "none",
-            },
-          },
-        },
-
-        "& .nav-tabs": {
-          borderBottom: "none",
-        },
       },
     },
 
@@ -196,7 +144,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "24px",
         color: theme.palette.text.primary,
       },
-      
     },
   },
 }));

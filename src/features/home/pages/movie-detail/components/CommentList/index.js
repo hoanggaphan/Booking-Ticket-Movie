@@ -1,23 +1,11 @@
 import { Box, Button } from "@material-ui/core";
-import Comment from "../Comment";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { actGetCommentList } from "redux/actions/user";
+import React, { memo, useState } from "react";
+import CommentItem from "../CommentItem";
 import useStyles from "./CommentList.styles";
 
-function CommentList() {
-  const dispatch = useDispatch();
-  const listComment = useSelector((state) => state.userReducer.listComment);
-
+function CommentList({ listComment }) {
   const classes = useStyles();
   const [visible, setVisible] = useState(5);
-  const { maPhim } = useParams();
-
-  useEffect(() => {
-    dispatch(actGetCommentList());
-    // eslint-disable-next-line
-  }, [maPhim]);
 
   return (
     <Box className={classes.root}>
@@ -25,7 +13,7 @@ function CommentList() {
         .reverse()
         .slice(0, visible)
         .map((comment, index) => (
-          <Comment key={comment ? comment.id : index} comment={comment} />
+          <CommentItem key={comment ? comment.id : index} comment={comment} />
         ))}
       {listComment && visible < listComment.length && (
         <Button
@@ -40,4 +28,4 @@ function CommentList() {
   );
 }
 
-export default CommentList;
+export default memo(CommentList);

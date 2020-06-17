@@ -1,9 +1,9 @@
-import { Box } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import Skeleton from "@material-ui/lab/Skeleton";
 import PropTypes from "prop-types";
-import React, { useState, memo } from "react";
+import React, { memo, useRef, useState } from "react";
 import useStyles from "./News.styles";
-import { useRef } from "react";
 
 News.propTypes = {
   list: PropTypes.array.isRequired,
@@ -76,21 +76,36 @@ function News({ list }) {
       );
     });
 
+  const renderSkeleton = () => {
+    return [...Array(2)].map((item, index) => (
+      <Grid
+        key={index}
+        className={`${classes.gridItem} ${classes.floatLeft}`}
+        item
+        sm={6}
+      >
+        <Skeleton variant="rect" className={classes.thumnail__general} />
+        <Skeleton variant="text" width="100%"  />
+        <Skeleton variant="text" width="70%"  />
+      </Grid>
+    ));
+  };
+
   const handleVisibleClick = () => {
     setVisible(visible + 8);
   };
 
   return (
     <>
-      {renderGrid()}
+      {list.length ? renderGrid() : renderSkeleton()}
 
       <div className={classes.clear}></div>
 
       {visible < list.length ? (
         <Box textAlign="center" width="100%">
-          <div className={classes.button} onClick={handleVisibleClick}>
+          <Button variant="outlined" onClick={handleVisibleClick}>
             XEM THÊM
-          </div>
+          </Button >
         </Box>
       ) : null}
     </>

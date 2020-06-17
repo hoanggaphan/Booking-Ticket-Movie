@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "20px",
 
     "@media (min-width: 600px)": {
-      "&:nth-child(8n + 2)": {
+      "&:nth-child(8n + 2), &:nth-child(8n + 1)": {
         width: "50%",
       },
     },
@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: "0",
       left: "0",
+      
+      userDrag: "none"
     },
   },
 
@@ -95,16 +97,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     boxOrient: "vertical",
     textOverflow: "ellipsis",
-  },
-
-  button: {
-    padding: "10px 20px",
-    display: "inline-block",
-    color: theme.palette.text.primary,
-
-    border: "1px solid white",
-    borderRadius: "4px",
-    cursor: "pointer",
   },
 
   floatLeft: {

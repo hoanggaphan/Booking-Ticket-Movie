@@ -1,8 +1,9 @@
-import {makeStyles} from '@material-ui/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: "580px",
+    width: "100%",
+
     "& .more-btn": {
       display: "block",
       outline: "none",
