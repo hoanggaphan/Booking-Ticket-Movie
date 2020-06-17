@@ -26,7 +26,6 @@ function TrailerModal() {
     >
       <Box className="modal-trailer-wrap">
         <iframe
-          loading="lazy"
           width="100%"
           height="100%"
           frameBorder="0"

@@ -1,12 +1,14 @@
+import { Button } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 import Sticker from "common/Sticker";
 import useFormatDate from "hooks/useFormatDate";
 import PropTypes from "prop-types";
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import useStyles from "./Movie.styles";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 Movie.propTypes = {
-  item: PropTypes.object.isRequired,
   color: PropTypes.string,
 };
 
@@ -15,31 +17,40 @@ Movie.defaultProps = {
 };
 
 function Movie(props) {
-  const classes = useStyles(props);
+  const classes = useStyles();
   const { item, color } = props;
-  const d = useFormatDate(item.ngayKhoiChieu);
+  const d = useFormatDate(item && item.ngayKhoiChieu);
 
   return (
     <div className={classes.movie}>
-      <Link to={`/home/movie-detail/${item.maPhim}`}>
-        <div className={classes.movie__thumbnail}>
-          <img
-            src={item.hinhAnh}
-            alt={item.tenPhim}
-            className={classes.movie__img}
-          />
+      {item ? (
+        <Link to={`/home/movie-detail/${item.maPhim}`}>
+          <div className={classes.movie__thumbnail}>
+            <img
+              src={item.hinhAnh}
+              alt={item.tenPhim}
+              className={classes.movie__img}
+            />
 
-          <div className={classes.movie__date}>
-            <Sticker text={`${d.date}/${d.month}`} color={color} />
+            <div className={classes.movie__date}>
+              <Sticker text={`${d.date}/${d.month}`} color={color} />
+            </div>
+
+            <div className={classes.movie__overplay}>
+              <Button
+                variant="outlined"
+                startIcon={<ShoppingCartIcon fontSize="small" />}
+              >
+                Mua Vé
+              </Button>
+            </div>
           </div>
 
-          <div className={classes.movie__overplay}>
-            <div>MUA VÉ</div>
-          </div>
-        </div>
-
-        <h4 className={classes.movie__title}>{item.tenPhim}</h4>
-      </Link>
+          <h4 className={classes.movie__title}>{item.tenPhim}</h4>
+        </Link>
+      ) : (
+        <Skeleton variant="rect" className={classes.movie__thumbnail} />
+      )}
     </div>
   );
 }

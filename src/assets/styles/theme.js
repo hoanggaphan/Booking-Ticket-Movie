@@ -4,13 +4,23 @@ const theme = createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
-        "a:hover": {
-          color: "inherit",
-          userDrag: "none"
+        a: {
+          "&:hover": {
+            color: "inherit",
+            userDrag: "none",
+          },
+          "&:focus": {
+            outline: "none",
+          },
         },
+
         "div:focus, button:focus": {
           outline: "none",
-        }
+        },
+
+        img: {
+          userDrag: "none",
+        },
       },
     },
   },
@@ -46,9 +56,11 @@ const theme = createMuiTheme({
       default: "linear-gradient(to bottom left,#344675,#263148,#344675)",
       primary: "linear-gradient(to bottom left,#e14eca,#ba54f5,#e14eca)",
       info: "linear-gradient(to bottom left,#1d8cf8,#3358f4,#1d8cf8)",
-      success: "linear-gradient(to bottom left,#00f2c3,#0098f0,#00f2c3)!important",
+      success:
+        "linear-gradient(to bottom left,#00f2c3,#0098f0,#00f2c3)!important",
       warning: "linear-gradient(to bottom left,#ff8d72,#ff6491,#ff8d72)",
-      danger: "linear-gradient(to bottom left,#fd5d93,#ec250d,#fd5d93)!important",
+      danger:
+        "linear-gradient(to bottom left,#fd5d93,#ec250d,#fd5d93)!important",
     },
 
     squares: {
@@ -62,7 +74,7 @@ const theme = createMuiTheme({
       paper: "#1f2251", // light black
       footer: "radial-gradient(ellipse at bottom,#292d61 30%,#171941 80%)",
     },
-    
+
     text: {
       default: "hsla(0,0%,100%,.8)",
       muted: "#6c757d",
@@ -74,7 +86,6 @@ const theme = createMuiTheme({
       warning: "#ff8d72",
       danger: "#fd5d93",
     },
-
   },
 });
 

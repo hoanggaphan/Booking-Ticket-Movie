@@ -8,27 +8,28 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
 
     position: "relative",
-    margin: "0 5px 20px",
+    margin: "0 5px",
+    marginBottom: "10px",
 
-    "&::before": {
-      height: "1px",
-      width: "100%",
-      background: "rgba(255, 255, 255, .1)",
+    borderBottom: "1px solid rgba(255, 255, 255, .1)",
 
-      left: "0",
-      bottom: "-1px",
-      content: "''",
-      position: "absolute",
-      //   },
+    "@media (min-width: 360px)": {
+      marginBottom: "20px",
     },
   },
 
   ListSlider__title: {
     position: "relative",
     color: theme.palette.text.primary,
+    paddingBottom: "5px",
 
-    fontSize: "22px",
+    fontSize: "18px",
     fontWeight: "500",
+    textTransform: "capitalize",
+
+    "@media (min-width: 360px)": {
+      fontSize: "22px",
+    },
 
     "&::before": {
       height: "1px",

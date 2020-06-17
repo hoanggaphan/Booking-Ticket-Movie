@@ -17,14 +17,8 @@ function HomePage() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const movieListShowing = useSelector(
-    (state) => state.movieReducer.movieListShowing
-  );
-
-  const movieListComming = useSelector(
-    (state) => state.movieReducer.movieListComming
-  );
-
+  const movieListShowing = useSelector((state) => state.movieReducer.movieListShowing);
+  const movieListComming = useSelector((state) => state.movieReducer.movieListComming);
   const film24h = useSelector((state) => state.newsReducer.film24h);
   const review = useSelector((state) => state.newsReducer.review);
   const promotion = useSelector((state) => state.newsReducer.promotion);
@@ -46,9 +40,8 @@ function HomePage() {
         </div>
       </Box>
 
-      <div id="movie-list"></div>
       <div className={classes.home__container}>
-        <section className={classes.home__slider}>
+        <section id="movie-list" className={classes.home__slider}>
           <ListSlider
             list={movieListShowing}
             title="Đang Chiếu"

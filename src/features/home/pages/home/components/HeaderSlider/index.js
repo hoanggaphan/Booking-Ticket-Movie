@@ -7,20 +7,22 @@ import carousel4 from "assets/images/carousel-4.jpg";
 import React, { memo, useRef } from "react";
 import Slider from "react-slick";
 import useStyle from "./HeaderSlider.styles";
+import { useMemo } from "react";
 
 const slides = [carousel1, carousel2, carousel3, carousel4];
-
-const settings = {
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: false,
-};
 
 function HeaderSlider() {
   const classes = useStyle();
   const sliderRef = useRef({});
+
+  const settings = useMemo(() => ({
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    pauseOnDotsHover: true
+  }), []);
 
   const handlePrevious = () => {
     sliderRef.current.slickPrev();

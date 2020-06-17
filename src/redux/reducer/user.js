@@ -8,6 +8,7 @@ const initialState = {
   isUpdating: false,
 
   listComment: null,
+  isLogin: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -96,9 +97,8 @@ const userReducer = (state = initialState, action) => {
       return { ...state };
 
     case ActionTypes.GET_COMMENT_LIST:
-      let { listComment } = action;
-      if (!listComment) return { ...state, listComment };
-      return { ...state, listComment };
+      state.listComment = action.listComment
+      return { ...state };
 
     case ActionTypes.ADD_COMMENT:
       state.listComment = [...state.listComment, action.comment];

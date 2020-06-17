@@ -75,32 +75,28 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
 
-    "& div": {
-      padding: "10px 20px",
-      display: "inline-block",
-      color: theme.palette.text.primary,
-      border: "1px solid white",
-      backgroundColor: "transparent",
-      borderRadius: "4px",
-
-      "&:hover": {
-        backgroundColor: ({ color }) => theme.palette[color].main,
-        borderColor: ({ color }) => theme.palette[color].main,
-      },
-    },
+    "& .MuiButton-outlined": {
+      borderColor: "rgba(255, 255, 255, .7)"
+    }
   },
   // END MOVIE BACKGROUND
 
   // MOVIE TITLE
   movie__title: {
     width: "100%",
-    maxHeight: "44px",
-    minHeight: "44px",
+    maxHeight: "40px",
+    minHeight: "40px",
     margin: "5px 0",
 
     fontSize: "16px",
     fontWeight: "400",
     textAlign: "center",
+    textTransform: 'capitalize',
+
+    display: "box",
+    lineClamp: "2",
+    boxOrient: "vertical",  
+    overflow: "hidden",
 
     color: theme.palette.text.default,
 
