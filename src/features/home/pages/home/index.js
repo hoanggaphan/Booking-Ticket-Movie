@@ -5,7 +5,7 @@ import ModalTrailer from "common/TrailerModal";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actgetMovieList } from "redux/actions/movie";
-import { actGetFilm24hNews, actGetPromotionNews, actGetReviewNews } from "redux/actions/news";
+import { actGetFilm24hList, actGetPromotionList, actGetReviewList } from "redux/actions/news";
 import AppBg from "./components/AppBg";
 import HeaderSlider from "./components/HeaderSlider";
 import ListSlider from "./components/ListSlider";
@@ -19,15 +19,15 @@ function HomePage() {
 
   const movieListShowing = useSelector((state) => state.movieReducer.movieListShowing);
   const movieListComming = useSelector((state) => state.movieReducer.movieListComming);
-  const film24h = useSelector((state) => state.newsReducer.film24h);
-  const review = useSelector((state) => state.newsReducer.review);
-  const promotion = useSelector((state) => state.newsReducer.promotion);
+  const film24hList = useSelector((state) => state.newsReducer.film24hList);
+  const reviewList = useSelector((state) => state.newsReducer.reviewList);
+  const promotionList = useSelector((state) => state.newsReducer.promotionList);
 
   useEffect(() => {
     dispatch(actgetMovieList());
-    dispatch(actGetFilm24hNews());
-    dispatch(actGetReviewNews());
-    dispatch(actGetPromotionNews());
+    dispatch(actGetFilm24hList());
+    dispatch(actGetReviewList());
+    dispatch(actGetPromotionList());
     //eslint-disable-next-line
   }, []);
 
@@ -67,9 +67,9 @@ function HomePage() {
           <MyTabs
             titleList={["Điện ảnh 24h", "Review", "Khuyến Mãi"]}
             componentList={[
-              <News list={film24h} />,
-              <News list={review} />,
-              <News list={promotion} />,
+              <News list={film24hList} uri="film24h" />,
+              <News list={reviewList} uri="review" />,
+              <News list={promotionList} uri="promotion" />,
             ]}
             color="primary"
           />

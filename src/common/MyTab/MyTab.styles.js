@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
     "& .MuiTabs-indicator": {
       height: "1px",
+      bottom: "-1px",
       backgroundColor: (props) => theme.palette[props.color].main,
       boxShadow: (props) => `0 0 15px 3px ${theme.palette[props.color].main}`,
     },

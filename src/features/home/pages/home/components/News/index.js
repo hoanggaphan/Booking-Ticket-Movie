@@ -3,17 +3,15 @@ import Grid from "@material-ui/core/Grid";
 import Skeleton from "@material-ui/lab/Skeleton";
 import PropTypes from "prop-types";
 import React, { memo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import useStyles from "./News.styles";
 
 News.propTypes = {
   list: PropTypes.array.isRequired,
+  uri: PropTypes.string.isRequired,
 };
 
-News.defaultProps = {
-  list: [],
-};
-
-function News({ list }) {
+function News({ list, uri }) {
   const classes = useStyles();
   const [visible, setVisible] = useState(8);
   let count = useRef(0);
@@ -31,10 +29,12 @@ function News({ list }) {
             item
             sm={6}
           >
-            <div className={classes.thumnail__general}>
-              <img src={data.hinhAnh} alt={data.title} />
-            </div>
-            <p className={classes.title}>{data.tieuDe}</p>
+            <Link to={`home/${uri}/${data.id}`}>
+              <div className={classes.thumnail__general}>
+                <img src={data.hinhAnh} alt={data.title} />
+              </div>
+              <p className={classes.title}>{data.tieuDe}</p>
+            </Link>
             <p className={classes.description}>{data.moTa}</p>
           </Grid>
         );
@@ -49,10 +49,12 @@ function News({ list }) {
             item
             sm={4}
           >
-            <div className={classes.thumnail__general}>
-              <img src={data.hinhAnh} alt={data.title} />
-            </div>
-            <p className={classes.title}>{data.tieuDe}</p>
+            <Link to={`home/${uri}/${data.id}`}>
+              <div className={classes.thumnail__general}>
+                <img src={data.hinhAnh} alt={data.title} />
+              </div>
+              <p className={classes.title}>{data.tieuDe}</p>
+            </Link>
             <p className={classes.description}>{data.moTa}</p>
           </Grid>
         );
@@ -66,12 +68,14 @@ function News({ list }) {
           item
           sm={4}
         >
-          <Box display="flex">
-            <div className={classes.thumnail__small}>
-              <img src={data.hinhAnh} alt={data.title} />
-            </div>
-            <p className={classes.title}>{data.tieuDe}</p>
-          </Box>
+          <Link to={`home/${uri}/${data.id}`}>
+            <Box display="flex">
+              <div className={classes.thumnail__small}>
+                <img src={data.hinhAnh} alt={data.title} />
+              </div>
+              <p className={classes.title}>{data.tieuDe}</p>
+            </Box>
+          </Link>
         </Grid>
       );
     });
@@ -85,8 +89,8 @@ function News({ list }) {
         sm={6}
       >
         <Skeleton variant="rect" className={classes.thumnail__general} />
-        <Skeleton variant="text" width="100%"  />
-        <Skeleton variant="text" width="70%"  />
+        <Skeleton variant="text" width="100%" />
+        <Skeleton variant="text" width="70%" />
       </Grid>
     ));
   };
@@ -105,7 +109,7 @@ function News({ list }) {
         <Box textAlign="center" width="100%">
           <Button variant="outlined" onClick={handleVisibleClick}>
             XEM THÊM
-          </Button >
+          </Button>
         </Box>
       ) : null}
     </>

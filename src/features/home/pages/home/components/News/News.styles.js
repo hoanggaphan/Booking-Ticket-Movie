@@ -5,6 +5,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 7px",
     marginBottom: "20px",
 
+    "& a:hover": {
+      textDecoration: "none"
+    },
+
     "@media (min-width: 600px)": {
       "&:nth-child(8n + 2), &:nth-child(8n + 1)": {
         width: "50%",
@@ -14,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
 
   gridItemSmall: {
     padding: "0 7px",
+
+    "& a:hover": {
+      textDecoration: "none"
+    },
 
     "&:nth-child(8n + 8)": {
       marginBottom: "20px",

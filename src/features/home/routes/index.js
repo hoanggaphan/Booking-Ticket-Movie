@@ -5,11 +5,14 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 // Code spliting
-const HomePage = lazy(() => import("features/home/pages/home"));
-const MovieBookingPage = lazy(() => import("features/home/pages/movie-booking"));
-const Account = lazy(() => import("features/home/pages/account"));
-const MovieDetailPage = lazy(() => import("features/home/pages/movie-detail"));
-const Cinema = lazy(() => import("features/home/pages/cinema"))
+const HomePage = lazy(() => import("../pages/home"));
+const Account = lazy(() => import("../pages/account"));
+const CinemaPage = lazy(() => import("../pages/cinema"));
+const MovieDetailPage = lazy(() => import("../pages/movie-detail"));
+const MovieBookingPage = lazy(() => import("../pages/movie-booking"));
+const Film24h = lazy(() => import("../pages/film24h"));
+const Review = lazy(() => import("../pages/review"));
+const Promotion = lazy(() => import("../pages/promotion"));
 
 function HomeRoutes() {
   const { path } = useRouteMatch();
@@ -17,19 +20,30 @@ function HomeRoutes() {
   return (
     <Suspense fallback={<DefaultBG />}>
       <Switch>
-
-        <Route 
-          exact 
+        <Route
+          exact
           path={path} // path="/home"
-          component={HomePage} 
+          component={HomePage}
+        />
+        <Route 
+          path={`${path}/cinema`} 
+          component={CinemaPage} 
         />
         <Route
           path={`${path}/movie-detail/:maPhim`}
           component={MovieDetailPage}
         />
-        <Route
-          path={`${path}/cinema`}
-          component={Cinema}
+        <Route 
+          path={`${path}/film24h/:id`} 
+          component={Film24h} 
+        />
+        <Route 
+          path={`${path}/review/:id`} 
+          component={Review} 
+        />
+        <Route 
+          path={`${path}/promotion/:id`} 
+          component={Promotion} 
         />
 
         <ProtectedRoute
@@ -43,7 +57,6 @@ function HomeRoutes() {
 
         {/* Page 404 */}
         <Route component={PageNotFound} />
-        
       </Switch>
     </Suspense>
   );
