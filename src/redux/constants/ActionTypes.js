@@ -12,9 +12,20 @@ export const VIEW_TRAILER = "VIEW_TRAILER";
 // -------------------------- END MOVIE ------------------------------- //
 
 // -------------------------- NEWS ----------------------------- //
-export const GET_FILM24H_NEWS = "GET_FILM24H_NEWS";
-export const GET_REVIEW_NEWS = "GET_REVIEW_NEWS";
-export const GET_PROMOTION_NEWS = "GET_PROMOTION_NEWS";
+export const GET_FILM24H_LIST = "GET_FILM24H_LIST";
+export const GET_FILM24H_DETAIL_REQUEST = "GET_FILM24H_DETAIL_REQUEST";
+export const GET_FILM24H_DETAIL_SUCCESS = "GET_FILM24H_DETAIL_SUCCESS";
+export const GET_FILM24H_DETAIL_FAILED = "GET_FILM24H_DETAIL_FAILED";
+
+export const GET_REVIEW_LIST = "GET_REVIEW_LIST";
+export const GET_REVIEW_DETAIL_REQUEST = "GET_REVIEW_DETAIL_REQUEST";
+export const GET_REVIEW_DETAIL_SUCCESS = "GET_REVIEW_DETAIL_SUCCESS";
+export const GET_REVIEW_DETAIL_FAILED = "GET_REVIEW_DETAIL_FAILED";
+
+export const GET_PROMOTION_LIST = "GET_PROMOTION_LIST";
+export const GET_PROMOTION_DETAIL_REQUEST = "GET_PROMOTION_DETAIL_REQUEST";
+export const GET_PROMOTION_DETAIL_SUCCESS = "GET_PROMOTION_DETAIL_SUCCESS";
+export const GET_PROMOTION_DETAIL_FAILED = "GET_PROMOTION_DETAIL_FAILED";
 // -------------------------- END NEWS ----------------------------- //
 
 // -------------------------- CINEMA ---------------------------------- //
