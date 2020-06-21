@@ -1,6 +1,6 @@
 import Box from "@material-ui/core/Box";
 import SearchIcon from "@material-ui/icons/Search";
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import Spinner from "react-bootstrap/Spinner";
@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 import { actSearchMovie, actTyping } from "redux/actions/movie";
 import useStyles from "./MovieSearch.styles";
 
-const MovieSearch = () => {
+const MovieSearch = ({ toggleDrawer }) => {
   const dispatch = useDispatch();
   const listSearch = useSelector((state) => state.movieReducer.listSearch);
-  const isTyping = useSelector(state => state.movieReducer.isTyping);
+  const isTyping = useSelector((state) => state.movieReducer.isTyping);
 
   const classes = useStyles();
   const [focus, setFocus] = useState(false);
@@ -26,16 +26,15 @@ const MovieSearch = () => {
 
     dispatch(actTyping());
 
-    if(typingTimeoutRef.current) {
+    if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
     }
 
     typingTimeoutRef.current = setTimeout(() => {
       dispatch(actSearchMovie(q));
-    }, 500)
+    }, 500);
   };
 
-  
   const renderListMovie = () => {
     if (isTyping) {
       return (
@@ -78,6 +77,7 @@ const MovieSearch = () => {
     return listSearch.map((movie) => {
       return (
         <Box
+          onClick={toggleDrawer(false)}
           key={movie.maPhim}
           component={Link}
           to={`/home/movie-detail/${movie.maPhim}`}

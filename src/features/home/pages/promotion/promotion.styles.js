@@ -6,6 +6,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "16px",
     maxWidth: "860px",
 
+    "& h1": {
+      "@media (max-width: 600px)": {
+        fontSize: "24px"
+      }
+    },
+    
     "& img": {
       maxWidth: "100%"
     },

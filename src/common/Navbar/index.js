@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { ArrowDropDown, Close, Menu } from "@material-ui/icons";
 import logo from "assets/images/logo.png";
-import MyAvatar from "common/Avatar";
+import Avatar from "common/Avatar";
 import MovieSearch from "common/MovieSearch";
 import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -19,10 +19,11 @@ import { actLoadUser } from "redux/actions/user";
 import useStyle from "./Navbar.styles";
 
 const Navbar = () => {
+  const classes = useStyle();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
 
-  const classes = useStyle();
+  const [state, setState] = useState(false);
   const [show, setShow] = useState(false);
   const history = useHistory();
   const location = useLocation();
@@ -35,8 +36,6 @@ const Navbar = () => {
     }
     // eslint-disable-next-line
   }, []);
-
-  const [state, setState] = React.useState(false);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -93,14 +92,13 @@ const Navbar = () => {
 
               <Grid container className={classes.webGrid}>
                 <Grid item xs={12}>
-                  <MovieSearch />
+                  <MovieSearch toggleDrawer={toggleDrawer} />
                 </Grid>
               </Grid>
 
               <Grid container className={classes.webGrid}>
                 <Grid item xs={12}>
                   <Link
-                    className={classes.headerNavLink}
                     onClick={toggleDrawer(false)}
                     to="/home/#movie-list"
                     scroll={(el) =>
@@ -113,20 +111,6 @@ const Navbar = () => {
 
                 <Grid item xs={12}>
                   <Link
-                    className={classes.headerNavLink}
-                    onClick={toggleDrawer(false)}
-                    to="/home/cinema"
-                    scroll={(el) =>
-                      el.scrollIntoView({ behavior: "smooth", block: "start" })
-                    }
-                  >
-                    <Button>Cụm Rạp</Button>
-                  </Link>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Link
-                    className={classes.headerNavLink}
                     onClick={toggleDrawer(false)}
                     to="/home/#news"
                     scroll={(el) =>
@@ -139,7 +123,6 @@ const Navbar = () => {
 
                 <Grid item xs={12}>
                   <Link
-                    className={classes.headerNavLink}
                     onClick={toggleDrawer(false)}
                     to="/home/#app"
                     scroll={(el) =>
@@ -162,53 +145,36 @@ const Navbar = () => {
         {/* NAV LINK */}
         <Box component="nav" display={{ xs: "none", sm: "block" }}>
           <Link
-            className={classes.headerNavLink}
             to="/home/#movie-list"
             scroll={(el) =>
               el.scrollIntoView({ behavior: "smooth", block: "start" })
             }
-            color="inherit"
           >
-            Phim
+            <Button>Phim</Button>
           </Link>
 
           <Link
-            className={classes.headerNavLink}
-            scroll={(el) =>
-              el.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-            to="/home/cinema"
-            color="inherit"
-          >
-            Cụm Rạp
-          </Link>
-
-          <Link
-            className={classes.headerNavLink}
             scroll={(el) =>
               el.scrollIntoView({ behavior: "smooth", block: "start" })
             }
             to="/home/#news"
-            color="inherit"
           >
-            Tin Tức
+            <Button>Tin Tức</Button>
           </Link>
 
           <Link
-            className={classes.headerNavLink}
             scroll={(el) =>
               el.scrollIntoView({ behavior: "smooth", block: "start" })
             }
             to="/home/#app"
-            color="inherit"
           >
-            Ứng dụng
+            <Button>Ứng dụng</Button>
           </Link>
         </Box>
 
         {/* SEARCH MOVIE */}
         <Box display={{ xs: "none", md: "block" }}>
-          <MovieSearch />
+          <MovieSearch toggleDrawer={toggleDrawer} />
         </Box>
 
         {/* USER LOGIN */}
@@ -219,7 +185,7 @@ const Navbar = () => {
               display={{ xs: "none", sm: "flex" }}
             >
               <Link to="/home/account">
-                <MyAvatar user={user} />
+                <Avatar user={user} />
               </Link>
               <Box className="header-login-txt" color="inherit">
                 <Box
@@ -238,7 +204,7 @@ const Navbar = () => {
             </Box>
             <Dropdown className="user-m">
               <Dropdown.Toggle>
-                <MyAvatar user={user} />
+                <Avatar user={user} />
                 <ArrowDropDown />
               </Dropdown.Toggle>
 
@@ -259,17 +225,15 @@ const Navbar = () => {
               className="header-login"
               display={{ xs: "none", sm: "flex" }}
             >
-              <Box className={classes.linkLogin}>
-                <MyAvatar />
+              <Box marginRight="5px">
+                <Avatar />
               </Box>
-              <Box className="header-login-btn" color="inherit">
-                Đăng Nhập
-              </Box>
+              <Button>Đăng Nhập</Button>
             </Box>
             <Box className="user-m">
-              <Box onClick={handleClickLogin} className={classes.linkLoginM}>
-                <MyAvatar />
-              </Box>
+              <IconButton onClick={handleClickLogin}>
+                <Avatar />
+              </IconButton>
             </Box>
           </>
         )}

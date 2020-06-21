@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       padding: "0 6px",
       minHeight: "unset",
 
-      "@media (min-width: 360px)": {
+      "@media (min-width: 600px)": {
         padding: "0 12px",
         fontSize: "22px",
       },

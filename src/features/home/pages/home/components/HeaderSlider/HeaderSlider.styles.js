@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme) => ({
 
       "& div": {
         height: "100%",
-      }
+      },
     },
 
     "& .slick-list": {
@@ -56,6 +56,15 @@ const useStyle = makeStyles((theme) => ({
     "& .slide-item": {
       position: "relative",
       backgroundColor: theme.palette.background.paper,
+
+      "&:hover": {
+        cursor: "pointer",
+
+        "& $playButton": {
+          opacity: "1",
+          visibility: "visible",
+        },
+      },
     },
   },
 
@@ -76,6 +85,30 @@ const useStyle = makeStyles((theme) => ({
     right: "0",
     bottom: "0",
     position: "absolute",
+  },
+
+  playButton: {
+    position: "absolute",
+    left: "50%",
+    top: "45%",
+    transform: "translate(-50%, -45%)",
+
+    opacity: "0",
+    visibility: "hidden",
+    transition: "all .2s",
+
+    "@media (max-width: 360px)": {
+      opacity: "1",
+      visibility: "visible",
+    },
+
+    "& .MuiSvgIcon-root": {
+      fontSize: "50px",
+
+      "@media (max-width: 360px)": {
+        fontSize: "40px",
+      },
+    },
   },
 }));
 
