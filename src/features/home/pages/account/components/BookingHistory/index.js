@@ -38,7 +38,7 @@ function BookingHistory() {
                   <TableCell>Tên phim</TableCell>
                   <TableCell>Ghế đã đặt</TableCell>
                   <TableCell>Địa điểm rạp</TableCell>
-                  <TableCell>Tổng tiền</TableCell>
+                  {/* <TableCell>Tổng tiền</TableCell> */}
                 </TableRow>
               </TableHead>
 
@@ -80,7 +80,7 @@ function BookingHistory() {
                       ))}
                     </TableCell>
 
-                    <TableCell>{item.giaVe.toLocaleString()} đ</TableCell>
+                    {/* <TableCell>{item.giaVe.toLocaleString()} đ</TableCell> */}
                     
                   </TableRow>
                 })}
@@ -97,7 +97,6 @@ function BookingHistory() {
 
           <TablePagination
             rowsPerPageOptions={[10, 25, { value: -1, label: "tất cả" }]}
-            labelRowsPerPage="số hàng"
             component="div"
             count={thongTinDatVe.length}
             rowsPerPage={rowsPerPage}
@@ -107,7 +106,14 @@ function BookingHistory() {
           />
         </Paper>
       ) : (
-        <Skeleton variant="rect" width="100%" height="500px" />
+        <>
+          <Skeleton variant="text" width="100%" height="30px" />
+          <Skeleton variant="text" width="100%" height="30px" />
+          <Skeleton variant="text" width="100%" height="30px" />
+          <Skeleton variant="text" width="100%" height="30px" />
+          <Skeleton variant="text" width="100%" height="30px" />
+          <Skeleton variant="text" width="100%" height="30px" />
+        </>
       )}
     </>
   );

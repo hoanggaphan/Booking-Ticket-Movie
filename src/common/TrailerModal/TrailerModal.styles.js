@@ -6,18 +6,20 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "center",
     padding: "20px",
+
     "& .modal-trailer-wrap": {
       position: "relative",
       outline: "none",
       backgroundColor: "black",
-      display: "none",
+      width: "100%",
+      height: "40%",
+
       "@media (min-width: 600px)": {
-        display: "block",
         width: "600px",
         height: "calc(600px * 9/16)",
       },
+
       "@media (min-width: 960px)": {
-        display: "block",
         width: "900px",
         height: "calc(900px * 9/16)",
       }

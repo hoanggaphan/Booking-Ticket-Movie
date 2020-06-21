@@ -5,6 +5,8 @@ const initialState = {
   movieListShowing: [],
   movieListComming: [],
 
+  carouselList: [],
+
   movieDetail: null,
   showtimesInfo: [],
   listCinema: [],
@@ -200,14 +202,18 @@ const movieReducer = (state = initialState, action) => {
 
       state.movieList = movieListSorted;
       return { ...state };
-    
+
+    case ActionTypes.GET_CAROUSEL_LIST:
+      state.carouselList = action.carouselList;
+      return { ...state };
+
     case ActionTypes.GET_MOVIE_DETAIL_REQUEST:
-        state.movieDetail = null;
-        return { ...state }
+      state.movieDetail = null;
+      return { ...state };
 
     case ActionTypes.GET_MOVIE_DETAIL_FAILED:
-        console.error(action.error)
-        return { ...state }
+      console.error(action.error);
+      return { ...state };
 
     case ActionTypes.GET_MOVIE_DETAIL_SUCCESS:
       const d = new Date(action.movieDetail.ngayKhoiChieu);
@@ -324,7 +330,7 @@ const movieReducer = (state = initialState, action) => {
       return { ...state };
 
     case ActionTypes.GET_SHOWTIMES_INFO:
-      console.log(action.showtimesInfo)
+      console.log(action.showtimesInfo);
       let listCinema = [];
       action.showtimesInfo.heThongRapChieu.forEach((item) =>
         item.cumRapChieu.forEach((item) => listCinema.push(item))

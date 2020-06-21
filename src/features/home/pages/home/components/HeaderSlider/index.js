@@ -1,28 +1,37 @@
-import { IconButton } from "@material-ui/core";
+import { IconButton, Box } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
-import carousel1 from "assets/images/carousel-1.jpg";
-import carousel2 from "assets/images/carousel-2.jpg";
-import carousel3 from "assets/images/carousel-3.jpg";
-import carousel4 from "assets/images/carousel-4.jpg";
-import React, { memo, useRef } from "react";
+import React, { memo, useMemo, useRef } from "react";
 import Slider from "react-slick";
 import useStyle from "./HeaderSlider.styles";
-import { useMemo } from "react";
+import PropTypes from "prop-types";
+import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
+import { useDispatch } from "react-redux";
+import { actViewTrailer } from "redux/actions/movie";
 
-const slides = [carousel1, carousel2, carousel3, carousel4];
+HeaderSlider.propTypes = {
+  list: PropTypes.array,
+};
 
-function HeaderSlider() {
+HeaderSlider.defaultProps = {
+  list: [],
+};
+
+function HeaderSlider({ list }) {
   const classes = useStyle();
   const sliderRef = useRef({});
+  const dispatch = useDispatch();
 
-  const settings = useMemo(() => ({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: true,
-    pauseOnDotsHover: true
-  }), []);
+  const settings = useMemo(
+    () => ({
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      autoplay: true,
+      pauseOnDotsHover: true,
+    }),
+    []
+  );
 
   const handlePrevious = () => {
     sliderRef.current.slickPrev();
@@ -32,6 +41,17 @@ function HeaderSlider() {
     sliderRef.current.slickNext();
   };
 
+  const handleViewTrailer = (item) => {
+    const newTrailer = {
+      movie: {
+        trailer: item.trailer,
+        title: item.tenPhim,
+      },
+      isOpen: true,
+    };
+    dispatch(actViewTrailer(newTrailer));
+  };
+
   return (
     <section className={classes.headerSlider}>
       <IconButton className="slider-prev" onClick={handlePrevious}>
@@ -39,16 +59,23 @@ function HeaderSlider() {
       </IconButton>
 
       <Slider ref={sliderRef} {...settings}>
-        {slides.map((slide, index) => (
-          <div className="slide-item" key={index}>
+        {list.map((item, index) => (
+          <div
+            onClick={() => handleViewTrailer(item)}
+            className="slide-item"
+            key={index}
+          >
             <img
-              src={slide}
-              alt={`carousel ${index}`}
+              src={item.hinhAnh}
+              alt={item.tenPhim}
               className={classes.headerSlider__img}
               width="100%"
               height="650px"
             />
             <div className={classes.headerSlider__backgroundLinear} />
+            <IconButton className={classes.playButton}>
+              <PlayCircleOutline />
+            </IconButton>
           </div>
         ))}
       </Slider>

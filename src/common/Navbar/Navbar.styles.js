@@ -9,8 +9,15 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: "rgb(23,25,64)",
     boxShadow: "0 0 30px 6px rgba(0,0,0,.3)",
 
-    "& button:focus": {
-      outline: "none",
+    "& .MuiButton-root": {
+      textTransform: "unset",
+      fontWeight: "400"
+    },
+
+    "& a": {
+      "&:hover": {
+        textDecoration: "none",
+      },
     },
 
     "& .login-success": {
@@ -61,7 +68,7 @@ const useStyle = makeStyles((theme) => ({
 
           margin: "unset",
           padding: "5px",
-          
+
           fontWeight: "500",
           background: "none",
           color: theme.palette.text.primary,
@@ -75,11 +82,11 @@ const useStyle = makeStyles((theme) => ({
       "& .header-login-txt": {
         width: "90px",
         marginLeft: "5px",
-        
+
         display: "flex",
         alignItems: "center",
         position: "relative",
-        
+
         fontSize: "14px",
         fontWeight: "400",
 
@@ -87,19 +94,12 @@ const useStyle = makeStyles((theme) => ({
           display: "block",
         },
       },
-
-      "& .header-login-btn": {
-        fontSize: "16px",
-        marginLeft: "5px",
-        fontWeight: "500",
-      },
     },
 
     "& .user-m": {
       display: "none",
       padding: "0",
-      paddingRight: "12px",
-      
+
       "@media (max-width: 1080px)": {
         display: "block",
       },
@@ -146,7 +146,7 @@ const useStyle = makeStyles((theme) => ({
           border: "none",
           padding: "5px 10px",
           whiteSpace: "nowrap",
-          
+
           background: "none",
           color: theme.palette.text.primary,
 
@@ -179,32 +179,16 @@ const useStyle = makeStyles((theme) => ({
 
   webGrid: {
     marginBottom: "10px",
-  },
 
-  headerNavLink: {
-    margin: "10px",
-    color: `${theme.palette.text.primary}!important`,
-    
-    "&:hover": {
-      textDecoration: "none",
+    "& a": {
+      "&:hover": {
+        textDecoration: "none",
+      },
     },
-
-    "& button": {
-      justifyContent: "unset"
-    }
   },
 
   icon: {
     outline: "none",
-  },
-
-  linkLogin: {
-    textDecoration: "none",
-  },
-
-  linkLoginM: {
-    textDecoration: "none",
-    cursor: "pointer",
   },
 }));
 

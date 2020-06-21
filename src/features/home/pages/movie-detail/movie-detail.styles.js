@@ -130,6 +130,10 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: "870px",
       marginBottom: "40px",
       
+      "@media (max-width: 960px)": {
+        transform: "translateY(-20px)",
+      },
+
       "@media (max-width: 600px)": {
         transform: "unset",
       },
@@ -141,8 +145,12 @@ const useStyles = makeStyles((theme) => ({
       padding: "0 15px 40px",
 
       "& .name-info": {
-        fontSize: "24px",
+        fontSize: "22px",
         color: theme.palette.text.primary,
+
+        "@media (min-width: 600px)": {
+          fontSize: "24px",
+        },
       },
     },
   },

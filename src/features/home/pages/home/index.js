@@ -1,10 +1,10 @@
 import Box from "@material-ui/core/Box";
 import Movie from "common/Movie";
 import MyTabs from "common/MyTab";
-import ModalTrailer from "common/TrailerModal";
+import TrailerModal from "common/TrailerModal";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actgetMovieList } from "redux/actions/movie";
+import { actgetMovieList, actGetCarouselList } from "redux/actions/movie";
 import { actGetFilm24hList, actGetPromotionList, actGetReviewList } from "redux/actions/news";
 import AppBg from "./components/AppBg";
 import HeaderSlider from "./components/HeaderSlider";
@@ -19,6 +19,7 @@ function HomePage() {
 
   const movieListShowing = useSelector((state) => state.movieReducer.movieListShowing);
   const movieListComming = useSelector((state) => state.movieReducer.movieListComming);
+  const carouselList = useSelector(state => state.movieReducer.carouselList);
   const film24hList = useSelector((state) => state.newsReducer.film24hList);
   const reviewList = useSelector((state) => state.newsReducer.reviewList);
   const promotionList = useSelector((state) => state.newsReducer.promotionList);
@@ -28,13 +29,14 @@ function HomePage() {
     dispatch(actGetFilm24hList());
     dispatch(actGetReviewList());
     dispatch(actGetPromotionList());
+    dispatch(actGetCarouselList());
     //eslint-disable-next-line
   }, []);
 
   return (
     <>
       <Box position="relative">
-        <HeaderSlider />
+        <HeaderSlider list={carouselList} />
         <div className={classes.home__booking}>
           <QuickTicketBook />
         </div>
@@ -77,7 +79,7 @@ function HomePage() {
       </div>
 
       <AppBg />
-      <ModalTrailer />
+      <TrailerModal />
     </>
   );
 }

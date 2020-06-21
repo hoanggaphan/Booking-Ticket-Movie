@@ -8,9 +8,8 @@ import { actGetCinemaLogo } from "redux/actions/cinema";
 import useStyles from "./Footer.styles";
 
 function Footer() {
-  const dispatch = useDispatch();
-
   const classes = useStyles();
+  const dispatch = useDispatch();
   const listCinemaLogo = useSelector(
     (state) => state.cinemaReducer.listCinemaLogo
   );
@@ -47,9 +46,9 @@ function Footer() {
           container
         >
           <Grid component={Box} px="15px" item xs={12} sm={4}>
-            <Typography variant="h6" className="footer-title">
+            <Box component="h6" paddingLeft="0!important" fontSize="1.25rem" className="footer-title">
               PHIMHUB
-            </Typography>
+            </Box>
             <Box display="flex" justifyContent="space-between">
               <Box width="100%" display={{ xs: "none", md: "block" }}>
                 <Link className="footer-link" to="/home">

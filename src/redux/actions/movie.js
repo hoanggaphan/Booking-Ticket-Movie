@@ -1,5 +1,6 @@
 import * as ActionTypes from "redux/constants/ActionTypes";
 import { callAPI } from "redux/utils/callAPI";
+import Axios from "axios";
 
 export const actgetMovieList = () => (dispatch) => {
   callAPI("GET", "QuanLyPhim/LayDanhSachPhim?maNhom=GP10", null, null)
@@ -11,6 +12,19 @@ export const actgetMovieList = () => (dispatch) => {
     )
     .catch((error) => console.error(error.response.data));
 };
+
+export const actGetCarouselList = () => (dispatch) =>
+  Axios({
+    method: "GET",
+    url: "https://5eee198699b2440016bc01cb.mockapi.io/carousel",
+  })
+    .then((response) =>
+      dispatch({
+        type: ActionTypes.GET_CAROUSEL_LIST,
+        carouselList: response.data,
+      })
+    )
+    .catch((error) => console.error(error));
 
 export const actGetMovieDetail = (maPhim) => (dispatch) => {
   dispatch({ type: ActionTypes.GET_MOVIE_DETAIL_REQUEST, movieDetail: null });
@@ -76,5 +90,3 @@ export const actViewTrailer = (trailer) => {
     trailer,
   };
 };
-
-

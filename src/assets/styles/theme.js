@@ -1,4 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+import { viVN } from '@material-ui/core/locale';
 
 const theme = createMuiTheme({
   overrides: {
@@ -87,6 +88,6 @@ const theme = createMuiTheme({
       danger: "#fd5d93",
     },
   },
-});
+}, viVN);
 
 export default theme;
