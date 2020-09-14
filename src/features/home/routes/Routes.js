@@ -6,14 +6,14 @@ import ProtectedRoute from "./ProtectedRoute";
 
 // Code spliting
 const HomePage = lazy(() => import("../pages/home"));
-const Account = lazy(() => import("../pages/account"));
+const AccountPage = lazy(() => import("../pages/account"));
 const MovieDetailPage = lazy(() => import("../pages/movie-detail"));
 const MovieBookingPage = lazy(() => import("../pages/movie-booking"));
-const Film24h = lazy(() => import("../pages/film24h"));
-const Review = lazy(() => import("../pages/review"));
-const Promotion = lazy(() => import("../pages/promotion"));
+const Film24hPage = lazy(() => import("../pages/film24h"));
+const ReviewPage = lazy(() => import("../pages/review"));
+const PromotionPage = lazy(() => import("../pages/promotion"));
 
-function HomeRoutes() {
+function Routes() {
   const { path } = useRouteMatch();
 
   return (
@@ -30,15 +30,15 @@ function HomeRoutes() {
         />
         <Route 
           path={`${path}/film24h/:id`} 
-          component={Film24h} 
+          component={Film24hPage} 
         />
         <Route 
           path={`${path}/review/:id`} 
-          component={Review} 
+          component={ReviewPage} 
         />
         <Route 
           path={`${path}/promotion/:id`} 
-          component={Promotion} 
+          component={PromotionPage} 
         />
 
         <ProtectedRoute
@@ -47,7 +47,7 @@ function HomeRoutes() {
         />
         <ProtectedRoute 
           path={`${path}/account`} 
-          component={Account} 
+          component={AccountPage} 
         />
 
         {/* Page 404 */}
@@ -57,4 +57,4 @@ function HomeRoutes() {
   );
 }
 
-export default HomeRoutes;
+export default Routes;

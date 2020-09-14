@@ -117,12 +117,13 @@ const useStyle = makeStyles((theme) => ({
   date: {
     fontSize: "18px",
     fontWeight: "500",
-    color: theme.palette.text.primary,
+    color: theme.palette.text.warning,
   },
 
   time: {
     padding: "10px",
     color: theme.palette.text.secondary,
+    textDecoration: "underline",
 
     "&:hover": {
       color: theme.palette.text.helper,

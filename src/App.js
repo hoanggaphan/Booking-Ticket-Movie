@@ -8,8 +8,8 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import theme from "./assets/styles/theme";
 
 // Code Spliting
-const HomeLayout = lazy(() => import("features/home/Layout"));
-const UserLayout = lazy(() => import("features/user/Layout"));
+const HomeLayout = lazy(() => import("features/home/layout"));
+const UserLayout = lazy(() => import("features/user/layout"));
 
 function App() {
   return (
@@ -20,7 +20,6 @@ function App() {
           <Suspense fallback={<DefaultBG />}>
             <Switch>
               <Redirect exact from="/" to="/home" />
-
               <Route path="/home" component={HomeLayout} />
               <Route path="/user" component={UserLayout} />
 

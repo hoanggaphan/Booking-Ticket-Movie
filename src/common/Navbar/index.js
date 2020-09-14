@@ -100,7 +100,7 @@ const Navbar = () => {
                 <Grid item xs={12}>
                   <Link
                     onClick={toggleDrawer(false)}
-                    to="/home/#movie-list"
+                    to="/home#movie-list"
                     scroll={(el) =>
                       el.scrollIntoView({ behavior: "smooth", block: "start" })
                     }
@@ -112,7 +112,7 @@ const Navbar = () => {
                 <Grid item xs={12}>
                   <Link
                     onClick={toggleDrawer(false)}
-                    to="/home/#news"
+                    to="/home#news"
                     scroll={(el) =>
                       el.scrollIntoView({ behavior: "smooth", block: "start" })
                     }
@@ -124,7 +124,7 @@ const Navbar = () => {
                 <Grid item xs={12}>
                   <Link
                     onClick={toggleDrawer(false)}
-                    to="/home/#app"
+                    to="/home#app"
                     scroll={(el) =>
                       el.scrollIntoView({ behavior: "smooth", block: "start" })
                     }
@@ -144,30 +144,15 @@ const Navbar = () => {
 
         {/* NAV LINK */}
         <Box component="nav" display={{ xs: "none", sm: "block" }}>
-          <Link
-            to="/home/#movie-list"
-            scroll={(el) =>
-              el.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-          >
+          <Link to="/home#movie-list" smooth>
             <Button>Phim</Button>
           </Link>
 
-          <Link
-            scroll={(el) =>
-              el.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-            to="/home/#news"
-          >
+          <Link smooth to="/home#news">
             <Button>Tin Tức</Button>
           </Link>
 
-          <Link
-            scroll={(el) =>
-              el.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-            to="/home/#app"
-          >
+          <Link smooth to="/home#app">
             <Button>Ứng dụng</Button>
           </Link>
         </Box>

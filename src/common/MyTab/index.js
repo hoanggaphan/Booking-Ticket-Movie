@@ -1,10 +1,9 @@
-import PropTypes from "prop-types";
-import React, { memo, useState } from "react";
 import Tab from "@material-ui/core/Tab";
 import TabContext from "@material-ui/lab/TabContext";
 import TabList from "@material-ui/lab/TabList";
 import TabPanel from "@material-ui/lab/TabPanel";
-import SwipeableViews from "react-swipeable-views";
+import PropTypes from "prop-types";
+import React, { memo, useState } from "react";
 import useStyles from "./MyTab.styles";
 
 MyTabs.propTypes = {
@@ -20,13 +19,9 @@ MyTabs.defaultProps = {
 function MyTabs({ titleList, componentList, color }) {
   const classes = useStyles({ color });
   const [value, setValue] = useState("0");
-
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
   };
 
   return (
@@ -43,17 +38,11 @@ function MyTabs({ titleList, componentList, color }) {
         ))}
       </TabList>
 
-      <SwipeableViews
-        index={parseInt(value)}
-        className={classes.tabPanel}
-        onChangeIndex={handleChangeIndex}
-      >
-        {componentList.map((Component, index) => (
-          <TabPanel key={index} value={index.toString()} index={index}>
-            {Component}
-          </TabPanel>
-        ))}
-      </SwipeableViews>
+      {componentList.map((Component, index) => (
+        <TabPanel key={index} value={index.toString()} index={index}>
+          {Component}
+        </TabPanel>
+      ))}
     </TabContext>
   );
 }

@@ -7,6 +7,22 @@ import PropTypes from "prop-types";
 
 RatingStar.propsTypes = {
   votes: PropTypes.number,
+  xs: PropTypes.shape({
+    star1: PropTypes.string.isRequired,
+    star2: PropTypes.string.isRequired,
+  }),
+  sm: PropTypes.shape({
+    star1: PropTypes.string.isRequired,
+    star2: PropTypes.string.isRequired,
+  }),
+  md: PropTypes.shape({
+    star1: PropTypes.string.isRequired,
+    star2: PropTypes.string.isRequired,
+  }),
+  lg: PropTypes.shape({
+    star1: PropTypes.string.isRequired,
+    star2: PropTypes.string.isRequired,
+  }),
 };
 
 RatingStar.defaultProps = {

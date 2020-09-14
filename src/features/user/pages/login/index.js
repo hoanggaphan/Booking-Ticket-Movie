@@ -1,12 +1,10 @@
-import WithBgSquares from "common/WithBgSquares";
-import loginCard from "features/user/pages/login/components/LoginCard";
+import { useSnackbar } from "notistack";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { actLoginUser } from "redux/actions/user";
-import { useSnackbar } from "notistack";
+import LoginCard from "./components/LoginCard";
 
-const EnhancedLogin = WithBgSquares(loginCard);
 function Login() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -19,7 +17,7 @@ function Login() {
     e.preventDefault();
     dispatch(actLoginUser(values, history, from, enqueueSnackbar));
   };
-  return <EnhancedLogin onSubmit={handleSubmit} color="primary" />;
+  return <LoginCard onSubmit={handleSubmit} />;
 }
 
 export default Login;

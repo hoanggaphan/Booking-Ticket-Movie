@@ -1,10 +1,10 @@
 import Box from "@material-ui/core/Box";
-import Movie from "common/Movie";
 import MyTabs from "common/MyTab";
 import TrailerModal from "common/TrailerModal";
+import Movie from "./components/Movie";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actgetMovieList, actGetCarouselList } from "redux/actions/movie";
+import { actGetCarouselList, actgetMovieList } from "redux/actions/movie";
 import { actGetFilm24hList, actGetPromotionList, actGetReviewList } from "redux/actions/news";
 import AppBg from "./components/AppBg";
 import HeaderSlider from "./components/HeaderSlider";
@@ -23,7 +23,7 @@ function HomePage() {
   const film24hList = useSelector((state) => state.newsReducer.film24hList);
   const reviewList = useSelector((state) => state.newsReducer.reviewList);
   const promotionList = useSelector((state) => state.newsReducer.promotionList);
-
+  
   useEffect(() => {
     dispatch(actgetMovieList());
     dispatch(actGetFilm24hList());

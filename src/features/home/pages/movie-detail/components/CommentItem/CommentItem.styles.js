@@ -162,7 +162,7 @@ const useStyles = makeStyles((theme) => ({
 
           "& .reply-more": {
             display: "inline-block",
-            marginBottom: "10px",
+            marginBottom: "5px",
             cursor: "pointer",
             
             fontWeight: "600",
