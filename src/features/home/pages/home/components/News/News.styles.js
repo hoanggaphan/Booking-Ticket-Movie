@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   title: {
-    height: "42px",
+    height: "40px",
     marginBottom: "5px",
 
     display: "box",

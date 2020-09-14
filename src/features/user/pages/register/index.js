@@ -1,12 +1,10 @@
-import registerCard from "features/user/pages/register/components/RegisterCard";
-import WithBgSquares from "common/WithBgSquares";
+import { useSnackbar } from "notistack";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { actRegisterUser } from "redux/actions/user";
-import { useSnackbar } from "notistack";
+import RegisterCard from "./components/RegisterCard";
 
-const EnhancedRegister = WithBgSquares(registerCard);
 function Register() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,7 +17,7 @@ function Register() {
     }
   };
 
-  return <EnhancedRegister onSubmit={handleSubmit} color="warning" />;
+  return <RegisterCard onSubmit={handleSubmit} />;
 }
 
 export default Register;

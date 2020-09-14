@@ -39,12 +39,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-
-  tabPanel: {
-    "& .MuiTabPanel-root": {
-      padding: "unset",
-    }
-  },
+ 
 }));
 
 export default useStyles;

@@ -16,7 +16,7 @@ import useStyles from "./CommentItem.styles";
 function CommentItem({ comment }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
-  
+
   const classes = useStyles();
   const [like, setLike] = useState(0);
   const [status, setStatus] = useState({ like: false, comment: false });
@@ -194,18 +194,18 @@ function CommentItem({ comment }) {
                       </Box>
                     );
                   })}
+                {comment.danhSachTraLoi.length > 0 &&
+                  visibile.reply < comment.danhSachTraLoi.length && (
+                    <Box
+                      className="reply-more"
+                      onClick={() =>
+                        setVisible({ ...visibile, reply: visibile.reply + 3 })
+                      }
+                    >
+                      Xem thêm bình luận
+                    </Box>
+                  )}
               </Box>
-              {comment.danhSachTraLoi.length > 0 &&
-                visibile.reply < comment.danhSachTraLoi.length && (
-                  <Box
-                    className="reply-more"
-                    onClick={() =>
-                      setVisible({ ...visibile, reply: visibile.reply + 3 })
-                    }
-                  >
-                    Xem thêm bình luận
-                  </Box>
-                )}
             </>
           </Box>
         )}

@@ -11,7 +11,7 @@ function RegisterCard(props) {
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
   const [notValid, setNotValid] = useState(true);
-
+  
   const [values, setValues] = useState({
     hoTen: "",
     taiKhoan: "",

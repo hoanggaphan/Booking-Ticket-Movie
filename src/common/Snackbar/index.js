@@ -2,7 +2,12 @@ import { IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Close } from "@material-ui/icons";
 import { SnackbarProvider } from "notistack";
+import PropTypes from 'prop-types';
 import React, { useRef } from "react";
+
+Snackbar.propsTypes = {
+  children: PropTypes.node.isRequired,
+}
 
 const useStyles = makeStyles({
   root: {

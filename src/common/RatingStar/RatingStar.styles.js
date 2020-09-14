@@ -7,11 +7,11 @@ const useStyles = makeStyles((theme) => ({
           textAlign: "center",
           "& .star1": {
             display: "inline-block",
-            maxWidth: props.xs.star1 || "8px",
+            maxWidth: props.xs.star1,
           },
           "& .starNum": {
             display: "inline-block",
-            maxWidth: props.xs.star2 || "10px",
+            maxWidth: props.xs.star2,
           },
         }
       : null,
@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: props.sm
       ? {
           "& .star1": {
-            maxWidth: props.sm.star1 || "8px",
+            maxWidth: props.sm.star1,
           },
           "& .starNum": {
-            maxWidth: props.sm.star2 || "10px",
+            maxWidth: props.sm.star2,
           },
         }
       : null,
@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: props.md
       ? {
           "& .star1": {
-            maxWidth: props.sm.star1 || "8px",
+            maxWidth: props.sm.star1,
           },
           "& .starNum": {
-            maxWidth: props.sm.star2 || "10px",
+            maxWidth: props.sm.star2,
           },
         }
       : null,
@@ -41,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("lg")]: props.lg
       ? {
           "& .star1": {
-            maxWidth: props.sm.star1 || "8px",
+            maxWidth: props.sm.star1,
           },
           "& .starNum": {
-            maxWidth: props.sm.star2 || "10px",
+            maxWidth: props.sm.star2,
           },
         }
       : null,

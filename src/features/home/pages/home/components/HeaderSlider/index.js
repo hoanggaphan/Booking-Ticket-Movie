@@ -1,12 +1,12 @@
-import { IconButton, Box } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
-import React, { memo, useMemo, useRef } from "react";
-import Slider from "react-slick";
-import useStyle from "./HeaderSlider.styles";
-import PropTypes from "prop-types";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
+import PropTypes from "prop-types";
+import React, { memo, useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
+import Slider from "react-slick";
 import { actViewTrailer } from "redux/actions/movie";
+import useStyle from "./HeaderSlider.styles";
 
 HeaderSlider.propTypes = {
   list: PropTypes.array,
@@ -60,11 +60,7 @@ function HeaderSlider({ list }) {
 
       <Slider ref={sliderRef} {...settings}>
         {list.map((item, index) => (
-          <div
-            onClick={() => handleViewTrailer(item)}
-            className="slide-item"
-            key={index}
-          >
+          <div className="slide-item" key={index}>
             <img
               src={item.hinhAnh}
               alt={item.tenPhim}
@@ -73,7 +69,10 @@ function HeaderSlider({ list }) {
               height="650px"
             />
             <div className={classes.headerSlider__backgroundLinear} />
-            <IconButton className={classes.playButton}>
+            <IconButton
+              onClick={() => handleViewTrailer(item)}
+              className={classes.playButton}
+            >
               <PlayCircleOutline />
             </IconButton>
           </div>

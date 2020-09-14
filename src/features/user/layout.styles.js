@@ -1,6 +1,7 @@
-import dots from 'assets/images/dots.png'
+import { makeStyles } from "@material-ui/core/styles";
+import dots from "assets/images/dots.png";
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   "@keyframes move-left-right": {
     "0%": {
       transform: "translateX(-10px)",
@@ -13,7 +14,7 @@ const styles = (theme) => ({
     },
   },
 
-  withFormBG: {
+  layout: {
     width: "100%",
     minHeight: "100vh",
     overflow: "hidden",
@@ -30,8 +31,7 @@ const styles = (theme) => ({
       position: "absolute",
       overflow: "hidden",
       borderRadius: "20%",
-      transition: "0.5s ease-out",
-      background: (props) => `${theme.palette.squares[props.color]}`,
+      transition: ".5s",
 
       "&.square1": {
         animation: `$move-left-right 4s infinite`,
@@ -86,7 +86,7 @@ const styles = (theme) => ({
         left: "10%",
         top: "35%",
       },
-      
+
       "&.square7": {
         animation: `$move-left-right 3s infinite`,
         height: "300px",
@@ -97,6 +97,6 @@ const styles = (theme) => ({
       },
     },
   },
-});
+}));
 
-export default styles;
+export default useStyles;
