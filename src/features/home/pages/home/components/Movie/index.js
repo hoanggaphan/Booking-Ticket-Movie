@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Sticker from "common/Sticker";
-import useFormatDate from "hooks/useFormatDate";
+import formatDate from "helpers/useFormatDate";
 import PropTypes from "prop-types";
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ Movie.defaultProps = {
 function Movie(props) {
   const classes = useStyles();
   const { item, color } = props;
-  const d = useFormatDate(item && item.ngayKhoiChieu);
+  const d = formatDate(item && item.ngayKhoiChieu);
 
   return (
     <div className={classes.movie}>

@@ -1,5 +1,5 @@
 import * as ActionTypes from "redux/constants/ActionTypes";
-import { callAPI } from "redux/utils/callAPI";
+import { callAPI } from "helpers/callAPI";
 
 export const actGetCinemaLogo = () => (dispatch) => {
   callAPI("GET", "QuanLyRap/LayThongTinHeThongRap")

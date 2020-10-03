@@ -8,8 +8,8 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import theme from "./assets/styles/theme";
 
 // Code Spliting
-const HomeLayout = lazy(() => import("features/home/layout"));
-const UserLayout = lazy(() => import("features/user/layout"));
+const HomeLayout = lazy(() => import("features/home/Layout"));
+const UserLayout = lazy(() => import("features/user/Layout"));
 
 function App() {
   return (

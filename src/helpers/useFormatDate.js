@@ -1,4 +1,4 @@
-const useFormatDate = (value) => {
+const formatDate = (value) => {
   if(!value) return;
   
   const d = new Date(value);
@@ -10,4 +10,4 @@ const useFormatDate = (value) => {
   return { day, date, month, year };
 };
 
-export default useFormatDate;
+export default formatDate;

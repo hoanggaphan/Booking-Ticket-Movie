@@ -1,5 +1,5 @@
 import * as ActionTypes from "redux/constants/ActionTypes";
-import { callAPI } from "redux/utils/callAPI";
+import { callAPI } from "helpers/callAPI";
 
 export const actGetRoomInfo = (maLichChieu) => (dispatch) => {
   dispatch({ type: ActionTypes.GET_ROOM_INFO_REQUEST, roomInfo: null });
