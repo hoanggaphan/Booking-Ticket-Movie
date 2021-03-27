@@ -15,7 +15,7 @@ export const actGetCinemaLogo = () => (dispatch) => {
 export const actGetCinemaList = () => (dispatch) => {
   callAPI(
     "GET",
-    "QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP10",
+    "QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP09",
     null,
     null
   )
