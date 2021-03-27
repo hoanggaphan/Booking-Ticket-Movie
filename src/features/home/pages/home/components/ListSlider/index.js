@@ -1,9 +1,9 @@
-import { IconButton } from "@material-ui/core";
-import { NavigateBefore, NavigateNext } from "@material-ui/icons";
-import PropTypes from "prop-types";
-import React, { memo, useEffect, useMemo, useRef, useState } from "react";
-import Slider from "react-slick";
-import useStyles from "./ListSlider.styles";
+import { IconButton } from '@material-ui/core';
+import { NavigateBefore, NavigateNext } from '@material-ui/icons';
+import PropTypes from 'prop-types';
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import Slider from 'react-slick';
+import useStyles from './ListSlider.styles';
 
 ListSlider.propTypes = {
   list: PropTypes.array.isRequired,
@@ -16,8 +16,8 @@ ListSlider.propTypes = {
 };
 
 ListSlider.defaultProps = {
-  title: "",
-  color: "warning",
+  title: '',
+  color: 'warning',
   rows: 1,
   slidesPerRow: 4,
   responsive: [
@@ -44,6 +44,7 @@ function ListSlider({
   slidesPerRow,
   responsive,
   Component,
+  isFetching,
 }) {
   const classes = useStyles({ color });
   const sliderRef = useRef({});
@@ -99,11 +100,15 @@ function ListSlider({
   };
 
   const renderList = () => {
-    return (list.length ? list : [...Array(4)]).map((item, index) => (
+    return (isFetching ? [...Array(slidesPerRow)] : list).map((item, index) => (
       <div key={index}>
         <Component item={item} color={color} />
       </div>
     ));
+  };
+
+  const renderError = () => {
+    return <div className={classes.ListSlider__error}>Hiện tại chưa có phim</div>;
   };
 
   return (
@@ -123,7 +128,7 @@ function ListSlider({
 
       <div>
         <Slider ref={sliderRef} {...settings}>
-          {renderList()}
+          {!isFetching && !list.length ? renderError() : renderList()}
         </Slider>
       </div>
     </div>

@@ -1,5 +1,6 @@
 // -------------------------- MOVIE ------------------------------------ //
 export const GET_MOVIE_LIST = "GET_MOVIE_LIST";
+export const GET_MOVIE_LIST_REQUEST = "GET_MOVIE_LIST_REQUEST";
 
 export const GET_CAROUSEL_LIST = "GET_CAROUSEL_LIST";
 
