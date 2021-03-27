@@ -3,7 +3,7 @@ import { callAPI } from "helpers/callAPI";
 import Axios from "axios";
 
 export const actGetMovieList = () => (dispatch) => {
-  callAPI("GET", "QuanLyPhim/LayDanhSachPhim?maNhom=GP10", null, null)
+  callAPI("GET", "QuanLyPhim/LayDanhSachPhim?maNhom=GP09", null, null)
     .then((response) =>
       dispatch({
         type: ActionTypes.GET_MOVIE_LIST,
@@ -63,7 +63,7 @@ export const actGetShowtimesInfoAPI = (maPhim) => (dispatch) => {
 
 export const actSearchMovie = (q) => (dispatch) => {
   if (q) {
-    callAPI("GET", `QuanLyPhim/LayDanhSachPhim?maNhom=GP10&tenPhim=${q}`)
+    callAPI("GET", `QuanLyPhim/LayDanhSachPhim?maNhom=GP09&tenPhim=${q}`)
       .then((response) =>
         dispatch({
           type: ActionTypes.SEARCH_MOVIE,

@@ -18,7 +18,7 @@ function RegisterCard(props) {
     matKhau: "",
     email: "",
     soDt: "",
-    maNhom: "GP10",
+    maNhom: "GP09",
     maLoaiNguoiDung: "KhachHang",
   });
 

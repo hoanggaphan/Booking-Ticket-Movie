@@ -39,7 +39,7 @@ function AccountCard() {
         matKhau: account.matKhau,
         email: account.email,
         soDT: account.soDT,
-        maNhom: "GP10",
+        maNhom: "GP09",
         maLoaiNguoiDung: "KhachHang",
       });
     }
