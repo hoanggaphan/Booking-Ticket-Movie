@@ -4,6 +4,7 @@ const initialState = {
   movieList: [],
   movieListShowing: [],
   movieListComming: [],
+  isFetching: true,
 
   carouselList: [],
 
@@ -201,6 +202,7 @@ const movieReducer = (state = initialState, action) => {
       );
 
       state.movieList = movieListSorted;
+      state.isFetching = false;
       return { ...state };
 
     case ActionTypes.GET_CAROUSEL_LIST:

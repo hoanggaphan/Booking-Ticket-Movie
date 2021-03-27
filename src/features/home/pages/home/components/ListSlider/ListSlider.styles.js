@@ -59,6 +59,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   //   END MOVIE LIST HEAD
+
+  ListSlider__error: {
+    marginBottom: "5rem",
+    color: theme.palette.text.default,
+  }
 }));
 
 export default useStyles;

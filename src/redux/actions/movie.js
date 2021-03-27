@@ -2,12 +2,13 @@ import * as ActionTypes from "redux/constants/ActionTypes";
 import { callAPI } from "helpers/callAPI";
 import Axios from "axios";
 
-export const actgetMovieList = () => (dispatch) => {
+export const actGetMovieList = () => (dispatch) => {
   callAPI("GET", "QuanLyPhim/LayDanhSachPhim?maNhom=GP10", null, null)
     .then((response) =>
       dispatch({
         type: ActionTypes.GET_MOVIE_LIST,
         movieList: response.data,
+        isFetching: false
       })
     )
     .catch((error) => console.error(error.response.data));

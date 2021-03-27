@@ -4,7 +4,7 @@ import TrailerModal from "common/TrailerModal";
 import Movie from "./components/Movie";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actGetCarouselList, actgetMovieList } from "redux/actions/movie";
+import { actGetCarouselList, actGetMovieList } from "redux/actions/movie";
 import { actGetFilm24hList, actGetPromotionList, actGetReviewList } from "redux/actions/news";
 import AppBg from "./components/AppBg";
 import HeaderSlider from "./components/HeaderSlider";
@@ -17,6 +17,7 @@ function HomePage() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const isFetching = useSelector((state) => state.movieReducer.isFetching)
   const movieListShowing = useSelector((state) => state.movieReducer.movieListShowing);
   const movieListComming = useSelector((state) => state.movieReducer.movieListComming);
   const carouselList = useSelector(state => state.movieReducer.carouselList);
@@ -25,7 +26,7 @@ function HomePage() {
   const promotionList = useSelector((state) => state.newsReducer.promotionList);
   
   useEffect(() => {
-    dispatch(actgetMovieList());
+    dispatch(actGetMovieList());
     dispatch(actGetFilm24hList());
     dispatch(actGetReviewList());
     dispatch(actGetPromotionList());
@@ -51,6 +52,7 @@ function HomePage() {
             rows={2}
             slidesPerRow={4}
             Component={Movie}
+            isFetching={isFetching}
           />
         </section>
 
@@ -62,6 +64,7 @@ function HomePage() {
             rows={1}
             slidesPerRow={4}
             Component={Movie}
+            isFetching={isFetching}
           />
         </section>
 
